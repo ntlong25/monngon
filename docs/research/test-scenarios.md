@@ -207,12 +207,14 @@ Ngày: 06/11/2026 · Cập nhật: 07/11/2026 (T-057b) · Owner: RESEARCH · Că
 | TC-E-01 | P0 | Nhập ngoài khoảng (đã có TC-1-03/04) | Nhập số ngoài biên | Báo lỗi, chặn đi tiếp |
 | TC-E-02 | P0 | Tắt hết bữa chính | Tắt cả sáng, trưa và tối | Chặn (app khóa, API 400); còn ≥ 1 bữa chính (TC-1-17) |
 | TC-E-03 | P0 | Loại hết nguồn đạm | Chọn kiêng thịt, cá, trứng, đậu phụ cùng lúc | Thông báo không đủ món; không crash; tuần `partial` hoặc báo lỗi thân thiện |
-| TC-E-04 | P0 | Mất mạng | Tắt mạng rồi tạo tuần | Tạo tuần vẫn chạy (dữ liệu trên máy); không báo lỗi mạng |
+| TC-E-04 | P0 | Mất mạng khi tạo tuần | Tắt mạng (Wi-Fi và dữ liệu) rồi bấm "Tạo thực đơn tuần" | Hiện "Chưa tạo được thực đơn" + thông báo "Không có mạng. Dữ liệu vẫn được giữ trên máy." + nút "Thử lại"; không crash; dữ liệu onboarding và tuần cũ trên máy giữ nguyên (D-QA-10, ADR-001). Sửa 2026-11-07 (T-057c), thay "tạo tuần vẫn chạy" |
+| TC-E-11 | P0 | Xem tuần đã tạo khi mất mạng | Tạo tuần khi có mạng; tắt mạng; mở tab Kế hoạch, mở một bữa và một công thức, mở tab Đi chợ | Kế hoạch, mâm, công thức (kể cả "Cách chúng mình tính") và danh sách đi chợ hiển thị đầy đủ từ dữ liệu trên máy, không lỗi mạng (D-QA-10, ADR-001). Tab Bạn hiện chỉ tiêu đã lưu (L-13) |
+| TC-E-12 | P0 | Thử lại khi có mạng trở lại | Từ TC-E-04 (màn lỗi), bật mạng, bấm "Thử lại" | Tuần được tạo; tab Kế hoạch hiện tuần mới (ngày đầu là ngày mai); không cần đóng và mở lại app (D-QA-10) |
 | TC-E-05 | P0 | Tắt app giữa onboarding | Đóng app ở bước 5; mở lại | Tiếp tục đúng bước (TC-1-37) |
 | TC-E-06 | P0 | Đổi múi giờ hoặc qua ngày sang tuần mới | Đổi giờ máy sang ngày Chủ nhật 23:59 rồi sang thứ Hai | Tuần mới theo giờ máy; tuần cũ chuyển sang "Tuần đã lưu" |
 | TC-E-07 | P0 | Hiệu năng | Mở tab Kế hoạch | Mở ≤ 300 ms; tạo tuần ≤ 5 s (PRD 7) |
 | TC-E-08 | P0 | Trợ năng | Kiểm vùng chạm và tương phản | Vùng chạm ≥ 44 pt; tương phản WCAG AA |
-| TC-E-09 | P0 | Riêng tư | Quan sát mạng khi dùng app | Không gửi dữ liệu người dùng ra ngoài máy trong MVP |
+| TC-E-09 | P0 | Riêng tư khi dùng app (D-QA-11) | Quan sát mạng khi tạo tuần, đổi món, mở công thức; kiểm payload và cấu hình log API | (1) Mọi request chỉ đi tới host API đã cấu hình; không có domain khác (không analytics, không SDK báo lỗi). (2) Payload chỉ gồm dữ liệu cần để lập thực đơn (chỉ số cơ thể, mục tiêu, lựa chọn ăn uống) theo OpenAPI; không có tên, email hay mã định danh thiết bị. (3) Cấu hình log API không ghi body request. Ngoài phạm vi: log truy cập của hosting/proxy (IP, thời gian, đường dẫn) là điểm mở trước phát hành (legal-notes). Sửa 2026-11-07 (T-057c, D-QA-11), thay "không gửi dữ liệu ra ngoài máy" vì mâu thuẫn với ADR-001 (tạo tuần đi qua API) |
 | TC-E-10 | P0 | Dữ liệu thiếu | Xóa một công thức trong bản seed và khởi động | Hệ thống báo lỗi dữ liệu rõ file + id (validate-data), không crash |
 
 ---
