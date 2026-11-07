@@ -154,6 +154,47 @@
         }
       }
     },
+    "/v1/rice/feasibility": {
+      "post": {
+        "tags": [
+          "MonNgon.Api"
+        ],
+        "summary": "Mức cơm khả thi mỗi bữa trưa/tối (kcal/đạm; kèm preferences thì tính cả ngân sách) — cảnh báo ở bước chọn thói quen ăn cơm",
+        "operationId": "RiceFeasibility",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RiceFeasibilityRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RiceFeasibilityResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/v1/budget-range": {
       "post": {
         "tags": [
@@ -1819,6 +1860,126 @@
           }
         }
       },
+      "RiceFeasibilityItem": {
+        "type": "object",
+        "properties": {
+          "habit": {
+            "type": "string"
+          },
+          "target_g": {
+            "type": "number",
+            "format": "double"
+          },
+          "target_cups": {
+            "type": "number",
+            "format": "double"
+          },
+          "feasible_g": {
+            "type": "number",
+            "format": "double"
+          },
+          "feasible_cups": {
+            "type": "number",
+            "format": "double"
+          },
+          "feasible": {
+            "type": "boolean"
+          },
+          "reason": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "meals_planned": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
+          },
+          "meals_with_full_rice": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
+          },
+          "meals_with_rice": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
+          },
+          "budget_vnd": {
+            "type": [
+              "null",
+              "number"
+            ],
+            "format": "double"
+          },
+          "budget_needed_vnd": {
+            "type": [
+              "null",
+              "number"
+            ],
+            "format": "double"
+          }
+        }
+      },
+      "RiceFeasibilityRequest": {
+        "type": "object",
+        "properties": {
+          "profile": {
+            "$ref": "#/components/schemas/Profile"
+          },
+          "slots": {
+            "$ref": "#/components/schemas/SlotsConfig"
+          },
+          "preferences": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Preferences"
+              }
+            ]
+          },
+          "start_date": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "seed": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int64"
+          }
+        }
+      },
+      "RiceFeasibilityResponse": {
+        "required": [
+          "targets",
+          "habits"
+        ],
+        "type": "object",
+        "properties": {
+          "targets": {
+            "$ref": "#/components/schemas/Targets"
+          },
+          "habits": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RiceFeasibilityItem"
+            }
+          }
+        }
+      },
       "RiceInfo": {
         "type": "object",
         "properties": {
@@ -1830,6 +1991,13 @@
             "format": "double"
           },
           "actual_g": {
+            "type": "number",
+            "format": "double"
+          },
+          "kind": {
+            "type": "string"
+          },
+          "rice_equiv_g": {
             "type": "number",
             "format": "double"
           }

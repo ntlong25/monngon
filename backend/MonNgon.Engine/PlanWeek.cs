@@ -72,6 +72,10 @@ public sealed record PlanOptions
     public bool RiceMamFirst { get; init; } = true;
     /// <summary>Cùng bậc, tinh bột là cơm/gạo lứt xếp trước khoai/bún (để gạo cần mua tăng dần theo mức cơm). Tắt ở các phương án dự phòng vì cơm đắt hơn khoai/bún, dễ vượt ngân sách.</summary>
     public bool RiceKindFirst { get; init; } = true;
+    /// <summary>D-COM-05 AC1: mức nhieu/rat_nhieu so với tuần mức dưới của cùng hồ sơ và dùng tuần đó khi tuần của chính mức này ít cơm hơn (xem <c>RunWithShifts</c>). Tắt = engine-report --lift false.</summary>
+    public bool LiftToLowerLevel { get; init; } = true;
+    /// <summary>Số món trưa/tối khác nhau tối thiểu để chấp nhận ngay một phương án ưu tiên cơm (mức nhiều/rất nhiều); dưới ngưỡng thì thử các phương án sau và lấy phương án đa dạng nhất. 6 = sàn tuyệt đối của D-DIV-01 (kho hẹp/ít dụng cụ): cơm là mục tiêu chính của T-098 nên ngưỡng ngân sách-sát (8) không dùng để loại phương án có cơm.</summary>
+    public int MinMainDistinct { get; init; } = 6;
     /// <summary>D-COM-04: dòng tinh bột của món trọn suất trưa/tối cũng ghim theo mức cơm. Tắt (false) = như T-096 (cơm trong món trọn suất co giãn tự do); chỉ dùng làm phương án cuối khi không phương án nào đạt 7/7.</summary>
     public bool PinFullMealRice { get; init; } = true;
     /// <summary>Chỉ để chẩn đoán (engine-report --rice-attempt n): chỉ chạy phương án xếp hạng cơm thứ n (1–7) thay vì thử lần lượt; 0 = thử lần lượt.</summary>
@@ -83,6 +87,9 @@ public sealed record PlanOptions
 }
 
 /// <summary>T-098: bậc xếp hạng trưa/tối: 3 mâm đủ cơm · 2 mâm bớt cơm (≥ sàn) · 1 món trọn suất có cơm · 0 còn lại (trọn suất không cơm, mâm không khả thi).</summary>
+/// <summary>Một phương án xếp hạng cơm: trạng thái, chi phí món ăn tuần, số bữa trưa/tối có cơm và số bữa trong đó đủ mức (không có ghi chú bớt cơm).</summary>
+public sealed record AttemptSummary(int Attempt, string Status, double CostVnd, int RiceMeals, int FullRiceMeals);
+
 public sealed record PickLog(string Date, string Slot, string RecipeId, int Tier, int BestTier);
 
 public sealed class PlanWeekInput
@@ -220,6 +227,9 @@ public sealed class WeekPlan
     /// <summary>T-098 (chỉ cho engine-report, không vào JSON): phương án xếp hạng cơm đã cho ra tuần này — 1 mâm trước · 2 ngang hàng · 3 giảm dồn kcal · 4 không dồn · 5 chỉ điểm mềm · 6 không ghim cơm món trọn suất; 0 = không áp dụng.</summary>
     [JsonIgnore]
     public int RiceAttempt { get; set; }
+    /// <summary>T-098 (D-COM-05): kết quả từng phương án đã chạy xong theo thứ tự ưu tiên (chỉ mức nhiều/rất nhiều) — để ước lượng ngân sách cần cho bữa có cơm. Không xuất ra API.</summary>
+    [JsonIgnore]
+    public List<AttemptSummary>? Attempts { get; set; }
     /// <summary>Ưu tiên mềm đã bị bỏ qua để tuần đạt chỉ tiêu cứng (D-HLT-02): health_leanings | cuisine. null khi không phải nới gì.</summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public List<string>? RelaxedPreferences { get; set; }
@@ -271,11 +281,70 @@ public static partial class WeekPlanner
     /// D-COM-04: mức cơm nhieu/rat_nhieu được dồn tối đa <see cref="PlanOptions.RiceKcalShift"/> kcal ngày từ bữa sáng/phụ sang trưa/tối. Dồn nhiều làm bữa trưa/tối to hơn (tốn tiền hơn)
     /// nên thử lần lượt mức tối đa → một nửa → không dồn (và thứ tự mâm-trước rồi ngang hàng), lấy phương án đạt 7/7 đầu tiên (nếu không có thì phương án ít vi phạm nhất). Mức it/vua và chế độ parity chỉ chạy một lần.
     /// </summary>
+    private static int MainDistinct(WeekPlan plan) =>
+        plan.Days.SelectMany(d => d.Meals).Where(m => m.Slot is "lunch" or "dinner" && m.Status == "planned" && m.RecipeId is not null).Select(m => m.RecipeId!).Distinct().Count();
+
+    /// <summary>
+    /// D-COM-05 AC1: chọn mức cơm cao hơn không được cho ít tinh bột hơn mức thấp hơn của cùng hồ sơ. Mức nhieu/rat_nhieu lập thêm tuần ở mức liền dưới (vua / nhieu, song song);
+    /// nếu tuần của chính mức này có tổng cơm quy đổi thấp hơn (< 99%) hoặc ít bữa có cơm hơn (< 12/14) so với tuần mức dưới — vì kcal/đạm/ngân sách của ngày chặn —
+    /// thì dùng chính tuần mức dưới, gắn lại mức đã chọn (cơm vẫn ≥ sàn của mức này; thấp hơn mức chọn thì có ghi chú rice_reduced). Tuần đó đã đạt 7/7 trong ngân sách ở mức dưới.
+    /// </summary>
     private static WeekPlan RunWithShifts(PlanWeekInput input)
     {
         var opt = input.Options ?? new PlanOptions();
+        var habit = input.Prefs.RiceHabit;
+        var lowerHabit = habit switch { "nhieu" => "vua", "rat_nhieu" => "nhieu", _ => null };
+        if (lowerHabit is null || !opt.LiftToLowerLevel || opt.RiceOnlyAttempt > 0 || input.Prefs.LowCarb || opt.MealStyle == MealStyle.FullMealOnly) return RunChain(input);
+        var lowerPrefs = System.Text.Json.JsonSerializer.Deserialize<Preferences>(System.Text.Json.JsonSerializer.Serialize(input.Prefs, JsonOptions.Default), JsonOptions.Default)!;
+        lowerPrefs.RiceHabit = lowerHabit;
+        var lowerTask = Task.Run(() => RunWithShifts(new PlanWeekInput { Targets = input.Targets, Prefs = lowerPrefs, Data = input.Data, StartDate = input.StartDate, Seed = input.Seed, Options = input.Options }));
+        var own = RunChain(input);
+        var lower = lowerTask.GetAwaiter().GetResult();
+        if (lower.Status != "ready") return own;
+        var ownSum = own.Days.SelectMany(d => d.Meals).Where(m => m.Rice is not null).Sum(m => m.Rice!.RiceEquivG);
+        var lowerSum = lower.Days.SelectMany(d => d.Meals).Where(m => m.Rice is not null).Sum(m => m.Rice!.RiceEquivG);
+        int Presence(WeekPlan w) => w.Days.SelectMany(d => d.Meals).Count(m => m.Slot is "lunch" or "dinner" && m.Status == "planned" && m.Rice is not null);
+        var planned = own.Days.SelectMany(d => d.Meals).Count(m => m.Slot is "lunch" or "dinner" && m.Status == "planned" && m.RecipeId is not null);
+        var need = (int)Math.Ceiling(planned * RiceFeasibility.EnoughMealsOf14 / 14.0);
+        var ownLess = own.Status != "ready" || ownSum < lowerSum * 0.99 || (Presence(own) < need && Presence(lower) > Presence(own));
+        if (!ownLess || !Rebadge(lower, lowerHabit, habit)) return own;
+        lower.RiceAttempt = 8;
+        lower.Attempts = own.Attempts;
+        return lower;
+    }
+
+    /// <summary>Gắn lại mức cơm của tuần đã lập ở mức dưới <paramref name="from"/> sang mức <paramref name="to"/>. false (không đổi gì) nếu có bữa cơm dưới sàn của mức mới.</summary>
+    private static bool Rebadge(WeekPlan plan, string from, string to)
+    {
+        var scale = RiceHabits.TargetG(to) / RiceHabits.TargetG(from);
+        foreach (var m in plan.Days.SelectMany(d => d.Meals).Where(m => m.Rice is not null))
+        {
+            var target = Math.Round(m.Rice!.TargetG * scale / 5) * 5;
+            var ratio = target / RiceHabits.TargetG(to);
+            var floor = Math.Min(target, Math.Ceiling(RiceHabits.FloorG(to) * ratio / 5) * 5);
+            if (m.Rice.ActualG < floor - 1e-6) return false;
+        }
+        foreach (var m in plan.Days.SelectMany(d => d.Meals).Where(m => m.Rice is not null))
+        {
+            var target = Math.Round(m.Rice!.TargetG * scale / 5) * 5;
+            m.Rice.Habit = to;
+            m.Rice.TargetG = target;
+            if (m.Rice.ActualG < target - RiceHabits.ToleranceG)
+            {
+                var reason = m.RiceReason ?? m.Notes?.FirstOrDefault(n => n.Code == "rice_reduced")?.Reason ?? "kcal";
+                m.Notes = [new MealNote { Code = "rice_reduced", TargetG = target, ActualG = m.Rice.ActualG, Reason = reason }];
+            }
+            else m.Notes = null;
+        }
+        return true;
+    }
+
+    private static WeekPlan RunChain(PlanWeekInput input)
+    {
+        var opt = input.Options ?? new PlanOptions();
         var max = opt.MealStyle != MealStyle.FullMealOnly && !input.Prefs.LowCarb ? RiceHabits.KcalShift(input.Prefs.RiceHabit, opt.RiceKcalShift) : 0;
-        if (max <= 0) return new Planner(input).Run();
+        // Ưu tiên cơm hơn khoai/bún chỉ áp cho mức nhiều/rất nhiều (để gạo cần mua tăng dần); mức ít/vừa giữ nguyên như T-096.
+        if (max <= 0) return new Planner(new PlanWeekInput { Targets = input.Targets, Prefs = input.Prefs, Data = input.Data, StartDate = input.StartDate, Seed = input.Seed, Options = opt with { RiceKindFirst = false } }).Run();
         // (mức dồn kcal, mâm xếp trên trọn suất có cơm?, xếp hạng theo cơm?, ghim cơm món trọn suất?, số vòng tối đa), theo thứ tự ưu tiên: lần đầu đúng thứ tự PM (chỉ mâm, 6 vòng);
         // các lần sau cho phép trọn suất có cơm ngang hàng mâm bớt cơm; cuối cùng là các lần không xếp hạng theo cơm (chỉ điểm mềm) — ràng buộc cứng (7/7 trong ngân sách) luôn thắng ưu tiên cơm.
         var plans = new[]
@@ -296,7 +365,14 @@ public static partial class WeekPlanner
         // Các phương án độc lập nên chạy song song (thời gian chờ = phương án chậm nhất thay vì tổng); kết quả vẫn chọn theo thứ tự ưu tiên nên không phụ thuộc thời điểm hoàn thành.
         using var cts = new CancellationTokenSource();
         var tasks = Enumerable.Range(0, plans.Length).Select(i => Task.Run(() => Run(i, cts.Token))).ToArray();
-        WeekPlan? best = null;
+        WeekPlan? best = null, bestReady = null;
+        var bestReadyDistinct = -1;
+        var attempts = new List<AttemptSummary>();
+        static AttemptSummary Summ(WeekPlan w)
+        {
+            var ld = w.Days.SelectMany(d => d.Meals).Where(m => m.Slot is "lunch" or "dinner" && m.Status == "planned" && m.RecipeId is not null).ToList();
+            return new AttemptSummary(w.RiceAttempt, w.Status, w.Shopping.WeekFoodCost, ld.Count(m => m.Rice is not null), ld.Count(m => m.Rice is not null && m.Notes?.Any(n => n.Code == "rice_reduced") != true));
+        }
         try
         {
             foreach (var t in tasks)
@@ -304,10 +380,19 @@ public static partial class WeekPlanner
                 WeekPlan plan;
                 try { plan = t.Result; }
                 catch (AggregateException ae) when (ae.InnerException is not null) { System.Runtime.ExceptionServices.ExceptionDispatchInfo.Capture(ae.InnerException).Throw(); throw; }
-                if (plan.Status == "ready") return plan;
+                attempts.Add(Summ(plan));
+                plan.Attempts = attempts;
+                if (plan.Status == "ready")
+                {
+                    // D-DIV-01/02: phương án ưu tiên cơm nhưng chỉ còn vài món trưa/tối (kho món bị thu hẹp) không được nhận nếu còn phương án khác đủ đa dạng.
+                    var distinct = MainDistinct(plan);
+                    if (distinct >= opt.MinMainDistinct) return plan;
+                    if (bestReady is null || distinct > bestReadyDistinct) { bestReady = plan; bestReadyDistinct = distinct; }
+                    continue;
+                }
                 if (best is null || Rank(plan, input.Targets) < Rank(best, input.Targets) - 1e-9) best = plan;
             }
-            return best!;
+            return bestReady ?? best!;
         }
         finally { cts.Cancel(); }
     }
@@ -518,6 +603,13 @@ public static partial class WeekPlanner
                     continue;
                 }
                 var actual = m.Grams[info.Idx].Grams;
+                if (!found && actual < info.FloorG - 1e-6)
+                {
+                    // Phương án dự phòng không ghim: dòng tinh bột bị scale xuống dưới sàn của mức đã chọn thì coi như bữa không có cơm (không gắn nhãn cơm cho vài chục gram).
+                    m.Rice = null;
+                    m.Notes = null;
+                    continue;
+                }
                 m.Rice = new RiceInfo { Habit = _prefs.RiceHabit, TargetG = info.TargetG, ActualG = actual, Kind = RiceKindOf(m.Grams[info.Idx].IngredientId), RiceEquivG = RiceEquivOf(m.Grams[info.Idx].IngredientId, actual) };
                 if (actual < info.TargetG - RiceHabits.ToleranceG)
                 {
@@ -831,6 +923,7 @@ public static partial class WeekPlanner
                         var pickScore = double.NegativeInfinity;
                         var pickTier = -1;
                         var pickKind = 0;
+                        var pickShort = 0;
                         var bestTier = -1;
                         var (pdK, pdP) = DessertEstimate(slot);
                         var pgoal = SlotGoal(sc.Target);
@@ -861,6 +954,7 @@ public static partial class WeekPlanner
                             // D-COM-02: ứng viên giữ được cơm theo mức luôn xếp trước ứng viên phải giảm cơm (thứ tự từ điển, không cộng dồn với điểm mềm).
                             // D-COM-04: bậc xếp hạng trưa/tối (thứ tự từ điển, không cộng dồn với điểm mềm): 3 mâm đủ cơm · 2 mâm bớt cơm · 1 trọn suất có cơm · 0 còn lại.
                             var tier = 3;
+                            var shortBucket = 0;
                             if (_opt.RiceKeepFirst && _style != MealStyle.FullMealOnly && slot is "lunch" or "dinner" && !c.ForceZeroCarb)
                             {
                                 if (_rice.ContainsKey(c.Recipe.Id))
@@ -868,18 +962,21 @@ public static partial class WeekPlanner
                                     var kt = new ScaleTarget(Math.Max(0, pgoal.Kcal - pdK), Math.Max(0, pgoal.ProteinG - pdP));
                                     var ksc = ScaleMeal(c.Recipe, kt, c.ForceZeroCarb, out _, out var kShort, strict: true);
                                     tier = RiceTier(c, kt, ksc, kShort);
+                                    // Cùng bậc: món giữ được nhiều cơm hơn (thiếu ít hơn, theo bậc 50 g) xếp trước — để tổng cơm quy đổi của mức cao không thấp hơn mức thấp (D-COM-05 AC1).
+                                    if (_opt.RiceKindFirst) shortBucket = (int)Math.Round(kShort / 50.0);
                                 }
                                 else tier = 0;
                             }
                             if (tier > bestTier) bestTier = tier;
                             // Cùng bậc: tinh bột là cơm (mua gạo) xếp trước tinh bột khác (khoai, bún) để gạo cần mua tăng dần theo mức cơm (T-098 AC1); điểm mềm quyết định tiếp.
                             var kindCom = _opt.RiceKindFirst && tier > 0 && IsRiceKindCom(c.Recipe) ? 1 : 0;
-                            if (pick is null || tier > pickTier || (tier == pickTier && (kindCom > pickKind || (kindCom == pickKind && (s > pickScore + 1e-9 || (Math.Abs(s - pickScore) <= 1e-9 && string.CompareOrdinal(c.Recipe.Id, pick.Recipe.Id) < 0))))))
+                            if (pick is null || tier > pickTier || (tier == pickTier && (kindCom > pickKind || (kindCom == pickKind && (shortBucket < pickShort || (shortBucket == pickShort && (s > pickScore + 1e-9 || (Math.Abs(s - pickScore) <= 1e-9 && string.CompareOrdinal(c.Recipe.Id, pick.Recipe.Id) < 0))))))))
                             {
                                 pick = c;
                                 pickScore = s;
                                 pickTier = tier;
                                 pickKind = kindCom;
+                                pickShort = shortBucket;
                             }
                         }
                         var chosen = pick!;

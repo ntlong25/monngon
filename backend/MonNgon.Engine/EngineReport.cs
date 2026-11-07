@@ -45,6 +45,9 @@ public sealed class ProfileResult
     public int DistinctMainRelaxed { get; init; } = -1;
     /// <summary>Gạo sống cần mua (g/tuần) ở 4 mức cơm it/vua/nhieu/rat_nhieu (chỉ khi extras.Levels); rỗng = không chạy.</summary>
     public double[] RawRiceByLevel { get; init; } = [];
+    /// <summary>D-COM-05 AC1: tổng tinh bột quy ra cơm trắng (Σ rice_equiv_g của mọi bữa có cơm) cả tuần ở mức đang chạy, và ở cả 4 mức (cờ --levels).</summary>
+    public double RiceEquivWeekG { get; init; }
+    public double[] RiceEquivByLevel { get; init; } = [];
     /// <summary>Mức cơm khả thi theo ước lượng (<see cref="RiceFeasibility"/>) cho mức đang chạy: gram / chén; Feasible=false → app cảnh báo.</summary>
     public RiceFeasibilityItem? RiceFeasible { get; init; }
     public double WeekFoodCost { get; init; }
@@ -163,6 +166,7 @@ public static class EngineReport
                 relaxed = DistinctMainOf(WeekPlanner.Plan(new PlanWeekInput { Targets = targets, Prefs = rp, Data = ds, StartDate = startDate, Seed = seed, Options = options }));
             }
             var byLevel = new List<double>();
+            var equivByLevel = new List<double>();
             if (extras?.Levels == true)
                 foreach (var h in Enums.RiceHabits)
                 {
@@ -170,6 +174,7 @@ public static class EngineReport
                     lp.RiceHabit = h;
                     var lpl = h == tp.Preferences.RiceHabit ? plan : WeekPlanner.Plan(new PlanWeekInput { Targets = targets, Prefs = lp, Data = ds, StartDate = startDate, Seed = seed, Options = options });
                     byLevel.Add(lpl.Shopping.Items.Where(i => i.IngredientId is "gao_te" or "gao_lut").Sum(i => i.NeedG));
+                    equivByLevel.Add(RiceEquivWeekOf(lpl));
                 }
             var mamRatio = MamRatioOf(plan);
             var (reason, detail) = mamRatio < 0.999 && (options?.MealStyle ?? MealStyle.Auto) != MealStyle.FullMealOnly
@@ -180,8 +185,8 @@ public static class EngineReport
                 Name = tp.Id, Note = tp.Name + (tp.Expect.Note.Length > 0 ? " — " + tp.Expect.Note : ""), Targets = targets, Budget = tp.Preferences.WeeklyBudgetVnd,
                 ExpectAllDaysPass = tp.Expect.ExpectAllDaysPass, Status = plan.Status,
                 DaysOk = days.Count(d => d.Ok), ProteinDaysOk = days.Count(d => d.ProteinShortG <= 1e-6), KcalDaysOk = days.Count(d => d.KcalDelta == 0),
-                MamRatio = mamRatio, MamReason = reason, MamReasonDetail = detail, DessertRatio = DessertRatioOf(plan), DessertMissing = DessertMissingOf(plan), EquipmentShare = EquipmentShareOf(plan, ds), DistinctRecipes = plan.DistinctRecipes, DistinctMain = mainIds.Count, DistinctMainRelaxed = relaxed, RawRiceByLevel = [.. byLevel],
-                RiceFeasible = RiceFeasibility.Compute(targets, tp.Preferences.Slots, tp.Preferences.LowCarb).FirstOrDefault(f => f.Habit == tp.Preferences.RiceHabit), WeekFoodCost = plan.Shopping.WeekFoodCost, TillCost = plan.Shopping.TillCost,
+                MamRatio = mamRatio, MamReason = reason, MamReasonDetail = detail, DessertRatio = DessertRatioOf(plan), DessertMissing = DessertMissingOf(plan), EquipmentShare = EquipmentShareOf(plan, ds), DistinctRecipes = plan.DistinctRecipes, DistinctMain = mainIds.Count, DistinctMainRelaxed = relaxed, RawRiceByLevel = [.. byLevel], RiceEquivByLevel = [.. equivByLevel], RiceEquivWeekG = RiceEquivWeekOf(plan),
+                RiceFeasible = RiceFeasibility.Evaluate(targets, tp.Preferences, new Dictionary<string, WeekPlan> { [tp.Preferences.RiceHabit] = plan }).FirstOrDefault(f => f.Habit == tp.Preferences.RiceHabit), WeekFoodCost = plan.Shopping.WeekFoodCost, TillCost = plan.Shopping.TillCost,
                 Ms = ms, Iterations = plan.Iterations, HardViolations = CheckHardConstraints(plan, tp, ds),
                 LunchDinnerPlanned = LunchDinnerOf(plan).Count, LunchDinnerWithRice = LunchDinnerOf(plan).Count(m => m.Rice is not null),
                 LunchDinnerFullWithRice = LunchDinnerOf(plan).Count(m => m.Rice is not null && !(m.RecipeId?.StartsWith(MamBuilder.IdPrefix, StringComparison.Ordinal) ?? false)), RiceAttempt = plan.RiceAttempt,
@@ -265,6 +270,9 @@ public static class EngineReport
 
     public static List<PlanMeal> LunchDinnerOf(WeekPlan plan) => plan.Days.SelectMany(d => d.Meals).Where(m => m.Status == "planned" && m.Slot is "lunch" or "dinner" && m.RecipeId is not null).ToList();
 
+    /// <summary>Σ rice_equiv_g của mọi bữa có cơm trong tuần (khoai/bún đã quy ra cơm trắng theo kcal).</summary>
+    public static double RiceEquivWeekOf(WeekPlan plan) => RiceMealsOf(plan).Sum(m => m.Rice!.RiceEquivG);
+
     public static List<PlanMeal> RiceMealsOf(WeekPlan plan) => plan.Days.SelectMany(d => d.Meals).Where(m => m.Status == "planned" && m.Rice is not null).ToList();
 
     public static double RiceMinOf(WeekPlan plan) => RiceMealsOf(plan).Select(m => m.Rice!.ActualG).DefaultIfEmpty(0).Min();
@@ -324,9 +332,13 @@ public static class EngineReport
             if (r.Status != "error" && r.LunchDinnerPlanned > 0 && r.RiceHabit != "")
                 L.Add($"   bữa trưa/tối có cơm: {r.LunchDinnerWithRice}/{r.LunchDinnerPlanned} (mâm {r.LunchDinnerWithRice - r.LunchDinnerFullWithRice} · trọn suất {r.LunchDinnerFullWithRice}) · phương án xếp hạng {r.RiceAttempt}");
             if (r.Status != "error" && r.RiceFeasible is { } rf)
-                L.Add($"   cơm khả thi ước lượng: {Fmt(rf.FeasibleG)} g (~{rf.FeasibleCups.ToString("0.#", CultureInfo.InvariantCulture)} chén) / mức chọn {Fmt(rf.TargetG)} g → {(rf.Feasible ? "đủ" : "CẢNH BÁO onboarding")}");
+                L.Add($"   cơm khả thi: ước lượng kcal/đạm {Fmt(rf.FeasibleG)} g (~{rf.FeasibleCups.ToString("0.#", CultureInfo.InvariantCulture)} chén) / mức chọn {Fmt(rf.TargetG)} g → {(rf.Feasible ? "đủ" : $"CẢNH BÁO onboarding (lý do {rf.Reason})")}"
+                    + (rf.MealsPlanned is { } mp ? $" · bữa trưa/tối đủ cơm {rf.MealsWithFullRice}/{mp}" : "")
+                    + (rf.Reason == "budget" || rf.MealsWithRice < 12 ? $" · bữa có cơm {rf.MealsWithRice}/{rf.MealsPlanned} · ngân sách {Fmt(rf.BudgetVnd ?? 0)} ₫, cần ≥ {(rf.BudgetNeededVnd is { } nb ? Fmt(nb) + " ₫" : "không phương án nào đủ")} để ≥ 12/14 bữa có cơm" : ""));
             if (r.RawRiceByLevel.Length == 4)
                 L.Add($"   gạo sống cần mua (g/tuần) it → vừa → nhiều → rất nhiều: {string.Join(" → ", r.RawRiceByLevel.Select(Fmt))}{(Enumerable.Range(1, 3).Any(i => r.RawRiceByLevel[i] < r.RawRiceByLevel[i - 1] - 1e-9) ? "  ✗ KHÔNG TĂNG DẦN" : "")}");
+            if (r.RiceEquivByLevel.Length == 4)
+                L.Add($"   cơm quy đổi cả tuần (g) it → vừa → nhiều → rất nhiều: {string.Join(" → ", r.RiceEquivByLevel.Select(Fmt))}{(Enumerable.Range(1, 3).Any(i => r.RiceEquivByLevel[i] < r.RiceEquivByLevel[i - 1] * 0.98) ? "  ✗ GIẢM > 2%" : "")}");
             if (r.DistinctMainRelaxed >= 0)
                 L.Add($"   món trưa/tối khác nhau khi nới ngân sách 20% → {r.DistinctMainRelaxed}");
             if (r.Status != "error" && r.RiceMeals > 0)

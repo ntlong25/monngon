@@ -470,6 +470,12 @@ T-001 (khởi tạo Expo), T-013…T-028 (UI Expo): **CANCELLED**, thay bằng T
   5. Mâm khoai lang/bún: `rice.kind = other`, `rice.rice_equiv_g` đúng kcal tương đương cơm trắng (±5 g).
   6. Không lùi: kết quả T-096 ở `it`/`vua` (≤ 20% ghi chú mỗi hồ sơ, p01 cơm trung vị ≥ 140 g, tráng miệng ≥ 3 loại); 16/16 hồ sơ 7/7, kcal ±5%, đạm ≥ sàn, chi phí ≤ ngân sách, 0 vi phạm cứng, ≥ 60% bữa trưa/tối ghép mâm ở `vua`.
   7. Đa dạng: hồ sơ bình thường ≥ 10 món trưa/tối, trừ ngoại lệ D-DIV-01/D-DIV-02 (ghi rõ hồ sơ nào thuộc ngoại lệ nào).
+- **Cập nhật AC sau lượt 1 (2026-11-08, D-COM-05):**
+  - AC1: đo bằng tổng `rice_equiv_g` cả tuần, không giảm khi tăng mức (sai số làm tròn ≤ 2%); miễn cho ô thuộc ngoại lệ ngân sách AC2.
+  - AC2: ngoại lệ "ngân sách sát" cho p02 (3+ chén), p09 (3+ chén), p14 (2 chén, 3+ chén); report ghi ngân sách cần để đạt.
+  - AC4: bắt buộc 64/64; ước lượng chén khả thi tính cả ngân sách; p14 2 chén phải bật cảnh báo; API trả lý do (`kcal_protein` | `budget`) và ngân sách cần.
+  - AC7: ở `nhieu`/`rat_nhieu` ngưỡng ≥ 6 món trưa/tối.
+  - Ngoại lệ trong Rice98Tests là danh sách tường minh (hồ sơ, mức, lý do), không nới ngưỡng chung. Không nâng ngân sách hồ sơ test; không nới luật 1 canh/1 món chính.
 
 ### T-099 — Thẻ tinh bột theo tên món + cảnh báo số chén khả thi (Flutter) · DEV · P1 (sau T-097, cùng vùng `mobile/`)
 - **Phụ thuộc:** T-098 (API), T-097. PRD D-COM-03, D-COM-04.
@@ -614,6 +620,7 @@ T-001 (khởi tạo Expo), T-013…T-028 (UI Expo): **CANCELLED**, thay bằng T
   - Kcal/100 g của gạo sống so với cơm chín khớp hệ số ±10% (vd gạo 365 kcal × 0,36 ≈ 131 so với cơm 130). Quy tắc chung ≤ 5% theo D-SHP-03. **DONE trong đợt D1.**.
 
 ### T-053 — Món phụ cho ghép mâm · RESEARCH · P0
+- **Bổ sung 2026-11-08 (D-COM-05):** ưu tiên món chính rẻ hợp mâm cơm (đạm nạc, kcal vừa) để người chọn 2–3 chén với ngân sách sát vẫn có mâm cơm và đủ đa dạng.
 - **Mô tả:** Theo hợp đồng v0.2, thêm vào `data/recipes.json`:
   - ≥ 15 `soup` (canh rau, canh chua, canh bí, canh mồng tơi, canh cải; ≥ 6 món chay **không nước mắm**);
   - ≥ 12 `side_veg` (rau muống luộc/xào, cải xào, su su, đậu cô ve, nộm…; ≥ 6 món chay);

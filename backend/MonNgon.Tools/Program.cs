@@ -54,7 +54,7 @@ static int EngineReportCmd(string[] a)
         if (!MonNgon.Engine.Types.Enums.RiceHabits.Contains(rice)) { Console.Error.WriteLine("--rice phải là it | vua | nhieu | rat_nhieu"); return 2; }
         foreach (var p in profiles) p.Preferences.RiceHabit = rice;
     }
-    var options = new PlanOptions { MealStyle = style, RiceKeepFirst = Opt("rice-keep-first", "true") != "false", RiceOnlyAttempt = int.Parse(Opt("rice-attempt", "0")), RiceKcalShift = double.Parse(Opt("rice-shift", "0.15"), System.Globalization.CultureInfo.InvariantCulture) };
+    var options = new PlanOptions { MealStyle = style, RiceKeepFirst = Opt("rice-keep-first", "true") != "false", RiceOnlyAttempt = int.Parse(Opt("rice-attempt", "0")), LiftToLowerLevel = Opt("lift", "true") != "false", RiceKcalShift = double.Parse(Opt("rice-shift", "0.15"), System.Globalization.CultureInfo.InvariantCulture) };
     var results = profiles.Select(p => EngineReport.RunProfile(p, ds, seed, "2026-11-09", options, new EngineReport.ReportExtras(a.Contains("--relaxed"), a.Contains("--levels")))).ToList();
     Console.WriteLine(EngineReport.Format(results));
     if (a.Contains("--days"))
