@@ -64,12 +64,18 @@ public class RiceTests
                         Assert.Contains(note.Reason, new[] { "kcal", "protein" });
                     }
                     else Assert.Null(note);
-                    Assert.True(Math.Abs(r.ActualG - m.Grams[Mam(m).RiceIdx].Grams) < 1e-9);
+                    Assert.True(Math.Abs(r.ActualG - m.Grams[RiceIdx(m)].Grams) < 1e-9);
                 }
             }
     }
 
-    private static MamInfo Mam(PlanMeal m) => MamBuilder.Rebuild(m.RecipeId!, Data, "vua")!;
+    /// <summary>Chỉ số dòng cơm trong Grams: mâm đủ → dòng cơm của mâm; món trọn suất có cơm (T-098) → dòng carb đầu tiên của công thức.</summary>
+    private static int RiceIdx(PlanMeal m)
+    {
+        var mam = MamBuilder.Rebuild(m.RecipeId!, Data, "vua");
+        if (mam is { RiceIdx: >= 0 }) return mam.RiceIdx;
+        return Data.RecipesById[m.RecipeId!].Ingredients.FindIndex(i => i.Role == "carb");
+    }
 
     /// <summary>AC2: p01 mức vừa — mỗi bữa mâm có cơm ≥ 140 g trừ bữa có ghi chú.</summary>
     [Fact]

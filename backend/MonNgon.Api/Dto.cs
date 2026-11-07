@@ -21,6 +21,13 @@ public sealed class SlotsPreviewResponse
     public required List<SlotTarget> Slots { get; init; }
 }
 
+public sealed class RiceFeasibilityResponse
+{
+    public required Targets Targets { get; init; }
+    /// <summary>Mỗi mức cơm (it, vua, nhieu, rat_nhieu): mức chọn, mức khả thi theo chỉ tiêu bữa, có cần cảnh báo ở bước chọn thói quen ăn cơm không.</summary>
+    public required List<RiceFeasibilityItem> Habits { get; init; }
+}
+
 public sealed class BudgetTargetsDto
 {
     public double? KcalTarget { get; set; }

@@ -95,6 +95,16 @@ public static class V1Endpoints
             return TypedResults.Ok(new SlotsPreviewResponse { Targets = t, Slots = MealSlots.Allocate(t, req.Slots) });
         }).WithName("PreviewSlots").WithSummary("Phân bổ chỉ tiêu theo bữa");
 
+        g.MapPost("/rice/feasibility", Results<Ok<RiceFeasibilityResponse>, ValidationProblem> (SlotsPreviewRequest req) =>
+        {
+            var e = new Errors();
+            Validation.Profile(e, req.Profile);
+            Validation.Slots(e, req.Slots);
+            if (e.Any) return TypedResults.ValidationProblem(e.ToDictionary());
+            var t = TargetCalc.Compute(req.Profile);
+            return TypedResults.Ok(new RiceFeasibilityResponse { Targets = t, Habits = RiceFeasibility.Compute(t, req.Slots) });
+        }).WithName("RiceFeasibility").WithSummary("Mức cơm khả thi mỗi bữa trưa/tối theo chỉ tiêu (cảnh báo ở bước chọn thói quen ăn cơm)");
+
         g.MapPost("/budget-range", Results<Ok<BudgetRangeResponse>, ValidationProblem> (BudgetRangeRequest req, Dataset data) =>
         {
             var e = new Errors();
