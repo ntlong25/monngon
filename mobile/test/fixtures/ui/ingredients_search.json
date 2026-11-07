@@ -1,0 +1,47 @@
+[
+ {
+  "id": "gao_lut_nau_chin",
+  "name": "Gạo lứt nấu chín",
+  "aisle": "gao_do_kho",
+  "household_units": [],
+  "default_pantry": false
+ },
+ {
+  "id": "gao_nep",
+  "name": "Gạo nếp (khô)",
+  "aisle": "gao_do_kho",
+  "household_units": [
+   {
+    "unit": "gói 500 g",
+    "grams": 500
+   }
+  ],
+  "default_pantry": false
+ },
+ {
+  "id": "dui_ga_khong_da",
+  "name": "Đùi gà, không xương, không da",
+  "aisle": "thit",
+  "household_units": [],
+  "default_pantry": false
+ },
+ {
+  "id": "trung_ga",
+  "name": "Trứng gà",
+  "aisle": "trung_dau_phu",
+  "household_units": [
+   {
+    "unit": "quả",
+    "grams": 50
+   }
+  ],
+  "default_pantry": false
+ },
+ {
+  "id": "uc_ga_khong_da",
+  "name": "Ức gà, không xương, không da",
+  "aisle": "thit",
+  "household_units": [],
+  "default_pantry": false
+ }
+]

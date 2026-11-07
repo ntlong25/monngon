@@ -1,0 +1,202 @@
+[
+  {
+    "id": "card_01",
+    "tag": "xao",
+    "title": "Xào nhanh",
+    "subtitle": "Đảo lửa lớn, lên món trong vài phút.",
+    "sample_recipe_ids": [
+      "ga_xao_sup_lo_xanh_toi",
+      "ga_xao_su_su_ca_rot",
+      "thit_heo_xao_ca_chua",
+      "thit_heo_xao_bap_cai",
+      "sup_lo_trang_xao_thit_bam",
+      "bo_xao_cai_ngot"
+    ],
+    "image_brief": "Cảnh bếp gia đình, chảo đang xào rau và thịt, khói nhẹ, ánh sáng ấm."
+  },
+  {
+    "id": "card_02",
+    "tag": "kho",
+    "title": "Kho đậm đà",
+    "subtitle": "Kho nhỏ lửa, nước sánh, ăn với cơm.",
+    "sample_recipe_ids": [
+      "dui_ga_kho_gung",
+      "thit_heo_kho_trung",
+      "thit_heo_kho_khoai_tay",
+      "ca_basa_kho_to"
+    ],
+    "image_brief": "Nồi đất kho cá hoặc thịt, nước màu nâu sánh, đĩa cơm trắng bên cạnh."
+  },
+  {
+    "id": "card_03",
+    "tag": "canh",
+    "title": "Canh & món nước",
+    "subtitle": "Nấu nhẹ, ăn kèm cơm, nóng hổi.",
+    "sample_recipe_ids": [
+      "canh_bi_xanh_ga",
+      "canh_bi_xanh_thit_bam",
+      "canh_ca_ro_phi_cai_ngot",
+      "canh_bi_xanh_tom",
+      "canh_dau_phu_bap_cai"
+    ],
+    "image_brief": "Tô canh rau và thịt trên bàn gỗ, rau xanh nổi trên mặt nước."
+  },
+  {
+    "id": "card_04",
+    "tag": "hap",
+    "title": "Hấp thanh đạm",
+    "subtitle": "Hấp giữ vị, ít dầu mỡ.",
+    "sample_recipe_ids": [
+      "ga_hap_gung_hanh",
+      "ca_basa_hap_gung",
+      "muc_hap_gung",
+      "trung_hap_thit_bam",
+      "trung_sang_hanh_la",
+      "khoai_lang_hap_vung"
+    ],
+    "image_brief": "Đĩa cá hoặc ức gà hấp, hành lá rắc trên, hơi nước mờ."
+  },
+  {
+    "id": "card_05",
+    "tag": "chay",
+    "title": "Món chay đậu phụ",
+    "subtitle": "Đậu phụ và rau, không thịt cá.",
+    "sample_recipe_ids": [
+      "dau_phu_sot_ca_chua",
+      "dau_phu_xao_cai_ngot",
+      "dau_phu_chien_sot_lac",
+      "dau_phu_sot_xi_dau_sup_lo",
+      "canh_dau_phu_bap_cai",
+      "lac_rang_nuoc_mam_tofu_chien"
+    ],
+    "image_brief": "Đĩa đậu phụ vàng và rau xanh, sốt cà chua ở giữa."
+  },
+  {
+    "id": "card_06",
+    "tag": "sot",
+    "title": "Sốt cà chua",
+    "subtitle": "Cà chua hầm sánh, dễ ăn.",
+    "sample_recipe_ids": [
+      "ga_sot_ca_chua",
+      "thit_bam_sot_ca_chua",
+      "ca_ro_phi_sot_ca_chua",
+      "ca_thu_sot_ca_chua",
+      "dau_phu_sot_ca_chua",
+      "dau_phu_chien_sot_lac"
+    ],
+    "image_brief": "Đĩa thịt hoặc cá trong sốt cà chua đỏ, rau thơm rắc trên."
+  },
+  {
+    "id": "card_07",
+    "tag": "chien",
+    "title": "Chiên vàng",
+    "subtitle": "Chiên ngoài giòn, bên trong mềm.",
+    "sample_recipe_ids": [
+      "trung_nhoi_thit_tom",
+      "lac_rang_nuoc_mam_tofu_chien",
+      "com_chien_trung_sang",
+      "khoai_tay_trung_sang",
+      "trung_chien_ca_chua_sang",
+      "dau_phu_chien_nuoc_mam"
+    ],
+    "image_brief": "Miếng đậu hoặc trứng chiên vàng, đĩa rau sống bên cạnh."
+  },
+  {
+    "id": "card_08",
+    "tag": "luoc",
+    "title": "Luộc & chấm",
+    "subtitle": "Luộc chín mềm, chấm nước mắm.",
+    "sample_recipe_ids": [
+      "thit_heo_luoc_cham_nuoc_mam",
+      "khoai_lang_trung_sang",
+      "khoai_lang_luoc",
+      "trung_luoc_muoi",
+      "khoai_tay_luoc_muoi"
+    ],
+    "image_brief": "Đĩa thịt luộc thái lát, bát nước chấm và rau thơm."
+  },
+  {
+    "id": "card_09",
+    "tag": "an_sang",
+    "title": "Bữa sáng nhanh",
+    "subtitle": "Chuẩn bị dưới 15 phút, no lâu.",
+    "sample_recipe_ids": [
+      "chao_ga",
+      "pho_ga_sang",
+      "bun_bo_sang",
+      "trung_sang_hanh_la",
+      "sua_chua_hat_sang",
+      "khoai_lang_trung_sang"
+    ],
+    "image_brief": "Bàn ăn sáng với trứng, cháo hoặc khoai, ánh sáng buổi sớm."
+  },
+  {
+    "id": "card_10",
+    "tag": "an_vat",
+    "title": "Ăn vặt lành mạnh",
+    "subtitle": "Bữa phụ nhẹ, ít đường.",
+    "sample_recipe_ids": [
+      "sua_chua_vung",
+      "khoai_lang_luoc",
+      "sua_chua_lac_duong",
+      "khoai_lang_hap_vung",
+      "sua_chua_duong_nhe",
+      "khoai_lang_nuong_duong"
+    ],
+    "image_brief": "Hũ sữa chua và vài món nhỏ như khoai hoặc đậu."
+  },
+  {
+    "id": "card_11",
+    "tag": "nhanh_de",
+    "title": "Nhanh gọn, dễ nấu",
+    "subtitle": "Dưới 20 phút, ít bước.",
+    "sample_recipe_ids": [
+      "ga_xao_sup_lo_xanh_toi",
+      "goi_ga_bap_cai",
+      "ga_sot_ca_chua",
+      "ga_nuong_sa_chanh_toi",
+      "bun_tron_ga_xe",
+      "ga_xao_su_su_ca_rot"
+    ],
+    "image_brief": "Đĩa cơm và món xào đơn giản trên bếp, nguyên liệu tươi xếp gọn."
+  },
+  {
+    "id": "card_12",
+    "tag": "ngot",
+    "title": "Vị ngọt nhẹ",
+    "subtitle": "Ngọt từ nguyên liệu, không quá nhiều đường.",
+    "sample_recipe_ids": [
+      "sua_chua_vung",
+      "sua_chua_lac_duong",
+      "sua_chua_duong_nhe",
+      "sua_chua_vung_nhe"
+    ],
+    "image_brief": "Hũ sữa chua và khoai lang nướng, rắc vừng."
+  },
+  {
+    "id": "card_13",
+    "tag": "thanh_dam",
+    "title": "Thanh đạm",
+    "subtitle": "Ít gia vị, vị tự nhiên.",
+    "sample_recipe_ids": [
+      "ga_hap_gung_hanh",
+      "thit_heo_luoc_cham_nuoc_mam",
+      "ca_basa_hap_gung",
+      "muc_hap_gung"
+    ],
+    "image_brief": "Đĩa gà hoặc cá với rau luộc, màu sáng nhẹ nhàng."
+  },
+  {
+    "id": "card_14",
+    "tag": "nhe",
+    "title": "Nhẹ bụng",
+    "subtitle": "Nhiều rau, ăn không nặng.",
+    "sample_recipe_ids": [
+      "canh_bi_xanh_ga",
+      "canh_bi_xanh_thit_bam",
+      "canh_ca_ro_phi_cai_ngot",
+      "canh_bi_xanh_tom"
+    ],
+    "image_brief": "Tô canh rau nhiều màu, ít dầu, ánh sáng buổi trưa."
+  }
+]

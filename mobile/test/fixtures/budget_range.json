@@ -1,0 +1,24 @@
+{
+ "min_vnd": 650000,
+ "max_vnd": 2250000,
+ "step_vnd": 50000,
+ "estimate_vnd": 897000,
+ "tiers": [
+  {
+   "key": "economy",
+   "from_vnd": 650000,
+   "to_vnd": 800000
+  },
+  {
+   "key": "moderate",
+   "from_vnd": 800000,
+   "to_vnd": 1250000
+  },
+  {
+   "key": "comfortable",
+   "from_vnd": 1250000,
+   "to_vnd": 2250000
+  }
+ ],
+ "basis": "week_food_cost"
+}

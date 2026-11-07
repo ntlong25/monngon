@@ -1,0 +1,22 @@
+# Chạy API cục bộ:  docker compose up --build   ->  http://localhost:5095/health
+# Cổng 5095 trùng mặc định của app (emulator Android gọi http://10.0.2.2:5095). Đổi: API_PORT=9000 docker compose up.
+services:
+  api:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    image: fitpro-api:local
+    ports:
+      - "${API_PORT:-5095}:8080"
+    environment:
+      # Mặc định đã trỏ vào /app/data và /app/content trong image; đặt lại ở đây cho rõ.
+      DataDir: /app/data
+      ContentDir: /app/content
+    volumes:
+      # Sửa data/ hoặc content/ trên máy rồi `docker compose restart api` là xong, không cần build lại image.
+      - ./data:/app/data:ro
+      - ./content:/app/content:ro
+    read_only: true
+    tmpfs:
+      - /tmp
+    restart: unless-stopped

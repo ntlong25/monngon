@@ -1,0 +1,124 @@
+
+> mon-ngon@0.0.1 engine-report
+> node src/report/engine-report-cli.ts
+
+BÁO CÁO ENGINE (T-011)
+
+[ĐẠT ] p01_nu_giam_mo_vua — Nữ giảm mỡ, ngân sách vừa — Đường cơ bản; kỳ vọng đạt 7/7 ngày.
+   chỉ tiêu: 1330–1400 kcal, protein ≥ 120 g
+   ngày đạt 7/7 (protein 7/7, kcal 7/7) · món khác nhau 12 (trưa/tối 6) · 49 ms · 1 vòng
+   chi phí món ăn 575.000 ₫ / ngân sách 650.000 ₫ ✓ · trả tại quầy ~1.161.000 ₫
+
+[ĐẠT ] p02_nu_nho_can_giam_mo_1350 — Nữ nhỏ cân giảm mỡ 1.350 kcal / 110 g — Ca khó nhất theo video; nếu không đạt thì kiểm tra số món đạm ít béo.
+   chỉ tiêu: 1283–1350 kcal, protein ≥ 110 g
+   ngày đạt 7/7 (protein 7/7, kcal 7/7) · món khác nhau 14 (trưa/tối 6) · 32 ms · 1 vòng
+   chi phí món ăn 490.000 ₫ / ngân sách 600.000 ₫ ✓ · trả tại quầy ~1.202.000 ₫
+
+[ĐẠT ] p03_nam_tang_co_2800 — Nam tăng cơ 2.800 kcal — Kỳ vọng chưa đạt: 180 g đạm/ngày cần nhiều món đạm lớn; thiếu món đạm nặng trong kho hiện tại.
+   chỉ tiêu: 2660–2800 kcal, protein ≥ 180 g
+   ngày đạt 7/7 (protein 7/7, kcal 7/7) · món khác nhau 12 (trưa/tối 5) · 51 ms · 2 vòng
+   chi phí món ăn 589.000 ₫ / ngân sách 1.000.000 ₫ ✓ · trả tại quầy ~1.074.000 ₫
+
+[ĐẠT ] p04_nam_giu_can — Nam giữ cân, tự tính chỉ tiêu — Đường cơ bản.
+   chỉ tiêu: 2280–2400 kcal, protein ≥ 120 g
+   ngày đạt 7/7 (protein 7/7, kcal 7/7) · món khác nhau 12 (trưa/tối 6) · 11 ms · 1 vòng
+   chi phí món ăn 532.000 ₫ / ngân sách 800.000 ₫ ✓ · trả tại quầy ~1.157.000 ₫
+
+[ĐẠT ] p05_thuan_chay_it_tinh_bot — Thuần chay, ít tinh bột — Kỳ vọng chưa đạt: ít món thuần chay lunch/dinner trong kho (chỉ có đậu phụ và lạc); cần thêm món chay.
+   chỉ tiêu: 1663–1750 kcal, protein ≥ 100 g
+   ngày đạt 7/7 (protein 7/7, kcal 7/7) · món khác nhau 6 (trưa/tối 6) · 4 ms · 1 vòng
+   chi phí món ăn 392.000 ₫ / ngân sách 550.000 ₫ ✓ · trả tại quầy ~681.000 ₫
+
+[ĐẠT ] p06_chay_lacto_nu — Ăn chay (có trứng, sữa) — Kỳ vọng đạt; nhiều món đậu phụ và trứng.
+   chỉ tiêu: 1758–1850 kcal, protein ≥ 90 g
+   ngày đạt 7/7 (protein 7/7, kcal 7/7) · món khác nhau 13 (trưa/tối 5) · 12 ms · 1 vòng
+   chi phí món ăn 374.000 ₫ / ngân sách 600.000 ₫ ✓ · trả tại quầy ~890.000 ₫
+
+[ĐẠT ] p07_khong_lon_khong_sua — Không lợn, không sữa — Kỳ vọng đạt; kho còn bò, gà, cá, đậu.
+   chỉ tiêu: 1900–2000 kcal, protein ≥ 155 g
+   ngày đạt 7/7 (protein 7/7, kcal 7/7) · món khác nhau 11 (trưa/tối 5) · 16 ms · 1 vòng
+   chi phí món ăn 567.000 ₫ / ngân sách 700.000 ₫ ✓ · trả tại quầy ~1.117.000 ₫
+
+[ĐẠT ] p08_di_ung_lac_hat_cay — Dị ứng lạc và hạt cây — Kiểm tra: không món nào chứa lạc (kể cả món 'lạc rang muối' và 'sốt lạc').
+   chỉ tiêu: 1615–1700 kcal, protein ≥ 110 g
+   ngày đạt 7/7 (protein 7/7, kcal 7/7) · món khác nhau 12 (trưa/tối 6) · 12 ms · 1 vòng
+   chi phí món ăn 433.000 ₫ / ngân sách 700.000 ₫ ✓ · trả tại quầy ~986.000 ₫
+
+[PARTIAL] p09_chi_co_lo_vi_song — Chỉ có lò vi sóng — Kỳ vọng chưa đạt: mọi công thức trong kho cần bep hoặc lo_nuong/noi_ap_suat; cần thêm món lò vi sóng.
+   chỉ tiêu: 1330–1400 kcal, protein ≥ 120 g
+   ngày đạt 0/7 (protein 0/7, kcal 0/7) · món khác nhau 0 (trưa/tối 0) · 1 ms · 12 vòng
+   chi phí món ăn 0 ₫ / ngân sách 600.000 ₫ ✓ · trả tại quầy ~0 ₫
+   · Lọc cứng loại 108/108 món; nhiều nhất do: equipment (108)
+   · KHÔNG CÓ MÓN cho bữa "breakfast", "lunch", "dinner", "snack_pm" sau khi lọc → cần thêm công thức phù hợp nhóm ràng buộc này (tuần vẫn được trả về, các ngày báo thiếu).
+   · Bữa breakfast: chỉ còn 0 món hợp lệ (nên ≥ 6 để có đa dạng).
+   · Bữa lunch: chỉ còn 0 món hợp lệ (nên ≥ 6 để có đa dạng).
+   · Bữa dinner: chỉ còn 0 món hợp lệ (nên ≥ 6 để có đa dạng).
+   · Bữa snack_pm: chỉ còn 0 món hợp lệ (nên ≥ 6 để có đa dạng).
+   · Ngày không đạt theo loại: protein_low×7, kcal_low×7
+   · Thiếu nặng nhất: 2026-11-09 kcal_low 1330 kcal.
+
+[ĐẠT ] p10_ngan_sach_toi_thieu — Ngân sách tối thiểu (600.000 ₫) — Kỳ vọng chưa đạt: 7 ngày đạm với ngân sách sát sàn có thể vượt; kiểm tra thông báo partial và chi phí.
+   chỉ tiêu: 2328–2450 kcal, protein ≥ 115 g
+   ngày đạt 7/7 (protein 7/7, kcal 7/7) · món khác nhau 12 (trưa/tối 6) · 10 ms · 1 vòng
+   chi phí món ăn 514.000 ₫ / ngân sách 600.000 ₫ ✓ · trả tại quầy ~1.037.000 ₫
+
+[ĐẠT ] p11_ho_2_nguoi_lon_2_tre — Hộ 2 người lớn + 2 trẻ em — Kiểm tra: danh sách đi chợ nhân số người, trẻ 0,6 suất.
+   chỉ tiêu: 2280–2400 kcal, protein ≥ 125 g
+   ngày đạt 7/7 (protein 7/7, kcal 7/7) · món khác nhau 11 (trưa/tối 5) · 14 ms · 1 vòng
+   chi phí món ăn 1.370.000 ₫ / ngân sách 1.500.000 ₫ ✓ · trả tại quầy ~1.831.000 ₫
+
+[ĐẠT ] p12_bua_sang_tu_lo — Bữa sáng tự lo — Kiểm tra: bữa sáng không lên món nhưng chỉ tiêu được phân bổ.
+   chỉ tiêu: 1995–2100 kcal, protein ≥ 160 g
+   ngày đạt 7/7 (protein 7/7, kcal 7/7) · món khác nhau 8 (trưa/tối 5) · 8 ms · 1 vòng
+   chi phí món ăn 436.000 ₫ / ngân sách 700.000 ₫ ✓ · trả tại quầy ~1.004.000 ₫
+
+[ĐẠT ] p13_nhieu_mon_ghet — Nhiều món không thích — Kiểm tra: không món nào chứa nguyên liệu ghét; có thể ít món hơn.
+   chỉ tiêu: 1615–1700 kcal, protein ≥ 95 g
+   ngày đạt 7/7 (protein 7/7, kcal 7/7) · món khác nhau 12 (trưa/tối 6) · 9 ms · 1 vòng
+   chi phí món ăn 512.000 ₫ / ngân sách 650.000 ₫ ✓ · trả tại quầy ~1.124.000 ₫
+
+[PARTIAL] p14_ho_3_nguoi_lon — Hộ 3 người lớn, ít dụng cụ — Kiểm tra: lunch packed chỉ dùng món 'packed' khả dụng.
+   chỉ tiêu: 1520–1600 kcal, protein ≥ 110 g
+   ngày đạt 6/7 (protein 6/7, kcal 6/7) · món khác nhau 11 (trưa/tối 6) · 207 ms · 12 vòng
+   chi phí món ăn 1.135.000 ₫ / ngân sách 1.200.000 ₫ ✓ · trả tại quầy ~1.447.000 ₫
+   · Lọc cứng loại 16/108 món; nhiều nhất do: equipment (16)
+   · Bữa lunch: chỉ 3/8 món scale khớp được mục tiêu bữa (~575 kcal, ≥ 41 g protein; dung sai protein 3 g, kcal 5%); gần nhất: ga_sot_ca_chua.
+   · Bữa snack_pm: chỉ 1/7 món scale khớp được mục tiêu bữa (~82 kcal, ≥ 6 g protein; dung sai protein 3 g, kcal 5%); gần nhất: khoai_tay_luoc_muoi.
+   · Ngày không đạt theo loại: protein_low×1, kcal_high×1
+   · Thiếu nặng nhất: 2026-11-15 protein_low 4 g.
+
+TỔNG HỢP
+  Hồ sơ đạt 7/7: 12/14 · partial 2 · lỗi 0
+  Hồ sơ kỳ vọng đạt: 9/10 (90%)
+  Ngày đạt: 90/98 (92%) · sàn protein 92% · dải calo 92%
+  Vi phạm ràng buộc cứng: 0 · thời gian TB 31 ms, tối đa 207 ms
+
+MA TRẬN PHỦ MÓN (số công thức dùng được / bữa; ⚠ = dưới 6)
+  nhóm ràng buộc             breakfast     lunch    dinner  snack_am  snack_pm
+  không ràng buộc                  28        52        52        13         7 
+  chay                             10        13        13        11         5⚠
+  thuần chay                        6        11        11         5⚠        3⚠
+  chay có cá                       18        28        28        12         6 
+  không lợn                        26        42        42        13         7 
+  không thịt đỏ                    26        46        46        13         7 
+  không trứng                      19        46        46        11         5⚠
+  không sữa                        26        52        52         9         7 
+  không gluten                     22        34        34        12         6 
+  không đậu nành                   20        30        30        11         5⚠
+  không cá                         15        20        20        11         5⚠
+  không hải sản có vỏ              28        46        46        13         7 
+  không lạc                        26        48        48        11         6 
+  ít tinh bột (trưa/tối)           28        51        51        13         7 
+  chỉ có bếp                       28        51        51        13         7 
+
+MẬT ĐỘ PROTEIN MÓN TRƯA/TỐI Ở KHẨU PHẦN CHUẨN (% calo từ protein)
+  65 món; trung vị 30%, thấp nhất 7% (ld_hk_ba_chi_kho_khoai_lang), cao nhất 77% (ga_hap_gung_hanh)
+  ≥ 25% calo từ protein: 51/65 · ≥ 30%: 33/65 · ≥ 35%: 14/65
+  kcal khẩu phần chuẩn: min 179, trung vị 534, max 891
+
+ĐỘ PHỦ GIÁ (số nguyên liệu có giá riêng của cửa hàng / 46)
+  bach_hoa_xanh    3/46  (phần thiếu dùng giá cho_khac)
+  winmart          0/46  (phần thiếu dùng giá cho_khac)
+  coopmart         0/46  (phần thiếu dùng giá cho_khac)
+  cho_khac         46/46
+  Nguyên liệu không dùng trong công thức nào: ca_tim

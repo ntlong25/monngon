@@ -1,0 +1,15 @@
+# Context của docker build là gốc repo; chỉ cần backend/ (không test/bin/obj), data/, content/.
+**/bin
+**/obj
+**/.vs
+node_modules
+.git
+mobile
+docs
+golden
+src
+backend/MonNgon.Api.Tests
+backend/MonNgon.Engine.Tests
+backend/MonNgon.Tools
+backend/openapi
+*.md

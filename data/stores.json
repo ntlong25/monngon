@@ -1,0 +1,22 @@
+[
+  {
+    "id": "bach_hoa_xanh",
+    "name": "Bách hóa Xanh",
+    "price_survey_date": "2026-11-06"
+  },
+  {
+    "id": "winmart",
+    "name": "WinMart",
+    "price_survey_date": "2026-11-06"
+  },
+  {
+    "id": "coopmart",
+    "name": "Co.opmart",
+    "price_survey_date": "2026-11-06"
+  },
+  {
+    "id": "cho_khac",
+    "name": "Chợ / nơi khác",
+    "price_survey_date": "2026-11-06"
+  }
+]

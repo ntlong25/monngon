@@ -1,0 +1,106 @@
+BÁO CÁO ENGINE (C#)
+
+[ĐẠT ] p01_nu_giam_mo_vua — Nữ giảm mỡ, ngân sách vừa — Đường cơ bản; kỳ vọng đạt 7/7 ngày.
+   chỉ tiêu: 1330–1470 kcal, protein ≥ 120 g
+   ngày đạt 7/7 (protein 7/7, kcal 7/7) · món khác nhau 16 (trưa/tối 10) · 1740 ms · 1 vòng · % bữa ghép mâm 100% · % có tráng miệng 100%
+   chi phí món ăn 637.000 ₫ / ngân sách 650.000 ₫ ✓ · trả tại quầy ~1.019.000 ₫
+   dụng cụ (% bữa): bep 100% · noi_com_dien 46%
+
+[ĐẠT ] p02_nu_nho_can_giam_mo_1350 — Nữ nhỏ cân giảm mỡ 1.350 kcal / 110 g — Ca khó nhất theo video; nếu không đạt thì kiểm tra số món đạm ít béo.
+   chỉ tiêu: 1283–1418 kcal, protein ≥ 110 g
+   ngày đạt 7/7 (protein 7/7, kcal 7/7) · món khác nhau 14 (trưa/tối 7) · 49 ms · 1 vòng · % bữa ghép mâm 100% · % có tráng miệng 100%
+   chi phí món ăn 496.000 ₫ / ngân sách 600.000 ₫ ✓ · trả tại quầy ~912.000 ₫
+   dụng cụ (% bữa): bep 100%
+
+[ĐẠT ] p03_nam_tang_co_2800 — Nam tăng cơ 2.800 kcal — Đạt 7/7 sau lô 3 (bổ sung món phụ và tinh chỉnh ngày).
+   chỉ tiêu: 2660–2940 kcal, protein ≥ 180 g
+   ngày đạt 7/7 (protein 7/7, kcal 7/7) · món khác nhau 15 (trưa/tối 7) · 51 ms · 1 vòng · % bữa ghép mâm 100% · % có tráng miệng 100%
+   chi phí món ăn 602.000 ₫ / ngân sách 1.000.000 ₫ ✓ · trả tại quầy ~1.071.000 ₫
+   dụng cụ (% bữa): bep 100% · lo_nuong 11%
+
+[ĐẠT ] p04_nam_giu_can — Nam giữ cân, tự tính chỉ tiêu — Đường cơ bản.
+   chỉ tiêu: 2280–2520 kcal, protein ≥ 120 g
+   ngày đạt 7/7 (protein 7/7, kcal 7/7) · món khác nhau 14 (trưa/tối 8) · 38 ms · 1 vòng · % bữa ghép mâm 100% · % có tráng miệng 100%
+   chi phí món ăn 530.000 ₫ / ngân sách 800.000 ₫ ✓ · trả tại quầy ~979.000 ₫
+   dụng cụ (% bữa): bep 100% · noi_com_dien 46%
+
+[ĐẠT ] p05_thuan_chay_it_tinh_bot — Thuần chay, ít tinh bột — Đạt 7/7 sau lô 2–3 (thêm món chay calo cao không cơm).
+   chỉ tiêu: 1663–1838 kcal, protein ≥ 100 g
+   ngày đạt 7/7 (protein 7/7, kcal 7/7) · món khác nhau 7 (trưa/tối 7) · 6 ms · 1 vòng · % bữa ghép mâm 100% · % có tráng miệng 100%
+   chi phí món ăn 399.000 ₫ / ngân sách 550.000 ₫ ✓ · trả tại quầy ~577.000 ₫
+   dụng cụ (% bữa): bep 100%
+
+[ĐẠT ] p06_chay_lacto_nu — Ăn chay (có trứng, sữa) — Kỳ vọng đạt; nhiều món đậu phụ và trứng.
+   chỉ tiêu: 1758–1943 kcal, protein ≥ 90 g
+   ngày đạt 7/7 (protein 7/7, kcal 7/7) · món khác nhau 17 (trưa/tối 9) · 24 ms · 1 vòng · % bữa ghép mâm 100% · % có tráng miệng 100%
+   chi phí món ăn 454.000 ₫ / ngân sách 600.000 ₫ ✓ · trả tại quầy ~815.000 ₫
+   dụng cụ (% bữa): bep 100% · noi_com_dien 49%
+
+[ĐẠT ] p07_khong_lon_khong_sua — Không lợn, không sữa — Kỳ vọng đạt; kho còn bò, gà, cá, đậu.
+   chỉ tiêu: 1900–2100 kcal, protein ≥ 155 g
+   ngày đạt 7/7 (protein 7/7, kcal 7/7) · món khác nhau 13 (trưa/tối 7) · 38 ms · 1 vòng · % bữa ghép mâm 100% · % có tráng miệng 100%
+   chi phí món ăn 537.000 ₫ / ngân sách 700.000 ₫ ✓ · trả tại quầy ~931.000 ₫
+   dụng cụ (% bữa): bep 100% · noi_com_dien 50%
+
+[ĐẠT ] p08_di_ung_lac_hat_cay — Dị ứng lạc và hạt cây — Kiểm tra: không món nào chứa lạc (kể cả món 'lạc rang muối' và 'sốt lạc').
+   chỉ tiêu: 1615–1785 kcal, protein ≥ 110 g
+   ngày đạt 7/7 (protein 7/7, kcal 7/7) · món khác nhau 13 (trưa/tối 7) · 36 ms · 1 vòng · % bữa ghép mâm 100% · % có tráng miệng 100%
+   chi phí món ăn 503.000 ₫ / ngân sách 700.000 ₫ ✓ · trả tại quầy ~942.000 ₫
+   dụng cụ (% bữa): bep 100% · noi_com_dien 50%
+
+[ĐẠT ] p09_chi_co_lo_vi_song — Chỉ có lò vi sóng — Đạt 7/7 sau lô 3 (20 món chỉ cần lò vi sóng).
+   chỉ tiêu: 1330–1470 kcal, protein ≥ 120 g
+   ngày đạt 7/7 (protein 7/7, kcal 7/7) · món khác nhau 10 (trưa/tối 4) · 192 ms · 1 vòng · % bữa ghép mâm 100% · % có tráng miệng 100%
+   chi phí món ăn 587.000 ₫ / ngân sách 600.000 ₫ ✓ · trả tại quầy ~970.000 ₫
+   dụng cụ (% bữa): lo_vi_song 100%
+
+[ĐẠT ] p10_ngan_sach_toi_thieu — Ngân sách tối thiểu (600.000 ₫) — Đạt 7/7 với ngân sách sát sàn.
+   chỉ tiêu: 2328–2573 kcal, protein ≥ 115 g
+   ngày đạt 7/7 (protein 7/7, kcal 7/7) · món khác nhau 15 (trưa/tối 9) · 44 ms · 1 vòng · % bữa ghép mâm 100% · % có tráng miệng 100%
+   chi phí món ăn 562.000 ₫ / ngân sách 600.000 ₫ ✓ · trả tại quầy ~950.000 ₫
+   dụng cụ (% bữa): bep 100% · noi_com_dien 46%
+
+[ĐẠT ] p11_ho_2_nguoi_lon_2_tre — Hộ 2 người lớn + 2 trẻ em — Kiểm tra: danh sách đi chợ nhân số người, trẻ 0,6 suất.
+   chỉ tiêu: 2280–2520 kcal, protein ≥ 125 g
+   ngày đạt 7/7 (protein 7/7, kcal 7/7) · món khác nhau 14 (trưa/tối 8) · 139 ms · 1 vòng · % bữa ghép mâm 100% · % có tráng miệng 100%
+   chi phí món ăn 1.483.000 ₫ / ngân sách 1.500.000 ₫ ✓ · trả tại quầy ~1.811.000 ₫
+   dụng cụ (% bữa): bep 100% · noi_com_dien 50%
+
+[ĐẠT ] p12_bua_sang_tu_lo — Bữa sáng tự lo — Kiểm tra: bữa sáng không lên món nhưng chỉ tiêu được phân bổ.
+   chỉ tiêu: 1995–2205 kcal, protein ≥ 160 g
+   ngày đạt 7/7 (protein 7/7, kcal 7/7) · món khác nhau 11 (trưa/tối 8) · 37 ms · 1 vòng · % bữa ghép mâm 100% · % có tráng miệng 100%
+   chi phí món ăn 492.000 ₫ / ngân sách 700.000 ₫ ✓ · trả tại quầy ~1.004.000 ₫
+   dụng cụ (% bữa): bep 100% · noi_com_dien 52%
+
+[ĐẠT ] p13_nhieu_mon_ghet — Nhiều món không thích — Kiểm tra: không món nào chứa nguyên liệu ghét; có thể ít món hơn.
+   chỉ tiêu: 1615–1785 kcal, protein ≥ 95 g
+   ngày đạt 7/7 (protein 7/7, kcal 7/7) · món khác nhau 12 (trưa/tối 6) · 22 ms · 1 vòng · % bữa ghép mâm 100% · % có tráng miệng 100%
+   chi phí món ăn 528.000 ₫ / ngân sách 650.000 ₫ ✓ · trả tại quầy ~1.003.000 ₫
+   dụng cụ (% bữa): bep 100% · noi_com_dien 50%
+
+[ĐẠT ] p14_ho_3_nguoi_lon — Hộ 3 người lớn, ít dụng cụ — Kiểm tra: lunch packed chỉ dùng món 'packed' khả dụng.
+   chỉ tiêu: 1520–1680 kcal, protein ≥ 110 g
+   ngày đạt 7/7 (protein 7/7, kcal 7/7) · món khác nhau 13 (trưa/tối 8) · 87 ms · 1 vòng · % bữa ghép mâm 100% · % có tráng miệng 100%
+   chi phí món ăn 1.197.000 ₫ / ngân sách 1.200.000 ₫ ✓ · trả tại quầy ~1.446.000 ₫
+   dụng cụ (% bữa): bep 100%
+
+[ĐẠT ] p15_chi_noi_chien_va_noi_com — Chỉ có nồi chiên không dầu và nồi cơm điện — Mới thêm: kiểm tra phủ món theo dụng cụ; kỳ vọng sẽ cập nhật theo kết quả đo.
+   chỉ tiêu: 2328–2573 kcal, protein ≥ 120 g
+   ngày đạt 7/7 (protein 7/7, kcal 7/7) · món khác nhau 9 (trưa/tối 7) · 350 ms · 1 vòng · % bữa ghép mâm 100% · % có tráng miệng 100%
+   chi phí món ăn 1.178.000 ₫ / ngân sách 1.200.000 ₫ ✓ · trả tại quầy ~1.399.000 ₫
+   dụng cụ (% bữa): noi_com_dien 81% · noi_chien_khong_dau 67%
+
+[ĐẠT ] p16_chi_bep_va_noi_chien — Chỉ có bếp và nồi chiên không dầu — Mới thêm: kiểm tra phủ món theo dụng cụ; kỳ vọng sẽ cập nhật theo kết quả đo.
+   chỉ tiêu: 1615–1785 kcal, protein ≥ 105 g
+   ngày đạt 7/7 (protein 7/7, kcal 7/7) · món khác nhau 11 (trưa/tối 8) · 41 ms · 1 vòng · % bữa ghép mâm 100% · % có tráng miệng 100%
+   chi phí món ăn 743.000 ₫ / ngân sách 900.000 ₫ ✓ · trả tại quầy ~1.052.000 ₫
+   dụng cụ (% bữa): bep 100% · noi_chien_khong_dau 33%
+
+TỔNG HỢP
+  Hồ sơ đạt 7/7: 16/16 · partial 0 · lỗi 0
+  Hồ sơ kỳ vọng đạt: 14/14 (100%)
+  Ngày đạt: 112/112 (100%) · sàn protein 100% · dải calo 100%
+  % bữa ghép mâm (trưa/tối ≥ 2 món): 100%
+  Dụng cụ (% bữa, trung bình các hồ sơ): bep 88% · noi_com_dien 33% · lo_vi_song 6% · noi_chien_khong_dau 6% · lo_nuong 1%
+  % bữa trưa/tối có tráng miệng: 100% · thiếu (dessert_missing): 0
+  Vi phạm ràng buộc cứng: 0 · thời gian TB 181 ms, tối đa 1740 ms

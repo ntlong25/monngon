@@ -1,0 +1,22 @@
+{
+  "name": "mon-ngon",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "Lập thực đơn tuần theo protein/calo và ngân sách (engine TypeScript thuần)",
+  "scripts": {
+    "test": "tsc --noEmit && vitest run",
+    "typecheck": "tsc --noEmit",
+    "validate-data": "node src/data/validate-cli.ts",
+    "engine-report": "node src/report/engine-report-cli.ts",
+    "export-golden": "node src/golden/export-golden-cli.ts"
+  },
+  "dependencies": {
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "typescript": "^5.9.3",
+    "vitest": "^5.1.0"
+  }
+}

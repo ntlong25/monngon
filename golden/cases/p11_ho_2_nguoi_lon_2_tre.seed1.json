@@ -1,0 +1,3018 @@
+{
+ "id": "p11_ho_2_nguoi_lon_2_tre.seed1",
+ "input": {
+  "options": null,
+  "preferences": {
+   "adults": 2,
+   "blocked_recipe_ids": [],
+   "children": 2,
+   "cuisine_less": [],
+   "cuisine_likes": [
+    "kho",
+    "canh"
+   ],
+   "diet": "none",
+   "disliked_ingredient_ids": [],
+   "equipment": [
+    "bep",
+    "noi_com_dien"
+   ],
+   "exclusions": [],
+   "health_leanings": [],
+   "low_carb": false,
+   "slots": {
+    "breakfast": "on",
+    "dinner": "on",
+    "lunch": "on",
+    "lunch_style": "hot",
+    "snack_am": "skip",
+    "snack_pm": "on",
+    "snack_pm_style": "savory"
+   },
+   "store_id": "bach_hoa_xanh",
+   "weekly_budget_vnd": 1500000
+  },
+  "profile": {
+   "activity": "moderate",
+   "age": 40,
+   "goal": "hold",
+   "height_cm": 168,
+   "sex": "male",
+   "target_mode": "formula",
+   "weight_kg": 70
+  },
+  "seed": 1,
+  "start_date": "2026-11-09",
+  "targets": {
+   "kcal_max": 2520,
+   "kcal_min": 2280,
+   "kcal_target": 2400,
+   "mode": "formula",
+   "protein_g": 125,
+   "steps": {
+    "activity_factor": 1.55,
+    "bmr": 1555,
+    "goal_factor": 1,
+    "kcal_unrounded": 2410.25,
+    "protein_cap_g": 210,
+    "protein_floor_g": 84,
+    "protein_g_per_kg": 1.8,
+    "protein_limited_by": "none",
+    "protein_raw_g": 125,
+    "reference_weight_kg": 70,
+    "tdee": 2410.25
+   }
+  }
+ },
+ "plan": {
+  "budget_vnd": 1500000,
+  "days": [
+   {
+    "date": "2026-11-09",
+    "meals": [
+     {
+      "batch_group_id": "sang_chay_dau_xanh_chao#0",
+      "date": "2026-11-09",
+      "extras": [
+       {
+        "grams": 5,
+        "ingredient_id": "gao_te"
+       }
+      ],
+      "forced_zero_carb": false,
+      "grams": [
+       {
+        "grams": 135,
+        "ingredient_id": "dau_xanh"
+       },
+       {
+        "grams": 240,
+        "ingredient_id": "com_trang"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "gung"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "hanh_la"
+       },
+       {
+        "grams": 1,
+        "ingredient_id": "muoi"
+       }
+      ],
+      "macros": {
+       "carb_g": 157.44699999999997,
+       "fat_g": 2.3045,
+       "fiber_g": 23.260000000000005,
+       "kcal": 804.3000000000001,
+       "protein_g": 39.260000000000005
+      },
+      "recipe_id": "sang_chay_dau_xanh_chao",
+      "scale_infeasible": false,
+      "slot": "breakfast",
+      "standard_grams": [
+       {
+        "grams": 100,
+        "ingredient_id": "dau_xanh"
+       },
+       {
+        "grams": 120,
+        "ingredient_id": "com_trang"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "gung"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "hanh_la"
+       },
+       {
+        "grams": 1,
+        "ingredient_id": "muoi"
+       }
+      ],
+      "status": "planned",
+      "substitutions": []
+     },
+     {
+      "batch_group_id": "ld_chay_dau_xanh_bi_xanh#0",
+      "date": "2026-11-09",
+      "extras": [
+       {
+        "grams": 25,
+        "ingredient_id": "gao_te"
+       },
+       {
+        "grams": 20,
+        "ingredient_id": "thit_heo_xay_nac"
+       }
+      ],
+      "forced_zero_carb": false,
+      "grams": [
+       {
+        "grams": 165,
+        "ingredient_id": "dau_xanh"
+       },
+       {
+        "grams": 200,
+        "ingredient_id": "com_trang"
+       },
+       {
+        "grams": 250,
+        "ingredient_id": "bi_xanh"
+       },
+       {
+        "grams": 10,
+        "ingredient_id": "hanh_la"
+       },
+       {
+        "grams": 3,
+        "ingredient_id": "toi"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "nuoc_mam_chay"
+       }
+      ],
+      "macros": {
+       "carb_g": 189.4805,
+       "fat_g": 4.285000000000001,
+       "fiber_g": 30.883,
+       "kcal": 1000.8200000000002,
+       "protein_g": 54.6233
+      },
+      "recipe_id": "ld_chay_dau_xanh_bi_xanh",
+      "scale_infeasible": true,
+      "slot": "lunch",
+      "standard_grams": [
+       {
+        "grams": 100,
+        "ingredient_id": "dau_xanh"
+       },
+       {
+        "grams": 100,
+        "ingredient_id": "com_trang"
+       },
+       {
+        "grams": 250,
+        "ingredient_id": "bi_xanh"
+       },
+       {
+        "grams": 10,
+        "ingredient_id": "hanh_la"
+       },
+       {
+        "grams": 3,
+        "ingredient_id": "toi"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "nuoc_mam_chay"
+       }
+      ],
+      "status": "planned",
+      "substitutions": []
+     },
+     {
+      "batch_group_id": "sn_nam_rom_dau_hu_xao#0",
+      "date": "2026-11-09",
+      "extras": [],
+      "forced_zero_carb": false,
+      "grams": [
+       {
+        "grams": 40,
+        "ingredient_id": "dau_phu"
+       },
+       {
+        "grams": 60,
+        "ingredient_id": "nam_rom"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "dau_an"
+       },
+       {
+        "grams": 3,
+        "ingredient_id": "toi"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "xi_dau"
+       }
+      ],
+      "macros": {
+       "carb_g": 5.1355,
+       "fat_g": 8.9395,
+       "fiber_g": 2.523,
+       "kcal": 128.12,
+       "protein_g": 9.8158
+      },
+      "recipe_id": "sn_nam_rom_dau_hu_xao",
+      "scale_infeasible": true,
+      "slot": "snack_pm",
+      "standard_grams": [
+       {
+        "grams": 40,
+        "ingredient_id": "dau_phu"
+       },
+       {
+        "grams": 60,
+        "ingredient_id": "nam_rom"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "dau_an"
+       },
+       {
+        "grams": 3,
+        "ingredient_id": "toi"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "xi_dau"
+       }
+      ],
+      "status": "planned",
+      "substitutions": []
+     },
+     {
+      "batch_group_id": "main_dau_hu_kho_tieu_mang_di#0",
+      "date": "2026-11-09",
+      "extras": [
+       {
+        "grams": 10,
+        "ingredient_id": "gao_te"
+       }
+      ],
+      "forced_zero_carb": false,
+      "grams": [
+       {
+        "grams": 250,
+        "ingredient_id": "dau_phu"
+       },
+       {
+        "grams": 10,
+        "ingredient_id": "xi_dau"
+       },
+       {
+        "grams": 3,
+        "ingredient_id": "duong"
+       },
+       {
+        "grams": 3,
+        "ingredient_id": "toi"
+       },
+       {
+        "grams": 1,
+        "ingredient_id": "tieu_den"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "dau_an"
+       }
+      ],
+      "macros": {
+       "carb_g": 20.076,
+       "fat_g": 26.970599999999997,
+       "fiber_g": 6.276,
+       "kcal": 464.59000000000003,
+       "protein_g": 45.07180000000001
+      },
+      "recipe_id": "main_dau_hu_kho_tieu_mang_di",
+      "scale_infeasible": true,
+      "slot": "dinner",
+      "standard_grams": [
+       {
+        "grams": 150,
+        "ingredient_id": "dau_phu"
+       },
+       {
+        "grams": 10,
+        "ingredient_id": "xi_dau"
+       },
+       {
+        "grams": 3,
+        "ingredient_id": "duong"
+       },
+       {
+        "grams": 3,
+        "ingredient_id": "toi"
+       },
+       {
+        "grams": 1,
+        "ingredient_id": "tieu_den"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "dau_an"
+       }
+      ],
+      "status": "planned",
+      "substitutions": []
+     }
+    ],
+    "totals": {
+     "carb_g": 372.139,
+     "fat_g": 42.4996,
+     "kcal": 2397.8300000000004,
+     "protein_g": 148.7709
+    }
+   },
+   {
+    "date": "2026-11-10",
+    "meals": [
+     {
+      "batch_group_id": "sang_chay_dau_xanh_chao#0",
+      "date": "2026-11-10",
+      "extras": [
+       {
+        "grams": 5,
+        "ingredient_id": "gao_te"
+       }
+      ],
+      "forced_zero_carb": false,
+      "grams": [
+       {
+        "grams": 135,
+        "ingredient_id": "dau_xanh"
+       },
+       {
+        "grams": 240,
+        "ingredient_id": "com_trang"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "gung"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "hanh_la"
+       },
+       {
+        "grams": 1,
+        "ingredient_id": "muoi"
+       }
+      ],
+      "macros": {
+       "carb_g": 157.44699999999997,
+       "fat_g": 2.3045,
+       "fiber_g": 23.260000000000005,
+       "kcal": 804.3000000000001,
+       "protein_g": 39.260000000000005
+      },
+      "recipe_id": "sang_chay_dau_xanh_chao",
+      "scale_infeasible": false,
+      "slot": "breakfast",
+      "standard_grams": [
+       {
+        "grams": 100,
+        "ingredient_id": "dau_xanh"
+       },
+       {
+        "grams": 120,
+        "ingredient_id": "com_trang"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "gung"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "hanh_la"
+       },
+       {
+        "grams": 1,
+        "ingredient_id": "muoi"
+       }
+      ],
+      "status": "planned",
+      "substitutions": []
+     },
+     {
+      "batch_group_id": "ld_chay_dau_xanh_bi_xanh#0",
+      "date": "2026-11-10",
+      "extras": [
+       {
+        "grams": 25,
+        "ingredient_id": "gao_te"
+       },
+       {
+        "grams": 20,
+        "ingredient_id": "thit_heo_xay_nac"
+       }
+      ],
+      "forced_zero_carb": false,
+      "grams": [
+       {
+        "grams": 165,
+        "ingredient_id": "dau_xanh"
+       },
+       {
+        "grams": 200,
+        "ingredient_id": "com_trang"
+       },
+       {
+        "grams": 250,
+        "ingredient_id": "bi_xanh"
+       },
+       {
+        "grams": 10,
+        "ingredient_id": "hanh_la"
+       },
+       {
+        "grams": 3,
+        "ingredient_id": "toi"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "nuoc_mam_chay"
+       }
+      ],
+      "macros": {
+       "carb_g": 189.4805,
+       "fat_g": 4.285000000000001,
+       "fiber_g": 30.883,
+       "kcal": 1000.8200000000002,
+       "protein_g": 54.6233
+      },
+      "recipe_id": "ld_chay_dau_xanh_bi_xanh",
+      "scale_infeasible": true,
+      "slot": "lunch",
+      "standard_grams": [
+       {
+        "grams": 100,
+        "ingredient_id": "dau_xanh"
+       },
+       {
+        "grams": 100,
+        "ingredient_id": "com_trang"
+       },
+       {
+        "grams": 250,
+        "ingredient_id": "bi_xanh"
+       },
+       {
+        "grams": 10,
+        "ingredient_id": "hanh_la"
+       },
+       {
+        "grams": 3,
+        "ingredient_id": "toi"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "nuoc_mam_chay"
+       }
+      ],
+      "status": "planned",
+      "substitutions": []
+     },
+     {
+      "batch_group_id": "sn_nam_rom_dau_hu_xao#0",
+      "date": "2026-11-10",
+      "extras": [],
+      "forced_zero_carb": false,
+      "grams": [
+       {
+        "grams": 40,
+        "ingredient_id": "dau_phu"
+       },
+       {
+        "grams": 60,
+        "ingredient_id": "nam_rom"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "dau_an"
+       },
+       {
+        "grams": 3,
+        "ingredient_id": "toi"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "xi_dau"
+       }
+      ],
+      "macros": {
+       "carb_g": 5.1355,
+       "fat_g": 8.9395,
+       "fiber_g": 2.523,
+       "kcal": 128.12,
+       "protein_g": 9.8158
+      },
+      "recipe_id": "sn_nam_rom_dau_hu_xao",
+      "scale_infeasible": true,
+      "slot": "snack_pm",
+      "standard_grams": [
+       {
+        "grams": 40,
+        "ingredient_id": "dau_phu"
+       },
+       {
+        "grams": 60,
+        "ingredient_id": "nam_rom"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "dau_an"
+       },
+       {
+        "grams": 3,
+        "ingredient_id": "toi"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "xi_dau"
+       }
+      ],
+      "status": "planned",
+      "substitutions": []
+     },
+     {
+      "batch_group_id": "main_dau_hu_kho_tieu_mang_di#0",
+      "date": "2026-11-10",
+      "extras": [
+       {
+        "grams": 10,
+        "ingredient_id": "gao_te"
+       }
+      ],
+      "forced_zero_carb": false,
+      "grams": [
+       {
+        "grams": 250,
+        "ingredient_id": "dau_phu"
+       },
+       {
+        "grams": 10,
+        "ingredient_id": "xi_dau"
+       },
+       {
+        "grams": 3,
+        "ingredient_id": "duong"
+       },
+       {
+        "grams": 3,
+        "ingredient_id": "toi"
+       },
+       {
+        "grams": 1,
+        "ingredient_id": "tieu_den"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "dau_an"
+       }
+      ],
+      "macros": {
+       "carb_g": 20.076,
+       "fat_g": 26.970599999999997,
+       "fiber_g": 6.276,
+       "kcal": 464.59000000000003,
+       "protein_g": 45.07180000000001
+      },
+      "recipe_id": "main_dau_hu_kho_tieu_mang_di",
+      "scale_infeasible": true,
+      "slot": "dinner",
+      "standard_grams": [
+       {
+        "grams": 150,
+        "ingredient_id": "dau_phu"
+       },
+       {
+        "grams": 10,
+        "ingredient_id": "xi_dau"
+       },
+       {
+        "grams": 3,
+        "ingredient_id": "duong"
+       },
+       {
+        "grams": 3,
+        "ingredient_id": "toi"
+       },
+       {
+        "grams": 1,
+        "ingredient_id": "tieu_den"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "dau_an"
+       }
+      ],
+      "status": "planned",
+      "substitutions": []
+     }
+    ],
+    "totals": {
+     "carb_g": 372.139,
+     "fat_g": 42.4996,
+     "kcal": 2397.8300000000004,
+     "protein_g": 148.7709
+    }
+   },
+   {
+    "date": "2026-11-11",
+    "meals": [
+     {
+      "batch_group_id": "sang_chay_dau_xanh_chao#1",
+      "date": "2026-11-11",
+      "extras": [
+       {
+        "grams": 5,
+        "ingredient_id": "gao_te"
+       }
+      ],
+      "forced_zero_carb": false,
+      "grams": [
+       {
+        "grams": 135,
+        "ingredient_id": "dau_xanh"
+       },
+       {
+        "grams": 240,
+        "ingredient_id": "com_trang"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "gung"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "hanh_la"
+       },
+       {
+        "grams": 1,
+        "ingredient_id": "muoi"
+       }
+      ],
+      "macros": {
+       "carb_g": 157.44699999999997,
+       "fat_g": 2.3045,
+       "fiber_g": 23.260000000000005,
+       "kcal": 804.3000000000001,
+       "protein_g": 39.260000000000005
+      },
+      "recipe_id": "sang_chay_dau_xanh_chao",
+      "scale_infeasible": false,
+      "slot": "breakfast",
+      "standard_grams": [
+       {
+        "grams": 100,
+        "ingredient_id": "dau_xanh"
+       },
+       {
+        "grams": 120,
+        "ingredient_id": "com_trang"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "gung"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "hanh_la"
+       },
+       {
+        "grams": 1,
+        "ingredient_id": "muoi"
+       }
+      ],
+      "status": "planned",
+      "substitutions": []
+     },
+     {
+      "batch_group_id": "ld_chay_dau_xanh_bi_xanh#1",
+      "date": "2026-11-11",
+      "extras": [
+       {
+        "grams": 25,
+        "ingredient_id": "gao_te"
+       },
+       {
+        "grams": 20,
+        "ingredient_id": "thit_heo_xay_nac"
+       }
+      ],
+      "forced_zero_carb": false,
+      "grams": [
+       {
+        "grams": 165,
+        "ingredient_id": "dau_xanh"
+       },
+       {
+        "grams": 200,
+        "ingredient_id": "com_trang"
+       },
+       {
+        "grams": 250,
+        "ingredient_id": "bi_xanh"
+       },
+       {
+        "grams": 10,
+        "ingredient_id": "hanh_la"
+       },
+       {
+        "grams": 3,
+        "ingredient_id": "toi"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "nuoc_mam_chay"
+       }
+      ],
+      "macros": {
+       "carb_g": 189.4805,
+       "fat_g": 4.285000000000001,
+       "fiber_g": 30.883,
+       "kcal": 1000.8200000000002,
+       "protein_g": 54.6233
+      },
+      "recipe_id": "ld_chay_dau_xanh_bi_xanh",
+      "scale_infeasible": true,
+      "slot": "lunch",
+      "standard_grams": [
+       {
+        "grams": 100,
+        "ingredient_id": "dau_xanh"
+       },
+       {
+        "grams": 100,
+        "ingredient_id": "com_trang"
+       },
+       {
+        "grams": 250,
+        "ingredient_id": "bi_xanh"
+       },
+       {
+        "grams": 10,
+        "ingredient_id": "hanh_la"
+       },
+       {
+        "grams": 3,
+        "ingredient_id": "toi"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "nuoc_mam_chay"
+       }
+      ],
+      "status": "planned",
+      "substitutions": []
+     },
+     {
+      "batch_group_id": "sn_nam_rom_dau_hu_xao#1",
+      "date": "2026-11-11",
+      "extras": [],
+      "forced_zero_carb": false,
+      "grams": [
+       {
+        "grams": 40,
+        "ingredient_id": "dau_phu"
+       },
+       {
+        "grams": 60,
+        "ingredient_id": "nam_rom"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "dau_an"
+       },
+       {
+        "grams": 3,
+        "ingredient_id": "toi"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "xi_dau"
+       }
+      ],
+      "macros": {
+       "carb_g": 5.1355,
+       "fat_g": 8.9395,
+       "fiber_g": 2.523,
+       "kcal": 128.12,
+       "protein_g": 9.8158
+      },
+      "recipe_id": "sn_nam_rom_dau_hu_xao",
+      "scale_infeasible": true,
+      "slot": "snack_pm",
+      "standard_grams": [
+       {
+        "grams": 40,
+        "ingredient_id": "dau_phu"
+       },
+       {
+        "grams": 60,
+        "ingredient_id": "nam_rom"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "dau_an"
+       },
+       {
+        "grams": 3,
+        "ingredient_id": "toi"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "xi_dau"
+       }
+      ],
+      "status": "planned",
+      "substitutions": []
+     },
+     {
+      "batch_group_id": "main_dau_hu_kho_tieu_mang_di#1",
+      "date": "2026-11-11",
+      "extras": [
+       {
+        "grams": 10,
+        "ingredient_id": "gao_te"
+       }
+      ],
+      "forced_zero_carb": false,
+      "grams": [
+       {
+        "grams": 250,
+        "ingredient_id": "dau_phu"
+       },
+       {
+        "grams": 10,
+        "ingredient_id": "xi_dau"
+       },
+       {
+        "grams": 3,
+        "ingredient_id": "duong"
+       },
+       {
+        "grams": 3,
+        "ingredient_id": "toi"
+       },
+       {
+        "grams": 1,
+        "ingredient_id": "tieu_den"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "dau_an"
+       }
+      ],
+      "macros": {
+       "carb_g": 20.076,
+       "fat_g": 26.970599999999997,
+       "fiber_g": 6.276,
+       "kcal": 464.59000000000003,
+       "protein_g": 45.07180000000001
+      },
+      "recipe_id": "main_dau_hu_kho_tieu_mang_di",
+      "scale_infeasible": true,
+      "slot": "dinner",
+      "standard_grams": [
+       {
+        "grams": 150,
+        "ingredient_id": "dau_phu"
+       },
+       {
+        "grams": 10,
+        "ingredient_id": "xi_dau"
+       },
+       {
+        "grams": 3,
+        "ingredient_id": "duong"
+       },
+       {
+        "grams": 3,
+        "ingredient_id": "toi"
+       },
+       {
+        "grams": 1,
+        "ingredient_id": "tieu_den"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "dau_an"
+       }
+      ],
+      "status": "planned",
+      "substitutions": []
+     }
+    ],
+    "totals": {
+     "carb_g": 372.139,
+     "fat_g": 42.4996,
+     "kcal": 2397.8300000000004,
+     "protein_g": 148.7709
+    }
+   },
+   {
+    "date": "2026-11-12",
+    "meals": [
+     {
+      "batch_group_id": "sang_chay_dau_hu_com_chien#2026-11-12-breakfast",
+      "date": "2026-11-12",
+      "extras": [],
+      "forced_zero_carb": false,
+      "grams": [
+       {
+        "grams": 135,
+        "ingredient_id": "dau_phu"
+       },
+       {
+        "grams": 165,
+        "ingredient_id": "com_trang"
+       },
+       {
+        "grams": 10,
+        "ingredient_id": "dau_an"
+       },
+       {
+        "grams": 10,
+        "ingredient_id": "hanh_la"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "nuoc_mam_chay"
+       }
+      ],
+      "macros": {
+       "carb_g": 51.26349999999999,
+       "fat_g": 22.2815,
+       "fiber_g": 4.065,
+       "kcal": 503.1499999999999,
+       "protein_g": 28.3835
+      },
+      "recipe_id": "sang_chay_dau_hu_com_chien",
+      "scale_infeasible": false,
+      "slot": "breakfast",
+      "standard_grams": [
+       {
+        "grams": 200,
+        "ingredient_id": "dau_phu"
+       },
+       {
+        "grams": 200,
+        "ingredient_id": "com_trang"
+       },
+       {
+        "grams": 10,
+        "ingredient_id": "dau_an"
+       },
+       {
+        "grams": 10,
+        "ingredient_id": "hanh_la"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "nuoc_mam_chay"
+       }
+      ],
+      "status": "planned",
+      "substitutions": []
+     },
+     {
+      "batch_group_id": "main_dau_lang_lac_chay#0",
+      "date": "2026-11-12",
+      "extras": [],
+      "forced_zero_carb": false,
+      "grams": [
+       {
+        "grams": 160,
+        "ingredient_id": "dau_lang"
+       },
+       {
+        "grams": 30,
+        "ingredient_id": "lac"
+       },
+       {
+        "grams": 15,
+        "ingredient_id": "dau_an"
+       },
+       {
+        "grams": 40,
+        "ingredient_id": "ca_rot"
+       },
+       {
+        "grams": 3,
+        "ingredient_id": "toi"
+       },
+       {
+        "grams": 1,
+        "ingredient_id": "muoi"
+       }
+      ],
+      "macros": {
+       "carb_g": 111.09499999999998,
+       "fat_g": 31.567000000000004,
+       "fiber_g": 20.853,
+       "kcal": 886.7700000000001,
+       "protein_g": 47.66280000000001
+      },
+      "recipe_id": "main_dau_lang_lac_chay",
+      "scale_infeasible": false,
+      "slot": "lunch",
+      "standard_grams": [
+       {
+        "grams": 120,
+        "ingredient_id": "dau_lang"
+       },
+       {
+        "grams": 30,
+        "ingredient_id": "lac"
+       },
+       {
+        "grams": 15,
+        "ingredient_id": "dau_an"
+       },
+       {
+        "grams": 40,
+        "ingredient_id": "ca_rot"
+       },
+       {
+        "grams": 3,
+        "ingredient_id": "toi"
+       },
+       {
+        "grams": 1,
+        "ingredient_id": "muoi"
+       }
+      ],
+      "status": "planned",
+      "substitutions": []
+     },
+     {
+      "batch_group_id": "sn_trung_op_ca_chua#0",
+      "date": "2026-11-12",
+      "extras": [],
+      "forced_zero_carb": false,
+      "grams": [
+       {
+        "grams": 50,
+        "ingredient_id": "trung_ga"
+       },
+       {
+        "grams": 80,
+        "ingredient_id": "ca_chua"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "dau_an"
+       },
+       {
+        "grams": 1,
+        "ingredient_id": "muoi"
+       }
+      ],
+      "macros": {
+       "carb_g": 3.472,
+       "fat_g": 9.915,
+       "fiber_g": 0.96,
+       "kcal": 130.10000000000002,
+       "protein_g": 7.004
+      },
+      "recipe_id": "sn_trung_op_ca_chua",
+      "scale_infeasible": false,
+      "slot": "snack_pm",
+      "standard_grams": [
+       {
+        "grams": 50,
+        "ingredient_id": "trung_ga"
+       },
+       {
+        "grams": 80,
+        "ingredient_id": "ca_chua"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "dau_an"
+       },
+       {
+        "grams": 1,
+        "ingredient_id": "muoi"
+       }
+      ],
+      "status": "planned",
+      "substitutions": []
+     },
+     {
+      "batch_group_id": "canh_dau_phu_bap_cai#0",
+      "date": "2026-11-12",
+      "extras": [],
+      "forced_zero_carb": false,
+      "grams": [
+       {
+        "grams": 265,
+        "ingredient_id": "dau_phu"
+       },
+       {
+        "grams": 300,
+        "ingredient_id": "com_trang"
+       },
+       {
+        "grams": 150,
+        "ingredient_id": "bap_cai"
+       },
+       {
+        "grams": 50,
+        "ingredient_id": "ca_rot"
+       },
+       {
+        "grams": 10,
+        "ingredient_id": "hanh_la"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "nuoc_mam"
+       }
+      ],
+      "macros": {
+       "carb_g": 106.373,
+       "fat_g": 24.237499999999997,
+       "fiber_g": 12.705,
+       "kcal": 834.55,
+       "protein_g": 56.73600000000001
+      },
+      "recipe_id": "canh_dau_phu_bap_cai",
+      "scale_infeasible": true,
+      "slot": "dinner",
+      "standard_grams": [
+       {
+        "grams": 200,
+        "ingredient_id": "dau_phu"
+       },
+       {
+        "grams": 150,
+        "ingredient_id": "com_trang"
+       },
+       {
+        "grams": 150,
+        "ingredient_id": "bap_cai"
+       },
+       {
+        "grams": 50,
+        "ingredient_id": "ca_rot"
+       },
+       {
+        "grams": 10,
+        "ingredient_id": "hanh_la"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "nuoc_mam"
+       }
+      ],
+      "status": "planned",
+      "substitutions": []
+     }
+    ],
+    "totals": {
+     "carb_g": 272.2035,
+     "fat_g": 88.001,
+     "kcal": 2354.5699999999997,
+     "protein_g": 139.78630000000004
+    }
+   },
+   {
+    "date": "2026-11-13",
+    "meals": [
+     {
+      "batch_group_id": "sang_chay_dau_hu_com_chien#2026-11-13-breakfast",
+      "date": "2026-11-13",
+      "extras": [],
+      "forced_zero_carb": false,
+      "grams": [
+       {
+        "grams": 135,
+        "ingredient_id": "dau_phu"
+       },
+       {
+        "grams": 165,
+        "ingredient_id": "com_trang"
+       },
+       {
+        "grams": 10,
+        "ingredient_id": "dau_an"
+       },
+       {
+        "grams": 10,
+        "ingredient_id": "hanh_la"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "nuoc_mam_chay"
+       }
+      ],
+      "macros": {
+       "carb_g": 51.26349999999999,
+       "fat_g": 22.2815,
+       "fiber_g": 4.065,
+       "kcal": 503.1499999999999,
+       "protein_g": 28.3835
+      },
+      "recipe_id": "sang_chay_dau_hu_com_chien",
+      "scale_infeasible": false,
+      "slot": "breakfast",
+      "standard_grams": [
+       {
+        "grams": 200,
+        "ingredient_id": "dau_phu"
+       },
+       {
+        "grams": 200,
+        "ingredient_id": "com_trang"
+       },
+       {
+        "grams": 10,
+        "ingredient_id": "dau_an"
+       },
+       {
+        "grams": 10,
+        "ingredient_id": "hanh_la"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "nuoc_mam_chay"
+       }
+      ],
+      "status": "planned",
+      "substitutions": []
+     },
+     {
+      "batch_group_id": "ld_chay_dau_xanh_bi_xanh#1",
+      "date": "2026-11-13",
+      "extras": [],
+      "forced_zero_carb": false,
+      "grams": [
+       {
+        "grams": 165,
+        "ingredient_id": "dau_xanh"
+       },
+       {
+        "grams": 200,
+        "ingredient_id": "com_trang"
+       },
+       {
+        "grams": 250,
+        "ingredient_id": "bi_xanh"
+       },
+       {
+        "grams": 10,
+        "ingredient_id": "hanh_la"
+       },
+       {
+        "grams": 3,
+        "ingredient_id": "toi"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "nuoc_mam_chay"
+       }
+      ],
+      "macros": {
+       "carb_g": 169.4385,
+       "fat_g": 3.3200000000000007,
+       "fiber_g": 30.558,
+       "kcal": 885.3700000000001,
+       "protein_g": 48.6208
+      },
+      "recipe_id": "ld_chay_dau_xanh_bi_xanh",
+      "scale_infeasible": false,
+      "slot": "lunch",
+      "standard_grams": [
+       {
+        "grams": 100,
+        "ingredient_id": "dau_xanh"
+       },
+       {
+        "grams": 100,
+        "ingredient_id": "com_trang"
+       },
+       {
+        "grams": 250,
+        "ingredient_id": "bi_xanh"
+       },
+       {
+        "grams": 10,
+        "ingredient_id": "hanh_la"
+       },
+       {
+        "grams": 3,
+        "ingredient_id": "toi"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "nuoc_mam_chay"
+       }
+      ],
+      "status": "planned",
+      "substitutions": []
+     },
+     {
+      "batch_group_id": "sn_trung_op_ca_chua#0",
+      "date": "2026-11-13",
+      "extras": [],
+      "forced_zero_carb": false,
+      "grams": [
+       {
+        "grams": 50,
+        "ingredient_id": "trung_ga"
+       },
+       {
+        "grams": 80,
+        "ingredient_id": "ca_chua"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "dau_an"
+       },
+       {
+        "grams": 1,
+        "ingredient_id": "muoi"
+       }
+      ],
+      "macros": {
+       "carb_g": 3.472,
+       "fat_g": 9.915,
+       "fiber_g": 0.96,
+       "kcal": 130.10000000000002,
+       "protein_g": 7.004
+      },
+      "recipe_id": "sn_trung_op_ca_chua",
+      "scale_infeasible": false,
+      "slot": "snack_pm",
+      "standard_grams": [
+       {
+        "grams": 50,
+        "ingredient_id": "trung_ga"
+       },
+       {
+        "grams": 80,
+        "ingredient_id": "ca_chua"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "dau_an"
+       },
+       {
+        "grams": 1,
+        "ingredient_id": "muoi"
+       }
+      ],
+      "status": "planned",
+      "substitutions": []
+     },
+     {
+      "batch_group_id": "canh_dau_phu_bap_cai#0",
+      "date": "2026-11-13",
+      "extras": [],
+      "forced_zero_carb": false,
+      "grams": [
+       {
+        "grams": 265,
+        "ingredient_id": "dau_phu"
+       },
+       {
+        "grams": 300,
+        "ingredient_id": "com_trang"
+       },
+       {
+        "grams": 150,
+        "ingredient_id": "bap_cai"
+       },
+       {
+        "grams": 50,
+        "ingredient_id": "ca_rot"
+       },
+       {
+        "grams": 10,
+        "ingredient_id": "hanh_la"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "nuoc_mam"
+       }
+      ],
+      "macros": {
+       "carb_g": 106.373,
+       "fat_g": 24.237499999999997,
+       "fiber_g": 12.705,
+       "kcal": 834.55,
+       "protein_g": 56.73600000000001
+      },
+      "recipe_id": "canh_dau_phu_bap_cai",
+      "scale_infeasible": true,
+      "slot": "dinner",
+      "standard_grams": [
+       {
+        "grams": 200,
+        "ingredient_id": "dau_phu"
+       },
+       {
+        "grams": 150,
+        "ingredient_id": "com_trang"
+       },
+       {
+        "grams": 150,
+        "ingredient_id": "bap_cai"
+       },
+       {
+        "grams": 50,
+        "ingredient_id": "ca_rot"
+       },
+       {
+        "grams": 10,
+        "ingredient_id": "hanh_la"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "nuoc_mam"
+       }
+      ],
+      "status": "planned",
+      "substitutions": []
+     }
+    ],
+    "totals": {
+     "carb_g": 330.547,
+     "fat_g": 59.754,
+     "kcal": 2353.17,
+     "protein_g": 140.7443
+    }
+   },
+   {
+    "date": "2026-11-14",
+    "meals": [
+     {
+      "batch_group_id": "sang_chay_dau_hu_com_chien#2026-11-14-breakfast",
+      "date": "2026-11-14",
+      "extras": [],
+      "forced_zero_carb": false,
+      "grams": [
+       {
+        "grams": 135,
+        "ingredient_id": "dau_phu"
+       },
+       {
+        "grams": 165,
+        "ingredient_id": "com_trang"
+       },
+       {
+        "grams": 10,
+        "ingredient_id": "dau_an"
+       },
+       {
+        "grams": 10,
+        "ingredient_id": "hanh_la"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "nuoc_mam_chay"
+       }
+      ],
+      "macros": {
+       "carb_g": 51.26349999999999,
+       "fat_g": 22.2815,
+       "fiber_g": 4.065,
+       "kcal": 503.1499999999999,
+       "protein_g": 28.3835
+      },
+      "recipe_id": "sang_chay_dau_hu_com_chien",
+      "scale_infeasible": false,
+      "slot": "breakfast",
+      "standard_grams": [
+       {
+        "grams": 200,
+        "ingredient_id": "dau_phu"
+       },
+       {
+        "grams": 200,
+        "ingredient_id": "com_trang"
+       },
+       {
+        "grams": 10,
+        "ingredient_id": "dau_an"
+       },
+       {
+        "grams": 10,
+        "ingredient_id": "hanh_la"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "nuoc_mam_chay"
+       }
+      ],
+      "status": "planned",
+      "substitutions": []
+     },
+     {
+      "batch_group_id": "main_dau_lang_lac_chay#0",
+      "date": "2026-11-14",
+      "extras": [],
+      "forced_zero_carb": false,
+      "grams": [
+       {
+        "grams": 160,
+        "ingredient_id": "dau_lang"
+       },
+       {
+        "grams": 30,
+        "ingredient_id": "lac"
+       },
+       {
+        "grams": 15,
+        "ingredient_id": "dau_an"
+       },
+       {
+        "grams": 40,
+        "ingredient_id": "ca_rot"
+       },
+       {
+        "grams": 3,
+        "ingredient_id": "toi"
+       },
+       {
+        "grams": 1,
+        "ingredient_id": "muoi"
+       }
+      ],
+      "macros": {
+       "carb_g": 111.09499999999998,
+       "fat_g": 31.567000000000004,
+       "fiber_g": 20.853,
+       "kcal": 886.7700000000001,
+       "protein_g": 47.66280000000001
+      },
+      "recipe_id": "main_dau_lang_lac_chay",
+      "scale_infeasible": false,
+      "slot": "lunch",
+      "standard_grams": [
+       {
+        "grams": 120,
+        "ingredient_id": "dau_lang"
+       },
+       {
+        "grams": 30,
+        "ingredient_id": "lac"
+       },
+       {
+        "grams": 15,
+        "ingredient_id": "dau_an"
+       },
+       {
+        "grams": 40,
+        "ingredient_id": "ca_rot"
+       },
+       {
+        "grams": 3,
+        "ingredient_id": "toi"
+       },
+       {
+        "grams": 1,
+        "ingredient_id": "muoi"
+       }
+      ],
+      "status": "planned",
+      "substitutions": []
+     },
+     {
+      "batch_group_id": "sn_trung_op_ca_chua#1",
+      "date": "2026-11-14",
+      "extras": [],
+      "forced_zero_carb": false,
+      "grams": [
+       {
+        "grams": 50,
+        "ingredient_id": "trung_ga"
+       },
+       {
+        "grams": 80,
+        "ingredient_id": "ca_chua"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "dau_an"
+       },
+       {
+        "grams": 1,
+        "ingredient_id": "muoi"
+       }
+      ],
+      "macros": {
+       "carb_g": 3.472,
+       "fat_g": 9.915,
+       "fiber_g": 0.96,
+       "kcal": 130.10000000000002,
+       "protein_g": 7.004
+      },
+      "recipe_id": "sn_trung_op_ca_chua",
+      "scale_infeasible": false,
+      "slot": "snack_pm",
+      "standard_grams": [
+       {
+        "grams": 50,
+        "ingredient_id": "trung_ga"
+       },
+       {
+        "grams": 80,
+        "ingredient_id": "ca_chua"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "dau_an"
+       },
+       {
+        "grams": 1,
+        "ingredient_id": "muoi"
+       }
+      ],
+      "status": "planned",
+      "substitutions": []
+     },
+     {
+      "batch_group_id": "canh_dau_phu_bap_cai#1",
+      "date": "2026-11-14",
+      "extras": [],
+      "forced_zero_carb": false,
+      "grams": [
+       {
+        "grams": 265,
+        "ingredient_id": "dau_phu"
+       },
+       {
+        "grams": 300,
+        "ingredient_id": "com_trang"
+       },
+       {
+        "grams": 150,
+        "ingredient_id": "bap_cai"
+       },
+       {
+        "grams": 50,
+        "ingredient_id": "ca_rot"
+       },
+       {
+        "grams": 10,
+        "ingredient_id": "hanh_la"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "nuoc_mam"
+       }
+      ],
+      "macros": {
+       "carb_g": 106.373,
+       "fat_g": 24.237499999999997,
+       "fiber_g": 12.705,
+       "kcal": 834.55,
+       "protein_g": 56.73600000000001
+      },
+      "recipe_id": "canh_dau_phu_bap_cai",
+      "scale_infeasible": true,
+      "slot": "dinner",
+      "standard_grams": [
+       {
+        "grams": 200,
+        "ingredient_id": "dau_phu"
+       },
+       {
+        "grams": 150,
+        "ingredient_id": "com_trang"
+       },
+       {
+        "grams": 150,
+        "ingredient_id": "bap_cai"
+       },
+       {
+        "grams": 50,
+        "ingredient_id": "ca_rot"
+       },
+       {
+        "grams": 10,
+        "ingredient_id": "hanh_la"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "nuoc_mam"
+       }
+      ],
+      "status": "planned",
+      "substitutions": []
+     }
+    ],
+    "totals": {
+     "carb_g": 272.2035,
+     "fat_g": 88.001,
+     "kcal": 2354.5699999999997,
+     "protein_g": 139.78630000000004
+    }
+   },
+   {
+    "date": "2026-11-15",
+    "meals": [
+     {
+      "batch_group_id": "sang_chay_dau_xanh_khoai#0",
+      "date": "2026-11-15",
+      "extras": [],
+      "forced_zero_carb": false,
+      "grams": [
+       {
+        "grams": 105,
+        "ingredient_id": "dau_xanh"
+       },
+       {
+        "grams": 100,
+        "ingredient_id": "khoai_lang"
+       },
+       {
+        "grams": 10,
+        "ingredient_id": "duong"
+       },
+       {
+        "grams": 3,
+        "ingredient_id": "vung"
+       }
+      ],
+      "macros": {
+       "carb_g": 96.53200000000001,
+       "fat_g": 2.7485,
+       "fiber_g": 20.469,
+       "kcal": 506.24,
+       "protein_g": 27.195999999999998
+      },
+      "recipe_id": "sang_chay_dau_xanh_khoai",
+      "scale_infeasible": false,
+      "slot": "breakfast",
+      "standard_grams": [
+       {
+        "grams": 100,
+        "ingredient_id": "dau_xanh"
+       },
+       {
+        "grams": 120,
+        "ingredient_id": "khoai_lang"
+       },
+       {
+        "grams": 10,
+        "ingredient_id": "duong"
+       },
+       {
+        "grams": 3,
+        "ingredient_id": "vung"
+       }
+      ],
+      "status": "planned",
+      "substitutions": []
+     },
+     {
+      "batch_group_id": "main_dau_lang_lac_chay#1",
+      "date": "2026-11-15",
+      "extras": [],
+      "forced_zero_carb": false,
+      "grams": [
+       {
+        "grams": 160,
+        "ingredient_id": "dau_lang"
+       },
+       {
+        "grams": 30,
+        "ingredient_id": "lac"
+       },
+       {
+        "grams": 15,
+        "ingredient_id": "dau_an"
+       },
+       {
+        "grams": 40,
+        "ingredient_id": "ca_rot"
+       },
+       {
+        "grams": 3,
+        "ingredient_id": "toi"
+       },
+       {
+        "grams": 1,
+        "ingredient_id": "muoi"
+       }
+      ],
+      "macros": {
+       "carb_g": 111.09499999999998,
+       "fat_g": 31.567000000000004,
+       "fiber_g": 20.853,
+       "kcal": 886.7700000000001,
+       "protein_g": 47.66280000000001
+      },
+      "recipe_id": "main_dau_lang_lac_chay",
+      "scale_infeasible": false,
+      "slot": "lunch",
+      "standard_grams": [
+       {
+        "grams": 120,
+        "ingredient_id": "dau_lang"
+       },
+       {
+        "grams": 30,
+        "ingredient_id": "lac"
+       },
+       {
+        "grams": 15,
+        "ingredient_id": "dau_an"
+       },
+       {
+        "grams": 40,
+        "ingredient_id": "ca_rot"
+       },
+       {
+        "grams": 3,
+        "ingredient_id": "toi"
+       },
+       {
+        "grams": 1,
+        "ingredient_id": "muoi"
+       }
+      ],
+      "status": "planned",
+      "substitutions": []
+     },
+     {
+      "batch_group_id": "sn_tempeh_chien_xi_dau#0",
+      "date": "2026-11-15",
+      "extras": [],
+      "forced_zero_carb": false,
+      "grams": [
+       {
+        "grams": 40,
+        "ingredient_id": "tempeh"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "dau_an"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "xi_dau"
+       },
+       {
+        "grams": 3,
+        "ingredient_id": "toi"
+       }
+      ],
+      "macros": {
+       "carb_g": 4.2955000000000005,
+       "fat_g": 9.3635,
+       "fiber_g": 0.10300000000000001,
+       "kcal": 128.12,
+       "protein_g": 8.7178
+      },
+      "recipe_id": "sn_tempeh_chien_xi_dau",
+      "scale_infeasible": false,
+      "slot": "snack_pm",
+      "standard_grams": [
+       {
+        "grams": 40,
+        "ingredient_id": "tempeh"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "dau_an"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "xi_dau"
+       },
+       {
+        "grams": 3,
+        "ingredient_id": "toi"
+       }
+      ],
+      "status": "planned",
+      "substitutions": []
+     },
+     {
+      "batch_group_id": "rc_com_tron_dau_hu#0",
+      "date": "2026-11-15",
+      "extras": [],
+      "forced_zero_carb": false,
+      "grams": [
+       {
+        "grams": 210,
+        "ingredient_id": "dau_phu"
+       },
+       {
+        "grams": 80,
+        "ingredient_id": "dua_chuot"
+       },
+       {
+        "grams": 400,
+        "ingredient_id": "com_trang"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "nuoc_mam"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "dau_an"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "hanh_la"
+       }
+      ],
+      "macros": {
+       "carb_g": 122.091,
+       "fat_g": 24.53,
+       "fiber_g": 6.96,
+       "kcal": 881.95,
+       "protein_g": 47.95450000000001
+      },
+      "recipe_id": "rc_com_tron_dau_hu",
+      "scale_infeasible": false,
+      "slot": "dinner",
+      "standard_grams": [
+       {
+        "grams": 150,
+        "ingredient_id": "dau_phu"
+       },
+       {
+        "grams": 80,
+        "ingredient_id": "dua_chuot"
+       },
+       {
+        "grams": 200,
+        "ingredient_id": "com_trang"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "nuoc_mam"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "dau_an"
+       },
+       {
+        "grams": 5,
+        "ingredient_id": "hanh_la"
+       }
+      ],
+      "status": "planned",
+      "substitutions": []
+     }
+    ],
+    "totals": {
+     "carb_g": 334.0135,
+     "fat_g": 68.209,
+     "kcal": 2403.08,
+     "protein_g": 131.5311
+    }
+   }
+  ],
+  "distinct_recipes": 11,
+  "iterations": 1,
+  "repairs": 0,
+  "seed": 1,
+  "shopping": {
+   "byAisle": [
+    {
+     "aisle": "thit",
+     "items": [
+      {
+       "aisle": "thit",
+       "ingredient_id": "thit_heo_xay_nac",
+       "leftover_days": 3,
+       "leftover_g": 140,
+       "name": "Thịt heo xay (nạc ~96%)",
+       "need_g": 60,
+       "pack_g": 200,
+       "pack_label": "thịt heo xay C.P 200 g",
+       "packs": 1,
+       "price_fallback": false,
+       "price_store_id": "bach_hoa_xanh",
+       "price_vnd_per_pack": 22478,
+       "till_cost_vnd": 22478,
+       "used_cost_vnd": 6743.4
+      }
+     ]
+    },
+    {
+     "aisle": "trung_dau_phu",
+     "items": [
+      {
+       "aisle": "trung_dau_phu",
+       "ingredient_id": "dau_phu",
+       "leftover_days": 5,
+       "leftover_g": 96,
+       "name": "Đậu hũ (đậu phụ) cứng",
+       "need_g": 6504,
+       "pack_g": 300,
+       "pack_label": "bìa 300 g (ước tính)",
+       "packs": 22,
+       "price_fallback": true,
+       "price_store_id": "cho_khac",
+       "price_vnd_per_pack": 12000,
+       "till_cost_vnd": 264000,
+       "used_cost_vnd": 260160
+      },
+      {
+       "aisle": "trung_dau_phu",
+       "ingredient_id": "tempeh",
+       "leftover_days": 14,
+       "leftover_g": 72,
+       "name": "Tempeh (đậu nành lên men)",
+       "need_g": 128,
+       "pack_g": 200,
+       "pack_label": "200 g (ước tính)",
+       "packs": 1,
+       "price_fallback": true,
+       "price_store_id": "cho_khac",
+       "price_vnd_per_pack": 45000,
+       "till_cost_vnd": 45000,
+       "used_cost_vnd": 28800
+      },
+      {
+       "aisle": "trung_dau_phu",
+       "ingredient_id": "trung_ga",
+       "leftover_days": 21,
+       "leftover_g": 20,
+       "name": "Trứng gà",
+       "need_g": 480,
+       "pack_g": 500,
+       "pack_label": "hộp 10 quả ≈ 500 g (ước tính)",
+       "packs": 1,
+       "price_fallback": true,
+       "price_store_id": "cho_khac",
+       "price_vnd_per_pack": 40000,
+       "till_cost_vnd": 40000,
+       "used_cost_vnd": 38400
+      }
+     ]
+    },
+    {
+     "aisle": "rau_cu",
+     "items": [
+      {
+       "aisle": "rau_cu",
+       "ingredient_id": "bap_cai",
+       "leftover_days": 7,
+       "leftover_g": 60,
+       "name": "Bắp cải",
+       "need_g": 1440,
+       "pack_g": 500,
+       "pack_label": "Bắp cải 500 g (ước tính)",
+       "packs": 3,
+       "price_fallback": true,
+       "price_store_id": "cho_khac",
+       "price_vnd_per_pack": 14000,
+       "till_cost_vnd": 42000,
+       "used_cost_vnd": 40320
+      },
+      {
+       "aisle": "rau_cu",
+       "ingredient_id": "bi_xanh",
+       "leftover_days": 7,
+       "leftover_g": 300,
+       "name": "Bí xanh (PROXY bí ngòi)",
+       "need_g": 3200,
+       "pack_g": 500,
+       "pack_label": "Bí xanh 500 g (ước tính)",
+       "packs": 7,
+       "price_fallback": true,
+       "price_store_id": "cho_khac",
+       "price_vnd_per_pack": 8000,
+       "till_cost_vnd": 56000,
+       "used_cost_vnd": 51200
+      },
+      {
+       "aisle": "rau_cu",
+       "ingredient_id": "ca_chua",
+       "leftover_days": 7,
+       "leftover_g": 232,
+       "name": "Cà chua",
+       "need_g": 768,
+       "pack_g": 500,
+       "pack_label": "Cà chua 500 g (ước tính)",
+       "packs": 2,
+       "price_fallback": true,
+       "price_store_id": "cho_khac",
+       "price_vnd_per_pack": 17000,
+       "till_cost_vnd": 34000,
+       "used_cost_vnd": 26112
+      },
+      {
+       "aisle": "rau_cu",
+       "ingredient_id": "ca_rot",
+       "leftover_days": 14,
+       "leftover_g": 136,
+       "name": "Cà rốt",
+       "need_g": 864,
+       "pack_g": 500,
+       "pack_label": "Cà rốt 500 g (ước tính)",
+       "packs": 2,
+       "price_fallback": true,
+       "price_store_id": "cho_khac",
+       "price_vnd_per_pack": 14000,
+       "till_cost_vnd": 28000,
+       "used_cost_vnd": 24192
+      },
+      {
+       "aisle": "rau_cu",
+       "ingredient_id": "dua_chuot",
+       "leftover_days": 7,
+       "leftover_g": 244,
+       "name": "Dưa chuột (có vỏ)",
+       "need_g": 256,
+       "pack_g": 500,
+       "pack_label": "3 quả khoảng 500 g (ước tính)",
+       "packs": 1,
+       "price_fallback": true,
+       "price_store_id": "cho_khac",
+       "price_vnd_per_pack": 15000,
+       "till_cost_vnd": 15000,
+       "used_cost_vnd": 7680
+      },
+      {
+       "aisle": "rau_cu",
+       "ingredient_id": "hanh_la",
+       "leftover_days": 5,
+       "leftover_g": 16,
+       "name": "Hành lá",
+       "need_g": 384,
+       "pack_g": 100,
+       "pack_label": "100 g (ước tính)",
+       "packs": 4,
+       "price_fallback": true,
+       "price_store_id": "cho_khac",
+       "price_vnd_per_pack": 6000,
+       "till_cost_vnd": 24000,
+       "used_cost_vnd": 23040
+      },
+      {
+       "aisle": "rau_cu",
+       "ingredient_id": "khoai_lang",
+       "leftover_days": 14,
+       "leftover_g": 136,
+       "name": "Khoai lang (củ)",
+       "need_g": 364,
+       "pack_g": 500,
+       "pack_label": "Khoai lang 500 g (ước tính)",
+       "packs": 1,
+       "price_fallback": true,
+       "price_store_id": "cho_khac",
+       "price_vnd_per_pack": 17000,
+       "till_cost_vnd": 17000,
+       "used_cost_vnd": 12376
+      },
+      {
+       "aisle": "rau_cu",
+       "ingredient_id": "nam_rom",
+       "leftover_days": 365,
+       "leftover_g": 224,
+       "name": "Nấm rơm đóng hộp (đã ráo nước)",
+       "need_g": 576,
+       "pack_g": 400,
+       "pack_label": "lon 400 g (ước tính)",
+       "packs": 2,
+       "price_fallback": true,
+       "price_store_id": "cho_khac",
+       "price_vnd_per_pack": 22000,
+       "till_cost_vnd": 44000,
+       "used_cost_vnd": 31680
+      }
+     ]
+    },
+    {
+     "aisle": "gao_do_kho",
+     "items": [
+      {
+       "aisle": "gao_do_kho",
+       "ingredient_id": "com_trang",
+       "leftover_days": 180,
+       "leftover_g": 263,
+       "name": "Cơm trắng (đã nấu chín)",
+       "need_g": 7737,
+       "pack_g": 1000,
+       "pack_label": "Cơm nấu chín quy đổi từ gạo tẻ 1 kg (ước tính: gạo ~20.000 ₫/kg, nở ~2,5 lần)",
+       "packs": 8,
+       "price_fallback": true,
+       "price_store_id": "cho_khac",
+       "price_vnd_per_pack": 12000,
+       "till_cost_vnd": 96000,
+       "used_cost_vnd": 92844
+      },
+      {
+       "aisle": "gao_do_kho",
+       "ingredient_id": "dau_lang",
+       "leftover_days": 365,
+       "leftover_g": 228,
+       "name": "Đậu lăng khô",
+       "need_g": 1272,
+       "pack_g": 500,
+       "pack_label": "500 g (ước tính)",
+       "packs": 3,
+       "price_fallback": true,
+       "price_store_id": "cho_khac",
+       "price_vnd_per_pack": 45000,
+       "till_cost_vnd": 135000,
+       "used_cost_vnd": 114480
+      },
+      {
+       "aisle": "gao_do_kho",
+       "ingredient_id": "dau_xanh",
+       "leftover_days": 365,
+       "leftover_g": 70,
+       "name": "Đậu xanh khô (hạt)",
+       "need_g": 2930,
+       "pack_g": 500,
+       "pack_label": "500 g (ước tính)",
+       "packs": 6,
+       "price_fallback": true,
+       "price_store_id": "cho_khac",
+       "price_vnd_per_pack": 40000,
+       "till_cost_vnd": 240000,
+       "used_cost_vnd": 234400
+      },
+      {
+       "aisle": "gao_do_kho",
+       "ingredient_id": "gao_te",
+       "leftover_days": 180,
+       "leftover_g": 880,
+       "name": "Gạo tẻ (sống)",
+       "need_g": 120,
+       "pack_g": 1000,
+       "pack_label": "Gạo tẻ 1 kg (ước tính)",
+       "packs": 1,
+       "price_fallback": true,
+       "price_store_id": "cho_khac",
+       "price_vnd_per_pack": 22000,
+       "till_cost_vnd": 22000,
+       "used_cost_vnd": 2640
+      },
+      {
+       "aisle": "gao_do_kho",
+       "ingredient_id": "lac",
+       "leftover_days": 90,
+       "leftover_g": 112,
+       "name": "Lạc (đậu phộng) sống",
+       "need_g": 288,
+       "pack_g": 200,
+       "pack_label": "Lạc sống 200 g (ước tính)",
+       "packs": 2,
+       "price_fallback": true,
+       "price_store_id": "cho_khac",
+       "price_vnd_per_pack": 22000,
+       "till_cost_vnd": 44000,
+       "used_cost_vnd": 31680
+      },
+      {
+       "aisle": "gao_do_kho",
+       "ingredient_id": "vung",
+       "leftover_days": 180,
+       "leftover_g": 190.4,
+       "name": "Vừng (mè) trắng",
+       "need_g": 9.600000000000001,
+       "pack_g": 200,
+       "pack_label": "200 g (ước tính)",
+       "packs": 1,
+       "price_fallback": true,
+       "price_store_id": "cho_khac",
+       "price_vnd_per_pack": 25000,
+       "till_cost_vnd": 25000,
+       "used_cost_vnd": 1200.0000000000002
+      }
+     ]
+    },
+    {
+     "aisle": "gia_vi_dau",
+     "items": [
+      {
+       "aisle": "gia_vi_dau",
+       "ingredient_id": "dau_an",
+       "leftover_days": 365,
+       "leftover_g": 84,
+       "name": "Dầu ăn (đậu nành)",
+       "need_g": 416,
+       "pack_g": 500,
+       "pack_label": "Dầu ăn 500 g (ước tính)",
+       "packs": 1,
+       "price_fallback": true,
+       "price_store_id": "cho_khac",
+       "price_vnd_per_pack": 30000,
+       "till_cost_vnd": 30000,
+       "used_cost_vnd": 24960
+      },
+      {
+       "aisle": "gia_vi_dau",
+       "ingredient_id": "duong",
+       "leftover_days": 730,
+       "leftover_g": 439.2,
+       "name": "Đường trắng (tinh luyện)",
+       "need_g": 60.800000000000004,
+       "pack_g": 500,
+       "pack_label": "Đường trắng 500 g (ước tính)",
+       "packs": 1,
+       "price_fallback": true,
+       "price_store_id": "cho_khac",
+       "price_vnd_per_pack": 15000,
+       "till_cost_vnd": 15000,
+       "used_cost_vnd": 1824.0000000000002
+      },
+      {
+       "aisle": "gia_vi_dau",
+       "ingredient_id": "gung",
+       "leftover_days": 14,
+       "leftover_g": 52,
+       "name": "Gừng tươi",
+       "need_g": 48,
+       "pack_g": 100,
+       "pack_label": "100 g (ước tính)",
+       "packs": 1,
+       "price_fallback": true,
+       "price_store_id": "cho_khac",
+       "price_vnd_per_pack": 10000,
+       "till_cost_vnd": 10000,
+       "used_cost_vnd": 4800
+      },
+      {
+       "aisle": "gia_vi_dau",
+       "ingredient_id": "muoi",
+       "leftover_days": 1000,
+       "leftover_g": 221.2,
+       "name": "Muối ăn",
+       "need_g": 28.799999999999997,
+       "pack_g": 250,
+       "pack_label": "Muối ăn 250 g (ước tính)",
+       "packs": 1,
+       "price_fallback": true,
+       "price_store_id": "cho_khac",
+       "price_vnd_per_pack": 4000,
+       "till_cost_vnd": 4000,
+       "used_cost_vnd": 460.79999999999995
+      },
+      {
+       "aisle": "gia_vi_dau",
+       "ingredient_id": "nuoc_mam",
+       "leftover_days": 365,
+       "leftover_g": 186,
+       "name": "Nước mắm",
+       "need_g": 64,
+       "pack_g": 250,
+       "pack_label": "Nước mắm 250 g (ước tính)",
+       "packs": 1,
+       "price_fallback": true,
+       "price_store_id": "cho_khac",
+       "price_vnd_per_pack": 19000,
+       "till_cost_vnd": 19000,
+       "used_cost_vnd": 4864
+      },
+      {
+       "aisle": "gia_vi_dau",
+       "ingredient_id": "nuoc_mam_chay",
+       "leftover_days": 365,
+       "leftover_g": 138,
+       "name": "Nước mắm chay (thay bằng nước tương)",
+       "need_g": 112,
+       "pack_g": 250,
+       "pack_label": "Nước mắm chay 250 g (ước tính)",
+       "packs": 1,
+       "price_fallback": true,
+       "price_store_id": "cho_khac",
+       "price_vnd_per_pack": 25000,
+       "till_cost_vnd": 25000,
+       "used_cost_vnd": 11200
+      },
+      {
+       "aisle": "gia_vi_dau",
+       "ingredient_id": "tieu_den",
+       "leftover_days": 365,
+       "leftover_g": 40.4,
+       "name": "Tiêu đen (hạt)",
+       "need_g": 9.600000000000001,
+       "pack_g": 50,
+       "pack_label": "50 g (ước tính)",
+       "packs": 1,
+       "price_fallback": true,
+       "price_store_id": "cho_khac",
+       "price_vnd_per_pack": 20000,
+       "till_cost_vnd": 20000,
+       "used_cost_vnd": 3840.0000000000005
+      },
+      {
+       "aisle": "gia_vi_dau",
+       "ingredient_id": "toi",
+       "leftover_days": 30,
+       "leftover_g": 65.60000000000002,
+       "name": "Tỏi (củ)",
+       "need_g": 134.39999999999998,
+       "pack_g": 100,
+       "pack_label": "100 g (ước tính)",
+       "packs": 2,
+       "price_fallback": true,
+       "price_store_id": "cho_khac",
+       "price_vnd_per_pack": 15000,
+       "till_cost_vnd": 30000,
+       "used_cost_vnd": 20159.999999999996
+      },
+      {
+       "aisle": "gia_vi_dau",
+       "ingredient_id": "xi_dau",
+       "leftover_days": 365,
+       "leftover_g": 90,
+       "name": "Xì dầu (nước tương, có lúa mì)",
+       "need_g": 160,
+       "pack_g": 250,
+       "pack_label": "Xì dầu 250 g (ước tính)",
+       "packs": 1,
+       "price_fallback": true,
+       "price_store_id": "cho_khac",
+       "price_vnd_per_pack": 14000,
+       "till_cost_vnd": 14000,
+       "used_cost_vnd": 8960
+      }
+     ]
+    }
+   ],
+   "items": [
+    {
+     "aisle": "thit",
+     "ingredient_id": "thit_heo_xay_nac",
+     "leftover_days": 3,
+     "leftover_g": 140,
+     "name": "Thịt heo xay (nạc ~96%)",
+     "need_g": 60,
+     "pack_g": 200,
+     "pack_label": "thịt heo xay C.P 200 g",
+     "packs": 1,
+     "price_fallback": false,
+     "price_store_id": "bach_hoa_xanh",
+     "price_vnd_per_pack": 22478,
+     "till_cost_vnd": 22478,
+     "used_cost_vnd": 6743.4
+    },
+    {
+     "aisle": "trung_dau_phu",
+     "ingredient_id": "dau_phu",
+     "leftover_days": 5,
+     "leftover_g": 96,
+     "name": "Đậu hũ (đậu phụ) cứng",
+     "need_g": 6504,
+     "pack_g": 300,
+     "pack_label": "bìa 300 g (ước tính)",
+     "packs": 22,
+     "price_fallback": true,
+     "price_store_id": "cho_khac",
+     "price_vnd_per_pack": 12000,
+     "till_cost_vnd": 264000,
+     "used_cost_vnd": 260160
+    },
+    {
+     "aisle": "trung_dau_phu",
+     "ingredient_id": "tempeh",
+     "leftover_days": 14,
+     "leftover_g": 72,
+     "name": "Tempeh (đậu nành lên men)",
+     "need_g": 128,
+     "pack_g": 200,
+     "pack_label": "200 g (ước tính)",
+     "packs": 1,
+     "price_fallback": true,
+     "price_store_id": "cho_khac",
+     "price_vnd_per_pack": 45000,
+     "till_cost_vnd": 45000,
+     "used_cost_vnd": 28800
+    },
+    {
+     "aisle": "trung_dau_phu",
+     "ingredient_id": "trung_ga",
+     "leftover_days": 21,
+     "leftover_g": 20,
+     "name": "Trứng gà",
+     "need_g": 480,
+     "pack_g": 500,
+     "pack_label": "hộp 10 quả ≈ 500 g (ước tính)",
+     "packs": 1,
+     "price_fallback": true,
+     "price_store_id": "cho_khac",
+     "price_vnd_per_pack": 40000,
+     "till_cost_vnd": 40000,
+     "used_cost_vnd": 38400
+    },
+    {
+     "aisle": "rau_cu",
+     "ingredient_id": "bap_cai",
+     "leftover_days": 7,
+     "leftover_g": 60,
+     "name": "Bắp cải",
+     "need_g": 1440,
+     "pack_g": 500,
+     "pack_label": "Bắp cải 500 g (ước tính)",
+     "packs": 3,
+     "price_fallback": true,
+     "price_store_id": "cho_khac",
+     "price_vnd_per_pack": 14000,
+     "till_cost_vnd": 42000,
+     "used_cost_vnd": 40320
+    },
+    {
+     "aisle": "rau_cu",
+     "ingredient_id": "bi_xanh",
+     "leftover_days": 7,
+     "leftover_g": 300,
+     "name": "Bí xanh (PROXY bí ngòi)",
+     "need_g": 3200,
+     "pack_g": 500,
+     "pack_label": "Bí xanh 500 g (ước tính)",
+     "packs": 7,
+     "price_fallback": true,
+     "price_store_id": "cho_khac",
+     "price_vnd_per_pack": 8000,
+     "till_cost_vnd": 56000,
+     "used_cost_vnd": 51200
+    },
+    {
+     "aisle": "rau_cu",
+     "ingredient_id": "ca_chua",
+     "leftover_days": 7,
+     "leftover_g": 232,
+     "name": "Cà chua",
+     "need_g": 768,
+     "pack_g": 500,
+     "pack_label": "Cà chua 500 g (ước tính)",
+     "packs": 2,
+     "price_fallback": true,
+     "price_store_id": "cho_khac",
+     "price_vnd_per_pack": 17000,
+     "till_cost_vnd": 34000,
+     "used_cost_vnd": 26112
+    },
+    {
+     "aisle": "rau_cu",
+     "ingredient_id": "ca_rot",
+     "leftover_days": 14,
+     "leftover_g": 136,
+     "name": "Cà rốt",
+     "need_g": 864,
+     "pack_g": 500,
+     "pack_label": "Cà rốt 500 g (ước tính)",
+     "packs": 2,
+     "price_fallback": true,
+     "price_store_id": "cho_khac",
+     "price_vnd_per_pack": 14000,
+     "till_cost_vnd": 28000,
+     "used_cost_vnd": 24192
+    },
+    {
+     "aisle": "rau_cu",
+     "ingredient_id": "dua_chuot",
+     "leftover_days": 7,
+     "leftover_g": 244,
+     "name": "Dưa chuột (có vỏ)",
+     "need_g": 256,
+     "pack_g": 500,
+     "pack_label": "3 quả khoảng 500 g (ước tính)",
+     "packs": 1,
+     "price_fallback": true,
+     "price_store_id": "cho_khac",
+     "price_vnd_per_pack": 15000,
+     "till_cost_vnd": 15000,
+     "used_cost_vnd": 7680
+    },
+    {
+     "aisle": "rau_cu",
+     "ingredient_id": "hanh_la",
+     "leftover_days": 5,
+     "leftover_g": 16,
+     "name": "Hành lá",
+     "need_g": 384,
+     "pack_g": 100,
+     "pack_label": "100 g (ước tính)",
+     "packs": 4,
+     "price_fallback": true,
+     "price_store_id": "cho_khac",
+     "price_vnd_per_pack": 6000,
+     "till_cost_vnd": 24000,
+     "used_cost_vnd": 23040
+    },
+    {
+     "aisle": "rau_cu",
+     "ingredient_id": "khoai_lang",
+     "leftover_days": 14,
+     "leftover_g": 136,
+     "name": "Khoai lang (củ)",
+     "need_g": 364,
+     "pack_g": 500,
+     "pack_label": "Khoai lang 500 g (ước tính)",
+     "packs": 1,
+     "price_fallback": true,
+     "price_store_id": "cho_khac",
+     "price_vnd_per_pack": 17000,
+     "till_cost_vnd": 17000,
+     "used_cost_vnd": 12376
+    },
+    {
+     "aisle": "rau_cu",
+     "ingredient_id": "nam_rom",
+     "leftover_days": 365,
+     "leftover_g": 224,
+     "name": "Nấm rơm đóng hộp (đã ráo nước)",
+     "need_g": 576,
+     "pack_g": 400,
+     "pack_label": "lon 400 g (ước tính)",
+     "packs": 2,
+     "price_fallback": true,
+     "price_store_id": "cho_khac",
+     "price_vnd_per_pack": 22000,
+     "till_cost_vnd": 44000,
+     "used_cost_vnd": 31680
+    },
+    {
+     "aisle": "gao_do_kho",
+     "ingredient_id": "com_trang",
+     "leftover_days": 180,
+     "leftover_g": 263,
+     "name": "Cơm trắng (đã nấu chín)",
+     "need_g": 7737,
+     "pack_g": 1000,
+     "pack_label": "Cơm nấu chín quy đổi từ gạo tẻ 1 kg (ước tính: gạo ~20.000 ₫/kg, nở ~2,5 lần)",
+     "packs": 8,
+     "price_fallback": true,
+     "price_store_id": "cho_khac",
+     "price_vnd_per_pack": 12000,
+     "till_cost_vnd": 96000,
+     "used_cost_vnd": 92844
+    },
+    {
+     "aisle": "gao_do_kho",
+     "ingredient_id": "dau_lang",
+     "leftover_days": 365,
+     "leftover_g": 228,
+     "name": "Đậu lăng khô",
+     "need_g": 1272,
+     "pack_g": 500,
+     "pack_label": "500 g (ước tính)",
+     "packs": 3,
+     "price_fallback": true,
+     "price_store_id": "cho_khac",
+     "price_vnd_per_pack": 45000,
+     "till_cost_vnd": 135000,
+     "used_cost_vnd": 114480
+    },
+    {
+     "aisle": "gao_do_kho",
+     "ingredient_id": "dau_xanh",
+     "leftover_days": 365,
+     "leftover_g": 70,
+     "name": "Đậu xanh khô (hạt)",
+     "need_g": 2930,
+     "pack_g": 500,
+     "pack_label": "500 g (ước tính)",
+     "packs": 6,
+     "price_fallback": true,
+     "price_store_id": "cho_khac",
+     "price_vnd_per_pack": 40000,
+     "till_cost_vnd": 240000,
+     "used_cost_vnd": 234400
+    },
+    {
+     "aisle": "gao_do_kho",
+     "ingredient_id": "gao_te",
+     "leftover_days": 180,
+     "leftover_g": 880,
+     "name": "Gạo tẻ (sống)",
+     "need_g": 120,
+     "pack_g": 1000,
+     "pack_label": "Gạo tẻ 1 kg (ước tính)",
+     "packs": 1,
+     "price_fallback": true,
+     "price_store_id": "cho_khac",
+     "price_vnd_per_pack": 22000,
+     "till_cost_vnd": 22000,
+     "used_cost_vnd": 2640
+    },
+    {
+     "aisle": "gao_do_kho",
+     "ingredient_id": "lac",
+     "leftover_days": 90,
+     "leftover_g": 112,
+     "name": "Lạc (đậu phộng) sống",
+     "need_g": 288,
+     "pack_g": 200,
+     "pack_label": "Lạc sống 200 g (ước tính)",
+     "packs": 2,
+     "price_fallback": true,
+     "price_store_id": "cho_khac",
+     "price_vnd_per_pack": 22000,
+     "till_cost_vnd": 44000,
+     "used_cost_vnd": 31680
+    },
+    {
+     "aisle": "gao_do_kho",
+     "ingredient_id": "vung",
+     "leftover_days": 180,
+     "leftover_g": 190.4,
+     "name": "Vừng (mè) trắng",
+     "need_g": 9.600000000000001,
+     "pack_g": 200,
+     "pack_label": "200 g (ước tính)",
+     "packs": 1,
+     "price_fallback": true,
+     "price_store_id": "cho_khac",
+     "price_vnd_per_pack": 25000,
+     "till_cost_vnd": 25000,
+     "used_cost_vnd": 1200.0000000000002
+    },
+    {
+     "aisle": "gia_vi_dau",
+     "ingredient_id": "dau_an",
+     "leftover_days": 365,
+     "leftover_g": 84,
+     "name": "Dầu ăn (đậu nành)",
+     "need_g": 416,
+     "pack_g": 500,
+     "pack_label": "Dầu ăn 500 g (ước tính)",
+     "packs": 1,
+     "price_fallback": true,
+     "price_store_id": "cho_khac",
+     "price_vnd_per_pack": 30000,
+     "till_cost_vnd": 30000,
+     "used_cost_vnd": 24960
+    },
+    {
+     "aisle": "gia_vi_dau",
+     "ingredient_id": "duong",
+     "leftover_days": 730,
+     "leftover_g": 439.2,
+     "name": "Đường trắng (tinh luyện)",
+     "need_g": 60.800000000000004,
+     "pack_g": 500,
+     "pack_label": "Đường trắng 500 g (ước tính)",
+     "packs": 1,
+     "price_fallback": true,
+     "price_store_id": "cho_khac",
+     "price_vnd_per_pack": 15000,
+     "till_cost_vnd": 15000,
+     "used_cost_vnd": 1824.0000000000002
+    },
+    {
+     "aisle": "gia_vi_dau",
+     "ingredient_id": "gung",
+     "leftover_days": 14,
+     "leftover_g": 52,
+     "name": "Gừng tươi",
+     "need_g": 48,
+     "pack_g": 100,
+     "pack_label": "100 g (ước tính)",
+     "packs": 1,
+     "price_fallback": true,
+     "price_store_id": "cho_khac",
+     "price_vnd_per_pack": 10000,
+     "till_cost_vnd": 10000,
+     "used_cost_vnd": 4800
+    },
+    {
+     "aisle": "gia_vi_dau",
+     "ingredient_id": "muoi",
+     "leftover_days": 1000,
+     "leftover_g": 221.2,
+     "name": "Muối ăn",
+     "need_g": 28.799999999999997,
+     "pack_g": 250,
+     "pack_label": "Muối ăn 250 g (ước tính)",
+     "packs": 1,
+     "price_fallback": true,
+     "price_store_id": "cho_khac",
+     "price_vnd_per_pack": 4000,
+     "till_cost_vnd": 4000,
+     "used_cost_vnd": 460.79999999999995
+    },
+    {
+     "aisle": "gia_vi_dau",
+     "ingredient_id": "nuoc_mam",
+     "leftover_days": 365,
+     "leftover_g": 186,
+     "name": "Nước mắm",
+     "need_g": 64,
+     "pack_g": 250,
+     "pack_label": "Nước mắm 250 g (ước tính)",
+     "packs": 1,
+     "price_fallback": true,
+     "price_store_id": "cho_khac",
+     "price_vnd_per_pack": 19000,
+     "till_cost_vnd": 19000,
+     "used_cost_vnd": 4864
+    },
+    {
+     "aisle": "gia_vi_dau",
+     "ingredient_id": "nuoc_mam_chay",
+     "leftover_days": 365,
+     "leftover_g": 138,
+     "name": "Nước mắm chay (thay bằng nước tương)",
+     "need_g": 112,
+     "pack_g": 250,
+     "pack_label": "Nước mắm chay 250 g (ước tính)",
+     "packs": 1,
+     "price_fallback": true,
+     "price_store_id": "cho_khac",
+     "price_vnd_per_pack": 25000,
+     "till_cost_vnd": 25000,
+     "used_cost_vnd": 11200
+    },
+    {
+     "aisle": "gia_vi_dau",
+     "ingredient_id": "tieu_den",
+     "leftover_days": 365,
+     "leftover_g": 40.4,
+     "name": "Tiêu đen (hạt)",
+     "need_g": 9.600000000000001,
+     "pack_g": 50,
+     "pack_label": "50 g (ước tính)",
+     "packs": 1,
+     "price_fallback": true,
+     "price_store_id": "cho_khac",
+     "price_vnd_per_pack": 20000,
+     "till_cost_vnd": 20000,
+     "used_cost_vnd": 3840.0000000000005
+    },
+    {
+     "aisle": "gia_vi_dau",
+     "ingredient_id": "toi",
+     "leftover_days": 30,
+     "leftover_g": 65.60000000000002,
+     "name": "Tỏi (củ)",
+     "need_g": 134.39999999999998,
+     "pack_g": 100,
+     "pack_label": "100 g (ước tính)",
+     "packs": 2,
+     "price_fallback": true,
+     "price_store_id": "cho_khac",
+     "price_vnd_per_pack": 15000,
+     "till_cost_vnd": 30000,
+     "used_cost_vnd": 20159.999999999996
+    },
+    {
+     "aisle": "gia_vi_dau",
+     "ingredient_id": "xi_dau",
+     "leftover_days": 365,
+     "leftover_g": 90,
+     "name": "Xì dầu (nước tương, có lúa mì)",
+     "need_g": 160,
+     "pack_g": 250,
+     "pack_label": "Xì dầu 250 g (ước tính)",
+     "packs": 1,
+     "price_fallback": true,
+     "price_store_id": "cho_khac",
+     "price_vnd_per_pack": 14000,
+     "till_cost_vnd": 14000,
+     "used_cost_vnd": 8960
+    }
+   ],
+   "skipped_pantry": [],
+   "till_cost": 1360000,
+   "week_food_cost": 1109000
+  },
+  "start_date": "2026-11-09",
+  "status": "ready",
+  "unfilled_slots": [],
+  "validation": {
+   "budget_over_vnd": 0,
+   "days": [
+    {
+     "date": "2026-11-09",
+     "exempt": false,
+     "kcal_delta": 0,
+     "ok": true,
+     "protein_short_g": 0
+    },
+    {
+     "date": "2026-11-10",
+     "exempt": false,
+     "kcal_delta": 0,
+     "ok": true,
+     "protein_short_g": 0
+    },
+    {
+     "date": "2026-11-11",
+     "exempt": false,
+     "kcal_delta": 0,
+     "ok": true,
+     "protein_short_g": 0
+    },
+    {
+     "date": "2026-11-12",
+     "exempt": false,
+     "kcal_delta": 0,
+     "ok": true,
+     "protein_short_g": 0
+    },
+    {
+     "date": "2026-11-13",
+     "exempt": false,
+     "kcal_delta": 0,
+     "ok": true,
+     "protein_short_g": 0
+    },
+    {
+     "date": "2026-11-14",
+     "exempt": false,
+     "kcal_delta": 0,
+     "ok": true,
+     "protein_short_g": 0
+    },
+    {
+     "date": "2026-11-15",
+     "exempt": false,
+     "kcal_delta": 0,
+     "ok": true,
+     "protein_short_g": 0
+    }
+   ],
+   "days_missing": 0,
+   "ok": true,
+   "shortfalls": []
+  }
+ },
+ "slots": [
+  {
+   "kcal": 505.2631578947368,
+   "mode": "on",
+   "planned": true,
+   "protein_g": 26.31578947368421,
+   "share": 0.21052631578947367,
+   "slot": "breakfast"
+  },
+  {
+   "kcal": 884.2105263157893,
+   "mode": "on",
+   "planned": true,
+   "protein_g": 46.052631578947356,
+   "share": 0.36842105263157887,
+   "slot": "lunch"
+  },
+  {
+   "kcal": 884.2105263157893,
+   "mode": "on",
+   "planned": true,
+   "protein_g": 46.052631578947356,
+   "share": 0.36842105263157887,
+   "slot": "dinner"
+  },
+  {
+   "kcal": 0,
+   "mode": "skip",
+   "planned": false,
+   "protein_g": 0,
+   "share": 0,
+   "slot": "snack_am"
+  },
+  {
+   "kcal": 126.3157894736842,
+   "mode": "on",
+   "planned": true,
+   "protein_g": 6.578947368421052,
+   "share": 0.05263157894736842,
+   "slot": "snack_pm"
+  }
+ ]
+}

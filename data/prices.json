@@ -1,0 +1,732 @@
+[
+  {
+    "ingredient_id": "thit_heo_xay_nac",
+    "store_id": "bach_hoa_xanh",
+    "pack_g": 200,
+    "pack_label": "thịt heo xay C.P 200 g",
+    "price_vnd": 22478,
+    "shelf_life_days": 3,
+    "source_url": "https://www.bachhoaxanh.com/thit-heo",
+    "surveyed_on": "2026-11-06"
+  },
+  {
+    "ingredient_id": "thit_heo_nac_dui",
+    "store_id": "bach_hoa_xanh",
+    "pack_g": 300,
+    "pack_label": "thịt đùi heo C.P 300 g (KM)",
+    "price_vnd": 33300,
+    "shelf_life_days": 3,
+    "source_url": "https://www.bachhoaxanh.com/thit-heo",
+    "surveyed_on": "2026-11-06"
+  },
+  {
+    "ingredient_id": "thit_heo_ba_chi",
+    "store_id": "bach_hoa_xanh",
+    "pack_g": 300,
+    "pack_label": "ba rọi heo C.P 300 g (KM)",
+    "price_vnd": 42300,
+    "shelf_life_days": 3,
+    "source_url": "https://www.bachhoaxanh.com/thit-heo",
+    "surveyed_on": "2026-11-06"
+  },
+  {
+    "ingredient_id": "uc_ga_khong_da",
+    "store_id": "cho_khac",
+    "pack_g": 300,
+    "pack_label": "Ức gà không xương 300 g (ước tính)",
+    "price_vnd": 63000,
+    "shelf_life_days": 3,
+    "source_url": "",
+    "surveyed_on": "2026-11-07"
+  },
+  {
+    "ingredient_id": "dui_ga_khong_da",
+    "store_id": "cho_khac",
+    "pack_g": 300,
+    "pack_label": "Đùi gà không xương 300 g (ước tính)",
+    "price_vnd": 53000,
+    "shelf_life_days": 3,
+    "source_url": "",
+    "surveyed_on": "2026-11-07"
+  },
+  {
+    "ingredient_id": "thit_heo_nac_dui",
+    "store_id": "cho_khac",
+    "pack_g": 500,
+    "pack_label": "500 g (ước tính)",
+    "price_vnd": 75000,
+    "shelf_life_days": 3,
+    "source_url": "",
+    "surveyed_on": "2026-11-06"
+  },
+  {
+    "ingredient_id": "thit_heo_nac_than",
+    "store_id": "cho_khac",
+    "pack_g": 300,
+    "pack_label": "Thịt heo thăn 300 g (ước tính)",
+    "price_vnd": 53000,
+    "shelf_life_days": 3,
+    "source_url": "",
+    "surveyed_on": "2026-11-07"
+  },
+  {
+    "ingredient_id": "thit_heo_ba_chi",
+    "store_id": "cho_khac",
+    "pack_g": 500,
+    "pack_label": "500 g (ước tính)",
+    "price_vnd": 70000,
+    "shelf_life_days": 3,
+    "source_url": "",
+    "surveyed_on": "2026-11-06"
+  },
+  {
+    "ingredient_id": "thit_heo_xay_nac",
+    "store_id": "cho_khac",
+    "pack_g": 500,
+    "pack_label": "500 g (ước tính)",
+    "price_vnd": 55000,
+    "shelf_life_days": 2,
+    "source_url": "",
+    "surveyed_on": "2026-11-06"
+  },
+  {
+    "ingredient_id": "thit_bo_nac",
+    "store_id": "cho_khac",
+    "pack_g": 300,
+    "pack_label": "Thịt bò đùi 300 g (ước tính theo BHX 200 g)",
+    "price_vnd": 90000,
+    "shelf_life_days": 3,
+    "source_url": "",
+    "surveyed_on": "2026-11-07"
+  },
+  {
+    "ingredient_id": "ca_basa",
+    "store_id": "cho_khac",
+    "pack_g": 300,
+    "pack_label": "Cá basa phi lê 300 g (ước tính)",
+    "price_vnd": 43000,
+    "shelf_life_days": 2,
+    "source_url": "",
+    "surveyed_on": "2026-11-07"
+  },
+  {
+    "ingredient_id": "tom",
+    "store_id": "cho_khac",
+    "pack_g": 250,
+    "pack_label": "Tôm làm sạch 250 g (ước tính)",
+    "price_vnd": 102000,
+    "shelf_life_days": 2,
+    "source_url": "",
+    "surveyed_on": "2026-11-07"
+  },
+  {
+    "ingredient_id": "trung_ga",
+    "store_id": "cho_khac",
+    "pack_g": 500,
+    "pack_label": "hộp 10 quả ≈ 500 g (ước tính)",
+    "price_vnd": 40000,
+    "shelf_life_days": 21,
+    "source_url": "",
+    "surveyed_on": "2026-11-06"
+  },
+  {
+    "ingredient_id": "dau_phu",
+    "store_id": "cho_khac",
+    "pack_g": 300,
+    "pack_label": "bìa 300 g (ước tính)",
+    "price_vnd": 12000,
+    "shelf_life_days": 5,
+    "source_url": "",
+    "surveyed_on": "2026-11-06"
+  },
+  {
+    "ingredient_id": "com_trang",
+    "store_id": "cho_khac",
+    "pack_g": 1000,
+    "pack_label": "Cơm nấu chín quy đổi từ gạo tẻ 1 kg (ước tính: gạo ~20.000 ₫/kg, nở ~2,5 lần)",
+    "price_vnd": 12000,
+    "shelf_life_days": 180,
+    "source_url": "",
+    "surveyed_on": "2026-11-07"
+  },
+  {
+    "ingredient_id": "khoai_lang",
+    "store_id": "cho_khac",
+    "pack_g": 500,
+    "pack_label": "Khoai lang 500 g (ước tính)",
+    "price_vnd": 17000,
+    "shelf_life_days": 14,
+    "source_url": "",
+    "surveyed_on": "2026-11-07"
+  },
+  {
+    "ingredient_id": "khoai_tay",
+    "store_id": "cho_khac",
+    "pack_g": 500,
+    "pack_label": "Khoai tây 500 g (ước tính)",
+    "price_vnd": 17000,
+    "shelf_life_days": 14,
+    "source_url": "",
+    "surveyed_on": "2026-11-07"
+  },
+  {
+    "ingredient_id": "bap_cai",
+    "store_id": "cho_khac",
+    "pack_g": 500,
+    "pack_label": "Bắp cải 500 g (ước tính)",
+    "price_vnd": 14000,
+    "shelf_life_days": 7,
+    "source_url": "",
+    "surveyed_on": "2026-11-07"
+  },
+  {
+    "ingredient_id": "ca_rot",
+    "store_id": "cho_khac",
+    "pack_g": 500,
+    "pack_label": "Cà rốt 500 g (ước tính)",
+    "price_vnd": 14000,
+    "shelf_life_days": 14,
+    "source_url": "",
+    "surveyed_on": "2026-11-07"
+  },
+  {
+    "ingredient_id": "ca_tim",
+    "store_id": "cho_khac",
+    "pack_g": 500,
+    "pack_label": "500 g (ước tính)",
+    "price_vnd": 15000,
+    "shelf_life_days": 5,
+    "source_url": "",
+    "surveyed_on": "2026-11-06"
+  },
+  {
+    "ingredient_id": "ca_chua",
+    "store_id": "cho_khac",
+    "pack_g": 500,
+    "pack_label": "Cà chua 500 g (ước tính)",
+    "price_vnd": 17000,
+    "shelf_life_days": 7,
+    "source_url": "",
+    "surveyed_on": "2026-11-07"
+  },
+  {
+    "ingredient_id": "sup_lo_xanh",
+    "store_id": "cho_khac",
+    "pack_g": 500,
+    "pack_label": "bông ≈ 500 g (ước tính)",
+    "price_vnd": 30000,
+    "shelf_life_days": 5,
+    "source_url": "",
+    "surveyed_on": "2026-11-06"
+  },
+  {
+    "ingredient_id": "sup_lo_trang",
+    "store_id": "cho_khac",
+    "pack_g": 500,
+    "pack_label": "bông ≈ 500 g (ước tính)",
+    "price_vnd": 25000,
+    "shelf_life_days": 5,
+    "source_url": "",
+    "surveyed_on": "2026-11-06"
+  },
+  {
+    "ingredient_id": "cai_ngot",
+    "store_id": "cho_khac",
+    "pack_g": 500,
+    "pack_label": "500 g (ước tính)",
+    "price_vnd": 15000,
+    "shelf_life_days": 3,
+    "source_url": "",
+    "surveyed_on": "2026-11-06"
+  },
+  {
+    "ingredient_id": "su_su",
+    "store_id": "cho_khac",
+    "pack_g": 500,
+    "pack_label": "Su su 500 g (ước tính)",
+    "price_vnd": 11000,
+    "shelf_life_days": 14,
+    "source_url": "",
+    "surveyed_on": "2026-11-07"
+  },
+  {
+    "ingredient_id": "bi_xanh",
+    "store_id": "cho_khac",
+    "pack_g": 500,
+    "pack_label": "Bí xanh 500 g (ước tính)",
+    "price_vnd": 8000,
+    "shelf_life_days": 7,
+    "source_url": "",
+    "surveyed_on": "2026-11-07"
+  },
+  {
+    "ingredient_id": "hanh_tay",
+    "store_id": "cho_khac",
+    "pack_g": 500,
+    "pack_label": "Hành tây 500 g (ước tính)",
+    "price_vnd": 17000,
+    "shelf_life_days": 30,
+    "source_url": "",
+    "surveyed_on": "2026-11-07"
+  },
+  {
+    "ingredient_id": "hanh_la",
+    "store_id": "cho_khac",
+    "pack_g": 100,
+    "pack_label": "100 g (ước tính)",
+    "price_vnd": 6000,
+    "shelf_life_days": 5,
+    "source_url": "",
+    "surveyed_on": "2026-11-06"
+  },
+  {
+    "ingredient_id": "toi",
+    "store_id": "cho_khac",
+    "pack_g": 100,
+    "pack_label": "100 g (ước tính)",
+    "price_vnd": 15000,
+    "shelf_life_days": 30,
+    "source_url": "",
+    "surveyed_on": "2026-11-06"
+  },
+  {
+    "ingredient_id": "gung",
+    "store_id": "cho_khac",
+    "pack_g": 100,
+    "pack_label": "100 g (ước tính)",
+    "price_vnd": 10000,
+    "shelf_life_days": 14,
+    "source_url": "",
+    "surveyed_on": "2026-11-06"
+  },
+  {
+    "ingredient_id": "ca_thu",
+    "store_id": "cho_khac",
+    "pack_g": 300,
+    "pack_label": "Cá thu khúc 300 g (ước tính)",
+    "price_vnd": 86000,
+    "shelf_life_days": 2,
+    "source_url": "",
+    "surveyed_on": "2026-11-07"
+  },
+  {
+    "ingredient_id": "ca_ro_phi",
+    "store_id": "cho_khac",
+    "pack_g": 300,
+    "pack_label": "Cá rô phi phi lê 300 g (ước tính)",
+    "price_vnd": 55000,
+    "shelf_life_days": 2,
+    "source_url": "",
+    "surveyed_on": "2026-11-07"
+  },
+  {
+    "ingredient_id": "muc_ong",
+    "store_id": "cho_khac",
+    "pack_g": 250,
+    "pack_label": "Mực ống làm sạch 250 g (ước tính)",
+    "price_vnd": 96000,
+    "shelf_life_days": 2,
+    "source_url": "",
+    "surveyed_on": "2026-11-07"
+  },
+  {
+    "ingredient_id": "sua_chua_khong_duong",
+    "store_id": "cho_khac",
+    "pack_g": 200,
+    "pack_label": "Sữa chua Hy Lạp không đường 200 g (ước tính)",
+    "price_vnd": 31000,
+    "shelf_life_days": 14,
+    "source_url": "",
+    "surveyed_on": "2026-11-07"
+  },
+  {
+    "ingredient_id": "tieu_den",
+    "store_id": "cho_khac",
+    "pack_g": 50,
+    "pack_label": "50 g (ước tính)",
+    "price_vnd": 20000,
+    "shelf_life_days": 365,
+    "source_url": "",
+    "surveyed_on": "2026-11-06"
+  },
+  {
+    "ingredient_id": "lac",
+    "store_id": "cho_khac",
+    "pack_g": 200,
+    "pack_label": "Lạc sống 200 g (ước tính)",
+    "price_vnd": 22000,
+    "shelf_life_days": 90,
+    "source_url": "",
+    "surveyed_on": "2026-11-07"
+  },
+  {
+    "ingredient_id": "vung",
+    "store_id": "cho_khac",
+    "pack_g": 200,
+    "pack_label": "200 g (ước tính)",
+    "price_vnd": 25000,
+    "shelf_life_days": 180,
+    "source_url": "",
+    "surveyed_on": "2026-11-06"
+  },
+  {
+    "ingredient_id": "bun_pho_nau_chin",
+    "store_id": "cho_khac",
+    "pack_g": 500,
+    "pack_label": "bún/phở tươi 500 g (ước tính)",
+    "price_vnd": 25000,
+    "shelf_life_days": 3,
+    "source_url": "",
+    "surveyed_on": "2026-11-06"
+  },
+  {
+    "ingredient_id": "dau_an",
+    "store_id": "cho_khac",
+    "pack_g": 500,
+    "pack_label": "Dầu ăn 500 g (ước tính)",
+    "price_vnd": 30000,
+    "shelf_life_days": 365,
+    "source_url": "",
+    "surveyed_on": "2026-11-07"
+  },
+  {
+    "ingredient_id": "duong",
+    "store_id": "cho_khac",
+    "pack_g": 500,
+    "pack_label": "Đường trắng 500 g (ước tính)",
+    "price_vnd": 15000,
+    "shelf_life_days": 730,
+    "source_url": "",
+    "surveyed_on": "2026-11-07"
+  },
+  {
+    "ingredient_id": "nuoc_mam",
+    "store_id": "cho_khac",
+    "pack_g": 250,
+    "pack_label": "Nước mắm 250 g (ước tính)",
+    "price_vnd": 19000,
+    "shelf_life_days": 365,
+    "source_url": "",
+    "surveyed_on": "2026-11-07"
+  },
+  {
+    "ingredient_id": "xi_dau",
+    "store_id": "cho_khac",
+    "pack_g": 250,
+    "pack_label": "Xì dầu 250 g (ước tính)",
+    "price_vnd": 14000,
+    "shelf_life_days": 365,
+    "source_url": "",
+    "surveyed_on": "2026-11-07"
+  },
+  {
+    "ingredient_id": "muoi",
+    "store_id": "cho_khac",
+    "pack_g": 250,
+    "pack_label": "Muối ăn 250 g (ước tính)",
+    "price_vnd": 4000,
+    "shelf_life_days": 1000,
+    "source_url": "",
+    "surveyed_on": "2026-11-07"
+  },
+  {
+    "ingredient_id": "dau_lang",
+    "store_id": "cho_khac",
+    "pack_g": 500,
+    "pack_label": "500 g (ước tính)",
+    "price_vnd": 45000,
+    "shelf_life_days": 365,
+    "source_url": "",
+    "surveyed_on": "2026-11-06"
+  },
+  {
+    "ingredient_id": "dau_xanh",
+    "store_id": "cho_khac",
+    "pack_g": 500,
+    "pack_label": "500 g (ước tính)",
+    "price_vnd": 40000,
+    "shelf_life_days": 365,
+    "source_url": "",
+    "surveyed_on": "2026-11-06"
+  },
+  {
+    "ingredient_id": "sua_dau_nanh",
+    "store_id": "cho_khac",
+    "pack_g": 500,
+    "pack_label": "Sữa đậu nành không đường 500 g (ước tính)",
+    "price_vnd": 14000,
+    "shelf_life_days": 180,
+    "source_url": "",
+    "surveyed_on": "2026-11-07"
+  },
+  {
+    "ingredient_id": "gao_lut_nau_chin",
+    "store_id": "cho_khac",
+    "pack_g": 500,
+    "pack_label": "Gạo lứt nấu chín 500 g (ước tính)",
+    "price_vnd": 19000,
+    "shelf_life_days": 180,
+    "source_url": "",
+    "surveyed_on": "2026-11-07"
+  },
+  {
+    "ingredient_id": "tempeh",
+    "store_id": "cho_khac",
+    "pack_g": 200,
+    "pack_label": "200 g (ước tính)",
+    "price_vnd": 45000,
+    "shelf_life_days": 14,
+    "source_url": "",
+    "surveyed_on": "2026-11-06"
+  },
+  {
+    "ingredient_id": "nuoc_mam_chay",
+    "store_id": "cho_khac",
+    "pack_g": 250,
+    "pack_label": "Nước mắm chay 250 g (ước tính)",
+    "price_vnd": 25000,
+    "shelf_life_days": 365,
+    "source_url": "",
+    "surveyed_on": "2026-11-07"
+  },
+  {
+    "ingredient_id": "rau_den",
+    "store_id": "cho_khac",
+    "pack_g": 300,
+    "pack_label": "bó 300 g (ước tính)",
+    "price_vnd": 9000,
+    "shelf_life_days": 3,
+    "source_url": "",
+    "surveyed_on": "2026-11-06"
+  },
+  {
+    "ingredient_id": "gia_do",
+    "store_id": "cho_khac",
+    "pack_g": 300,
+    "pack_label": "gói 300 g (ước tính)",
+    "price_vnd": 8000,
+    "shelf_life_days": 2,
+    "source_url": "",
+    "surveyed_on": "2026-11-06"
+  },
+  {
+    "ingredient_id": "nam_rom",
+    "store_id": "cho_khac",
+    "pack_g": 400,
+    "pack_label": "lon 400 g (ước tính)",
+    "price_vnd": 22000,
+    "shelf_life_days": 365,
+    "source_url": "",
+    "surveyed_on": "2026-11-06"
+  },
+  {
+    "ingredient_id": "dau_co_ve",
+    "store_id": "cho_khac",
+    "pack_g": 500,
+    "pack_label": "gói 500 g (ước tính)",
+    "price_vnd": 30000,
+    "shelf_life_days": 5,
+    "source_url": "",
+    "surveyed_on": "2026-11-06"
+  },
+  {
+    "ingredient_id": "dua_chuot",
+    "store_id": "cho_khac",
+    "pack_g": 500,
+    "pack_label": "3 quả khoảng 500 g (ước tính)",
+    "price_vnd": 15000,
+    "shelf_life_days": 7,
+    "source_url": "",
+    "surveyed_on": "2026-11-06"
+  },
+  {
+    "ingredient_id": "dau_bap",
+    "store_id": "cho_khac",
+    "pack_g": 500,
+    "pack_label": "gói 500 g (ước tính)",
+    "price_vnd": 25000,
+    "shelf_life_days": 5,
+    "source_url": "",
+    "surveyed_on": "2026-11-06"
+  },
+  {
+    "ingredient_id": "cai_thao",
+    "store_id": "cho_khac",
+    "pack_g": 500,
+    "pack_label": "Cải thảo 500 g (ước tính)",
+    "price_vnd": 11000,
+    "shelf_life_days": 14,
+    "source_url": "",
+    "surveyed_on": "2026-11-07"
+  },
+  {
+    "ingredient_id": "chuoi",
+    "store_id": "cho_khac",
+    "pack_g": 500,
+    "pack_label": "Chuối chín 500 g (ước tính)",
+    "price_vnd": 19000,
+    "shelf_life_days": 4,
+    "source_url": "",
+    "surveyed_on": "2026-11-07"
+  },
+  {
+    "ingredient_id": "cam",
+    "store_id": "cho_khac",
+    "pack_g": 500,
+    "pack_label": "Cam sành/cam ngọt 500 g (ước tính)",
+    "price_vnd": 33000,
+    "shelf_life_days": 14,
+    "source_url": "",
+    "surveyed_on": "2026-11-07"
+  },
+  {
+    "ingredient_id": "oi",
+    "store_id": "cho_khac",
+    "pack_g": 500,
+    "pack_label": "Ổi 500 g (ước tính)",
+    "price_vnd": 22000,
+    "shelf_life_days": 5,
+    "source_url": "",
+    "surveyed_on": "2026-11-07"
+  },
+  {
+    "ingredient_id": "dua_hau",
+    "store_id": "cho_khac",
+    "pack_g": 500,
+    "pack_label": "Dưa hấu 500 g (ước tính)",
+    "price_vnd": 8000,
+    "shelf_life_days": 2,
+    "source_url": "",
+    "surveyed_on": "2026-11-07"
+  },
+  {
+    "ingredient_id": "du_du",
+    "store_id": "cho_khac",
+    "pack_g": 500,
+    "pack_label": "Đu đủ chín 500 g (ước tính)",
+    "price_vnd": 14000,
+    "shelf_life_days": 5,
+    "source_url": "",
+    "surveyed_on": "2026-11-07"
+  },
+  {
+    "ingredient_id": "tao",
+    "store_id": "cho_khac",
+    "pack_g": 500,
+    "pack_label": "Táo 500 g (ước tính)",
+    "price_vnd": 50000,
+    "shelf_life_days": 21,
+    "source_url": "",
+    "surveyed_on": "2026-11-07"
+  },
+  {
+    "ingredient_id": "xoai",
+    "store_id": "cho_khac",
+    "pack_g": 500,
+    "pack_label": "Xoài chín 500 g (ước tính)",
+    "price_vnd": 28000,
+    "shelf_life_days": 5,
+    "source_url": "",
+    "surveyed_on": "2026-11-07"
+  },
+  {
+    "ingredient_id": "dua_thom",
+    "store_id": "cho_khac",
+    "pack_g": 500,
+    "pack_label": "Dứa 500 g (ước tính)",
+    "price_vnd": 14000,
+    "shelf_life_days": 4,
+    "source_url": "",
+    "surveyed_on": "2026-11-07"
+  },
+  {
+    "ingredient_id": "buoi",
+    "store_id": "cho_khac",
+    "pack_g": 500,
+    "pack_label": "Bưởi 500 g (ước tính)",
+    "price_vnd": 33000,
+    "shelf_life_days": 14,
+    "source_url": "",
+    "surveyed_on": "2026-11-07"
+  },
+  {
+    "ingredient_id": "sua_tuoi",
+    "store_id": "cho_khac",
+    "pack_g": 720,
+    "pack_label": "lốc 4 hộp 180 ml (ước tính)",
+    "price_vnd": 32000,
+    "shelf_life_days": 30,
+    "source_url": "",
+    "surveyed_on": "2026-11-06"
+  },
+  {
+    "ingredient_id": "sua_chua_co_duong",
+    "store_id": "cho_khac",
+    "pack_g": 400,
+    "pack_label": "lốc 4 hũ 100 g (ước tính)",
+    "price_vnd": 28000,
+    "shelf_life_days": 21,
+    "source_url": "",
+    "surveyed_on": "2026-11-06"
+  },
+  {
+    "ingredient_id": "dau_do",
+    "store_id": "cho_khac",
+    "pack_g": 500,
+    "pack_label": "gói 500 g (ước tính)",
+    "price_vnd": 25000,
+    "shelf_life_days": 365,
+    "source_url": "",
+    "surveyed_on": "2026-11-06"
+  },
+  {
+    "ingredient_id": "gao_nep",
+    "store_id": "cho_khac",
+    "pack_g": 500,
+    "pack_label": "gói 500 g (ước tính)",
+    "price_vnd": 35000,
+    "shelf_life_days": 365,
+    "source_url": "",
+    "surveyed_on": "2026-11-06"
+  },
+  {
+    "ingredient_id": "thit_bo_nac",
+    "store_id": "bach_hoa_xanh",
+    "pack_g": 200,
+    "pack_label": "Đùi bò 200 g (giá flash sale, giá gốc 63.400 ₫)",
+    "price_vnd": 58929,
+    "shelf_life_days": 3,
+    "source_url": "https://www.bachhoaxanh.com/thit-bo",
+    "surveyed_on": "2026-11-07"
+  },
+  {
+    "ingredient_id": "gao_te",
+    "store_id": "cho_khac",
+    "pack_g": 1000,
+    "pack_label": "Gạo tẻ 1 kg (ước tính)",
+    "price_vnd": 22000,
+    "shelf_life_days": 180,
+    "source_url": "",
+    "surveyed_on": "2026-11-07"
+  },
+  {
+    "ingredient_id": "gao_lut",
+    "store_id": "cho_khac",
+    "pack_g": 1000,
+    "pack_label": "Gạo lứt 1 kg (ước tính)",
+    "price_vnd": 30000,
+    "shelf_life_days": 180,
+    "source_url": "",
+    "surveyed_on": "2026-11-07"
+  },
+  {
+    "ingredient_id": "rau_muong",
+    "store_id": "cho_khac",
+    "pack_g": 500,
+    "pack_label": "Rau muống 500 g (ước tính)",
+    "price_vnd": 15000,
+    "shelf_life_days": 3,
+    "source_url": "",
+    "surveyed_on": "2026-11-07"
+  }
+]

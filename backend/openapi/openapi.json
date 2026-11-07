@@ -1,0 +1,2548 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "MonNgon.Api | v1",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost/"
+    }
+  ],
+  "paths": {
+    "/v1/reference": {
+      "get": {
+        "tags": [
+          "MonNgon.Api"
+        ],
+        "summary": "Cửa hàng, dụng cụ, lựa chọn kiêng/loại trừ, thẻ vuốt, phiên bản dữ liệu",
+        "operationId": "GetReference",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReferenceResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/ingredients": {
+      "get": {
+        "tags": [
+          "MonNgon.Api"
+        ],
+        "summary": "Tìm nguyên liệu không dấu (ô 'không muốn thấy')",
+        "operationId": "SearchIngredients",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IngredientDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/targets": {
+      "post": {
+        "tags": [
+          "MonNgon.Api"
+        ],
+        "summary": "Chỉ tiêu calo/protein kèm các bước trung gian",
+        "operationId": "ComputeTargets",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TargetsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Targets"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/slots/preview": {
+      "post": {
+        "tags": [
+          "MonNgon.Api"
+        ],
+        "summary": "Phân bổ chỉ tiêu theo bữa",
+        "operationId": "PreviewSlots",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SlotsPreviewRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SlotsPreviewResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/budget-range": {
+      "post": {
+        "tags": [
+          "MonNgon.Api"
+        ],
+        "summary": "Khoảng ngân sách tuần gợi ý theo chỉ tiêu, số người, số bữa và (tùy chọn) kiêng/ghét/dụng cụ",
+        "description": "`targets` bắt buộc. Nguồn cấu hình có hai dạng: (1) `preferences` đầy đủ (khuyến nghị; lọc món theo kiêng/ghét/dụng cụ; các trường cấp ngoài `store_id`, `adults`, `children`, `slots` bị bỏ qua) hoặc (2) không có `preferences`, khi đó gửi ít nhất một trong `store_id` (mặc định cho_khac), `adults` (1–6, mặc định 1), `children` (0–4, mặc định 0), `slots` (mặc định ăn sáng/trưa/tối); trường vắng dùng mặc định. Không có nguồn nào → 400 (lỗi ở `preferences`).",
+        "operationId": "BudgetRange",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BudgetRangeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BudgetRangeResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/plans": {
+      "post": {
+        "tags": [
+          "MonNgon.Api"
+        ],
+        "summary": "Tạo tuần: WeekPlan + danh sách đi chợ + trace 'Cách chúng mình tính'",
+        "operationId": "CreatePlan",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/plans/swap-suggestions": {
+      "post": {
+        "tags": [
+          "MonNgon.Api"
+        ],
+        "summary": "US-5.1: 2–3 món thay thế cùng loại bữa, kèm chênh lệch protein/kcal/chi phí; chỉ món giữ ngày đạt (hoặc món gần đạt nhất, any_keeps_day = false)",
+        "operationId": "SwapSuggestions",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SwapSuggestionsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SwapSuggestions"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/plans/apply-swap": {
+      "post": {
+        "tags": [
+          "MonNgon.Api"
+        ],
+        "summary": "US-5.1: đổi bữa sang món đã chọn; validator và danh sách đi chợ chạy lại",
+        "operationId": "ApplySwap",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApplySwapRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/plans/ingredient-options": {
+      "post": {
+        "tags": [
+          "MonNgon.Api"
+        ],
+        "summary": "US-5.2: nguyên liệu cùng swap_group thay được (không vi phạm ràng buộc cứng, giữ protein bữa ±5%)",
+        "operationId": "IngredientOptions",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IngredientOptionsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IngredientOptions"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/plans/swap-ingredient": {
+      "post": {
+        "tags": [
+          "MonNgon.Api"
+        ],
+        "summary": "US-5.2: đổi một nguyên liệu trong bữa, gram tính lại để giữ protein bữa trong ±5%",
+        "operationId": "SwapIngredient",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SwapIngredientRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/plans/eat-out": {
+      "post": {
+        "tags": [
+          "MonNgon.Api"
+        ],
+        "summary": "US-5.3: ăn ngoài / bỏ bữa / hoàn tác — ngày đó được miễn kiểm, bữa rút khỏi danh sách đi chợ",
+        "operationId": "EatOut",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EatOutRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/plans/regenerate-rest": {
+      "post": {
+        "tags": [
+          "MonNgon.Api"
+        ],
+        "summary": "US-5.5: giữ các ngày đã qua và hôm nay, lập lại các ngày sau (tôn trọng món bị chặn)",
+        "operationId": "RegenerateRest",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegenerateRestRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/shopping-list": {
+      "post": {
+        "tags": [
+          "MonNgon.Api"
+        ],
+        "summary": "Tính lại danh sách đi chợ (stateless): nhà có sẵn, ăn ngoài",
+        "operationId": "BuildShoppingList",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ShoppingListRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShoppingList"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/recipes/{id}": {
+      "get": {
+        "tags": [
+          "MonNgon.Api"
+        ],
+        "summary": "Chi tiết công thức + macro khẩu phần chuẩn kèm nguồn",
+        "operationId": "GetRecipe",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecipeDetailResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AisleGroup": {
+        "type": "object",
+        "properties": {
+          "aisle": {
+            "type": "string"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShoppingItem"
+            }
+          }
+        }
+      },
+      "ApplySwapRequest": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "$ref": "#/components/schemas/PlanStateDto"
+          },
+          "date": {
+            "type": "string"
+          },
+          "slot": {
+            "type": "string"
+          },
+          "recipe_id": {
+            "type": "string"
+          }
+        }
+      },
+      "BudgetRangeRequest": {
+        "type": "object",
+        "properties": {
+          "targets": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "description": "Bắt buộc: chỉ tiêu đã tính ở bước \"chỉ tiêu\" (kcal_target, protein_g).",
+                "$ref": "#/components/schemas/BudgetTargetsDto"
+              }
+            ]
+          },
+          "preferences": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "description": "Nguồn đầy đủ (khuyến nghị): có thì lọc món theo kiêng/ghét/dụng cụ trước khi tính, và store/adults/children/slots lấy từ đây; các trường cùng tên ở cấp ngoài (store_id, adults, children, slots) bị bỏ qua. Không có thì phải gửi ít nhất một trong các trường cấp ngoài, nếu không → 400.",
+                "$ref": "#/components/schemas/Preferences"
+              }
+            ]
+          },
+          "store_id": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Chỉ dùng khi KHÔNG có preferences. Mặc định \"cho_khac\"."
+          },
+          "adults": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "description": "Chỉ dùng khi KHÔNG có preferences. 1–6, mặc định 1.",
+            "format": "int32"
+          },
+          "children": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "description": "Chỉ dùng khi KHÔNG có preferences. 0–4, mặc định 0.",
+            "format": "int32"
+          },
+          "slots": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "description": "Chỉ dùng khi KHÔNG có preferences. Mặc định: ăn sáng/trưa/tối, bỏ bữa phụ.",
+                "$ref": "#/components/schemas/SlotsConfig"
+              }
+            ]
+          }
+        }
+      },
+      "BudgetRangeResponse": {
+        "required": [
+          "min_vnd",
+          "max_vnd",
+          "step_vnd",
+          "estimate_vnd",
+          "tiers",
+          "basis"
+        ],
+        "type": "object",
+        "properties": {
+          "min_vnd": {
+            "type": "number",
+            "format": "double"
+          },
+          "max_vnd": {
+            "type": "number",
+            "format": "double"
+          },
+          "step_vnd": {
+            "type": "number",
+            "format": "double"
+          },
+          "estimate_vnd": {
+            "type": "number",
+            "format": "double"
+          },
+          "tiers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BudgetTierDto"
+            }
+          },
+          "basis": {
+            "type": "string"
+          }
+        }
+      },
+      "BudgetTargetsDto": {
+        "type": "object",
+        "properties": {
+          "kcal_target": {
+            "type": [
+              "null",
+              "number"
+            ],
+            "format": "double"
+          },
+          "protein_g": {
+            "type": [
+              "null",
+              "number"
+            ],
+            "format": "double"
+          }
+        }
+      },
+      "BudgetTierDto": {
+        "required": [
+          "key",
+          "from_vnd",
+          "to_vnd"
+        ],
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "from_vnd": {
+            "type": "number",
+            "format": "double"
+          },
+          "to_vnd": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "DayTotals": {
+        "type": "object",
+        "properties": {
+          "kcal": {
+            "type": "number",
+            "format": "double"
+          },
+          "protein_g": {
+            "type": "number",
+            "format": "double"
+          },
+          "carb_g": {
+            "type": "number",
+            "format": "double"
+          },
+          "fat_g": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "DayValidation": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string"
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "exempt": {
+            "type": "boolean"
+          },
+          "protein_short_g": {
+            "type": "number",
+            "format": "double"
+          },
+          "kcal_delta": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "Dish": {
+        "type": "object",
+        "properties": {
+          "role": {
+            "type": "string"
+          },
+          "recipe_id": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "grams": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GramLine"
+            }
+          },
+          "macros": {
+            "$ref": "#/components/schemas/Macros"
+          }
+        }
+      },
+      "EatOutRequest": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "$ref": "#/components/schemas/PlanStateDto"
+          },
+          "date": {
+            "type": "string"
+          },
+          "slot": {
+            "type": "string"
+          },
+          "mode": {
+            "type": "string"
+          }
+        }
+      },
+      "GramLine": {
+        "type": "object",
+        "properties": {
+          "ingredient_id": {
+            "type": "string"
+          },
+          "grams": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "HouseholdUnit": {
+        "type": "object",
+        "properties": {
+          "unit": {
+            "type": "string"
+          },
+          "grams": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "HttpValidationProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "title": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "status": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
+          },
+          "detail": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "instance": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "errors": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "IngredientDto": {
+        "required": [
+          "id",
+          "name",
+          "aisle"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "aisle": {
+            "type": "string"
+          },
+          "household_units": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HouseholdUnit"
+            }
+          },
+          "default_pantry": {
+            "type": "boolean"
+          }
+        }
+      },
+      "IngredientInfoDto": {
+        "required": [
+          "name",
+          "aisle"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "aisle": {
+            "type": "string"
+          },
+          "household_units": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HouseholdUnit"
+            }
+          },
+          "default_pantry": {
+            "type": "boolean"
+          },
+          "purchase_as": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/PurchaseAs"
+              }
+            ]
+          }
+        }
+      },
+      "IngredientOption": {
+        "required": [
+          "ingredient_id",
+          "name",
+          "grams",
+          "delta_protein_g",
+          "delta_kcal",
+          "delta_cost_vnd",
+          "keeps_day_ok"
+        ],
+        "type": "object",
+        "properties": {
+          "ingredient_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "grams": {
+            "type": "number",
+            "format": "double"
+          },
+          "delta_protein_g": {
+            "type": "number",
+            "format": "double"
+          },
+          "delta_kcal": {
+            "type": "number",
+            "format": "double"
+          },
+          "delta_cost_vnd": {
+            "type": "number",
+            "format": "double"
+          },
+          "keeps_day_ok": {
+            "type": "boolean"
+          }
+        }
+      },
+      "IngredientOptions": {
+        "required": [
+          "date",
+          "slot",
+          "ingredient_id",
+          "swap_group",
+          "options"
+        ],
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string"
+          },
+          "slot": {
+            "type": "string"
+          },
+          "ingredient_id": {
+            "type": "string"
+          },
+          "swap_group": {
+            "type": "string"
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IngredientOption"
+            }
+          }
+        }
+      },
+      "IngredientOptionsRequest": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "$ref": "#/components/schemas/PlanStateDto"
+          },
+          "date": {
+            "type": "string"
+          },
+          "slot": {
+            "type": "string"
+          },
+          "ingredient_id": {
+            "type": "string"
+          }
+        }
+      },
+      "MacroLine": {
+        "type": "object",
+        "properties": {
+          "ingredient_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "grams": {
+            "type": "number",
+            "format": "double"
+          },
+          "macros": {
+            "$ref": "#/components/schemas/Macros"
+          },
+          "source": {
+            "$ref": "#/components/schemas/Source"
+          }
+        }
+      },
+      "MacroResult": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "$ref": "#/components/schemas/Macros"
+          },
+          "lines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MacroLine"
+            }
+          }
+        }
+      },
+      "Macros": {
+        "required": [
+          "kcal",
+          "protein_g",
+          "carb_g",
+          "fat_g",
+          "fiber_g"
+        ],
+        "type": "object",
+        "properties": {
+          "kcal": {
+            "type": "number",
+            "format": "double"
+          },
+          "protein_g": {
+            "type": "number",
+            "format": "double"
+          },
+          "carb_g": {
+            "type": "number",
+            "format": "double"
+          },
+          "fat_g": {
+            "type": "number",
+            "format": "double"
+          },
+          "fiber_g": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "MealNote": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "target_g": {
+            "type": [
+              "null",
+              "number"
+            ],
+            "format": "double"
+          },
+          "actual_g": {
+            "type": [
+              "null",
+              "number"
+            ],
+            "format": "double"
+          },
+          "reason": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "MealTrace": {
+        "required": [
+          "date",
+          "slot",
+          "recipe_id",
+          "lines",
+          "extras",
+          "dessert",
+          "total"
+        ],
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string"
+          },
+          "slot": {
+            "type": "string"
+          },
+          "recipe_id": {
+            "type": "string"
+          },
+          "lines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TraceLine"
+            }
+          },
+          "extras": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TraceLine"
+            }
+          },
+          "dessert": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TraceLine"
+            }
+          },
+          "total": {
+            "$ref": "#/components/schemas/Macros"
+          }
+        }
+      },
+      "OptionDto": {
+        "required": [
+          "id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "bans": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "description": {
+            "type": "string"
+          },
+          "group": {
+            "type": "string"
+          }
+        }
+      },
+      "PlanDay": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string"
+          },
+          "meals": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlanMeal"
+            }
+          },
+          "totals": {
+            "$ref": "#/components/schemas/DayTotals"
+          }
+        }
+      },
+      "PlanMeal": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string"
+          },
+          "slot": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "recipe_id": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "grams": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GramLine"
+            }
+          },
+          "standard_grams": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GramLine"
+            }
+          },
+          "extras": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GramLine"
+            }
+          },
+          "substitutions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Substitution"
+            }
+          },
+          "macros": {
+            "$ref": "#/components/schemas/Macros"
+          },
+          "batch_group_id": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "forced_zero_carb": {
+            "type": "boolean"
+          },
+          "scale_infeasible": {
+            "type": "boolean"
+          },
+          "dishes": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/Dish"
+            }
+          },
+          "dessert_id": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "dessert": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/GramLine"
+            }
+          },
+          "warnings": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string"
+            }
+          },
+          "rice": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/RiceInfo"
+              }
+            ]
+          },
+          "notes": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/MealNote"
+            }
+          }
+        }
+      },
+      "PlanRequest": {
+        "type": "object",
+        "properties": {
+          "profile": {
+            "$ref": "#/components/schemas/Profile"
+          },
+          "preferences": {
+            "$ref": "#/components/schemas/Preferences"
+          },
+          "start_date": {
+            "type": "string"
+          },
+          "seed": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int64"
+          },
+          "meal_style": {
+            "type": "string"
+          },
+          "include_dessert": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PlanResponse": {
+        "required": [
+          "targets",
+          "plan",
+          "trace",
+          "data_version",
+          "recipes",
+          "ingredients"
+        ],
+        "type": "object",
+        "properties": {
+          "targets": {
+            "$ref": "#/components/schemas/Targets"
+          },
+          "plan": {
+            "$ref": "#/components/schemas/WeekPlan"
+          },
+          "trace": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MealTrace"
+            }
+          },
+          "data_version": {
+            "type": "string"
+          },
+          "recipes": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Recipe"
+            }
+          },
+          "ingredients": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/IngredientInfoDto"
+            }
+          }
+        }
+      },
+      "PlanStateDto": {
+        "type": "object",
+        "properties": {
+          "profile": {
+            "$ref": "#/components/schemas/Profile"
+          },
+          "preferences": {
+            "$ref": "#/components/schemas/Preferences"
+          },
+          "plan": {
+            "$ref": "#/components/schemas/WeekPlan"
+          },
+          "include_dessert": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Preferences": {
+        "type": "object",
+        "properties": {
+          "store_id": {
+            "type": "string"
+          },
+          "weekly_budget_vnd": {
+            "type": "number",
+            "format": "double"
+          },
+          "adults": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "children": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "slots": {
+            "$ref": "#/components/schemas/SlotsConfig"
+          },
+          "diet": {
+            "type": "string"
+          },
+          "low_carb": {
+            "type": "boolean"
+          },
+          "exclusions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "disliked_ingredient_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "health_leanings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "cuisine_likes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "cuisine_less": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "equipment": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "blocked_recipe_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rice_habit": {
+            "type": "string"
+          }
+        }
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "title": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "status": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
+          },
+          "detail": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "instance": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "Profile": {
+        "type": "object",
+        "properties": {
+          "goal": {
+            "type": "string"
+          },
+          "sex": {
+            "type": "string"
+          },
+          "age": {
+            "type": "number",
+            "format": "double"
+          },
+          "height_cm": {
+            "type": "number",
+            "format": "double"
+          },
+          "weight_kg": {
+            "type": "number",
+            "format": "double"
+          },
+          "activity": {
+            "type": "string"
+          },
+          "target_mode": {
+            "type": "string"
+          },
+          "manual_kcal": {
+            "type": [
+              "null",
+              "number"
+            ],
+            "format": "double"
+          },
+          "manual_protein_g": {
+            "type": [
+              "null",
+              "number"
+            ],
+            "format": "double"
+          }
+        }
+      },
+      "PurchaseAs": {
+        "type": "object",
+        "properties": {
+          "ingredient_id": {
+            "type": "string"
+          },
+          "factor": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "Recipe": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "meal_types": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "lunch_style": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "snack_style": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "cuisine_tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "health_tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "equipment": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "cook_minutes": {
+            "type": "number",
+            "format": "double"
+          },
+          "batchable": {
+            "type": "boolean"
+          },
+          "is_low_carb": {
+            "type": "boolean"
+          },
+          "ingredients": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RecipeIngredient"
+            }
+          },
+          "steps": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "image": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "dish_role": {
+            "type": "string"
+          },
+          "pairs_with": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "portable": {
+            "type": "boolean"
+          },
+          "low_carb_ok": {
+            "type": "boolean"
+          },
+          "image_group": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "RecipeDetailResponse": {
+        "required": [
+          "recipe",
+          "macros"
+        ],
+        "type": "object",
+        "properties": {
+          "recipe": {
+            "$ref": "#/components/schemas/Recipe"
+          },
+          "macros": {
+            "$ref": "#/components/schemas/MacroResult"
+          }
+        }
+      },
+      "RecipeIngredient": {
+        "type": "object",
+        "properties": {
+          "ingredient_id": {
+            "type": "string"
+          },
+          "grams": {
+            "type": "number",
+            "format": "double"
+          },
+          "role": {
+            "type": "string"
+          },
+          "min_g": {
+            "type": "number",
+            "format": "double"
+          },
+          "max_g": {
+            "type": "number",
+            "format": "double"
+          },
+          "swap_group": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "ReferenceResponse": {
+        "required": [
+          "data_version",
+          "stores",
+          "equipment",
+          "exclusions",
+          "diets",
+          "swipe_cards",
+          "health_leanings",
+          "dislike_suggestions",
+          "aisles",
+          "recipe_count",
+          "ingredient_count"
+        ],
+        "type": "object",
+        "properties": {
+          "data_version": {
+            "type": "string"
+          },
+          "stores": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StoreDto"
+            }
+          },
+          "equipment": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OptionDto"
+            }
+          },
+          "exclusions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OptionDto"
+            }
+          },
+          "diets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OptionDto"
+            }
+          },
+          "swipe_cards": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SwipeCardDto"
+            }
+          },
+          "health_leanings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OptionDto"
+            }
+          },
+          "dislike_suggestions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IngredientDto"
+            }
+          },
+          "aisles": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "recipe_count": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ingredient_count": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "RegenerateRestRequest": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "$ref": "#/components/schemas/PlanStateDto"
+          },
+          "today": {
+            "type": "string"
+          },
+          "seed": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int64"
+          }
+        }
+      },
+      "RiceInfo": {
+        "type": "object",
+        "properties": {
+          "habit": {
+            "type": "string"
+          },
+          "target_g": {
+            "type": "number",
+            "format": "double"
+          },
+          "actual_g": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "ShoppingItem": {
+        "type": "object",
+        "properties": {
+          "ingredient_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "aisle": {
+            "type": "string"
+          },
+          "need_g": {
+            "type": "number",
+            "format": "double"
+          },
+          "packs": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pack_g": {
+            "type": "number",
+            "format": "double"
+          },
+          "pack_label": {
+            "type": "string"
+          },
+          "price_vnd_per_pack": {
+            "type": "number",
+            "format": "double"
+          },
+          "used_cost_vnd": {
+            "type": "number",
+            "format": "double"
+          },
+          "till_cost_vnd": {
+            "type": "number",
+            "format": "double"
+          },
+          "leftover_g": {
+            "type": "number",
+            "format": "double"
+          },
+          "leftover_days": {
+            "type": "number",
+            "format": "double"
+          },
+          "price_store_id": {
+            "type": "string"
+          },
+          "price_fallback": {
+            "type": "boolean"
+          },
+          "display_qty": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "is_default_pantry": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "is_pantry": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          }
+        }
+      },
+      "ShoppingLineDto": {
+        "type": "object",
+        "properties": {
+          "ingredient_id": {
+            "type": "string"
+          },
+          "grams": {
+            "type": "number",
+            "format": "double"
+          },
+          "standard_grams": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "ShoppingList": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShoppingItem"
+            }
+          },
+          "by_aisle": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AisleGroup"
+            }
+          },
+          "skipped_pantry": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "week_food_cost": {
+            "type": "number",
+            "format": "double"
+          },
+          "till_cost": {
+            "type": "number",
+            "format": "double"
+          },
+          "pantry_cost_if_buy_vnd": {
+            "type": [
+              "null",
+              "number"
+            ],
+            "format": "double"
+          }
+        }
+      },
+      "ShoppingListRequest": {
+        "type": "object",
+        "properties": {
+          "meals": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShoppingMealDto"
+            }
+          },
+          "store_id": {
+            "type": "string"
+          },
+          "adults": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "children": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pantry_ids": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "ShoppingMealDto": {
+        "type": "object",
+        "properties": {
+          "ingredients": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShoppingLineDto"
+            }
+          },
+          "eaten_out": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Shortfall": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "SlotTarget": {
+        "type": "object",
+        "properties": {
+          "slot": {
+            "type": "string"
+          },
+          "mode": {
+            "type": "string"
+          },
+          "share": {
+            "type": "number",
+            "format": "double"
+          },
+          "kcal": {
+            "type": "number",
+            "format": "double"
+          },
+          "protein_g": {
+            "type": "number",
+            "format": "double"
+          },
+          "planned": {
+            "type": "boolean"
+          }
+        }
+      },
+      "SlotsConfig": {
+        "type": "object",
+        "properties": {
+          "breakfast": {
+            "type": "string"
+          },
+          "lunch": {
+            "type": "string"
+          },
+          "dinner": {
+            "type": "string"
+          },
+          "snack_am": {
+            "type": "string"
+          },
+          "snack_pm": {
+            "type": "string"
+          },
+          "lunch_style": {
+            "type": "string"
+          },
+          "snack_pm_style": {
+            "type": "string"
+          }
+        }
+      },
+      "SlotsPreviewRequest": {
+        "type": "object",
+        "properties": {
+          "profile": {
+            "$ref": "#/components/schemas/Profile"
+          },
+          "slots": {
+            "$ref": "#/components/schemas/SlotsConfig"
+          }
+        }
+      },
+      "SlotsPreviewResponse": {
+        "required": [
+          "targets",
+          "slots"
+        ],
+        "type": "object",
+        "properties": {
+          "targets": {
+            "$ref": "#/components/schemas/Targets"
+          },
+          "slots": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SlotTarget"
+            }
+          }
+        }
+      },
+      "Source": {
+        "type": "object",
+        "properties": {
+          "db": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          }
+        }
+      },
+      "StoreDto": {
+        "required": [
+          "id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "price_survey_date": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "Substitution": {
+        "required": [
+          "from",
+          "to"
+        ],
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string"
+          },
+          "to": {
+            "type": "string"
+          }
+        }
+      },
+      "SwapDish": {
+        "required": [
+          "role",
+          "recipe_id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "role": {
+            "type": "string"
+          },
+          "recipe_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "SwapIngredientRequest": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "$ref": "#/components/schemas/PlanStateDto"
+          },
+          "date": {
+            "type": "string"
+          },
+          "slot": {
+            "type": "string"
+          },
+          "from_ingredient_id": {
+            "type": "string"
+          },
+          "to_ingredient_id": {
+            "type": "string"
+          }
+        }
+      },
+      "SwapSuggestion": {
+        "required": [
+          "recipe_id",
+          "name",
+          "dishes",
+          "macros",
+          "delta_protein_g",
+          "delta_kcal",
+          "delta_cost_vnd",
+          "keeps_day_ok",
+          "day_protein_g",
+          "day_kcal"
+        ],
+        "type": "object",
+        "properties": {
+          "recipe_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "dishes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SwapDish"
+            }
+          },
+          "macros": {
+            "$ref": "#/components/schemas/Macros"
+          },
+          "delta_protein_g": {
+            "type": "number",
+            "format": "double"
+          },
+          "delta_kcal": {
+            "type": "number",
+            "format": "double"
+          },
+          "delta_cost_vnd": {
+            "type": "number",
+            "format": "double"
+          },
+          "keeps_day_ok": {
+            "type": "boolean"
+          },
+          "day_protein_g": {
+            "type": "number",
+            "format": "double"
+          },
+          "day_kcal": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "SwapSuggestions": {
+        "required": [
+          "date",
+          "slot",
+          "current_recipe_id",
+          "any_keeps_day",
+          "items",
+          "recipes"
+        ],
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string"
+          },
+          "slot": {
+            "type": "string"
+          },
+          "current_recipe_id": {
+            "type": "string"
+          },
+          "any_keeps_day": {
+            "type": "boolean"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SwapSuggestion"
+            }
+          },
+          "recipes": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Recipe"
+            }
+          }
+        }
+      },
+      "SwapSuggestionsRequest": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "$ref": "#/components/schemas/PlanStateDto"
+          },
+          "date": {
+            "type": "string"
+          },
+          "slot": {
+            "type": "string"
+          },
+          "limit": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
+          }
+        }
+      },
+      "SwipeCardDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "tag": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "subtitle": {
+            "type": "string"
+          },
+          "sample_recipe_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "TargetSteps": {
+        "type": "object",
+        "properties": {
+          "bmr": {
+            "type": "number",
+            "format": "double"
+          },
+          "activity_factor": {
+            "type": "number",
+            "format": "double"
+          },
+          "tdee": {
+            "type": "number",
+            "format": "double"
+          },
+          "goal_factor": {
+            "type": "number",
+            "format": "double"
+          },
+          "kcal_unrounded": {
+            "type": "number",
+            "format": "double"
+          },
+          "reference_weight_kg": {
+            "type": "number",
+            "format": "double"
+          },
+          "protein_g_per_kg": {
+            "type": "number",
+            "format": "double"
+          },
+          "protein_raw_g": {
+            "type": "number",
+            "format": "double"
+          },
+          "protein_cap_g": {
+            "type": "number",
+            "format": "double"
+          },
+          "protein_floor_g": {
+            "type": "number",
+            "format": "double"
+          },
+          "protein_limited_by": {
+            "type": "string"
+          }
+        }
+      },
+      "Targets": {
+        "type": "object",
+        "properties": {
+          "mode": {
+            "type": "string"
+          },
+          "kcal_target": {
+            "type": "number",
+            "format": "double"
+          },
+          "kcal_min": {
+            "type": "number",
+            "format": "double"
+          },
+          "kcal_max": {
+            "type": "number",
+            "format": "double"
+          },
+          "protein_g": {
+            "type": "number",
+            "format": "double"
+          },
+          "steps": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/TargetSteps"
+              }
+            ]
+          }
+        }
+      },
+      "TargetsRequest": {
+        "type": "object",
+        "properties": {
+          "profile": {
+            "$ref": "#/components/schemas/Profile"
+          }
+        }
+      },
+      "TraceLine": {
+        "required": [
+          "ingredient_id",
+          "name",
+          "grams",
+          "macros",
+          "source"
+        ],
+        "type": "object",
+        "properties": {
+          "ingredient_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "grams": {
+            "type": "number",
+            "format": "double"
+          },
+          "macros": {
+            "$ref": "#/components/schemas/Macros"
+          },
+          "source": {
+            "type": "string"
+          }
+        }
+      },
+      "WeekPlan": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "start_date": {
+            "type": "string"
+          },
+          "seed": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "days": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlanDay"
+            }
+          },
+          "validation": {
+            "$ref": "#/components/schemas/WeekValidation"
+          },
+          "shopping": {
+            "$ref": "#/components/schemas/ShoppingList"
+          },
+          "budget_vnd": {
+            "type": "number",
+            "format": "double"
+          },
+          "iterations": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "distinct_recipes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "repairs": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "unfilled_slots": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "meal_style": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "relaxed_preferences": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "WeekValidation": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "days": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DayValidation"
+            }
+          },
+          "shortfalls": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Shortfall"
+            }
+          },
+          "days_missing": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "budget_over_vnd": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "MonNgon.Api"
+    }
+  ]
+}

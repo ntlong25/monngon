@@ -1,0 +1,20 @@
+{
+ "mode": "formula",
+ "kcal_target": 1400,
+ "kcal_min": 1330,
+ "kcal_max": 1470,
+ "protein_g": 120,
+ "steps": {
+  "bmr": 1291.5,
+  "activity_factor": 1.375,
+  "tdee": 1775.8125,
+  "goal_factor": 0.8,
+  "kcal_unrounded": 1420.65,
+  "reference_weight_kg": 60,
+  "protein_g_per_kg": 2.2,
+  "protein_raw_g": 130,
+  "protein_cap_g": 120,
+  "protein_floor_g": 106,
+  "protein_limited_by": "cap"
+ }
+}

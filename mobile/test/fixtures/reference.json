@@ -1,0 +1,541 @@
+{
+ "data_version": "0b6c64572f5ed7ec41d73fe1eb7de4529f16c909da242982e82bd24b47c33d7d",
+ "stores": [
+  {
+   "id": "bach_hoa_xanh",
+   "name": "Bách hóa Xanh",
+   "price_survey_date": "2026-11-06"
+  },
+  {
+   "id": "winmart",
+   "name": "WinMart",
+   "price_survey_date": "2026-11-06"
+  },
+  {
+   "id": "coopmart",
+   "name": "Co.opmart",
+   "price_survey_date": "2026-11-06"
+  },
+  {
+   "id": "cho_khac",
+   "name": "Chợ / nơi khác",
+   "price_survey_date": "2026-11-06"
+  }
+ ],
+ "equipment": [
+  {
+   "id": "bep",
+   "name": "Bếp",
+   "bans": [],
+   "description": "",
+   "group": "equipment"
+  },
+  {
+   "id": "noi_com_dien",
+   "name": "Nồi cơm điện",
+   "bans": [],
+   "description": "",
+   "group": "equipment"
+  },
+  {
+   "id": "lo_vi_song",
+   "name": "Lò vi sóng",
+   "bans": [],
+   "description": "",
+   "group": "equipment"
+  },
+  {
+   "id": "noi_chien_khong_dau",
+   "name": "Nồi chiên không dầu",
+   "bans": [],
+   "description": "",
+   "group": "equipment"
+  },
+  {
+   "id": "lo_nuong",
+   "name": "Lò nướng",
+   "bans": [],
+   "description": "",
+   "group": "equipment"
+  },
+  {
+   "id": "noi_ap_suat",
+   "name": "Nồi áp suất",
+   "bans": [],
+   "description": "",
+   "group": "equipment"
+  },
+  {
+   "id": "may_xay",
+   "name": "Máy xay",
+   "bans": [],
+   "description": "",
+   "group": "equipment"
+  }
+ ],
+ "exclusions": [
+  {
+   "id": "no_pork",
+   "name": "Không thịt lợn",
+   "bans": [
+    "pork"
+   ],
+   "description": "Loại: Thịt heo nạc đùi, Thịt heo thăn (nạc), Thịt heo ba chỉ, Thịt heo xay (nạc ~96%)",
+   "group": "exclusion"
+  },
+  {
+   "id": "no_red_meat",
+   "name": "Không thịt đỏ",
+   "bans": [
+    "red_meat"
+   ],
+   "description": "Loại: Thịt bò đùi (nạc)",
+   "group": "exclusion"
+  },
+  {
+   "id": "no_gluten",
+   "name": "Không gluten",
+   "bans": [
+    "gluten"
+   ],
+   "description": "Loại: Xì dầu (nước tương, có lúa mì), Nước mắm chay (thay bằng nước tương)",
+   "group": "exclusion"
+  },
+  {
+   "id": "no_dairy",
+   "name": "Không sữa",
+   "bans": [
+    "dairy"
+   ],
+   "description": "Loại: Sữa chua Hy Lạp không đường, Sữa tươi nguyên kem không đường, Sữa chua trái cây ít béo (chất tạo ngọt ít calo)",
+   "group": "exclusion"
+  },
+  {
+   "id": "no_egg",
+   "name": "Không trứng",
+   "bans": [
+    "egg"
+   ],
+   "description": "Loại: Trứng gà",
+   "group": "exclusion"
+  },
+  {
+   "id": "no_peanut",
+   "name": "Không lạc",
+   "bans": [
+    "peanut"
+   ],
+   "description": "Loại: Lạc (đậu phộng) sống",
+   "group": "exclusion"
+  },
+  {
+   "id": "no_tree_nut",
+   "name": "Không hạt cây",
+   "bans": [
+    "tree_nut"
+   ],
+   "description": "Không loại nguyên liệu nào trong kho hiện tại",
+   "group": "exclusion"
+  },
+  {
+   "id": "no_seed",
+   "name": "Không hạt giống",
+   "bans": [
+    "seed"
+   ],
+   "description": "Không loại nguyên liệu nào trong kho hiện tại",
+   "group": "exclusion"
+  },
+  {
+   "id": "no_sesame",
+   "name": "Không vừng",
+   "bans": [
+    "sesame"
+   ],
+   "description": "Loại: Vừng (mè) trắng",
+   "group": "exclusion"
+  },
+  {
+   "id": "no_soy",
+   "name": "Không đậu nành",
+   "bans": [
+    "soy"
+   ],
+   "description": "Loại: Đậu hũ (đậu phụ) cứng, Xì dầu (nước tương, có lúa mì), Sữa đậu nành không đường, Tempeh (đậu nành lên men), Nước mắm chay (thay bằng nước tương)",
+   "group": "exclusion"
+  },
+  {
+   "id": "no_fish",
+   "name": "Không cá",
+   "bans": [
+    "fish"
+   ],
+   "description": "Loại: Cá basa phi lê, Cá thu (khúc), Cá rô phi (phi lê), Nước mắm",
+   "group": "exclusion"
+  },
+  {
+   "id": "no_shellfish",
+   "name": "Không hải sản có vỏ",
+   "bans": [
+    "crustacean",
+    "mollusc",
+    "seafood"
+   ],
+   "description": "Loại: Tôm sú / tôm thẻ (làm sạch), Mực ống (làm sạch)",
+   "group": "exclusion"
+  }
+ ],
+ "diets": [
+  {
+   "id": "none",
+   "name": "Không kiêng",
+   "bans": [],
+   "description": "Ăn mọi thứ",
+   "group": "diet"
+  },
+  {
+   "id": "vegetarian",
+   "name": "Chay",
+   "bans": [
+    "meat",
+    "poultry",
+    "pork",
+    "red_meat",
+    "fish",
+    "seafood"
+   ],
+   "description": "Loại 13 nguyên liệu: Ức gà, không xương, không da, Đùi gà, không xương, không da, Thịt heo nạc đùi, Thịt heo thăn (nạc), Thịt heo ba chỉ, Thịt heo xay (nạc ~96%)…",
+   "group": "diet"
+  },
+  {
+   "id": "vegan",
+   "name": "Thuần chay",
+   "bans": [
+    "meat",
+    "poultry",
+    "pork",
+    "red_meat",
+    "fish",
+    "seafood",
+    "egg",
+    "dairy"
+   ],
+   "description": "Loại 17 nguyên liệu: Ức gà, không xương, không da, Đùi gà, không xương, không da, Thịt heo nạc đùi, Thịt heo thăn (nạc), Thịt heo ba chỉ, Thịt heo xay (nạc ~96%)…",
+   "group": "diet"
+  },
+  {
+   "id": "pescatarian",
+   "name": "Chay có cá",
+   "bans": [
+    "meat",
+    "poultry",
+    "pork",
+    "red_meat"
+   ],
+   "description": "Loại 7 nguyên liệu: Ức gà, không xương, không da, Đùi gà, không xương, không da, Thịt heo nạc đùi, Thịt heo thăn (nạc), Thịt heo ba chỉ, Thịt heo xay (nạc ~96%)…",
+   "group": "diet"
+  }
+ ],
+ "swipe_cards": [
+  {
+   "id": "card_01",
+   "tag": "xao",
+   "title": "Xào nhanh",
+   "subtitle": "Đảo lửa lớn, lên món trong vài phút.",
+   "sample_recipe_ids": [
+    "ga_xao_sup_lo_xanh_toi",
+    "ga_xao_su_su_ca_rot",
+    "thit_heo_xao_ca_chua",
+    "thit_heo_xao_bap_cai",
+    "sup_lo_trang_xao_thit_bam",
+    "bo_xao_cai_ngot"
+   ]
+  },
+  {
+   "id": "card_02",
+   "tag": "kho",
+   "title": "Kho đậm đà",
+   "subtitle": "Kho nhỏ lửa, nước sánh, ăn với cơm.",
+   "sample_recipe_ids": [
+    "dui_ga_kho_gung",
+    "thit_heo_kho_trung",
+    "thit_heo_kho_khoai_tay",
+    "ca_basa_kho_to"
+   ]
+  },
+  {
+   "id": "card_03",
+   "tag": "canh",
+   "title": "Canh & món nước",
+   "subtitle": "Nấu nhẹ, ăn kèm cơm, nóng hổi.",
+   "sample_recipe_ids": [
+    "canh_bi_xanh_ga",
+    "canh_bi_xanh_thit_bam",
+    "canh_ca_ro_phi_cai_ngot",
+    "canh_bi_xanh_tom",
+    "canh_dau_phu_bap_cai"
+   ]
+  },
+  {
+   "id": "card_04",
+   "tag": "hap",
+   "title": "Hấp thanh đạm",
+   "subtitle": "Hấp giữ vị, ít dầu mỡ.",
+   "sample_recipe_ids": [
+    "ga_hap_gung_hanh",
+    "ca_basa_hap_gung",
+    "muc_hap_gung",
+    "trung_hap_thit_bam",
+    "trung_sang_hanh_la",
+    "khoai_lang_hap_vung"
+   ]
+  },
+  {
+   "id": "card_05",
+   "tag": "chay",
+   "title": "Món chay đậu phụ",
+   "subtitle": "Đậu phụ và rau, không thịt cá.",
+   "sample_recipe_ids": [
+    "dau_phu_sot_ca_chua",
+    "dau_phu_xao_cai_ngot",
+    "dau_phu_chien_sot_lac",
+    "dau_phu_sot_xi_dau_sup_lo",
+    "canh_dau_phu_bap_cai",
+    "lac_rang_nuoc_mam_tofu_chien"
+   ]
+  },
+  {
+   "id": "card_06",
+   "tag": "sot",
+   "title": "Sốt cà chua",
+   "subtitle": "Cà chua hầm sánh, dễ ăn.",
+   "sample_recipe_ids": [
+    "ga_sot_ca_chua",
+    "thit_bam_sot_ca_chua",
+    "ca_ro_phi_sot_ca_chua",
+    "ca_thu_sot_ca_chua",
+    "dau_phu_sot_ca_chua",
+    "dau_phu_chien_sot_lac"
+   ]
+  },
+  {
+   "id": "card_07",
+   "tag": "chien",
+   "title": "Chiên vàng",
+   "subtitle": "Chiên ngoài giòn, bên trong mềm.",
+   "sample_recipe_ids": [
+    "trung_nhoi_thit_tom",
+    "lac_rang_nuoc_mam_tofu_chien",
+    "com_chien_trung_sang",
+    "khoai_tay_trung_sang",
+    "trung_chien_ca_chua_sang",
+    "dau_phu_chien_nuoc_mam"
+   ]
+  },
+  {
+   "id": "card_08",
+   "tag": "luoc",
+   "title": "Luộc & chấm",
+   "subtitle": "Luộc chín mềm, chấm nước mắm.",
+   "sample_recipe_ids": [
+    "thit_heo_luoc_cham_nuoc_mam",
+    "khoai_lang_trung_sang",
+    "khoai_lang_luoc",
+    "trung_luoc_muoi",
+    "khoai_tay_luoc_muoi"
+   ]
+  },
+  {
+   "id": "card_09",
+   "tag": "an_sang",
+   "title": "Bữa sáng nhanh",
+   "subtitle": "Chuẩn bị dưới 15 phút, no lâu.",
+   "sample_recipe_ids": [
+    "chao_ga",
+    "pho_ga_sang",
+    "bun_bo_sang",
+    "trung_sang_hanh_la",
+    "sua_chua_hat_sang",
+    "khoai_lang_trung_sang"
+   ]
+  },
+  {
+   "id": "card_10",
+   "tag": "an_vat",
+   "title": "Ăn vặt lành mạnh",
+   "subtitle": "Bữa phụ nhẹ, ít đường.",
+   "sample_recipe_ids": [
+    "sua_chua_vung",
+    "khoai_lang_luoc",
+    "sua_chua_lac_duong",
+    "khoai_lang_hap_vung",
+    "sua_chua_duong_nhe",
+    "khoai_lang_nuong_duong"
+   ]
+  },
+  {
+   "id": "card_11",
+   "tag": "nhanh_de",
+   "title": "Nhanh gọn, dễ nấu",
+   "subtitle": "Dưới 20 phút, ít bước.",
+   "sample_recipe_ids": [
+    "ga_xao_sup_lo_xanh_toi",
+    "goi_ga_bap_cai",
+    "ga_sot_ca_chua",
+    "ga_nuong_sa_chanh_toi",
+    "bun_tron_ga_xe",
+    "ga_xao_su_su_ca_rot"
+   ]
+  },
+  {
+   "id": "card_12",
+   "tag": "ngot",
+   "title": "Vị ngọt nhẹ",
+   "subtitle": "Ngọt từ nguyên liệu, không quá nhiều đường.",
+   "sample_recipe_ids": [
+    "sua_chua_vung",
+    "sua_chua_lac_duong",
+    "sua_chua_duong_nhe",
+    "sua_chua_vung_nhe"
+   ]
+  },
+  {
+   "id": "card_13",
+   "tag": "thanh_dam",
+   "title": "Thanh đạm",
+   "subtitle": "Ít gia vị, vị tự nhiên.",
+   "sample_recipe_ids": [
+    "ga_hap_gung_hanh",
+    "thit_heo_luoc_cham_nuoc_mam",
+    "ca_basa_hap_gung",
+    "muc_hap_gung"
+   ]
+  },
+  {
+   "id": "card_14",
+   "tag": "nhe",
+   "title": "Nhẹ bụng",
+   "subtitle": "Nhiều rau, ăn không nặng.",
+   "sample_recipe_ids": [
+    "canh_bi_xanh_ga",
+    "canh_bi_xanh_thit_bam",
+    "canh_ca_ro_phi_cai_ngot",
+    "canh_bi_xanh_tom"
+   ]
+  }
+ ],
+ "health_leanings": [
+  {
+   "id": "nhieu_xo",
+   "name": "Nhiều chất xơ",
+   "bans": [],
+   "description": "Ưu tiên món có nhiều rau, đậu và ngũ cốc nguyên cám.",
+   "group": "health"
+  },
+  {
+   "id": "it_duong",
+   "name": "Ít đường",
+   "bans": [],
+   "description": "Ưu tiên món không thêm đường và ít tinh bột.",
+   "group": "health"
+  },
+  {
+   "id": "tot_cho_tim",
+   "name": "Tốt cho tim mạch",
+   "bans": [],
+   "description": "Ưu tiên món có cá béo, nhiều xơ và ít chiên ngập dầu.",
+   "group": "health"
+  },
+  {
+   "id": "it_beo",
+   "name": "Ít béo",
+   "bans": [],
+   "description": "Ưu tiên món có ít chất béo trong tổng năng lượng.",
+   "group": "health"
+  }
+ ],
+ "dislike_suggestions": [
+  {
+   "id": "ca_tim",
+   "name": "Cà tím",
+   "aisle": "rau_cu",
+   "household_units": [],
+   "default_pantry": false
+  },
+  {
+   "id": "dau_bap",
+   "name": "Đậu bắp",
+   "aisle": "rau_cu",
+   "household_units": [],
+   "default_pantry": false
+  },
+  {
+   "id": "hanh_tay",
+   "name": "Hành tây",
+   "aisle": "rau_cu",
+   "household_units": [],
+   "default_pantry": false
+  },
+  {
+   "id": "ca_thu",
+   "name": "Cá thu (khúc)",
+   "aisle": "ca_hai_san",
+   "household_units": [],
+   "default_pantry": false
+  },
+  {
+   "id": "muc_ong",
+   "name": "Mực ống (làm sạch)",
+   "aisle": "ca_hai_san",
+   "household_units": [],
+   "default_pantry": false
+  },
+  {
+   "id": "dau_phu",
+   "name": "Đậu hũ (đậu phụ) cứng",
+   "aisle": "trung_dau_phu",
+   "household_units": [],
+   "default_pantry": false
+  },
+  {
+   "id": "nam_rom",
+   "name": "Nấm rơm đóng hộp (đã ráo nước)",
+   "aisle": "rau_cu",
+   "household_units": [],
+   "default_pantry": false
+  },
+  {
+   "id": "gia_do",
+   "name": "Giá đỗ (mầm đậu xanh)",
+   "aisle": "rau_cu",
+   "household_units": [],
+   "default_pantry": false
+  },
+  {
+   "id": "tom",
+   "name": "Tôm sú / tôm thẻ (làm sạch)",
+   "aisle": "ca_hai_san",
+   "household_units": [],
+   "default_pantry": false
+  },
+  {
+   "id": "tempeh",
+   "name": "Tempeh (đậu nành lên men)",
+   "aisle": "trung_dau_phu",
+   "household_units": [],
+   "default_pantry": false
+  }
+ ],
+ "aisles": {
+  "thit": "Thịt",
+  "ca_hai_san": "Cá & hải sản",
+  "trung_dau_phu": "Trứng & đậu phụ",
+  "rau_cu": "Rau củ",
+  "trai_cay": "Trái cây",
+  "gao_do_kho": "Gạo & đồ khô",
+  "gia_vi_dau": "Gia vị & dầu",
+  "sua": "Sữa"
+ },
+ "recipe_count": 324,
+ "ingredient_count": 66
+}

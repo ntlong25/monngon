@@ -1,0 +1,202 @@
+{
+ "recipe": {
+  "id": "sang_chay_tofu_scramble",
+  "name": "Đậu phụ xào trứng chay",
+  "meal_types": [
+   "breakfast"
+  ],
+  "lunch_style": [],
+  "snack_style": null,
+  "cuisine_tags": [
+   "xao",
+   "chay"
+  ],
+  "health_tags": [
+   "chay",
+   "giau_dam",
+   "nhieu_xo",
+   "it_duong",
+   "tot_cho_tim"
+  ],
+  "equipment": [
+   "bep"
+  ],
+  "cook_minutes": 15,
+  "batchable": false,
+  "is_low_carb": false,
+  "ingredients": [
+   {
+    "ingredient_id": "dau_phu",
+    "grams": 200,
+    "role": "protein",
+    "min_g": 135,
+    "max_g": 335,
+    "swap_group": "dau_phu"
+   },
+   {
+    "ingredient_id": "com_trang",
+    "grams": 100,
+    "role": "carb",
+    "min_g": 0,
+    "max_g": 200,
+    "swap_group": "tinh_bot"
+   },
+   {
+    "ingredient_id": "ca_chua",
+    "grams": 100,
+    "role": "veg",
+    "min_g": 100,
+    "max_g": 100,
+    "swap_group": "rau_xao"
+   },
+   {
+    "ingredient_id": "hanh_tay",
+    "grams": 20,
+    "role": "veg",
+    "min_g": 20,
+    "max_g": 20,
+    "swap_group": "rau_xao"
+   },
+   {
+    "ingredient_id": "dau_an",
+    "grams": 5,
+    "role": "fat",
+    "min_g": 5,
+    "max_g": 5,
+    "swap_group": null
+   },
+   {
+    "ingredient_id": "nuoc_mam_chay",
+    "grams": 10,
+    "role": "seasoning",
+    "min_g": 10,
+    "max_g": 10,
+    "swap_group": null
+   }
+  ],
+  "steps": [
+   "Bóp nhỏ đậu phụ bằng tay.",
+   "Xào hành tây và cà chua 2 phút.",
+   "Cho đậu vào, nêm nước mắm chay, ăn cùng cơm."
+  ],
+  "image": null,
+  "dish_role": "full_meal",
+  "pairs_with": [],
+  "portable": false,
+  "low_carb_ok": false,
+  "image_group": "sang"
+ },
+ "macros": {
+  "total": {
+   "kcal": 493.5,
+   "protein_g": 39.204,
+   "carb_g": 40.011,
+   "fat_g": 22.997,
+   "fiber_g": 6.62
+  },
+  "lines": [
+   {
+    "ingredient_id": "dau_phu",
+    "name": "Đậu hũ (đậu phụ) cứng",
+    "grams": 200,
+    "macros": {
+     "kcal": 288,
+     "protein_g": 34.6,
+     "carb_g": 5.56,
+     "fat_g": 17.44,
+     "fiber_g": 4.6
+    },
+    "source": {
+     "db": "USDA_FDC",
+     "code": "172475",
+     "note": "Tofu, raw, firm, prepared with calcium sulfate (SR Legacy). Truy cập 06/11/2026."
+    }
+   },
+   {
+    "ingredient_id": "com_trang",
+    "name": "Cơm trắng (đã nấu chín)",
+    "grams": 100,
+    "macros": {
+     "kcal": 130,
+     "protein_g": 2.69,
+     "carb_g": 28.2,
+     "fat_g": 0.28,
+     "fiber_g": 0.4
+    },
+    "source": {
+     "db": "USDA_FDC",
+     "code": "168878",
+     "note": "Rice, white, long-grain, regular, enriched, cooked (SR Legacy). Giá trị theo cơm đã nấu. Truy cập 06/11/2026."
+    }
+   },
+   {
+    "ingredient_id": "ca_chua",
+    "name": "Cà chua",
+    "grams": 100,
+    "macros": {
+     "kcal": 18,
+     "protein_g": 0.88,
+     "carb_g": 3.89,
+     "fat_g": 0.2,
+     "fiber_g": 1.2
+    },
+    "source": {
+     "db": "USDA_FDC",
+     "code": "170457",
+     "note": "Tomatoes, red, ripe, raw, year round average (SR Legacy). Tra trên web FDC ngày 06/11/2026."
+    }
+   },
+   {
+    "ingredient_id": "hanh_tay",
+    "name": "Hành tây",
+    "grams": 20,
+    "macros": {
+     "kcal": 8,
+     "protein_g": 0.22000000000000003,
+     "carb_g": 1.868,
+     "fat_g": 0.020000000000000004,
+     "fiber_g": 0.34
+    },
+    "source": {
+     "db": "USDA_FDC",
+     "code": "170000",
+     "note": "Onions, raw (SR Legacy). Tra trên web FDC ngày 06/11/2026."
+    }
+   },
+   {
+    "ingredient_id": "dau_an",
+    "name": "Dầu ăn (đậu nành)",
+    "grams": 5,
+    "macros": {
+     "kcal": 44.2,
+     "protein_g": 0,
+     "carb_g": 0,
+     "fat_g": 5,
+     "fiber_g": 0
+    },
+    "source": {
+     "db": "USDA_FDC",
+     "code": "171411",
+     "note": "Oil, soybean, salad or cooking (SR Legacy). Dầu chứa 0 chất xơ. Tra trên web FDC ngày 06/11/2026."
+    }
+   },
+   {
+    "ingredient_id": "nuoc_mam_chay",
+    "name": "Nước mắm chay (thay bằng nước tương)",
+    "grams": 10,
+    "macros": {
+     "kcal": 5.300000000000001,
+     "protein_g": 0.8140000000000001,
+     "carb_g": 0.493,
+     "fat_g": 0.056999999999999995,
+     "fiber_g": 0.08000000000000002
+    },
+    "source": {
+     "db": "USDA_FDC",
+     "code": "174277",
+     "note": "PROXY: số liệu xì dầu (Soy sauce made from soy and wheat, SR Legacy). Nước mắm chay thực tế có thể khác; cần nhãn sản phẩm. Gắn gluten theo bảo thủ vì nhiều bản có lúa mì."
+    }
+   }
+  ]
+ }
+}

@@ -1,0 +1,45 @@
+{
+ "profile": {
+  "goal": "lose",
+  "sex": "female",
+  "age": 32,
+  "height_cm": 162,
+  "weight_kg": 60,
+  "activity": "light",
+  "target_mode": "formula"
+ },
+ "preferences": {
+  "store_id": "bach_hoa_xanh",
+  "weekly_budget_vnd": 650000,
+  "adults": 1,
+  "children": 0,
+  "slots": {
+   "breakfast": "on",
+   "lunch": "on",
+   "dinner": "on",
+   "snack_am": "skip",
+   "snack_pm": "on",
+   "lunch_style": "hot",
+   "snack_pm_style": "savory"
+  },
+  "diet": "none",
+  "low_carb": false,
+  "exclusions": [],
+  "disliked_ingredient_ids": [],
+  "health_leanings": [
+   "nhieu_xo"
+  ],
+  "cuisine_likes": [
+   "xao",
+   "canh"
+  ],
+  "cuisine_less": [],
+  "equipment": [
+   "bep",
+   "noi_com_dien"
+  ],
+  "blocked_recipe_ids": []
+ },
+ "start_date": "2026-11-09",
+ "seed": 1
+}

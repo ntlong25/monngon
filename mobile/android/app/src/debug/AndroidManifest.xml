@@ -1,0 +1,7 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- INTERNET: cần cho phát triển (hot reload) và gọi API.
+         usesCleartextTraffic: chỉ bản debug, để gọi API dev http://10.0.2.2:5095.
+         Bản release không bật cleartext (phải dùng HTTPS). -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <application android:usesCleartextTraffic="true"/>
+</manifest>

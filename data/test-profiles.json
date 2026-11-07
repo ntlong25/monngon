@@ -1,0 +1,804 @@
+[
+  {
+    "id": "p01_nu_giam_mo_vua",
+    "name": "Nữ giảm mỡ, ngân sách vừa",
+    "note": "Persona cơ bản: giảm mỡ, đi chợ một lần mỗi tuần.",
+    "profile": {
+      "goal": "lose",
+      "sex": "female",
+      "age": 32,
+      "height_cm": 162,
+      "weight_kg": 60,
+      "activity": "light",
+      "target_mode": "formula"
+    },
+    "preferences": {
+      "store_id": "bach_hoa_xanh",
+      "weekly_budget_vnd": 650000,
+      "adults": 1,
+      "children": 0,
+      "slots": {
+        "breakfast": "on",
+        "lunch": "on",
+        "dinner": "on",
+        "snack_am": "skip",
+        "snack_pm": "on",
+        "lunch_style": "hot",
+        "snack_pm_style": "savory"
+      },
+      "diet": "none",
+      "low_carb": false,
+      "exclusions": [],
+      "disliked_ingredient_ids": [],
+      "health_leanings": [
+        "nhieu_xo"
+      ],
+      "cuisine_likes": [
+        "xao",
+        "canh"
+      ],
+      "cuisine_less": [],
+      "equipment": [
+        "bep",
+        "noi_com_dien"
+      ],
+      "blocked_recipe_ids": []
+    },
+    "expect": {
+      "expect_all_days_pass": true,
+      "forbidden_ingredient_ids": [],
+      "note": "Đường cơ bản; kỳ vọng đạt 7/7 ngày."
+    }
+  },
+  {
+    "id": "p02_nu_nho_can_giam_mo_1350",
+    "name": "Nữ nhỏ cân giảm mỡ 1.350 kcal / 110 g",
+    "note": "Ca khó như video: mục tiêu thủ công 1.350 kcal và 110 g protein.",
+    "profile": {
+      "goal": "lose",
+      "sex": "female",
+      "age": 28,
+      "height_cm": 152,
+      "weight_kg": 46,
+      "activity": "sedentary",
+      "target_mode": "manual",
+      "manual_kcal": 1350,
+      "manual_protein_g": 110
+    },
+    "preferences": {
+      "store_id": "bach_hoa_xanh",
+      "weekly_budget_vnd": 600000,
+      "adults": 1,
+      "children": 0,
+      "slots": {
+        "breakfast": "on",
+        "lunch": "on",
+        "dinner": "on",
+        "snack_am": "on",
+        "snack_pm": "on",
+        "lunch_style": "hot",
+        "snack_pm_style": "savory"
+      },
+      "diet": "none",
+      "low_carb": false,
+      "exclusions": [],
+      "disliked_ingredient_ids": [],
+      "health_leanings": [],
+      "cuisine_likes": [],
+      "cuisine_less": [],
+      "equipment": [
+        "bep"
+      ],
+      "blocked_recipe_ids": []
+    },
+    "expect": {
+      "expect_all_days_pass": true,
+      "forbidden_ingredient_ids": [],
+      "note": "Ca khó nhất theo video; nếu không đạt thì kiểm tra số món đạm ít béo."
+    }
+  },
+  {
+    "id": "p03_nam_tang_co_2800",
+    "name": "Nam tăng cơ 2.800 kcal",
+    "note": "Chỉ tiêu thủ công 2.800 kcal và 180 g protein mỗi ngày.",
+    "profile": {
+      "goal": "build",
+      "sex": "male",
+      "age": 25,
+      "height_cm": 178,
+      "weight_kg": 75,
+      "activity": "athlete",
+      "target_mode": "manual",
+      "manual_kcal": 2800,
+      "manual_protein_g": 180
+    },
+    "preferences": {
+      "store_id": "bach_hoa_xanh",
+      "weekly_budget_vnd": 1000000,
+      "adults": 1,
+      "children": 0,
+      "slots": {
+        "breakfast": "on",
+        "lunch": "on",
+        "dinner": "on",
+        "snack_am": "on",
+        "snack_pm": "on",
+        "lunch_style": "hot",
+        "snack_pm_style": "savory"
+      },
+      "diet": "none",
+      "low_carb": false,
+      "exclusions": [],
+      "disliked_ingredient_ids": [],
+      "health_leanings": [],
+      "cuisine_likes": [],
+      "cuisine_less": [],
+      "equipment": [
+        "bep",
+        "lo_nuong"
+      ],
+      "blocked_recipe_ids": []
+    },
+    "expect": {
+      "expect_all_days_pass": true,
+      "forbidden_ingredient_ids": [],
+      "note": "Đạt 7/7 sau lô 3 (bổ sung món phụ và tinh chỉnh ngày)."
+    }
+  },
+  {
+    "id": "p04_nam_giu_can",
+    "name": "Nam giữ cân, tự tính chỉ tiêu",
+    "note": "Giữ cân, chỉ tiêu do công thức tính.",
+    "profile": {
+      "goal": "hold",
+      "sex": "male",
+      "age": 40,
+      "height_cm": 170,
+      "weight_kg": 68,
+      "activity": "moderate",
+      "target_mode": "formula"
+    },
+    "preferences": {
+      "store_id": "bach_hoa_xanh",
+      "weekly_budget_vnd": 800000,
+      "adults": 1,
+      "children": 0,
+      "slots": {
+        "breakfast": "on",
+        "lunch": "on",
+        "dinner": "on",
+        "snack_am": "skip",
+        "snack_pm": "on",
+        "lunch_style": "hot",
+        "snack_pm_style": "savory"
+      },
+      "diet": "none",
+      "low_carb": false,
+      "exclusions": [],
+      "disliked_ingredient_ids": [],
+      "health_leanings": [],
+      "cuisine_likes": [],
+      "cuisine_less": [],
+      "equipment": [
+        "bep",
+        "noi_com_dien"
+      ],
+      "blocked_recipe_ids": []
+    },
+    "expect": {
+      "expect_all_days_pass": true,
+      "forbidden_ingredient_ids": [],
+      "note": "Đường cơ bản."
+    }
+  },
+  {
+    "id": "p05_thuan_chay_it_tinh_bot",
+    "name": "Thuần chay, ít tinh bột",
+    "note": "Thuần chay: không thịt, cá, trứng, sữa. Bật ít tinh bột.",
+    "profile": {
+      "goal": "hold",
+      "sex": "female",
+      "age": 30,
+      "height_cm": 165,
+      "weight_kg": 55,
+      "activity": "light",
+      "target_mode": "formula"
+    },
+    "preferences": {
+      "store_id": "bach_hoa_xanh",
+      "weekly_budget_vnd": 550000,
+      "adults": 1,
+      "children": 0,
+      "slots": {
+        "breakfast": "self",
+        "lunch": "on",
+        "dinner": "on",
+        "snack_am": "skip",
+        "snack_pm": "skip",
+        "lunch_style": "hot",
+        "snack_pm_style": "savory"
+      },
+      "diet": "vegan",
+      "low_carb": true,
+      "exclusions": [],
+      "disliked_ingredient_ids": [],
+      "health_leanings": [],
+      "cuisine_likes": [],
+      "cuisine_less": [],
+      "equipment": [
+        "bep"
+      ],
+      "blocked_recipe_ids": []
+    },
+    "expect": {
+      "expect_all_days_pass": true,
+      "forbidden_ingredient_ids": [
+        "ca_basa",
+        "ca_ro_phi",
+        "ca_thu",
+        "dui_ga_khong_da",
+        "muc_ong",
+        "nuoc_mam",
+        "sua_chua_khong_duong",
+        "thit_bo_nac",
+        "thit_heo_ba_chi",
+        "thit_heo_nac_dui",
+        "thit_heo_nac_than",
+        "thit_heo_xay_nac",
+        "tom",
+        "trung_ga",
+        "uc_ga_khong_da"
+      ],
+      "note": "Đạt 7/7 sau lô 2–3 (thêm món chay calo cao không cơm)."
+    }
+  },
+  {
+    "id": "p06_chay_lacto_nu",
+    "name": "Ăn chay (có trứng, sữa)",
+    "note": "Chay: không thịt, cá, hải sản; vẫn ăn trứng và sữa.",
+    "profile": {
+      "goal": "hold",
+      "sex": "female",
+      "age": 26,
+      "height_cm": 158,
+      "weight_kg": 50,
+      "activity": "moderate",
+      "target_mode": "formula"
+    },
+    "preferences": {
+      "store_id": "bach_hoa_xanh",
+      "weekly_budget_vnd": 600000,
+      "adults": 1,
+      "children": 0,
+      "slots": {
+        "breakfast": "on",
+        "lunch": "on",
+        "dinner": "on",
+        "snack_am": "on",
+        "snack_pm": "on",
+        "lunch_style": "hot",
+        "snack_pm_style": "savory"
+      },
+      "diet": "vegetarian",
+      "low_carb": false,
+      "exclusions": [],
+      "disliked_ingredient_ids": [],
+      "health_leanings": [],
+      "cuisine_likes": [],
+      "cuisine_less": [],
+      "equipment": [
+        "bep",
+        "noi_com_dien"
+      ],
+      "blocked_recipe_ids": []
+    },
+    "expect": {
+      "expect_all_days_pass": true,
+      "forbidden_ingredient_ids": [
+        "ca_basa",
+        "ca_ro_phi",
+        "ca_thu",
+        "dui_ga_khong_da",
+        "muc_ong",
+        "nuoc_mam",
+        "thit_bo_nac",
+        "thit_heo_ba_chi",
+        "thit_heo_nac_dui",
+        "thit_heo_nac_than",
+        "thit_heo_xay_nac",
+        "tom",
+        "uc_ga_khong_da"
+      ],
+      "note": "Kỳ vọng đạt; nhiều món đậu phụ và trứng."
+    }
+  },
+  {
+    "id": "p07_khong_lon_khong_sua",
+    "name": "Không lợn, không sữa",
+    "note": "Loại thịt heo và sữa (phù hợp halal và dị ứng sữa).",
+    "profile": {
+      "goal": "lose",
+      "sex": "male",
+      "age": 35,
+      "height_cm": 172,
+      "weight_kg": 70,
+      "activity": "moderate",
+      "target_mode": "formula"
+    },
+    "preferences": {
+      "store_id": "bach_hoa_xanh",
+      "weekly_budget_vnd": 700000,
+      "adults": 1,
+      "children": 0,
+      "slots": {
+        "breakfast": "on",
+        "lunch": "on",
+        "dinner": "on",
+        "snack_am": "skip",
+        "snack_pm": "on",
+        "lunch_style": "hot",
+        "snack_pm_style": "savory"
+      },
+      "diet": "none",
+      "low_carb": false,
+      "exclusions": [
+        "no_pork",
+        "no_dairy"
+      ],
+      "disliked_ingredient_ids": [],
+      "health_leanings": [],
+      "cuisine_likes": [],
+      "cuisine_less": [],
+      "equipment": [
+        "bep",
+        "noi_com_dien"
+      ],
+      "blocked_recipe_ids": []
+    },
+    "expect": {
+      "expect_all_days_pass": true,
+      "forbidden_ingredient_ids": [
+        "sua_chua_khong_duong",
+        "thit_heo_ba_chi",
+        "thit_heo_nac_dui",
+        "thit_heo_nac_than",
+        "thit_heo_xay_nac"
+      ],
+      "note": "Kỳ vọng đạt; kho còn bò, gà, cá, đậu."
+    }
+  },
+  {
+    "id": "p08_di_ung_lac_hat_cay",
+    "name": "Dị ứng lạc và hạt cây",
+    "note": "Loại lạc và hạt cây (không loại hạt hướng dương/vừng).",
+    "profile": {
+      "goal": "hold",
+      "sex": "female",
+      "age": 45,
+      "height_cm": 160,
+      "weight_kg": 62,
+      "activity": "light",
+      "target_mode": "formula"
+    },
+    "preferences": {
+      "store_id": "bach_hoa_xanh",
+      "weekly_budget_vnd": 700000,
+      "adults": 1,
+      "children": 0,
+      "slots": {
+        "breakfast": "on",
+        "lunch": "on",
+        "dinner": "on",
+        "snack_am": "skip",
+        "snack_pm": "on",
+        "lunch_style": "hot",
+        "snack_pm_style": "savory"
+      },
+      "diet": "none",
+      "low_carb": false,
+      "exclusions": [
+        "no_peanut",
+        "no_tree_nut"
+      ],
+      "disliked_ingredient_ids": [],
+      "health_leanings": [],
+      "cuisine_likes": [],
+      "cuisine_less": [],
+      "equipment": [
+        "bep",
+        "noi_com_dien"
+      ],
+      "blocked_recipe_ids": []
+    },
+    "expect": {
+      "expect_all_days_pass": true,
+      "forbidden_ingredient_ids": [
+        "lac"
+      ],
+      "note": "Kiểm tra: không món nào chứa lạc (kể cả món 'lạc rang muối' và 'sốt lạc')."
+    }
+  },
+  {
+    "id": "p09_chi_co_lo_vi_song",
+    "name": "Chỉ có lò vi sóng",
+    "note": "Bếp không có bếp gas, chỉ có lò vi sóng.",
+    "profile": {
+      "goal": "lose",
+      "sex": "female",
+      "age": 33,
+      "height_cm": 165,
+      "weight_kg": 58,
+      "activity": "light",
+      "target_mode": "formula"
+    },
+    "preferences": {
+      "store_id": "bach_hoa_xanh",
+      "weekly_budget_vnd": 600000,
+      "adults": 1,
+      "children": 0,
+      "slots": {
+        "breakfast": "on",
+        "lunch": "on",
+        "dinner": "on",
+        "snack_am": "skip",
+        "snack_pm": "on",
+        "lunch_style": "hot",
+        "snack_pm_style": "savory"
+      },
+      "diet": "none",
+      "low_carb": false,
+      "exclusions": [],
+      "disliked_ingredient_ids": [],
+      "health_leanings": [],
+      "cuisine_likes": [],
+      "cuisine_less": [],
+      "equipment": [
+        "lo_vi_song"
+      ],
+      "blocked_recipe_ids": []
+    },
+    "expect": {
+      "expect_all_days_pass": true,
+      "forbidden_ingredient_ids": [],
+      "note": "Đạt 7/7 sau lô 3 (20 món chỉ cần lò vi sóng)."
+    }
+  },
+  {
+    "id": "p10_ngan_sach_toi_thieu",
+    "name": "Ngân sách tối thiểu (600.000 ₫)",
+    "note": "Ngân sách sát sàn của thanh trượt.",
+    "profile": {
+      "goal": "hold",
+      "sex": "male",
+      "age": 30,
+      "height_cm": 170,
+      "weight_kg": 65,
+      "activity": "moderate",
+      "target_mode": "formula"
+    },
+    "preferences": {
+      "store_id": "bach_hoa_xanh",
+      "weekly_budget_vnd": 600000,
+      "adults": 1,
+      "children": 0,
+      "slots": {
+        "breakfast": "on",
+        "lunch": "on",
+        "dinner": "on",
+        "snack_am": "skip",
+        "snack_pm": "on",
+        "lunch_style": "hot",
+        "snack_pm_style": "savory"
+      },
+      "diet": "none",
+      "low_carb": false,
+      "exclusions": [],
+      "disliked_ingredient_ids": [],
+      "health_leanings": [],
+      "cuisine_likes": [],
+      "cuisine_less": [],
+      "equipment": [
+        "bep",
+        "noi_com_dien"
+      ],
+      "blocked_recipe_ids": []
+    },
+    "expect": {
+      "expect_all_days_pass": true,
+      "forbidden_ingredient_ids": [],
+      "note": "Đạt 7/7 với ngân sách sát sàn."
+    }
+  },
+  {
+    "id": "p11_ho_2_nguoi_lon_2_tre",
+    "name": "Hộ 2 người lớn + 2 trẻ em",
+    "note": "Trẻ em tính 0,6 suất mỗi trẻ.",
+    "profile": {
+      "goal": "hold",
+      "sex": "male",
+      "age": 40,
+      "height_cm": 168,
+      "weight_kg": 70,
+      "activity": "moderate",
+      "target_mode": "formula"
+    },
+    "preferences": {
+      "store_id": "bach_hoa_xanh",
+      "weekly_budget_vnd": 1500000,
+      "adults": 2,
+      "children": 2,
+      "slots": {
+        "breakfast": "on",
+        "lunch": "on",
+        "dinner": "on",
+        "snack_am": "skip",
+        "snack_pm": "on",
+        "lunch_style": "hot",
+        "snack_pm_style": "savory"
+      },
+      "diet": "none",
+      "low_carb": false,
+      "exclusions": [],
+      "disliked_ingredient_ids": [],
+      "health_leanings": [],
+      "cuisine_likes": [
+        "kho",
+        "canh"
+      ],
+      "cuisine_less": [],
+      "equipment": [
+        "bep",
+        "noi_com_dien"
+      ],
+      "blocked_recipe_ids": []
+    },
+    "expect": {
+      "expect_all_days_pass": true,
+      "forbidden_ingredient_ids": [],
+      "note": "Kiểm tra: danh sách đi chợ nhân số người, trẻ 0,6 suất."
+    }
+  },
+  {
+    "id": "p12_bua_sang_tu_lo",
+    "name": "Bữa sáng tự lo",
+    "note": "Sáng chọn 'tự lo' (self) nhưng giữ phần chỉ tiêu.",
+    "profile": {
+      "goal": "lose",
+      "sex": "male",
+      "age": 29,
+      "height_cm": 175,
+      "weight_kg": 72,
+      "activity": "moderate",
+      "target_mode": "formula"
+    },
+    "preferences": {
+      "store_id": "bach_hoa_xanh",
+      "weekly_budget_vnd": 700000,
+      "adults": 1,
+      "children": 0,
+      "slots": {
+        "breakfast": "self",
+        "lunch": "on",
+        "dinner": "on",
+        "snack_am": "skip",
+        "snack_pm": "on",
+        "lunch_style": "hot",
+        "snack_pm_style": "savory"
+      },
+      "diet": "none",
+      "low_carb": false,
+      "exclusions": [],
+      "disliked_ingredient_ids": [],
+      "health_leanings": [],
+      "cuisine_likes": [],
+      "cuisine_less": [],
+      "equipment": [
+        "bep",
+        "noi_com_dien"
+      ],
+      "blocked_recipe_ids": []
+    },
+    "expect": {
+      "expect_all_days_pass": true,
+      "forbidden_ingredient_ids": [],
+      "note": "Kiểm tra: bữa sáng không lên món nhưng chỉ tiêu được phân bổ."
+    }
+  },
+  {
+    "id": "p13_nhieu_mon_ghet",
+    "name": "Nhiều món không thích",
+    "note": "Ghét cá thu, mực, đậu phụ, cá basa, bí xanh, cà tím.",
+    "profile": {
+      "goal": "hold",
+      "sex": "female",
+      "age": 27,
+      "height_cm": 160,
+      "weight_kg": 54,
+      "activity": "light",
+      "target_mode": "formula"
+    },
+    "preferences": {
+      "store_id": "bach_hoa_xanh",
+      "weekly_budget_vnd": 650000,
+      "adults": 1,
+      "children": 0,
+      "slots": {
+        "breakfast": "on",
+        "lunch": "on",
+        "dinner": "on",
+        "snack_am": "skip",
+        "snack_pm": "on",
+        "lunch_style": "hot",
+        "snack_pm_style": "savory"
+      },
+      "diet": "none",
+      "low_carb": false,
+      "exclusions": [],
+      "disliked_ingredient_ids": [
+        "ca_thu",
+        "muc_ong",
+        "dau_phu",
+        "ca_basa",
+        "bi_xanh",
+        "ca_tim"
+      ],
+      "health_leanings": [],
+      "cuisine_likes": [],
+      "cuisine_less": [],
+      "equipment": [
+        "bep",
+        "noi_com_dien"
+      ],
+      "blocked_recipe_ids": []
+    },
+    "expect": {
+      "expect_all_days_pass": true,
+      "forbidden_ingredient_ids": [
+        "bi_xanh",
+        "ca_basa",
+        "ca_thu",
+        "ca_tim",
+        "dau_phu",
+        "muc_ong"
+      ],
+      "note": "Kiểm tra: không món nào chứa nguyên liệu ghét; có thể ít món hơn."
+    }
+  },
+  {
+    "id": "p14_ho_3_nguoi_lon",
+    "name": "Hộ 3 người lớn, ít dụng cụ",
+    "note": "Chỉ có bếp, không có nồi cơm điện; 3 người lớn.",
+    "profile": {
+      "goal": "hold",
+      "sex": "female",
+      "age": 50,
+      "height_cm": 155,
+      "weight_kg": 60,
+      "activity": "light",
+      "target_mode": "formula"
+    },
+    "preferences": {
+      "store_id": "bach_hoa_xanh",
+      "weekly_budget_vnd": 1200000,
+      "adults": 3,
+      "children": 0,
+      "slots": {
+        "breakfast": "on",
+        "lunch": "on",
+        "dinner": "on",
+        "snack_am": "skip",
+        "snack_pm": "on",
+        "lunch_style": "packed",
+        "snack_pm_style": "savory"
+      },
+      "diet": "none",
+      "low_carb": false,
+      "exclusions": [],
+      "disliked_ingredient_ids": [],
+      "health_leanings": [],
+      "cuisine_likes": [],
+      "cuisine_less": [],
+      "equipment": [
+        "bep"
+      ],
+      "blocked_recipe_ids": []
+    },
+    "expect": {
+      "expect_all_days_pass": true,
+      "forbidden_ingredient_ids": [],
+      "note": "Kiểm tra: lunch packed chỉ dùng món 'packed' khả dụng."
+    }
+  },
+  {
+    "id": "p15_chi_noi_chien_va_noi_com",
+    "name": "Chỉ có nồi chiên không dầu và nồi cơm điện",
+    "note": "Chỉ có nồi chiên không dầu và nồi cơm điện; không có bếp.",
+    "profile": {
+      "goal": "hold",
+      "sex": "male",
+      "age": 32,
+      "height_cm": 170,
+      "weight_kg": 68,
+      "activity": "moderate",
+      "target_mode": "formula"
+    },
+    "preferences": {
+      "store_id": "bach_hoa_xanh",
+      "weekly_budget_vnd": 1200000,
+      "adults": 2,
+      "children": 0,
+      "slots": {
+        "breakfast": "on",
+        "lunch": "on",
+        "dinner": "on",
+        "snack_am": "skip",
+        "snack_pm": "skip",
+        "lunch_style": "hot",
+        "snack_pm_style": "savory"
+      },
+      "diet": "none",
+      "low_carb": false,
+      "exclusions": [],
+      "disliked_ingredient_ids": [],
+      "health_leanings": [],
+      "cuisine_likes": [],
+      "cuisine_less": [],
+      "equipment": [
+        "noi_chien_khong_dau",
+        "noi_com_dien"
+      ],
+      "blocked_recipe_ids": []
+    },
+    "expect": {
+      "expect_all_days_pass": false,
+      "forbidden_ingredient_ids": [],
+      "note": "Mới thêm: kiểm tra phủ món theo dụng cụ; kỳ vọng sẽ cập nhật theo kết quả đo."
+    }
+  },
+  {
+    "id": "p16_chi_bep_va_noi_chien",
+    "name": "Chỉ có bếp và nồi chiên không dầu",
+    "note": "Chỉ có bếp và nồi chiên không dầu; không có nồi cơm điện.",
+    "profile": {
+      "goal": "hold",
+      "sex": "female",
+      "age": 38,
+      "height_cm": 160,
+      "weight_kg": 58,
+      "activity": "light",
+      "target_mode": "formula"
+    },
+    "preferences": {
+      "store_id": "bach_hoa_xanh",
+      "weekly_budget_vnd": 900000,
+      "adults": 2,
+      "children": 0,
+      "slots": {
+        "breakfast": "on",
+        "lunch": "on",
+        "dinner": "on",
+        "snack_am": "skip",
+        "snack_pm": "skip",
+        "lunch_style": "hot",
+        "snack_pm_style": "savory"
+      },
+      "diet": "none",
+      "low_carb": false,
+      "exclusions": [],
+      "disliked_ingredient_ids": [],
+      "health_leanings": [],
+      "cuisine_likes": [],
+      "cuisine_less": [],
+      "equipment": [
+        "bep",
+        "noi_chien_khong_dau"
+      ],
+      "blocked_recipe_ids": []
+    },
+    "expect": {
+      "expect_all_days_pass": false,
+      "forbidden_ingredient_ids": [],
+      "note": "Mới thêm: kiểm tra phủ món theo dụng cụ; kỳ vọng sẽ cập nhật theo kết quả đo."
+    }
+  }
+]

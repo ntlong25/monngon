@@ -1,0 +1,15 @@
+[
+  { "ingredient_id": "uc_ga_khong_da", "store_id": "winmart", "pack_g": 500, "pack_label": "khay 500 g", "price_vnd": 62000, "shelf_life_days": 3, "surveyed_on": "2026-11-01" },
+  { "ingredient_id": "uc_ga_khong_da", "store_id": "cho_khac", "pack_g": 100, "pack_label": "100 g (chợ)", "price_vnd": 11000, "shelf_life_days": 2, "surveyed_on": "2026-11-01" },
+  { "ingredient_id": "com_trang", "store_id": "cho_khac", "pack_g": 100, "pack_label": "100 g gạo quy cơm", "price_vnd": 1500, "shelf_life_days": 180 },
+  { "ingredient_id": "sup_lo_xanh", "store_id": "cho_khac", "pack_g": 400, "pack_label": "1 bông 400 g", "price_vnd": 24000, "shelf_life_days": 5 },
+  { "ingredient_id": "dau_an", "store_id": "cho_khac", "pack_g": 1000, "pack_label": "chai 1 lít", "price_vnd": 58000, "shelf_life_days": 365 },
+  { "ingredient_id": "trung_ga", "store_id": "cho_khac", "pack_g": 550, "pack_label": "vỉ 10 quả", "price_vnd": 32000, "shelf_life_days": 14 },
+  { "ingredient_id": "dau_phu", "store_id": "cho_khac", "pack_g": 300, "pack_label": "hộp 300 g", "price_vnd": 12000, "shelf_life_days": 4 },
+  { "ingredient_id": "ca_basa_phi_le", "store_id": "cho_khac", "pack_g": 500, "pack_label": "khay 500 g", "price_vnd": 70000, "shelf_life_days": 2 },
+  { "ingredient_id": "thit_nac_heo", "store_id": "cho_khac", "pack_g": 100, "pack_label": "100 g (chợ)", "price_vnd": 9500, "shelf_life_days": 2 },
+  { "ingredient_id": "rau_muong", "store_id": "cho_khac", "pack_g": 300, "pack_label": "1 bó", "price_vnd": 8000, "shelf_life_days": 3 },
+  { "ingredient_id": "lac_rang", "store_id": "cho_khac", "pack_g": 200, "pack_label": "gói 200 g", "price_vnd": 22000, "shelf_life_days": 60 },
+  { "ingredient_id": "hat_dieu", "store_id": "cho_khac", "pack_g": 200, "pack_label": "gói 200 g", "price_vnd": 70000, "shelf_life_days": 90 },
+  { "ingredient_id": "hat_huong_duong", "store_id": "cho_khac", "pack_g": 200, "pack_label": "gói 200 g", "price_vnd": 30000, "shelf_life_days": 90 }
+]

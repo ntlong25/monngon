@@ -1,0 +1,866 @@
+[
+ {
+  "id": "p01_nu_giam_mo_vua",
+  "slots": [
+   {
+    "kcal": 294.7368421052631,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 25.263157894736842,
+    "share": 0.21052631578947367,
+    "slot": "breakfast"
+   },
+   {
+    "kcal": 515.7894736842104,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 44.210526315789465,
+    "share": 0.36842105263157887,
+    "slot": "lunch"
+   },
+   {
+    "kcal": 515.7894736842104,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 44.210526315789465,
+    "share": 0.36842105263157887,
+    "slot": "dinner"
+   },
+   {
+    "kcal": 0,
+    "mode": "skip",
+    "planned": false,
+    "protein_g": 0,
+    "share": 0,
+    "slot": "snack_am"
+   },
+   {
+    "kcal": 73.68421052631578,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 6.315789473684211,
+    "share": 0.05263157894736842,
+    "slot": "snack_pm"
+   }
+  ],
+  "slots_config": {
+   "breakfast": "on",
+   "dinner": "on",
+   "lunch": "on",
+   "lunch_style": "hot",
+   "snack_am": "skip",
+   "snack_pm": "on",
+   "snack_pm_style": "savory"
+  }
+ },
+ {
+  "id": "p02_nu_nho_can_giam_mo_1350",
+  "slots": [
+   {
+    "kcal": 270,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 22,
+    "share": 0.2,
+    "slot": "breakfast"
+   },
+   {
+    "kcal": 472.49999999999994,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 38.5,
+    "share": 0.35,
+    "slot": "lunch"
+   },
+   {
+    "kcal": 472.49999999999994,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 38.5,
+    "share": 0.35,
+    "slot": "dinner"
+   },
+   {
+    "kcal": 67.5,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 5.5,
+    "share": 0.05,
+    "slot": "snack_am"
+   },
+   {
+    "kcal": 67.5,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 5.5,
+    "share": 0.05,
+    "slot": "snack_pm"
+   }
+  ],
+  "slots_config": {
+   "breakfast": "on",
+   "dinner": "on",
+   "lunch": "on",
+   "lunch_style": "hot",
+   "snack_am": "on",
+   "snack_pm": "on",
+   "snack_pm_style": "savory"
+  }
+ },
+ {
+  "id": "p03_nam_tang_co_2800",
+  "slots": [
+   {
+    "kcal": 560,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 36,
+    "share": 0.2,
+    "slot": "breakfast"
+   },
+   {
+    "kcal": 979.9999999999999,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 62.99999999999999,
+    "share": 0.35,
+    "slot": "lunch"
+   },
+   {
+    "kcal": 979.9999999999999,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 62.99999999999999,
+    "share": 0.35,
+    "slot": "dinner"
+   },
+   {
+    "kcal": 140,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 9,
+    "share": 0.05,
+    "slot": "snack_am"
+   },
+   {
+    "kcal": 140,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 9,
+    "share": 0.05,
+    "slot": "snack_pm"
+   }
+  ],
+  "slots_config": {
+   "breakfast": "on",
+   "dinner": "on",
+   "lunch": "on",
+   "lunch_style": "hot",
+   "snack_am": "on",
+   "snack_pm": "on",
+   "snack_pm_style": "savory"
+  }
+ },
+ {
+  "id": "p04_nam_giu_can",
+  "slots": [
+   {
+    "kcal": 505.2631578947368,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 25.263157894736842,
+    "share": 0.21052631578947367,
+    "slot": "breakfast"
+   },
+   {
+    "kcal": 884.2105263157893,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 44.210526315789465,
+    "share": 0.36842105263157887,
+    "slot": "lunch"
+   },
+   {
+    "kcal": 884.2105263157893,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 44.210526315789465,
+    "share": 0.36842105263157887,
+    "slot": "dinner"
+   },
+   {
+    "kcal": 0,
+    "mode": "skip",
+    "planned": false,
+    "protein_g": 0,
+    "share": 0,
+    "slot": "snack_am"
+   },
+   {
+    "kcal": 126.3157894736842,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 6.315789473684211,
+    "share": 0.05263157894736842,
+    "slot": "snack_pm"
+   }
+  ],
+  "slots_config": {
+   "breakfast": "on",
+   "dinner": "on",
+   "lunch": "on",
+   "lunch_style": "hot",
+   "snack_am": "skip",
+   "snack_pm": "on",
+   "snack_pm_style": "savory"
+  }
+ },
+ {
+  "id": "p05_thuan_chay_it_tinh_bot",
+  "slots": [
+   {
+    "kcal": 388.8888888888889,
+    "mode": "self",
+    "planned": false,
+    "protein_g": 22.222222222222225,
+    "share": 0.22222222222222224,
+    "slot": "breakfast"
+   },
+   {
+    "kcal": 680.5555555555554,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 38.888888888888886,
+    "share": 0.38888888888888884,
+    "slot": "lunch"
+   },
+   {
+    "kcal": 680.5555555555554,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 38.888888888888886,
+    "share": 0.38888888888888884,
+    "slot": "dinner"
+   },
+   {
+    "kcal": 0,
+    "mode": "skip",
+    "planned": false,
+    "protein_g": 0,
+    "share": 0,
+    "slot": "snack_am"
+   },
+   {
+    "kcal": 0,
+    "mode": "skip",
+    "planned": false,
+    "protein_g": 0,
+    "share": 0,
+    "slot": "snack_pm"
+   }
+  ],
+  "slots_config": {
+   "breakfast": "self",
+   "dinner": "on",
+   "lunch": "on",
+   "lunch_style": "hot",
+   "snack_am": "skip",
+   "snack_pm": "skip",
+   "snack_pm_style": "savory"
+  }
+ },
+ {
+  "id": "p06_chay_lacto_nu",
+  "slots": [
+   {
+    "kcal": 370,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 18,
+    "share": 0.2,
+    "slot": "breakfast"
+   },
+   {
+    "kcal": 647.5,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 31.499999999999996,
+    "share": 0.35,
+    "slot": "lunch"
+   },
+   {
+    "kcal": 647.5,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 31.499999999999996,
+    "share": 0.35,
+    "slot": "dinner"
+   },
+   {
+    "kcal": 92.5,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 4.5,
+    "share": 0.05,
+    "slot": "snack_am"
+   },
+   {
+    "kcal": 92.5,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 4.5,
+    "share": 0.05,
+    "slot": "snack_pm"
+   }
+  ],
+  "slots_config": {
+   "breakfast": "on",
+   "dinner": "on",
+   "lunch": "on",
+   "lunch_style": "hot",
+   "snack_am": "on",
+   "snack_pm": "on",
+   "snack_pm_style": "savory"
+  }
+ },
+ {
+  "id": "p07_khong_lon_khong_sua",
+  "slots": [
+   {
+    "kcal": 421.05263157894734,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 32.63157894736842,
+    "share": 0.21052631578947367,
+    "slot": "breakfast"
+   },
+   {
+    "kcal": 736.8421052631577,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 57.105263157894726,
+    "share": 0.36842105263157887,
+    "slot": "lunch"
+   },
+   {
+    "kcal": 736.8421052631577,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 57.105263157894726,
+    "share": 0.36842105263157887,
+    "slot": "dinner"
+   },
+   {
+    "kcal": 0,
+    "mode": "skip",
+    "planned": false,
+    "protein_g": 0,
+    "share": 0,
+    "slot": "snack_am"
+   },
+   {
+    "kcal": 105.26315789473684,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 8.157894736842104,
+    "share": 0.05263157894736842,
+    "slot": "snack_pm"
+   }
+  ],
+  "slots_config": {
+   "breakfast": "on",
+   "dinner": "on",
+   "lunch": "on",
+   "lunch_style": "hot",
+   "snack_am": "skip",
+   "snack_pm": "on",
+   "snack_pm_style": "savory"
+  }
+ },
+ {
+  "id": "p08_di_ung_lac_hat_cay",
+  "slots": [
+   {
+    "kcal": 357.89473684210526,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 23.157894736842103,
+    "share": 0.21052631578947367,
+    "slot": "breakfast"
+   },
+   {
+    "kcal": 626.315789473684,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 40.52631578947368,
+    "share": 0.36842105263157887,
+    "slot": "lunch"
+   },
+   {
+    "kcal": 626.315789473684,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 40.52631578947368,
+    "share": 0.36842105263157887,
+    "slot": "dinner"
+   },
+   {
+    "kcal": 0,
+    "mode": "skip",
+    "planned": false,
+    "protein_g": 0,
+    "share": 0,
+    "slot": "snack_am"
+   },
+   {
+    "kcal": 89.47368421052632,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 5.789473684210526,
+    "share": 0.05263157894736842,
+    "slot": "snack_pm"
+   }
+  ],
+  "slots_config": {
+   "breakfast": "on",
+   "dinner": "on",
+   "lunch": "on",
+   "lunch_style": "hot",
+   "snack_am": "skip",
+   "snack_pm": "on",
+   "snack_pm_style": "savory"
+  }
+ },
+ {
+  "id": "p09_chi_co_lo_vi_song",
+  "slots": [
+   {
+    "kcal": 294.7368421052631,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 25.263157894736842,
+    "share": 0.21052631578947367,
+    "slot": "breakfast"
+   },
+   {
+    "kcal": 515.7894736842104,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 44.210526315789465,
+    "share": 0.36842105263157887,
+    "slot": "lunch"
+   },
+   {
+    "kcal": 515.7894736842104,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 44.210526315789465,
+    "share": 0.36842105263157887,
+    "slot": "dinner"
+   },
+   {
+    "kcal": 0,
+    "mode": "skip",
+    "planned": false,
+    "protein_g": 0,
+    "share": 0,
+    "slot": "snack_am"
+   },
+   {
+    "kcal": 73.68421052631578,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 6.315789473684211,
+    "share": 0.05263157894736842,
+    "slot": "snack_pm"
+   }
+  ],
+  "slots_config": {
+   "breakfast": "on",
+   "dinner": "on",
+   "lunch": "on",
+   "lunch_style": "hot",
+   "snack_am": "skip",
+   "snack_pm": "on",
+   "snack_pm_style": "savory"
+  }
+ },
+ {
+  "id": "p10_ngan_sach_toi_thieu",
+  "slots": [
+   {
+    "kcal": 515.7894736842105,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 24.210526315789473,
+    "share": 0.21052631578947367,
+    "slot": "breakfast"
+   },
+   {
+    "kcal": 902.6315789473682,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 42.36842105263157,
+    "share": 0.36842105263157887,
+    "slot": "lunch"
+   },
+   {
+    "kcal": 902.6315789473682,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 42.36842105263157,
+    "share": 0.36842105263157887,
+    "slot": "dinner"
+   },
+   {
+    "kcal": 0,
+    "mode": "skip",
+    "planned": false,
+    "protein_g": 0,
+    "share": 0,
+    "slot": "snack_am"
+   },
+   {
+    "kcal": 128.94736842105263,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 6.052631578947368,
+    "share": 0.05263157894736842,
+    "slot": "snack_pm"
+   }
+  ],
+  "slots_config": {
+   "breakfast": "on",
+   "dinner": "on",
+   "lunch": "on",
+   "lunch_style": "hot",
+   "snack_am": "skip",
+   "snack_pm": "on",
+   "snack_pm_style": "savory"
+  }
+ },
+ {
+  "id": "p11_ho_2_nguoi_lon_2_tre",
+  "slots": [
+   {
+    "kcal": 505.2631578947368,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 26.31578947368421,
+    "share": 0.21052631578947367,
+    "slot": "breakfast"
+   },
+   {
+    "kcal": 884.2105263157893,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 46.052631578947356,
+    "share": 0.36842105263157887,
+    "slot": "lunch"
+   },
+   {
+    "kcal": 884.2105263157893,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 46.052631578947356,
+    "share": 0.36842105263157887,
+    "slot": "dinner"
+   },
+   {
+    "kcal": 0,
+    "mode": "skip",
+    "planned": false,
+    "protein_g": 0,
+    "share": 0,
+    "slot": "snack_am"
+   },
+   {
+    "kcal": 126.3157894736842,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 6.578947368421052,
+    "share": 0.05263157894736842,
+    "slot": "snack_pm"
+   }
+  ],
+  "slots_config": {
+   "breakfast": "on",
+   "dinner": "on",
+   "lunch": "on",
+   "lunch_style": "hot",
+   "snack_am": "skip",
+   "snack_pm": "on",
+   "snack_pm_style": "savory"
+  }
+ },
+ {
+  "id": "p12_bua_sang_tu_lo",
+  "slots": [
+   {
+    "kcal": 442.10526315789474,
+    "mode": "self",
+    "planned": false,
+    "protein_g": 33.68421052631579,
+    "share": 0.21052631578947367,
+    "slot": "breakfast"
+   },
+   {
+    "kcal": 773.6842105263156,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 58.947368421052616,
+    "share": 0.36842105263157887,
+    "slot": "lunch"
+   },
+   {
+    "kcal": 773.6842105263156,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 58.947368421052616,
+    "share": 0.36842105263157887,
+    "slot": "dinner"
+   },
+   {
+    "kcal": 0,
+    "mode": "skip",
+    "planned": false,
+    "protein_g": 0,
+    "share": 0,
+    "slot": "snack_am"
+   },
+   {
+    "kcal": 110.52631578947368,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 8.421052631578947,
+    "share": 0.05263157894736842,
+    "slot": "snack_pm"
+   }
+  ],
+  "slots_config": {
+   "breakfast": "self",
+   "dinner": "on",
+   "lunch": "on",
+   "lunch_style": "hot",
+   "snack_am": "skip",
+   "snack_pm": "on",
+   "snack_pm_style": "savory"
+  }
+ },
+ {
+  "id": "p13_nhieu_mon_ghet",
+  "slots": [
+   {
+    "kcal": 357.89473684210526,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 20,
+    "share": 0.21052631578947367,
+    "slot": "breakfast"
+   },
+   {
+    "kcal": 626.315789473684,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 34.99999999999999,
+    "share": 0.36842105263157887,
+    "slot": "lunch"
+   },
+   {
+    "kcal": 626.315789473684,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 34.99999999999999,
+    "share": 0.36842105263157887,
+    "slot": "dinner"
+   },
+   {
+    "kcal": 0,
+    "mode": "skip",
+    "planned": false,
+    "protein_g": 0,
+    "share": 0,
+    "slot": "snack_am"
+   },
+   {
+    "kcal": 89.47368421052632,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 5,
+    "share": 0.05263157894736842,
+    "slot": "snack_pm"
+   }
+  ],
+  "slots_config": {
+   "breakfast": "on",
+   "dinner": "on",
+   "lunch": "on",
+   "lunch_style": "hot",
+   "snack_am": "skip",
+   "snack_pm": "on",
+   "snack_pm_style": "savory"
+  }
+ },
+ {
+  "id": "p14_ho_3_nguoi_lon",
+  "slots": [
+   {
+    "kcal": 336.84210526315786,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 23.157894736842103,
+    "share": 0.21052631578947367,
+    "slot": "breakfast"
+   },
+   {
+    "kcal": 589.4736842105262,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 40.52631578947368,
+    "share": 0.36842105263157887,
+    "slot": "lunch"
+   },
+   {
+    "kcal": 589.4736842105262,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 40.52631578947368,
+    "share": 0.36842105263157887,
+    "slot": "dinner"
+   },
+   {
+    "kcal": 0,
+    "mode": "skip",
+    "planned": false,
+    "protein_g": 0,
+    "share": 0,
+    "slot": "snack_am"
+   },
+   {
+    "kcal": 84.21052631578947,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 5.789473684210526,
+    "share": 0.05263157894736842,
+    "slot": "snack_pm"
+   }
+  ],
+  "slots_config": {
+   "breakfast": "on",
+   "dinner": "on",
+   "lunch": "on",
+   "lunch_style": "packed",
+   "snack_am": "skip",
+   "snack_pm": "on",
+   "snack_pm_style": "savory"
+  }
+ },
+ {
+  "id": "p15_chi_noi_chien_va_noi_com",
+  "slots": [
+   {
+    "kcal": 544.4444444444445,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 26.666666666666668,
+    "share": 0.22222222222222224,
+    "slot": "breakfast"
+   },
+   {
+    "kcal": 952.7777777777776,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 46.66666666666666,
+    "share": 0.38888888888888884,
+    "slot": "lunch"
+   },
+   {
+    "kcal": 952.7777777777776,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 46.66666666666666,
+    "share": 0.38888888888888884,
+    "slot": "dinner"
+   },
+   {
+    "kcal": 0,
+    "mode": "skip",
+    "planned": false,
+    "protein_g": 0,
+    "share": 0,
+    "slot": "snack_am"
+   },
+   {
+    "kcal": 0,
+    "mode": "skip",
+    "planned": false,
+    "protein_g": 0,
+    "share": 0,
+    "slot": "snack_pm"
+   }
+  ],
+  "slots_config": {
+   "breakfast": "on",
+   "dinner": "on",
+   "lunch": "on",
+   "lunch_style": "hot",
+   "snack_am": "skip",
+   "snack_pm": "skip",
+   "snack_pm_style": "savory"
+  }
+ },
+ {
+  "id": "p16_chi_bep_va_noi_chien",
+  "slots": [
+   {
+    "kcal": 377.7777777777778,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 23.333333333333336,
+    "share": 0.22222222222222224,
+    "slot": "breakfast"
+   },
+   {
+    "kcal": 661.111111111111,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 40.83333333333333,
+    "share": 0.38888888888888884,
+    "slot": "lunch"
+   },
+   {
+    "kcal": 661.111111111111,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 40.83333333333333,
+    "share": 0.38888888888888884,
+    "slot": "dinner"
+   },
+   {
+    "kcal": 0,
+    "mode": "skip",
+    "planned": false,
+    "protein_g": 0,
+    "share": 0,
+    "slot": "snack_am"
+   },
+   {
+    "kcal": 0,
+    "mode": "skip",
+    "planned": false,
+    "protein_g": 0,
+    "share": 0,
+    "slot": "snack_pm"
+   }
+  ],
+  "slots_config": {
+   "breakfast": "on",
+   "dinner": "on",
+   "lunch": "on",
+   "lunch_style": "hot",
+   "snack_am": "skip",
+   "snack_pm": "skip",
+   "snack_pm_style": "savory"
+  }
+ }
+]

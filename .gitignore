@@ -1,0 +1,10 @@
+node_modules/
+bin/
+obj/
+*.user
+.vs/
+.dart_tool/
+build/
+.flutter-plugins*
+.packages
+.idea/

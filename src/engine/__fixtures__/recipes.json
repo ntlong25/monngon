@@ -1,0 +1,60 @@
+[
+  { "id": "uc_ga_xao_sup_lo_toi", "name": "Ức gà xào súp lơ xanh tỏi", "meal_types": ["lunch", "dinner"],
+    "lunch_style": ["hot", "packed"], "snack_style": null, "cuisine_tags": ["xao", "nhanh_de"], "health_tags": ["nhieu_xo"],
+    "equipment": ["bep"], "cook_minutes": 20, "batchable": true, "is_low_carb": true,
+    "ingredients": [
+      { "ingredient_id": "uc_ga_khong_da", "grams": 150, "role": "protein", "min_g": 100, "max_g": 250, "swap_group": "thit_gia_cam" },
+      { "ingredient_id": "com_trang", "grams": 150, "role": "carb", "min_g": 0, "max_g": 300, "swap_group": "tinh_bot" },
+      { "ingredient_id": "sup_lo_xanh", "grams": 150, "role": "veg", "min_g": 150, "max_g": 150, "swap_group": "rau_xao" },
+      { "ingredient_id": "dau_an", "grams": 10, "role": "fat", "min_g": 10, "max_g": 10, "swap_group": null }
+    ], "steps": ["Thái ức gà, xào với tỏi.", "Cho súp lơ vào xào chín, ăn cùng cơm."], "image": null },
+  { "id": "ca_basa_kho_rau_muong", "name": "Cá basa kho với rau muống luộc", "meal_types": ["lunch", "dinner"],
+    "lunch_style": ["hot"], "snack_style": null, "cuisine_tags": ["kho", "mien_nam"], "health_tags": [],
+    "equipment": ["bep"], "cook_minutes": 30, "batchable": true, "is_low_carb": false,
+    "ingredients": [
+      { "ingredient_id": "ca_basa_phi_le", "grams": 150, "role": "protein", "min_g": 100, "max_g": 300, "swap_group": "ca" },
+      { "ingredient_id": "com_trang", "grams": 150, "role": "carb", "min_g": 50, "max_g": 300, "swap_group": "tinh_bot" },
+      { "ingredient_id": "rau_muong", "grams": 120, "role": "veg", "min_g": 120, "max_g": 120, "swap_group": "rau_luoc" },
+      { "ingredient_id": "dau_an", "grams": 8, "role": "fat", "min_g": 8, "max_g": 8, "swap_group": null }
+    ], "steps": ["Kho cá.", "Luộc rau muống."], "image": null },
+  { "id": "thit_heo_rang_rau_muong", "name": "Thịt heo rang và rau muống xào", "meal_types": ["lunch", "dinner"],
+    "lunch_style": ["hot", "packed"], "snack_style": null, "cuisine_tags": ["xao", "gia_dinh"], "health_tags": [],
+    "equipment": ["bep"], "cook_minutes": 25, "batchable": true, "is_low_carb": false,
+    "ingredients": [
+      { "ingredient_id": "thit_nac_heo", "grams": 120, "role": "protein", "min_g": 80, "max_g": 250, "swap_group": "thit_do" },
+      { "ingredient_id": "com_trang", "grams": 150, "role": "carb", "min_g": 50, "max_g": 300, "swap_group": "tinh_bot" },
+      { "ingredient_id": "rau_muong", "grams": 150, "role": "veg", "min_g": 150, "max_g": 150, "swap_group": "rau_luoc" },
+      { "ingredient_id": "dau_an", "grams": 10, "role": "fat", "min_g": 10, "max_g": 10, "swap_group": null }
+    ], "steps": ["Rang thịt.", "Xào rau."], "image": null },
+  { "id": "dau_phu_sot_trung", "name": "Đậu phụ sốt trứng với súp lơ", "meal_types": ["lunch", "dinner"],
+    "lunch_style": ["hot", "packed"], "snack_style": null, "cuisine_tags": ["chay_mem", "nhanh_de"], "health_tags": ["nhieu_xo"],
+    "equipment": ["bep", "lo_vi_song"], "cook_minutes": 15, "batchable": false, "is_low_carb": true,
+    "ingredients": [
+      { "ingredient_id": "dau_phu", "grams": 200, "role": "protein", "min_g": 100, "max_g": 400, "swap_group": "dam_thuc_vat" },
+      { "ingredient_id": "trung_ga", "grams": 55, "role": "protein", "min_g": 55, "max_g": 165, "swap_group": null },
+      { "ingredient_id": "com_trang", "grams": 120, "role": "carb", "min_g": 0, "max_g": 300, "swap_group": "tinh_bot" },
+      { "ingredient_id": "sup_lo_xanh", "grams": 100, "role": "veg", "min_g": 100, "max_g": 100, "swap_group": "rau_xao" },
+      { "ingredient_id": "dau_an", "grams": 8, "role": "fat", "min_g": 8, "max_g": 8, "swap_group": null }
+    ], "steps": ["Chiên đậu.", "Sốt trứng."], "image": null },
+  { "id": "trung_chien_com", "name": "Cơm chiên trứng", "meal_types": ["breakfast"],
+    "lunch_style": [], "snack_style": null, "cuisine_tags": ["nhanh_de"], "health_tags": [],
+    "equipment": ["bep"], "cook_minutes": 10, "batchable": false, "is_low_carb": false,
+    "ingredients": [
+      { "ingredient_id": "trung_ga", "grams": 110, "role": "protein", "min_g": 55, "max_g": 220, "swap_group": null },
+      { "ingredient_id": "com_trang", "grams": 120, "role": "carb", "min_g": 60, "max_g": 240, "swap_group": "tinh_bot" },
+      { "ingredient_id": "dau_an", "grams": 8, "role": "fat", "min_g": 8, "max_g": 8, "swap_group": null }
+    ], "steps": ["Đánh trứng, chiên cơm."], "image": null },
+  { "id": "lac_rang_muoi", "name": "Lạc rang muối", "meal_types": ["snack_pm", "snack_am"],
+    "lunch_style": [], "snack_style": "savory", "cuisine_tags": ["an_vat"], "health_tags": [],
+    "equipment": [], "cook_minutes": 0, "batchable": true, "is_low_carb": false,
+    "ingredients": [
+      { "ingredient_id": "lac_rang", "grams": 30, "role": "protein", "min_g": 15, "max_g": 60, "swap_group": null }
+    ], "steps": ["Ăn trực tiếp."], "image": null },
+  { "id": "hat_dieu_huong_duong", "name": "Hạt điều và hạt hướng dương", "meal_types": ["snack_pm", "snack_am"],
+    "lunch_style": [], "snack_style": "savory", "cuisine_tags": ["an_vat"], "health_tags": [],
+    "equipment": [], "cook_minutes": 0, "batchable": true, "is_low_carb": false,
+    "ingredients": [
+      { "ingredient_id": "hat_dieu", "grams": 20, "role": "protein", "min_g": 10, "max_g": 40, "swap_group": null },
+      { "ingredient_id": "hat_huong_duong", "grams": 10, "role": "seasoning", "min_g": 10, "max_g": 10, "swap_group": null }
+    ], "steps": ["Trộn đều."], "image": null }
+]
