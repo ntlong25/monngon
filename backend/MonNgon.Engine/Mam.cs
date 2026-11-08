@@ -56,6 +56,9 @@ public sealed class MamInfo
 }
 
 /// <summary>D-COM-01: thói quen ăn cơm → gram cơm chín mỗi bữa mâm (cho người dùng chính).</summary>
+/// <summary>T-098: vị trí và mức của dòng cơm (tinh bột theo mức) trong công thức của một bữa — mâm hoặc món trọn suất.</summary>
+public sealed record RiceLineInfo(int Idx, double TargetG, double FloorG);
+
 public static class RiceHabits
 {
     public const string Default = "vua";
@@ -69,12 +72,116 @@ public static class RiceHabits
     /// <summary>Nguyên liệu tham chiếu để quy tinh bột khác (bún, khoai) ra kcal tương đương.</summary>
     public const string ReferenceIngredient = "com_trang";
 
+    /// <summary>D-COM-04: phần kcal ngày (tối đa) được dồn sang trưa/tối: chỉ mức nhieu/rat_nhieu.</summary>
+    public static double KcalShift(string? habit, double max) => habit is "nhieu" or "rat_nhieu" ? max : 0;
+
     public static double TargetG(string? habit) => habit switch { "it" => 75, "nhieu" => 300, "rat_nhieu" => 450, _ => 150 };
 
     public static double FloorG(string? habit)
     {
         var t = TargetG(habit);
         return Math.Min(t, Math.Max(FloorMinG, t * FloorRatio));
+    }
+}
+
+/// <summary>Một mức cơm trong ước lượng "mức cơm khả thi" cho màn chọn thói quen ăn cơm (T-098/T-099).</summary>
+public sealed class RiceFeasibilityItem
+{
+    public string Habit { get; init; } = "";
+    /// <summary>Lượng cơm trắng mỗi bữa trưa/tối của mức này (g).</summary>
+    public double TargetG { get; init; }
+    public double TargetCups { get; init; }
+    /// <summary>Lượng cơm tối đa mỗi bữa trưa/tối mà chỉ tiêu bữa còn chứa được sau khi trừ phần đạm/rau/tráng miệng (g, làm tròn xuống 25 g, không vượt mức).</summary>
+    public double FeasibleG { get; init; }
+    /// <summary>Số chén khả thi, làm tròn xuống nửa chén (1 chén = 150 g).</summary>
+    public double FeasibleCups { get; init; }
+    /// <summary>false = có lý do (<see cref="Reason"/>) khiến mức này không đủ cơm → app cảnh báo trước khi người dùng chọn.</summary>
+    public bool Feasible { get; init; }
+    /// <summary>null (đủ) | "kcal_protein" (chỉ tiêu bữa không đủ chỗ: thiếu hơn một bước 25 g) | "budget" (kcal đủ nhưng ngân sách không đủ: lập tuần đạt 7/7 trong ngân sách thì > 20% bữa phải bớt cơm hoặc không có cơm).</summary>
+    public string? Reason { get; init; }
+    /// <summary>Chỉ khi có lập tuần thử (kèm preferences): số bữa trưa/tối lên thực đơn, và số bữa trong đó đủ mức cơm (không bị ghi chú bớt cơm).</summary>
+    public int? MealsPlanned { get; init; }
+    public int? MealsWithFullRice { get; init; }
+    /// <summary>Số bữa trưa/tối có dòng cơm (kể cả bớt cơm). < 12/14 nghĩa là ngân sách chặn việc có cơm ở mỗi bữa; khi đó <see cref="BudgetNeededVnd"/> là ngân sách cần để ≥ 12/14 bữa có cơm.</summary>
+    public int? MealsWithRice { get; init; }
+    /// <summary>Ngân sách tuần người dùng đặt, và (khi Reason = budget) ngân sách cần để ≥ 12/14 bữa có cơm — chi phí của phương án ưu tiên cơm rẻ nhất; null nếu không phương án nào đủ.</summary>
+    public double? BudgetVnd { get; init; }
+    public double? BudgetNeededVnd { get; init; }
+}
+
+/// <summary>
+/// Ước lượng nhanh (không cần xếp thực đơn) lượng cơm tối đa mỗi bữa trưa/tối: kcal bữa (đã gồm phần dồn kcal của mức nhiều/rất nhiều, D-COM-04)
+/// trừ kcal của phần đạm đi kèm (<see cref="KcalPerProteinG"/> kcal cho mỗi g đạm: món chính + rau + canh) và tráng miệng, phần còn lại chia cho 1,3 kcal/g cơm.
+/// </summary>
+public static class RiceFeasibility
+{
+    public const double KcalPerProteinG = 6.0;
+    public const double DessertKcal = 50;
+    public const double KcalPerRiceG = 1.3;
+    public const double CupG = RiceHabits.StdG;
+
+    /// <summary>Ngưỡng D-COM-05: > 20% bữa trưa/tối không đủ cơm thì cảnh báo; ≥ 12/14 bữa có cơm là mức "đủ" khi tính ngân sách cần.</summary>
+    public const double MaxShortRatio = 0.2;
+    public const int EnoughMealsOf14 = 12;
+
+    /// <summary>
+    /// Gộp ước lượng theo kcal/đạm (<see cref="Compute"/>) với một lần lập tuần thử ở từng mức (D-COM-05): lập tuần là chính bộ máy dùng để tạo thực đơn nên phản ánh cả ngân sách, dụng cụ, loại trừ.
+    /// <paramref name="plans"/>: habit → tuần đã lập ở mức đó. Mức không có tuần thử thì giữ kết quả kcal/đạm.
+    /// </summary>
+    public static List<RiceFeasibilityItem> Evaluate(Targets targets, Preferences prefs, IReadOnlyDictionary<string, WeekPlan> plans)
+    {
+        var res = new List<RiceFeasibilityItem>();
+        foreach (var k in Compute(targets, prefs.Slots, prefs.LowCarb))
+        {
+            if (prefs.LowCarb || !plans.TryGetValue(k.Habit, out var plan)) { res.Add(k); continue; }
+            var ld = plan.Days.SelectMany(d => d.Meals).Where(m => m.Slot is "lunch" or "dinner" && m.Status == "planned" && m.RecipeId is not null).ToList();
+            var full = ld.Count(m => m.Rice is not null && m.Notes?.Any(n => n.Code == "rice_reduced") != true);
+            var short_ = ld.Count > 0 && ld.Count - full > MaxShortRatio * ld.Count + 1e-9;
+            string? reason = !k.Feasible ? "kcal_protein" : short_ ? "budget" : null;
+            // Số bữa có dòng cơm (kể cả bớt cơm) < 12/14: ngân sách đang chặn việc có cơm ở mỗi bữa (ngoại lệ "ngân sách sát", AC2) — ngay cả khi lý do chính của cảnh báo là kcal/đạm.
+            var enough = (int)Math.Ceiling(ld.Count * EnoughMealsOf14 / 14.0);
+            var presence = ld.Count(m => m.Rice is not null);
+            double? needed = null;
+            if (reason == "budget" || presence < enough)
+            {
+                // reason = budget: cần đủ cơm ở ≥ 12/14 bữa (không bớt); còn lại chỉ cần ≥ 12/14 bữa có cơm.
+                // Phương án ưu tiên cơm rẻ nhất đủ ≥ 12/14 bữa; nếu không phương án nào đủ thì lấy phương án nhiều bữa đủ nhất (rẻ nhất trong số đó) — "cần ít nhất ngần này mới gần đủ".
+                int Score(AttemptSummary a) => reason == "budget" ? a.FullRiceMeals : a.RiceMeals;
+                var all = (plan.Attempts ?? []).Where(a => a.Attempt <= 6).ToList();
+                var ok = all.Where(a => Score(a) >= enough).ToList();
+                var pool = ok.Count > 0 ? ok : all.Where(a => all.Count > 0 && Score(a) == all.Max(Score)).ToList();
+                var c = pool.Select(a => a.CostVnd).DefaultIfEmpty(double.NaN).Min();
+                needed = double.IsNaN(c) ? null : Math.Ceiling(c / 1000) * 1000;
+            }
+            res.Add(new RiceFeasibilityItem
+            {
+                Habit = k.Habit, TargetG = k.TargetG, TargetCups = k.TargetCups, FeasibleG = k.FeasibleG, FeasibleCups = k.FeasibleCups,
+                Feasible = reason is null, Reason = reason, MealsPlanned = ld.Count, MealsWithFullRice = full, MealsWithRice = presence,
+                BudgetVnd = prefs.WeeklyBudgetVnd, BudgetNeededVnd = needed,
+            });
+        }
+        return res;
+    }
+
+    public static List<RiceFeasibilityItem> Compute(Targets targets, SlotsConfig slots, bool lowCarb = false, double maxShift = 0.15)
+    {
+        var res = new List<RiceFeasibilityItem>();
+        foreach (var habit in Enums.RiceHabits)
+        {
+            var target = RiceHabits.TargetG(habit);
+            var meals = MealSlots.Allocate(targets, slots, RiceHabits.KcalShift(habit, maxShift)).Where(s => s.Planned && s.Slot is "lunch" or "dinner").ToList();
+            // Chỉ đếm bữa trưa/tối: nếu không lên thực đơn trưa/tối thì mức cơm không áp dụng (coi là khả thi).
+            var feasible = meals.Count == 0 ? target : meals.Min(m => Math.Max(0, (m.Kcal - KcalPerProteinG * m.ProteinG - DessertKcal) / KcalPerRiceG));
+            var floor = Math.Floor(Math.Min(target, feasible) / RiceHabits.StepG) * RiceHabits.StepG;
+            res.Add(new RiceFeasibilityItem
+            {
+                Habit = habit, TargetG = target, TargetCups = target / CupG,
+                FeasibleG = floor, FeasibleCups = Math.Floor(floor / CupG * 2) / 2,
+                Feasible = lowCarb || floor >= target - RiceHabits.StepG,
+                Reason = lowCarb || floor >= target - RiceHabits.StepG ? null : "kcal_protein",
+            });
+        }
+        return res;
     }
 }
 
@@ -209,6 +316,28 @@ public static class MamBuilder
             MinG = Math.Min(i.MinG, floor), MaxG = Math.Max(i.MaxG, Math.Max(target, std)),
             RiceTargetG = target, RiceFloorG = floor,
         };
+    }
+
+    /// <summary>
+    /// T-098 (D-COM-04): dòng tinh bột đầu tiên (role carb) của món trọn suất trưa/tối cũng ghim theo mức cơm người dùng chọn, như dòng cơm của mâm;
+    /// tinh bột khác cơm (bún, khoai) quy theo kcal tương đương cơm trắng. Gram chuẩn (Grams) giữ nguyên công thức. null = món không có dòng tinh bột.
+    /// </summary>
+    public static (Recipe Recipe, RiceLineInfo Line)? PinFullMeal(Recipe r, RiceSpec spec)
+    {
+        var idx = r.Ingredients.FindIndex(i => i.Role == "carb");
+        if (idx < 0) return null;
+        var li = r.Ingredients[idx];
+        var rl = RiceLine(li, spec);
+        var target = rl.RiceTargetG!.Value;
+        var floor = rl.RiceFloorG!.Value;
+        var pinned = new RecipeIngredient
+        {
+            IngredientId = li.IngredientId, Grams = li.Grams, Role = li.Role, SwapGroup = li.SwapGroup,
+            MinG = Math.Min(li.MinG, floor), MaxG = Math.Max(li.MaxG, Math.Max(target, li.Grams)),
+            RiceTargetG = target, RiceFloorG = floor,
+        };
+        var ings = r.Ingredients.Select((x, i) => i == idx ? pinned : x).ToList();
+        return (r.WithIngredients(ings), new RiceLineInfo(idx, target, floor));
     }
 
     internal static MamInfo Compose(Recipe main, Recipe? soup, Recipe? veg, Recipe? carb, bool packedLunch, RiceSpec? rice = null)

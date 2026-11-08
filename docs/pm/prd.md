@@ -412,7 +412,7 @@ Bối cảnh: it-05 (p01) cho mâm chỉ có 37 kcal cơm (xem D-MAM-02). Yêu c
 - **Ghi chú trong API:** mỗi bữa mâm trả `rice: { habit, target_g, actual_g }`; khi `actual_g < target_g − 10` thì thêm `notes: [{ code: "rice_reduced", target_g, actual_g, reason: "kcal" | "protein" }]`. App hiện (chuỗi i18n, Research soạn), ghi theo chén: "Bữa này cơm còn khoảng {actual_chen} chén ({actual} g), bạn chọn {target_chen} chén, để vẫn đủ đạm trong mức {kcal} kcal của bạn."
 - **Cảnh báo sớm ở onboarding:** nếu kcal cơm của mức đã chọn > 45% kcal trung bình một bữa chính (tính từ chỉ tiêu US-1.1 và phân bổ US-1.3), bước này hiện dòng "Với mức calo hiện tại, một số bữa sẽ phải bớt cơm. Bạn vẫn có thể giữ lựa chọn này." Không chặn.
 - **Hộ gia đình:** mức cơm chỉ áp cho người dùng chính. Người lớn khác ăn mức `vua`, trẻ em 0,6 × `vua` (như quy ước khẩu phần). Danh sách đi chợ cộng gạo theo cơm thực tế của cả nhà (hệ số 0,36 gạo trắng / 0,34 gạo lứt).
-- **Phạm vi:** chỉ bữa mâm trưa/tối. Bữa sáng, bữa phụ và phần cơm bên trong món `full_meal` (cơm tấm, cơm rang…) chưa theo mức ở MVP; áp cho `full_meal` là P1.
+- **Phạm vi:** chỉ bữa mâm trưa/tối. Bữa sáng, bữa phụ và phần cơm bên trong món `full_meal` (cơm tấm, cơm rang…) chưa theo mức ở MVP; áp cho `full_meal` là P1. **(Cập nhật D-COM-04: `full_meal` có cơm đưa vào MVP.)**
 - **Thứ tự ưu tiên (thay D-MAM-01):** ràng buộc cứng > sàn protein + dải kcal > **lượng cơm theo lựa chọn (có sàn, có ghi chú)** > ngân sách > tráng miệng > ghép mâm > xu hướng/khẩu vị.
 - **Đổi câu trả lời ở tab Bạn:** đổi xong hỏi xác nhận rồi lên lại các ngày còn lại của tuần (theo US-5.5: giữ ngày đã qua và hôm nay), danh sách đi chợ cập nhật.
 - API: thêm `preferences.rice_habit` (enum trên). Thiếu trường thì coi là `vua` để không vỡ máy khách cũ và golden.
@@ -447,6 +447,41 @@ Bối cảnh: sau T-094 (`docs/dev/engine-report-rice.md`), ở mức "1 chén" 
 - Sai số ước tính ngân sách 2% → 3%: **chấp nhận**. Đây là sai số ước tính, ngưỡng sản phẩm D-BUD-02 không đổi.
 - `Tuan_14` số bữa mâm p04 ≥ 9 (trước 10), p10 ≥ 8 (trước 9): **chấp nhận tạm**. Ngưỡng sản phẩm là ≥ 60% bữa trưa/tối ghép mâm trên toàn bộ hồ sơ (D-MAM-01) vẫn giữ. Khôi phục ≥ 10 / ≥ 9 trong T-096 nếu đạt; không đạt thì Dev ghi số đo.
 - p01 tráng miệng ≥ 2 loại (trước ≥ 3): **không chấp nhận lâu dài**. 2 loại tráng miệng cho cả tuần là quá lặp với yêu cầu tráng miệng mọi bữa (D-DES-01). Tạm để 2 cho T-094 qua; T-096 phải **khôi phục ≥ 3**.
+
+**D-COM-03 — Thẻ tinh bột khi mâm không dùng cơm (PM, 2026-11-07).** Không ẩn thẻ (người dùng cần thấy mức của mình được thay bằng gì). Nhãn theo **tên món**, quy đổi chén cơm đặt sau: "Khoai lang hấp · ~115 g (thay ½ chén cơm)", "Bún tươi · ~200 g (thay 1 chén cơm)". Chữ "chén cơm" chỉ dùng khi món là cơm trắng/gạo lứt. Ghi chú giảm cơm cũng theo dạng này ("Bữa này khoai lang còn ~90 g, thay khoảng ½ chén cơm…"). API trả thêm `rice.kind` (`com` | `other`) và `rice.rice_equiv_g` (gram cơm trắng tương đương) để app quy ra chén; app không tự đoán. Task: T-098 (API), T-099 (Flutter).
+
+**D-COM-04 — Mức 2 chén / 3+ chén lại ít bữa có cơm (PM, 2026-11-07).**
+
+Số đo (p01, 1.400 kcal / 120 g đạm, sau T-096): bữa mâm có cơm mỗi tuần: ½ chén 14, 1 chén 13, 2 chén 5, 3+ chén 2. **Gạo sống cần mua: 1 chén 575 g/tuần, 2 chén 678 g, 3+ chén 429 g**, tức người chọn ăn nhiều cơm nhất lại được mua ít gạo nhất. Ngược ý người dùng, không chấp nhận.
+
+Nguyên nhân:
+- Với 1.400 kcal, 2 chén (~390 kcal) mỗi bữa trưa/tối là ~56% kcal cả ngày. Phần còn lại không đủ chỗ cho 120 g đạm, nên đa số bữa thật sự không giữ được đủ mức. Việc này dự kiến được; cảnh báo onboarding (US-1.4b AC3) có để báo trước.
+- **Lỗi thứ tự:** sau T-096, bữa đủ món không có cơm (`full_meal`) được coi là "không phải giảm cơm" nên xếp trên mâm phải bớt cơm. D-COM-01 quy định ngược lại: mâm bớt cơm đến sàn (có ghi chú) đứng **trước** `full_meal`.
+
+Quyết định:
+- **Thứ tự xếp hạng bữa trưa/tối** khi người dùng không chọn Ít tinh bột:
+  1. Mâm giữ đủ mức cơm.
+  2. Mâm bớt cơm, không dưới sàn max(50% mức, 60 g), có ghi chú.
+  3. Món `full_meal` có cơm (cơm tấm, cơm gà…), dòng cơm theo mức trong [min_g, max_g] (đưa phần P1 của D-COM-01 vào MVP).
+  4. `full_meal` không cơm.
+
+  Bữa đủ món không cơm tính như **cơm thực tế 0 g**, không được coi là "giữ cơm".
+- **Được dồn kcal trong ngày** cho mức 2 chén và 3+ chén: engine được chuyển tối đa **15% kcal của ngày** từ bữa sáng/bữa phụ sang trưa/tối. Kiểm đạt vẫn theo ngày (kcal ±5%, đạm ≥ sàn). Mức ½ và 1 chén giữ phân bổ cũ.
+- **Onboarding nói trước bằng con số:** dòng cảnh báo US-1.4b AC3 kèm số chén khả thi: "Với 1.400 kcal và 120 g đạm, mỗi bữa bạn ăn được khoảng 1½ chén mà vẫn đủ đạm. Bạn vẫn có thể giữ 3 chén; app sẽ bớt cơm ở bữa cần bớt và ghi chú." Số chén khả thi do server tính (`budget-range` hoặc endpoint riêng, Dev chọn), app không tự tính.
+- Task: T-098 (engine + API), T-099 (Flutter).
+
+**D-DIV-02 — p01 chỉ 9 món trưa/tối khác nhau (PM, 2026-11-07).** PM đo: cùng p01, ngân sách 650k → 9 món; **800k → 11 món**. Nguyên nhân là ngân sách sát, không phải lỗi engine. Ngân sách xếp trên đa dạng món, nên **chấp nhận**. Sửa D-DIV-01: thêm ngoại lệ "ngân sách sát" (chi phí món ≥ 90% ngân sách và nới ngân sách 20% thì đạt ≥ 10 món) với ngưỡng **≥ 8**. Engine-report thêm dòng "món trưa/tối khác nhau khi nới ngân sách 20% → N" (như dòng lý do không ghép mâm) để phân biệt với lỗi engine. Không làm task dữ liệu riêng; T-053/T-054 (món rẻ) sẽ nâng số này. Ghi vào T-098.
+
+**D-QA-10 — TC-E-04 tạo tuần khi mất mạng (PM, 2026-11-07).** Bảng TC sai, không phải app sai. Theo ADR-001, tạo/đổi tuần cần mạng; xem tuần, công thức, danh sách đi chợ đã tạo thì offline được. Kỳ vọng đúng: hiện "Chưa tạo được thực đơn" + thông báo mất mạng + nút Thử lại; dữ liệu trên máy giữ nguyên; có mạng lại thì Thử lại tạo được tuần. Research sửa bảng (T-057c).
+
+**D-QA-11 — TC-E-09 riêng tư: câu chữ đúng (PM, 2026-11-07).** "Không gửi dữ liệu ra ngoài máy" sai với ADR-001: tạo/đổi tuần và `budget-range` gửi chỉ số cơ thể, mục tiêu và lựa chọn ăn uống lên API. Câu đúng, khớp NFR riêng tư (§7) và đoạn chính sách trong `docs/research/legal-notes.md`: **app chỉ gửi dữ liệu cần để lập thực đơn, chỉ tới máy chủ của app; không gửi bên thứ ba; không gửi tên, email hay mã định danh thiết bị; máy chủ không lưu nội dung yêu cầu sau khi trả kết quả.** Các điểm kiểm được: (1) mọi request chỉ tới host API đã cấu hình, không domain nào khác (không analytics, không SDK báo lỗi); (2) payload chỉ có trường trong OpenAPI, không có tên/email/ID thiết bị; (3) cấu hình log của API không ghi body request. Log truy cập của hosting/proxy (IP, thời gian, đường dẫn) là điểm mở trước phát hành theo legal-notes, không thuộc TC này.
+
+**D-COM-05 — Kết quả T-098: duyệt ngoại lệ (PM, 2026-11-08).** Không nâng ngân sách hồ sơ test: hồ sơ test phản ánh người dùng thật.
+- **AC2 (≥ 12/14 bữa có cơm ở 2 chén / 3+ chén):** chấp nhận ngoại lệ **"ngân sách sát"**: hồ sơ mà Dev đo được mọi phương án ≥ 12/14 bữa có cơm đều vượt ngân sách (hiện p02 3+ chén, p09 3+ chén, p14 2 chén và 3+ chén). Ngân sách là ràng buộc của người dùng nên thắng. Điều kiện: engine-report ghi cho từng ngoại lệ **ngân sách cần để đạt** (vd p02 ≥ 652k), và app phải cảnh báo (AC4).
+- **AC4 (cảnh báo khi thiếu cơm): không có ngoại lệ, phải 64/64.** Ước lượng số chén khả thi phải tính cả **ngân sách**, không chỉ kcal/đạm. p14 ở mức 2 chén phải bật cảnh báo. Câu cảnh báo nêu đúng lý do: "Với ngân sách {X}, khoảng {n}/14 bữa có đủ {m} chén cơm; cần khoảng {Y} để bữa nào cũng đủ." (lý do kcal/đạm giữ câu D-COM-04).
+- **AC1 (gạo tăng dần):** đo lại bằng **tổng tinh bột quy ra cơm** (`rice_equiv_g` cả tuần), không đo gạo sống, vì mâm khoai/bún thay cơm là hợp lệ. Yêu cầu tuyệt đối: không giảm khi tăng mức (cho phép sai số làm tròn ≤ 2%). Hồ sơ thuộc ngoại lệ ngân sách ở AC2 được miễn ở các mức thuộc ngoại lệ. Gạo sống chỉ ghi trong report. **Không nới luật 1 canh / 1 món chính.** Kho mâm cơm hẹp giao Research bổ sung trong T-053/T-054: ưu tiên món chính rẻ hợp mâm cơm.
+- **AC7 (đa dạng) ở 2 chén / 3+ chén:** chấp nhận **≥ 6 món trưa/tối** cho MVP (ngưỡng ở ½ chén và 1 chén giữ theo D-DIV-01/02). Theo dõi trong report; T-053/T-054 nâng lên.
+- Rice98Tests: các ngoại lệ phải đọc từ một danh sách có tên hồ sơ, mức và lý do (`budget`), không nới ngưỡng chung.
 
 **D-SHP-01 — Đồ "nhà có sẵn" trong con số tại quầy (PM, 2026-11-07).** Câu (a) trong `docs/research/prices-small-packs-notes.md`. Chọn **có, loại khỏi mặc định**:
 - Nguyên liệu `default_pantry` (dầu ăn, nước mắm, xì dầu, muối, đường, tiêu, gia vị khô…) được đánh dấu sẵn "Nhà có sẵn" ở tuần đầu. **Không** cộng vào "Ước tính trả tại quầy" mặc định.
@@ -523,7 +558,7 @@ API trả 400 kèm trường lỗi. App khóa nút Tiếp tục kèm lời nhắ
 - Engine C# ưu tiên `purchase_as` (gạo sống). Hai dòng cũ chỉ còn dùng cho parity và không được hiển thị cho người dùng.
 - Validate-data không báo lỗi với hai dòng này.
 
-**D-DIV-01 — Độ đa dạng món khi kho hẹp (L-11, PM 2026-11-07).**
+**D-DIV-01 — Độ đa dạng món khi kho hẹp (L-11, PM 2026-11-07).** (Bổ sung ngoại lệ "ngân sách sát" ≥ 8 món ở D-DIV-02.)
 
 Sau đợt D1, 12/14 hồ sơ có 10–11 mâm khác nhau/tuần. p09 (chỉ lò vi sóng) ra 6, p15 ra 8, vì kho món hợp lệ hẹp.
 

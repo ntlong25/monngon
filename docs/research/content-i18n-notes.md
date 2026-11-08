@@ -87,3 +87,15 @@ Thêm vào `content/i18n/vi.json` (giữ nguyên `onboardingSummaryBudgetLow`), 
 Lưu ý: `gen_arb.py` đổi tên tham số thành `v1`, `v2` khi một chuỗi có từ hai tham số trở lên, nên Dev phải truyền đúng thứ tự trên. Với `onboardingSummaryBudgetLow` (đã có sẵn), ARB là `{v1}` = budget, `{v2}` = min.
 
 Chưa gửi được cho Dev qua hub (hub tạm dừng nhắn). Dev cần đọc mục này.
+
+## T-057c (07/11/2026): rà TC có giả định offline
+
+- TC-E-04: sửa kết quả theo D-QA-10 (báo không có mạng + Thử lại, dữ liệu giữ nguyên). Ghi lý do ở chính dòng TC.
+- Thêm TC-E-11 (tuần đã tạo xem được offline) và TC-E-12 (Thử lại khi có mạng).
+- Rà các TC khác: không có TC nào khác giả định tạo tuần offline. TC-6-05 (xóa dữ liệu), TC-1-37/TC-E-05 (đóng app giữa onboarding) đều không cần mạng. TC-E-09 (riêng tư: "không gửi dữ liệu ra ngoài máy") cần PM xem lại: tạo tuần đi qua API, nên câu này chỉ đúng nếu API là máy dev của chính người dùng. Chưa sửa, cần quyết định của PM.
+
+## TC-E-09 theo D-QA-11 (07/11/2026, gộp vào T-057c)
+
+- Kết quả mong đợi thay "không gửi dữ liệu ra ngoài máy" bằng: chỉ gửi dữ liệu cần để lập thực đơn, chỉ tới máy chủ của app, không tới bên thứ ba, không gửi tên/email/mã thiết bị, máy chủ không lưu nội dung yêu cầu sau khi trả kết quả.
+- Ba bước kiểm: (1) host duy nhất; (2) payload đúng OpenAPI; (3) log API không ghi body.
+- Ngoài phạm vi TC: log truy cập của hosting/proxy, điểm mở trước phát hành (legal-notes).

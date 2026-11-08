@@ -454,6 +454,43 @@ T-001 (khởi tạo Expo), T-013…T-028 (UI Expo): **CANCELLED**, thay bằng T
 
 - **AC:** 2 mục xong; `dotnet test` và `flutter test` xanh; báo session chính để Research chạy lại TC-1-09, TC-1-33, TC-E-04 (gộp vào T-050c).
 
+### T-098 — Mức 2 chén/3+ chén có đủ bữa có cơm; API thẻ tinh bột · DEV · **P0** (trước T-097)
+- **Phụ thuộc:** T-096. PRD §10 D-COM-03, D-COM-04, D-DIV-02.
+- **Files:** chấm/xếp hạng bữa trưa/tối trong `backend/MonNgon.Engine/PlanWeek.cs`, `Mam.cs`, `WeekChanges.cs`; phân bổ kcal theo bữa; model/OpenAPI (`rice.kind`, `rice.rice_equiv_g`, số chén khả thi); `MonNgon.Tools` engine-report; golden nếu lệch. Không đụng `mobile/`.
+- **Mô tả:**
+  - Xếp hạng bữa trưa/tối: mâm đủ cơm → mâm bớt cơm (≥ sàn, có ghi chú) → `full_meal` có cơm (dòng cơm theo mức) → `full_meal` không cơm (tính cơm 0 g).
+  - Mức `nhieu`/`rat_nhieu`: cho dồn tối đa 15% kcal ngày từ sáng/phụ sang trưa/tối.
+  - API: `rice.kind` (`com` | `other`), `rice.rice_equiv_g`; số chén khả thi mỗi bữa theo chỉ tiêu + đạm (cho cảnh báo onboarding).
+  - Engine-report thêm cột: số bữa trưa/tối có cơm mỗi tuần (mâm + `full_meal` có cơm), gạo sống/tuần theo 4 mức trên một dòng, "món trưa/tối khi nới ngân sách 20%".
+- **AC (16 hồ sơ, seed 1 + 2 seed thêm):**
+  1. **Gạo sống cần mua mỗi tuần không giảm khi mức tăng:** với mọi hồ sơ không Ít tinh bột, `it` ≤ `vua` ≤ `nhieu` ≤ `rat_nhieu`. p01 hiện 575 / 678 / 429 g, không đạt.
+  2. Hồ sơ lên thực đơn cả trưa và tối: số bữa có cơm/tuần ở `nhieu` và `rat_nhieu` **≥ 12/14** (p01 hiện 5 và 2). Không đạt ở hồ sơ nào thì ghi số và báo session chính, không tự nới.
+  3. Không bữa `full_meal` không cơm nào được chọn khi còn mâm bớt cơm hợp lệ (test bất biến trên log xếp hạng).
+  4. Mọi hồ sơ có > 20% bữa bị ghi chú bớt cơm ở một mức thì ở mức đó cờ cảnh báo onboarding phải bật (số chén khả thi < mức chọn). Test chéo trên 16 hồ sơ × 4 mức.
+  5. Mâm khoai lang/bún: `rice.kind = other`, `rice.rice_equiv_g` đúng kcal tương đương cơm trắng (±5 g).
+  6. Không lùi: kết quả T-096 ở `it`/`vua` (≤ 20% ghi chú mỗi hồ sơ, p01 cơm trung vị ≥ 140 g, tráng miệng ≥ 3 loại); 16/16 hồ sơ 7/7, kcal ±5%, đạm ≥ sàn, chi phí ≤ ngân sách, 0 vi phạm cứng, ≥ 60% bữa trưa/tối ghép mâm ở `vua`.
+  7. Đa dạng: hồ sơ bình thường ≥ 10 món trưa/tối, trừ ngoại lệ D-DIV-01/D-DIV-02 (ghi rõ hồ sơ nào thuộc ngoại lệ nào).
+- **Cập nhật AC sau lượt 1 (2026-11-08, D-COM-05):**
+  - AC1: đo bằng tổng `rice_equiv_g` cả tuần, không giảm khi tăng mức (sai số làm tròn ≤ 2%); miễn cho ô thuộc ngoại lệ ngân sách AC2.
+  - AC2: ngoại lệ "ngân sách sát" cho p02 (3+ chén), p09 (3+ chén), p14 (2 chén, 3+ chén); report ghi ngân sách cần để đạt.
+  - AC4: bắt buộc 64/64; ước lượng chén khả thi tính cả ngân sách; p14 2 chén phải bật cảnh báo; API trả lý do (`kcal_protein` | `budget`) và ngân sách cần.
+  - AC7: ở `nhieu`/`rat_nhieu` ngưỡng ≥ 6 món trưa/tối.
+  - Ngoại lệ trong Rice98Tests là danh sách tường minh (hồ sơ, mức, lý do), không nới ngưỡng chung. Không nâng ngân sách hồ sơ test; không nới luật 1 canh/1 món chính.
+
+### T-099 — Thẻ tinh bột theo tên món + cảnh báo số chén khả thi (Flutter) · DEV · P1 (sau T-097, cùng vùng `mobile/`)
+- **Phụ thuộc:** T-098 (API), T-097. PRD D-COM-03, D-COM-04.
+- **Mô tả:**
+  - Thẻ tinh bột màn mâm: `rice.kind = com` → "Cơm gạo lứt · 1 chén (150 g)"; `other` → "Khoai lang hấp · ~115 g (thay ½ chén cơm)" (chén lấy từ `rice_equiv_g`). Ghi chú bớt cơm dùng cùng dạng.
+  - Bước thói quen ăn cơm: dòng cảnh báo hiện số chén khả thi do server trả.
+- **AC:**
+  1. Widget test 3 trường hợp: cơm, khoai lang, bún; không còn chữ "chén cơm" làm nhãn chính cho món không phải cơm.
+  2. Widget test cảnh báo: có số chén khả thi < mức chọn → hiện câu kèm số; ngược lại không hiện.
+  3. Chạy lại luồng it-10 (4 mức) và chụp màn mâm khoai lang vào `docs/dev/screens/`. `flutter test` xanh.
+
+### T-057c — Sửa TC-E-04 theo hành vi đúng (D-QA-10) · RESEARCH · P1 (việc nhỏ)
+- **Mô tả:** Trong `docs/research/test-scenarios.md`, TC-E-04 sửa kết quả mong đợi thành: "Hiện 'Chưa tạo được thực đơn' + thông báo không có mạng + nút Thử lại; dữ liệu trên máy giữ nguyên; có mạng lại thì Thử lại tạo được tuần". Thêm TC: tuần đã tạo xem được offline (Kế hoạch, công thức, Đi chợ). Kiểm các TC khác có giả định "chạy offline" tương tự thì sửa luôn.
+- **AC:** TC-E-04 khớp ADR-001 và `docs/dev/qa-automation.md`; ghi ngày sửa và lý do (D-QA-10).
+
 ### T-050b — Kiểm thử lại + phần UI chưa kiểm · RESEARCH · P0 (sau T-093 mục 1–4)
 - **Mô tả:**
   - Chạy lại các TC không đạt của T-050 (TC-1-17, 1-23, 1-31, 2-04, 2-04b) cùng TC đã sửa.
@@ -484,8 +521,8 @@ T-001 (khởi tạo Expo), T-013…T-028 (UI Expo): **CANCELLED**, thay bằng T
   - Ghi danh sách thay đổi vào `docs/research/data-batch-D1.md`.
 
 ### Thứ tự ưu tiên sau T-050
-1. **Dev:** xong việc điều tra số test .NET dao động → T-093 mục 1 (L-03) → 2 (L-09) → 3 (L-01) → 4 (L-02) → T-078 phần pantry → **T-094 (lượng cơm theo thói quen, D-COM-01, xong) → T-095 (Flutter) ∥ T-096 (giữ cơm khi chọn mâm, D-COM-02; song song được vì khác file)** → T-097 (L-12, L-13) → T-093 mục 5 (L-08) → mục 6 (L-05).
-2. **Research:** **T-059c ngay (số liệu chén cơm, dữ liệu `max_g`, chuỗi; Dev cần trước T-095)**, T-057b (tài liệu, không chạm dữ liệu) → chờ Dev xong mục 1–4 → T-050b → T-050c (sau T-094/T-095/T-096) → T-054b (mở băng D1) → các task dữ liệu còn lại (T-053, T-054…).
+1. **Dev:** xong việc điều tra số test .NET dao động → T-093 mục 1 (L-03) → 2 (L-09) → 3 (L-01) → 4 (L-02) → T-078 phần pantry → **T-094 (lượng cơm theo thói quen, D-COM-01, xong) → T-095 (Flutter) ∥ T-096 (giữ cơm khi chọn mâm, D-COM-02; song song được vì khác file)** → **T-098 (2–3 chén đủ bữa có cơm, D-COM-04)** → T-097 (L-12, L-13) → T-099 (thẻ tinh bột, Flutter) → T-093 mục 5 (L-08) → mục 6 (L-05).
+2. **Research:** T-057c (sửa TC-E-04, nhỏ) bất cứ lúc nào; **T-059c ngay (số liệu chén cơm, dữ liệu `max_g`, chuỗi; Dev cần trước T-095)**, T-057b (tài liệu, không chạm dữ liệu) → chờ Dev xong mục 1–4 → T-050b → T-050c (sau T-094/T-095/T-096) → T-054b (mở băng D1) → các task dữ liệu còn lại (T-053, T-054…).
 
 ### T-029 — Freemium (viết lại) · DEV · P2
 - **Mô tả:** Theo PRD §12.
@@ -583,6 +620,7 @@ T-001 (khởi tạo Expo), T-013…T-028 (UI Expo): **CANCELLED**, thay bằng T
   - Kcal/100 g của gạo sống so với cơm chín khớp hệ số ±10% (vd gạo 365 kcal × 0,36 ≈ 131 so với cơm 130). Quy tắc chung ≤ 5% theo D-SHP-03. **DONE trong đợt D1.**.
 
 ### T-053 — Món phụ cho ghép mâm · RESEARCH · P0
+- **Bổ sung 2026-11-08 (D-COM-05):** ưu tiên món chính rẻ hợp mâm cơm (đạm nạc, kcal vừa) để người chọn 2–3 chén với ngân sách sát vẫn có mâm cơm và đủ đa dạng.
 - **Mô tả:** Theo hợp đồng v0.2, thêm vào `data/recipes.json`:
   - ≥ 15 `soup` (canh rau, canh chua, canh bí, canh mồng tơi, canh cải; ≥ 6 món chay **không nước mắm**);
   - ≥ 12 `side_veg` (rau muống luộc/xào, cải xào, su su, đậu cô ve, nộm…; ≥ 6 món chay);
@@ -653,7 +691,7 @@ T-001 (khởi tạo Expo), T-013…T-028 (UI Expo): **CANCELLED**, thay bằng T
 ## Tổng hợp v0.2
 | Owner | DONE | CANCELLED | Còn mở P0 | Còn mở P1 | Còn mở P2 |
 |---|---|---|---|---|---|
-| DEV | 11 (T-002…T-012) | 17 (T-001, T-013…T-028) | 29 (T-051, T-052, T-060…T-066, T-069…T-072, T-074, T-076, T-078, T-080…T-089, T-093…T-097) | 7 (T-067, T-068, T-073, T-077, T-090…T-092) | 4 (T-029, T-075, T-079, T-100) |
-| RESEARCH | 5 (T-041, T-043, T-047, T-048, T-049) | 1 (T-044) | 11 (T-058, T-053, T-054, T-055, T-057, T-059, T-059c, T-042c, T-050b, T-050c, T-057b) | 3 (T-042b, T-056, T-054b) · T-050 DONE | 0 |
+| DEV | 11 (T-002…T-012) | 17 (T-001, T-013…T-028) | 30 (T-051, T-052, T-060…T-066, T-069…T-072, T-074, T-076, T-078, T-080…T-089, T-093…T-098) | 8 (T-067, T-068, T-073, T-077, T-099, T-090…T-092) | 4 (T-029, T-075, T-079, T-100) |
+| RESEARCH | 5 (T-041, T-043, T-047, T-048, T-049) | 1 (T-044) | 12 (T-058, T-053, T-054, T-055, T-057, T-059, T-059c, T-042c, T-050b, T-050c, T-057b, T-057c) | 3 (T-042b, T-056, T-054b) · T-050 DONE | 0 |
 
 Ghi chú: các task RESEARCH PARTIAL (T-040, T-042, T-045, T-046) đã được gộp vào T-054, T-042b, T-055.

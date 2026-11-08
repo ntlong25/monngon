@@ -21,6 +21,26 @@ public sealed class SlotsPreviewResponse
     public required List<SlotTarget> Slots { get; init; }
 }
 
+/// <summary>
+/// Mức cơm khả thi cho bước chọn thói quen ăn cơm. Chỉ gửi <c>profile</c> + <c>slots</c>: trả nhanh, chỉ theo kcal/đạm của bữa (reason = kcal_protein).
+/// Gửi thêm <c>preferences</c> (ngân sách, hộ, dụng cụ, loại trừ…): lập thử một tuần ở từng mức (song song, vài giây) để tính cả ngân sách (reason = budget, kèm ngân sách cần).
+/// </summary>
+public sealed class RiceFeasibilityRequest
+{
+    public Profile Profile { get; set; } = new();
+    public SlotsConfig Slots { get; set; } = new();
+    public Preferences? Preferences { get; set; }
+    public string? StartDate { get; set; }
+    public long? Seed { get; set; }
+}
+
+public sealed class RiceFeasibilityResponse
+{
+    public required Targets Targets { get; init; }
+    /// <summary>Mỗi mức cơm (it, vua, nhieu, rat_nhieu): mức chọn, mức khả thi theo chỉ tiêu bữa, có cần cảnh báo ở bước chọn thói quen ăn cơm không.</summary>
+    public required List<RiceFeasibilityItem> Habits { get; init; }
+}
+
 public sealed class BudgetTargetsDto
 {
     public double? KcalTarget { get; set; }

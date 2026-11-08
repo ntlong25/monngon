@@ -95,6 +95,29 @@ public static class V1Endpoints
             return TypedResults.Ok(new SlotsPreviewResponse { Targets = t, Slots = MealSlots.Allocate(t, req.Slots) });
         }).WithName("PreviewSlots").WithSummary("Phân bổ chỉ tiêu theo bữa");
 
+        g.MapPost("/rice/feasibility", async Task<Results<Ok<RiceFeasibilityResponse>, ValidationProblem>> (RiceFeasibilityRequest req, Dataset data) =>
+        {
+            var e = new Errors();
+            Validation.Profile(e, req.Profile);
+            if (req.Preferences is null) Validation.Slots(e, req.Slots);
+            else
+            {
+                Validation.Preferences(e, req.Preferences, data);
+                if (req.StartDate is not null) Validation.StartDate(e, req.StartDate);
+            }
+            if (e.Any) return TypedResults.ValidationProblem(e.ToDictionary());
+            var t = TargetCalc.Compute(req.Profile);
+            if (req.Preferences is null) return TypedResults.Ok(new RiceFeasibilityResponse { Targets = t, Habits = RiceFeasibility.Compute(t, req.Slots) });
+            var start = req.StartDate ?? DateTime.UtcNow.AddHours(7).ToString("yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+            var plans = await Task.WhenAll(Enums.RiceHabits.Select(h => Task.Run(() =>
+            {
+                var prefs = System.Text.Json.JsonSerializer.Deserialize<Preferences>(System.Text.Json.JsonSerializer.Serialize(req.Preferences, JsonOptions.Default), JsonOptions.Default)!;
+                prefs.RiceHabit = h;
+                return (h, plan: WeekPlanner.Plan(new PlanWeekInput { Targets = t, Prefs = prefs, Data = data, StartDate = start, Seed = req.Seed ?? 1 }));
+            })));
+            return TypedResults.Ok(new RiceFeasibilityResponse { Targets = t, Habits = RiceFeasibility.Evaluate(t, req.Preferences, plans.ToDictionary(x => x.h, x => x.plan)) });
+        }).WithName("RiceFeasibility").WithSummary("Mức cơm khả thi mỗi bữa trưa/tối (kcal/đạm; kèm preferences thì tính cả ngân sách) — cảnh báo ở bước chọn thói quen ăn cơm");
+
         g.MapPost("/budget-range", Results<Ok<BudgetRangeResponse>, ValidationProblem> (BudgetRangeRequest req, Dataset data) =>
         {
             var e = new Errors();

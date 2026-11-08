@@ -84,6 +84,35 @@ public class V1Tests(WebApplicationFactory<Program> factory) : IClassFixture<Web
         Assert.Equal(5, j["slots"]!.AsArray().Count);
     }
 
+    /// <summary>T-098: bước chọn thói quen ăn cơm — mức cơm khả thi theo chỉ tiêu bữa (không cần lập tuần).</summary>
+    [Fact]
+    public async Task Rice_feasibility_tra_4_muc_kem_so_chen_kha_thi()
+    {
+        var g = Golden("p01_nu_giam_mo_vua.seed1.json");
+        var body = new JsonObject { ["profile"] = g["input"]!["profile"]!.DeepClone(), ["slots"] = g["input"]!["preferences"]!["slots"]!.DeepClone() };
+        var r = await _c.PostAsync("/v1/rice/feasibility", JsonContent.Create(body));
+        Assert.Equal(HttpStatusCode.OK, r.StatusCode);
+        var j = await Json(r);
+        var h = j["habits"]!.AsArray();
+        Assert.Equal(["it", "vua", "nhieu", "rat_nhieu"], h.Select(x => (string)x!["habit"]!));
+        var vua = h[1]!;
+        Assert.Equal(150, (double)vua["target_g"]!);
+        Assert.Equal(1.0, (double)vua["feasible_cups"]!);
+        Assert.True((bool)vua["feasible"]!);
+        var nhieu = h[2]!;
+        Assert.Equal(2.0, (double)nhieu["target_cups"]!);
+        Assert.False((bool)nhieu["feasible"]!);
+        Assert.True((double)nhieu["feasible_cups"]! < 2.0);
+        Assert.NotNull(j["targets"]);
+    }
+
+    [Fact]
+    public async Task Rice_feasibility_sai_dau_vao_tra_400()
+    {
+        var r = await _c.PostAsJsonAsync("/v1/rice/feasibility", new { profile = new { goal = "bay", sex = "female", age = 5, height_cm = 160, weight_kg = 60, activity = "light", target_mode = "formula" } });
+        Assert.Equal(HttpStatusCode.BadRequest, r.StatusCode);
+    }
+
     [Fact]
     public async Task Slots_preview_khong_bua_chinh_nao_tra_400()
     {
@@ -304,6 +333,10 @@ public class V1Tests(WebApplicationFactory<Program> factory) : IClassFixture<Web
         Assert.All(withRice, m => Assert.Equal("vua", m["rice"]!["habit"]!.GetValue<string>()));
         Assert.All(withRice, m => Assert.True(m["rice"]!["target_g"]!.GetValue<double>() > 0 && m["rice"]!["actual_g"]!.GetValue<double>() > 0));
         Assert.Contains(withRice, m => m["rice"]!["target_g"]!.GetValue<double>() == 150);
+        // T-098: loại tinh bột (com | other) và gram quy ra cơm trắng theo kcal
+        Assert.All(withRice, m => Assert.Contains(m["rice"]!["kind"]!.GetValue<string>(), new[] { "com", "other" }));
+        Assert.All(withRice, m => Assert.True(m["rice"]!["rice_equiv_g"]!.GetValue<double>() > 0));
+        Assert.All(withRice.Where(m => m["rice"]!["kind"]!.GetValue<string>() == "com"), m => Assert.Equal(m["rice"]!["actual_g"]!.GetValue<double>(), m["rice"]!["rice_equiv_g"]!.GetValue<double>(), 1e-6));
 
         var lots = await Json(await _c.PostAsync("/v1/plans", JsonContent.Create(Body("rat_nhieu"))));
         var notes = Planned(lots).Where(m => m["notes"] is not null).ToList();
@@ -449,7 +482,7 @@ public class V1Tests(WebApplicationFactory<Program> factory) : IClassFixture<Web
         Directory.CreateDirectory(dir);
         File.WriteAllText(Path.Combine(dir, "openapi.json"), j.ToJsonString(new JsonSerializerOptions { WriteIndented = true, Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping }));
         var paths = j["paths"]!.AsObject().Select(p => p.Key).ToList();
-        foreach (var p in new[] { "/v1/reference", "/v1/ingredients", "/v1/targets", "/v1/slots/preview", "/v1/budget-range", "/v1/plans", "/v1/recipes/{id}", "/v1/plans/swap-suggestions", "/v1/plans/apply-swap", "/v1/plans/ingredient-options", "/v1/plans/swap-ingredient", "/v1/plans/eat-out", "/v1/plans/regenerate-rest" })
+        foreach (var p in new[] { "/v1/reference", "/v1/ingredients", "/v1/targets", "/v1/slots/preview", "/v1/rice/feasibility", "/v1/budget-range", "/v1/plans", "/v1/recipes/{id}", "/v1/plans/swap-suggestions", "/v1/plans/apply-swap", "/v1/plans/ingredient-options", "/v1/plans/swap-ingredient", "/v1/plans/eat-out", "/v1/plans/regenerate-rest" })
             Assert.Contains(p, paths);
     }
 
