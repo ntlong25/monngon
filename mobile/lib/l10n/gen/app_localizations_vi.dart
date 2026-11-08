@@ -1704,4 +1704,44 @@ class AppL10nVi extends AppL10n {
 
   @override
   String get profileRiceHabitTitle => 'Thói quen ăn cơm';
+
+  @override
+  String mealStarchCups(Object v1, Object v2, Object v3) {
+    return '$v1 · $v2 chén ($v3 g)';
+  }
+
+  @override
+  String mealStarchOther(Object v1, Object v2, Object v3) {
+    return '$v1 · ~$v2 g (thay $v3 chén cơm)';
+  }
+
+  @override
+  String mealStarchReducedOther(Object v1, Object v2, Object v3) {
+    return 'Bữa này bớt còn ~$v1 g $v2 (thay $v3 chén cơm) để giữ đúng calo.';
+  }
+
+  @override
+  String onboardingRiceFeasibleWarning(
+    Object v1,
+    Object v2,
+    Object v3,
+    Object v4,
+  ) {
+    return 'Với $v1 kcal và $v2 g đạm, mỗi bữa bạn ăn được khoảng $v3 chén mà vẫn đủ đạm. Bạn vẫn có thể giữ $v4 chén; app sẽ bớt cơm ở bữa cần bớt và ghi chú.';
+  }
+
+  @override
+  String onboardingRiceBudgetWarning(
+    Object v1,
+    Object v2,
+    Object v3,
+    Object v4,
+  ) {
+    return 'Với ngân sách $v1, khoảng $v2/14 bữa có đủ $v3 chén cơm; cần khoảng $v4 để bữa nào cũng đủ.';
+  }
+
+  @override
+  String onboardingRiceBudgetWarningShort(Object v1, Object v2, Object v3) {
+    return 'Với ngân sách $v1, khoảng $v2/14 bữa có đủ $v3 chén cơm.';
+  }
 }

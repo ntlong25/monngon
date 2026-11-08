@@ -481,5 +481,11 @@
   "meal.rice_cups": "{cups} chén cơm (~{grams} g)",
   "meal.rice_reduced_cups": "Bữa này bớt còn {cups} chén cơm để giữ đúng calo.",
   "meal.rice_summary_low_carb": "Ít tinh bột: mâm không có cơm",
-  "profile.rice_habit.title": "Thói quen ăn cơm"
+  "profile.rice_habit.title": "Thói quen ăn cơm",
+  "meal.starch_cups": "{name} · {cups} chén ({g} g)",
+  "meal.starch_other": "{name} · ~{g} g (thay {cups} chén cơm)",
+  "meal.starch_reduced_other": "Bữa này bớt còn ~{g} g {name} (thay {cups} chén cơm) để giữ đúng calo.",
+  "onboarding.rice.feasible_warning": "Với {kcal} kcal và {protein} g đạm, mỗi bữa bạn ăn được khoảng {feasible} chén mà vẫn đủ đạm. Bạn vẫn có thể giữ {chosen} chén; app sẽ bớt cơm ở bữa cần bớt và ghi chú.",
+  "onboarding.rice.budget_warning": "Với ngân sách {budget}, khoảng {meals}/14 bữa có đủ {chosen} chén cơm; cần khoảng {needed} để bữa nào cũng đủ.",
+  "onboarding.rice.budget_warning_short": "Với ngân sách {budget}, khoảng {meals}/14 bữa có đủ {chosen} chén cơm."
 }

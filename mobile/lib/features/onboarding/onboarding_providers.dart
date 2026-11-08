@@ -71,6 +71,57 @@ final slotsPreviewProvider = FutureProvider<SlotsPreviewResponse>(
   },
 );
 
+/// Mức cơm khả thi — bản nhanh theo kcal/đạm (`POST /v1/rice/feasibility`, không lập tuần).
+final riceFeasibilityQuickProvider = FutureProvider<RiceFeasibilityResponse>(
+  retry: noRetry,
+  (ref) async {
+    final profile = ref.watch(profileProvider);
+    final slots = ref.watch(preferencesProvider.select((p) => p.slots));
+    if (validateProfile(profile).isNotEmpty || !hasPlannedMainMeal(slots)) {
+      throw const SupersededRequest();
+    }
+    await Future<void>.delayed(const Duration(milliseconds: 150));
+    if (!ref.mounted) throw const SupersededRequest();
+    return ref
+        .watch(apiProvider)
+        .riceFeasibility(
+          RiceFeasibilityRequest(profile: profile, slots: slots),
+        );
+  },
+);
+
+/// Mức cơm khả thi — bản có ngân sách: gửi kèm lựa chọn nên server lập thử tuần cho cả 4 mức (vài giây đến ~20 s),
+/// vì vậy chỉ theo dõi lựa chọn KHÔNG tính thói quen cơm (đổi mức cơm không gọi lại). Lỗi → bước cơm dùng bản nhanh.
+final riceFeasibilityFullProvider = FutureProvider<RiceFeasibilityResponse>(
+  retry: noRetry,
+  (ref) async {
+    final profile = ref.watch(profileProvider);
+    final prefsJson = ref.watch(
+      preferencesProvider.select(
+        (p) => jsonEncode(p.copyWith(riceHabit: 'vua').toJson()),
+      ),
+    );
+    final prefs = Preferences.fromJson(
+      jsonDecode(prefsJson) as Map<String, dynamic>,
+    );
+    if (validateProfile(profile).isNotEmpty ||
+        !hasPlannedMainMeal(prefs.slots)) {
+      throw const SupersededRequest();
+    }
+    await Future<void>.delayed(kDebounce);
+    if (!ref.mounted) throw const SupersededRequest();
+    return ref
+        .watch(apiProvider)
+        .riceFeasibility(
+          RiceFeasibilityRequest(
+            profile: profile,
+            slots: prefs.slots,
+            preferences: prefs,
+          ),
+        );
+  },
+);
+
 /// Truy vấn khoảng ngân sách: chỉ số người/bữa/cửa hàng (bước ngân sách) hoặc kèm cả kiêng/dụng cụ (tổng kết).
 class BudgetQuery {
   const BudgetQuery({

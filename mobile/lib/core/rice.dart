@@ -28,16 +28,51 @@ enum RiceHabit {
     ratNhieu => l.onboardingRiceRatNhieu,
   };
 
-  /// Kcal của 1 g cơm trắng chín (~130 kcal/100 g) và tỉ lệ ước tính của một bữa chính trong ngày.
-  static const kcalPerG = 1.3;
-  static const mainMealShare = 0.33;
-  static const warnShare = 0.45;
-
-  /// Cơm chiếm > 45% kcal ước tính của bữa chính (≈ 1/3 chỉ tiêu ngày) → cảnh báo mềm (không chặn).
-  static bool exceedsMainMealShare(RiceHabit h, double kcalTarget) =>
-      kcalTarget > 0 && h.grams * kcalPerG > kcalTarget * mainMealShare * warnShare;
-
   /// Dòng "Ít tinh bột: mâm không có cơm" hoặc nhãn mức ở màn tổng kết / tab Bạn.
   static String summary(AppL10n l, Preferences p) =>
       p.lowCarb ? l.mealRiceSummaryLowCarb : label(l, parse(p.riceHabit));
+
+  /// Số chén (đã làm tròn xuống ½ chén ở server) dạng chữ: `1.5` → "1½", `0.5` → "½", `0` → "0".
+  static String halfCups(double cups) {
+    final halves = (cups * 2).floor();
+    final whole = halves ~/ 2;
+    final half = halves.isOdd ? '½' : '';
+    if (whole == 0) return half.isEmpty ? '0' : half;
+    return '$whole$half';
+  }
+}
+
+/// Cảnh báo ở bước "Thói quen ăn cơm" (D-COM-04, D-COM-05). Mọi con số do server tính (`POST /v1/rice/feasibility`);
+/// app chỉ chọn mức người dùng đang chọn và quyết định có hiện hay không.
+class RiceWarning {
+  const RiceWarning({
+    required this.item,
+    required this.kcal,
+    required this.proteinG,
+  });
+
+  final RiceFeasibilityItem item;
+  final double kcal;
+  final double proteinG;
+
+  /// `budget` (ngân sách không đủ giữ cơm ở mức chọn) hoặc `kcal_protein` (mặc định khi server không ghi lý do).
+  bool get isBudget => item.reason == 'budget';
+}
+
+/// Cảnh báo cho mức [habit]: dùng bản có ngân sách ([full]) khi đã về, chưa có thì bản nhanh theo kcal/đạm ([quick]).
+/// Trả null khi chưa có dữ liệu hoặc mức khả thi (số chén khả thi ≥ mức chọn).
+RiceWarning? riceWarningFor(
+  RiceHabit habit,
+  RiceFeasibilityResponse? quick,
+  RiceFeasibilityResponse? full,
+) {
+  final source = full ?? quick;
+  if (source == null) return null;
+  final item = source.habits.where((i) => i.habit == habit.id).firstOrNull;
+  if (item == null || item.feasible) return null;
+  return RiceWarning(
+    item: item,
+    kcal: source.targets.kcalTarget,
+    proteinG: source.targets.proteinG,
+  );
 }

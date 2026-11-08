@@ -483,6 +483,12 @@
   "mealRiceReducedCups": "Bữa này bớt còn {cups} chén cơm để giữ đúng calo.",
   "mealRiceSummaryLowCarb": "Ít tinh bột: mâm không có cơm",
   "profileRiceHabitTitle": "Thói quen ăn cơm",
+  "mealStarchCups": "{v1} · {v2} chén ({v3} g)",
+  "mealStarchOther": "{v1} · ~{v2} g (thay {v3} chén cơm)",
+  "mealStarchReducedOther": "Bữa này bớt còn ~{v1} g {v2} (thay {v3} chén cơm) để giữ đúng calo.",
+  "onboardingRiceFeasibleWarning": "Với {v1} kcal và {v2} g đạm, mỗi bữa bạn ăn được khoảng {v3} chén mà vẫn đủ đạm. Bạn vẫn có thể giữ {v4} chén; app sẽ bớt cơm ở bữa cần bớt và ghi chú.",
+  "onboardingRiceBudgetWarning": "Với ngân sách {v1}, khoảng {v2}/14 bữa có đủ {v3} chén cơm; cần khoảng {v4} để bữa nào cũng đủ.",
+  "onboardingRiceBudgetWarningShort": "Với ngân sách {v1}, khoảng {v2}/14 bữa có đủ {v3} chén cơm.",
   "@commonKcal": {
     "placeholders": {
       "count": {
@@ -1241,6 +1247,90 @@
   "@mealRiceReducedCups": {
     "placeholders": {
       "cups": {
+        "type": "Object"
+      }
+    }
+  },
+  "@mealStarchCups": {
+    "placeholders": {
+      "v1": {
+        "type": "Object"
+      },
+      "v2": {
+        "type": "Object"
+      },
+      "v3": {
+        "type": "Object"
+      }
+    }
+  },
+  "@mealStarchOther": {
+    "placeholders": {
+      "v1": {
+        "type": "Object"
+      },
+      "v2": {
+        "type": "Object"
+      },
+      "v3": {
+        "type": "Object"
+      }
+    }
+  },
+  "@mealStarchReducedOther": {
+    "placeholders": {
+      "v1": {
+        "type": "Object"
+      },
+      "v2": {
+        "type": "Object"
+      },
+      "v3": {
+        "type": "Object"
+      }
+    }
+  },
+  "@onboardingRiceFeasibleWarning": {
+    "placeholders": {
+      "v1": {
+        "type": "Object"
+      },
+      "v2": {
+        "type": "Object"
+      },
+      "v3": {
+        "type": "Object"
+      },
+      "v4": {
+        "type": "Object"
+      }
+    }
+  },
+  "@onboardingRiceBudgetWarning": {
+    "placeholders": {
+      "v1": {
+        "type": "Object"
+      },
+      "v2": {
+        "type": "Object"
+      },
+      "v3": {
+        "type": "Object"
+      },
+      "v4": {
+        "type": "Object"
+      }
+    }
+  },
+  "@onboardingRiceBudgetWarningShort": {
+    "placeholders": {
+      "v1": {
+        "type": "Object"
+      },
+      "v2": {
+        "type": "Object"
+      },
+      "v3": {
         "type": "Object"
       }
     }
