@@ -35,6 +35,31 @@ public class Rice98Tests
 
     private static bool Planned(PlanMeal m) => m.Status == "planned" && m.RecipeId is not null;
 
+    // ---- Hồi quy mức Vừa: nhà nhiều người + ngân sách sát (phát hiện ở integration it-10, T-099) ----
+
+    /// <summary>
+    /// Trọn suất có dòng cơm ghim theo mức xếp bậc 1 — trên mâm không khả thi (bậc 0) — nên ở mức Vừa, hộ 2 lớn + 1 nhỏ ngân sách 1,5 triệu mất sạch mâm (T-096: 12/14 bữa mâm, T-098 lỗi: 0/14).
+    /// Mức ít/vừa không ghim cơm cho món trọn suất; test giữ số mâm ≈ T-096 (đo: 12 / 9 / 8) và vẫn trong ngân sách.
+    /// </summary>
+    [Theory]
+    [InlineData(2, 1, 1_500_000, 11)]
+    [InlineData(3, 0, 1_500_000, 8)]
+    [InlineData(2, 1, 1_200_000, 7)]
+    public void Vua_ho_nhieu_nguoi_ngan_sach_sat_van_con_mam(int adults, int children, int budget, int minMam)
+    {
+        var src = P("p01");
+        var prefs = WithHabit(src, "vua");
+        prefs.Adults = adults;
+        prefs.Children = children;
+        prefs.WeeklyBudgetVnd = budget;
+        var plan = WeekPlanner.Plan(new PlanWeekInput { Targets = TargetCalc.Compute(src.Profile), Prefs = prefs, Data = Data, StartDate = Start, Seed = 1 });
+        Assert.Equal("ready", plan.Status);
+        Assert.True(plan.Shopping.WeekFoodCost <= budget, $"chi phí {plan.Shopping.WeekFoodCost} > ngân sách {budget}");
+        var lunchDinner = plan.Days.SelectMany(d => d.Meals).Where(m => Planned(m) && m.Slot is "lunch" or "dinner").ToList();
+        var mam = lunchDinner.Count(m => m.Dishes?.Any(x => x.Role == "main") ?? false);
+        Assert.True(mam >= minMam, $"{adults}+{children} người, {budget}: chỉ {mam}/{lunchDinner.Count} bữa ghép mâm (cần ≥ {minMam})");
+    }
+
     // ---- AC3: bất biến xếp hạng ----
 
     /// <summary>

@@ -344,7 +344,9 @@ public static partial class WeekPlanner
         var opt = input.Options ?? new PlanOptions();
         var max = opt.MealStyle != MealStyle.FullMealOnly && !input.Prefs.LowCarb ? RiceHabits.KcalShift(input.Prefs.RiceHabit, opt.RiceKcalShift) : 0;
         // Ưu tiên cơm hơn khoai/bún chỉ áp cho mức nhiều/rất nhiều (để gạo cần mua tăng dần); mức ít/vừa giữ nguyên như T-096.
-        if (max <= 0) return new Planner(new PlanWeekInput { Targets = input.Targets, Prefs = input.Prefs, Data = input.Data, StartDate = input.StartDate, Seed = input.Seed, Options = opt with { RiceKindFirst = false } }).Run();
+        // Mức ít/vừa cũng KHÔNG ghim cơm cho món trọn suất: trọn suất có dòng cơm xếp bậc 1 trên mâm không khả thi, nên nhà nhiều người + ngân sách sát
+        // (vd 2 lớn + 1 nhỏ, 1,5 triệu, mức Vừa) mất sạch mâm (12/14 → 0/14 so với T-096). Mức ít/vừa không có yêu cầu "đủ bữa có cơm" nên giữ đúng hành vi T-096.
+        if (max <= 0) return new Planner(new PlanWeekInput { Targets = input.Targets, Prefs = input.Prefs, Data = input.Data, StartDate = input.StartDate, Seed = input.Seed, Options = opt with { RiceKindFirst = false, PinFullMealRice = false } }).Run();
         // (mức dồn kcal, mâm xếp trên trọn suất có cơm?, xếp hạng theo cơm?, ghim cơm món trọn suất?, số vòng tối đa), theo thứ tự ưu tiên: lần đầu đúng thứ tự PM (chỉ mâm, 6 vòng);
         // các lần sau cho phép trọn suất có cơm ngang hàng mâm bớt cơm; cuối cùng là các lần không xếp hạng theo cơm (chỉ điểm mềm) — ràng buộc cứng (7/7 trong ngân sách) luôn thắng ưu tiên cơm.
         var plans = new[]
