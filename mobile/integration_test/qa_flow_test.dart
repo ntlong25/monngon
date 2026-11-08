@@ -131,6 +131,8 @@ List<PlanMeal> _mam(PlanResponse r) => _planned(r)
     .where(
       (m) =>
           (m.slot == 'lunch' || m.slot == 'dinner') &&
+          // Mâm thật = có món chính riêng; trọn suất + tráng miệng cũng có 2 dòng nhưng không phải mâm (T-098: trọn suất có thể mang `rice`).
+          (m.dishes?.any((d) => d.role == 'main') ?? false) &&
           (m.dishes?.length ?? 0) > 1,
     )
     .toList();
@@ -274,7 +276,21 @@ void main() {
             break;
           }
         }
-        for (final m in [full, ?cut]) {
+        // T-099: thẻ tinh bột gọi đúng tên món; chụp riêng một bữa khoai/bún (kind=other) không bị bớt nếu có.
+        final other = riceMeals
+            .where(
+              (m) =>
+                  m.rice!.kind == 'other' &&
+                  !(m.notes ?? const <MealNote>[]).any(
+                    (n) => n.code == 'rice_reduced',
+                  ),
+            )
+            .firstOrNull;
+        for (final m in [
+          full,
+          ?cut,
+          if (other != null && other != full && other != cut) other,
+        ]) {
           await openMeal(t, m);
           final list = find.byKey(const Key('meal-list'));
           await scrollTo(t, list, find.byKey(const Key('rice-card')));
@@ -282,9 +298,33 @@ void main() {
           final text = t
               .widget<Text>(find.byKey(const Key('rice-amount')))
               .data!;
-          final expected = lOf(t)
-              .mealRiceCups(RiceCard.cups(r.actualG), formatInt(r.actualG));
+          final dishName = m.dishes
+              ?.where((d) => d.role == 'carb_base')
+              .firstOrNull
+              ?.name;
+          final l10n = lOf(t);
+          final grams10 = formatInt(r.actualG);
+          final expected = dishName == null
+              ? l10n.mealRiceCups(RiceCard.cups(r.actualG), grams10)
+              : r.kind == 'other'
+              ? l10n.mealStarchOther(
+                  dishName,
+                  grams10,
+                  RiceCard.cups(r.riceEquivG),
+                )
+              : l10n.mealStarchCups(
+                  dishName,
+                  RiceCard.cups(r.actualG),
+                  grams10,
+                );
           expect(text, expected);
+          if (r.kind == 'other') {
+            expect(
+              text.startsWith(dishName ?? '?'),
+              isTrue,
+              reason: 'tinh bột khác cơm phải gọi theo tên món, không ghi "chén cơm" làm nhãn chính',
+            );
+          }
           final isCut = identical(m, cut);
           if (!isCut && r.targetG == grams && r.actualG >= r.targetG - 10) {
             // Bữa đủ cơm: số chén/gram đúng mức đã chọn.
@@ -298,7 +338,11 @@ void main() {
           print('[it] mức $id ${isCut ? "bớt" : "đủ"}: "$text"');
           await shot(
             t,
-            isCut ? 'it-10-com-$id-bot-com' : 'it-10-com-$id-the-com',
+            isCut
+                ? 'it-10-com-$id-bot-com'
+                : r.kind == 'other'
+                ? 'it-10-com-$id-the-khoai'
+                : 'it-10-com-$id-the-com',
           );
           await back(t);
         }

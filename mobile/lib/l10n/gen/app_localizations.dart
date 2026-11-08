@@ -2990,6 +2990,52 @@ abstract class AppL10n {
   /// In vi, this message translates to:
   /// **'Thói quen ăn cơm'**
   String get profileRiceHabitTitle;
+
+  /// No description provided for @mealStarchCups.
+  ///
+  /// In vi, this message translates to:
+  /// **'{v1} · {v2} chén ({v3} g)'**
+  String mealStarchCups(Object v1, Object v2, Object v3);
+
+  /// No description provided for @mealStarchOther.
+  ///
+  /// In vi, this message translates to:
+  /// **'{v1} · ~{v2} g (thay {v3} chén cơm)'**
+  String mealStarchOther(Object v1, Object v2, Object v3);
+
+  /// No description provided for @mealStarchReducedOther.
+  ///
+  /// In vi, this message translates to:
+  /// **'Bữa này bớt còn ~{v1} g {v2} (thay {v3} chén cơm) để giữ đúng calo.'**
+  String mealStarchReducedOther(Object v1, Object v2, Object v3);
+
+  /// No description provided for @onboardingRiceFeasibleWarning.
+  ///
+  /// In vi, this message translates to:
+  /// **'Với {v1} kcal và {v2} g đạm, mỗi bữa bạn ăn được khoảng {v3} chén mà vẫn đủ đạm. Bạn vẫn có thể giữ {v4} chén; app sẽ bớt cơm ở bữa cần bớt và ghi chú.'**
+  String onboardingRiceFeasibleWarning(
+    Object v1,
+    Object v2,
+    Object v3,
+    Object v4,
+  );
+
+  /// No description provided for @onboardingRiceBudgetWarning.
+  ///
+  /// In vi, this message translates to:
+  /// **'Với ngân sách {v1}, khoảng {v2}/14 bữa có đủ {v3} chén cơm; cần khoảng {v4} để bữa nào cũng đủ.'**
+  String onboardingRiceBudgetWarning(
+    Object v1,
+    Object v2,
+    Object v3,
+    Object v4,
+  );
+
+  /// No description provided for @onboardingRiceBudgetWarningShort.
+  ///
+  /// In vi, this message translates to:
+  /// **'Với ngân sách {v1}, khoảng {v2}/14 bữa có đủ {v3} chén cơm.'**
+  String onboardingRiceBudgetWarningShort(Object v1, Object v2, Object v3);
 }
 
 class _AppL10nDelegate extends LocalizationsDelegate<AppL10n> {

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/format.dart';
 import '../../core/rice.dart';
 import '../../l10n/gen/app_localizations.dart';
 import '../../state/providers.dart';
 import '../../ui/ui.dart';
+import '../meal/rice_card.dart';
 import 'onboarding_providers.dart';
 import 'onboarding_scaffold.dart';
 
@@ -19,8 +21,10 @@ class RiceStep extends ConsumerWidget {
     final habit = RiceHabit.parse(
       ref.watch(preferencesProvider.select((p) => p.riceHabit)),
     );
-    final kcal = ref.watch(targetsProvider).asData?.value.kcalTarget;
-    final warn = kcal != null && RiceHabit.exceedsMainMealShare(habit, kcal);
+    // Số chén khả thi do server tính (D-COM-04/05): bản nhanh theo kcal/đạm về trước, bản có ngân sách về sau thay thế.
+    final quick = ref.watch(riceFeasibilityQuickProvider).asData?.value;
+    final full = ref.watch(riceFeasibilityFullProvider).asData?.value;
+    final warning = riceWarningFor(habit, quick, full);
     return OnboardingScaffold(
       title: l.onboardingRiceTitle,
       subtitle: l.onboardingRiceQuestion,
@@ -42,15 +46,39 @@ class RiceStep extends ConsumerWidget {
           style: Theme.of(context).textTheme.bodyMedium
               ?.copyWith(color: AppColors.textMuted),
         ),
-        if (warn) ...[
+        if (warning != null) ...[
           const SizedBox(height: AppSpacing.lg),
           AppBanner(
             key: const Key('rice-warning'),
             kind: BannerKind.warning,
-            message: l.onboardingRiceWarning,
+            message: _warningText(l, warning),
           ),
         ],
       ],
     );
   }
+}
+
+String _warningText(AppL10n l, RiceWarning w) {
+  final i = w.item;
+  final chosen = RiceCard.cups(i.targetG);
+  if (!w.isBudget) {
+    return l.onboardingRiceFeasibleWarning(
+      formatInt(w.kcal),
+      formatInt(w.proteinG),
+      RiceHabit.halfCups(i.feasibleCups),
+      chosen,
+    );
+  }
+  final budget = l.commonVnd(formatVnd(i.budgetVnd ?? 0));
+  final meals = '${i.mealsWithFullRice ?? i.mealsWithRice ?? 0}';
+  final needed = i.budgetNeededVnd;
+  return needed == null
+      ? l.onboardingRiceBudgetWarningShort(budget, meals, chosen)
+      : l.onboardingRiceBudgetWarning(
+          budget,
+          meals,
+          chosen,
+          l.commonVnd(formatVnd(needed)),
+        );
 }

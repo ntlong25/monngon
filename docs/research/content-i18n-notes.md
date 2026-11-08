@@ -99,3 +99,18 @@ Chưa gửi được cho Dev qua hub (hub tạm dừng nhắn). Dev cần đọc
 - Kết quả mong đợi thay "không gửi dữ liệu ra ngoài máy" bằng: chỉ gửi dữ liệu cần để lập thực đơn, chỉ tới máy chủ của app, không tới bên thứ ba, không gửi tên/email/mã thiết bị, máy chủ không lưu nội dung yêu cầu sau khi trả kết quả.
 - Ba bước kiểm: (1) host duy nhất; (2) payload đúng OpenAPI; (3) log API không ghi body.
 - Ngoài phạm vi TC: log truy cập của hosting/proxy, điểm mở trước phát hành (legal-notes).
+
+## T-099 (08/11/2026): chuỗi thẻ tinh bột và cảnh báo chén (theo Dev)
+
+Đã thêm 6 khóa vào `content/i18n/vi.json`, chạy `gen_arb.py` (489 chuỗi). Thứ tự tham số ARB (v1, v2…) theo thứ tự xuất hiện trong chuỗi:
+
+| Khóa vi.json | Tên ARB | Tham số theo thứ tự |
+|---|---|---|
+| `meal.starch_cups` | `mealStarchCups` | v1 = name, v2 = cups, v3 = g |
+| `meal.starch_other` | `mealStarchOther` | v1 = name, v2 = g, v3 = cups |
+| `meal.starch_reduced_other` | `mealStarchReducedOther` | v1 = g, v2 = name, v3 = cups |
+| `onboarding.rice.feasible_warning` | `onboardingRiceFeasibleWarning` | v1 = kcal, v2 = protein, v3 = feasible, v4 = chosen |
+| `onboarding.rice.budget_warning` | `onboardingRiceBudgetWarning` | v1 = budget, v2 = meals, v3 = chosen, v4 = needed |
+| `onboarding.rice.budget_warning_short` | `onboardingRiceBudgetWarningShort` | v1 = budget, v2 = meals, v3 = chosen |
+
+Ghi chú: `meal.starch_reduced_other` có `g` trước `name` vì câu tiếng Việt đặt số gram trước tên món ("bớt còn ~75 g khoai lang hấp"). Các chuỗi đều theo đề xuất của Dev, chỉ đổi thứ tự tham số trong ARB cho `starch_reduced_other`.

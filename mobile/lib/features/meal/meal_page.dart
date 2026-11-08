@@ -140,7 +140,14 @@ class MealPage extends ConsumerWidget {
             const SizedBox(height: AppSpacing.sm),
           ],
           if (meal.rice case final rice?) ...[
-            RiceCard(rice: rice, notes: meal.notes),
+            RiceCard(
+              rice: rice,
+              notes: meal.notes,
+              dishName: dishes
+                  .where((d) => d.role == 'carb_base')
+                  .firstOrNull
+                  ?.name,
+            ),
             const SizedBox(height: AppSpacing.sm),
           ],
           if (meal.extras.isNotEmpty) ...[
