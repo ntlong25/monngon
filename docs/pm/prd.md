@@ -581,13 +581,13 @@ Chọn phương án (3):
   - **Thịt cá tươi cấp đông được** (`freezable = true`): mặc định **Theo ngày**. Có công tắc "Mua thịt cá cả tuần rồi cấp đông" trên tab Đi chợ: bật thì các dòng này chuyển sang Theo tuần, kèm hướng dẫn cấp đông và rã đông (US-8.3 AC3).
   - Nguyên liệu `chua_co_nguon` (không có dữ liệu) xếp **Theo tuần** kèm ghi chú "Chưa có thông tin hạn dùng". Không đoán.
 - **Chế độ Theo ngày:**
-  - Danh sách chia theo **đợt mua**. Đợt đầu là "Hôm nay", sau đó là từng ngày còn lại của tuần; mỗi ngày gập/mở được.
+  - Danh sách chia theo **đợt mua**. Đợt đầu là "Hôm nay" (chỉ khi trùng ngày hiện tại; nếu không thì ghi thứ/ngày, D-SHP-09), sau đó là từng ngày còn lại của tuần; mỗi ngày gập/mở được.
   - Mỗi đợt gồm nguyên liệu tươi cho các bữa của ngày đó. **Gộp mua sớm:** nếu cùng nguyên liệu dùng lại trong số ngày nó còn tươi (theo cận dưới của nhãn), thì gộp vào đợt sớm hơn để tránh mua lẻ gói nhiều lần. Ví dụ: rau 3–5 ngày dùng ngày 1 và ngày 3 → mua 1 lần ngày 1.
   - Quy cách gói làm tròn theo từng đợt.
 - **Chế độ Theo tuần:** danh sách như hiện nay nhưng chỉ có nhóm Theo tuần, vẫn gộp theo quầy.
 - **Số liệu theo chế độ:**
   - **Chi phí món ăn so ngân sách** (theo gram dùng) **không đổi** theo chế độ. Trạng thái ngân sách giữ nguyên.
-  - **"Ước tính trả tại quầy":** đầu tab hiện tổng cả tuần. Mỗi chế độ hiện tổng của chế độ đó; Theo ngày thêm tổng của từng đợt. Tổng cả tuần có thể cao hơn trước một chút vì làm tròn gói theo đợt; số chênh hiện rõ ("+X ₫ do mua theo đợt").
+  - **"Ước tính trả tại quầy":** đầu tab hiện tổng cả tuần. Mỗi chế độ hiện tổng của chế độ đó; Theo ngày thêm tổng của từng đợt. Tổng cả tuần có thể cao hơn trước vì làm tròn gói theo đợt; số chênh hiện rõ ("+X ₫ do mua theo đợt"). Ở chợ mua theo cân, có ngưỡng và gợi ý cấp đông: xem D-SHP-09.
   - **"Đã mua x/N":** đếm riêng mỗi chế độ (N = số dòng của chế độ); đầu tab hiện tổng.
   - **"Nhà có sẵn":** chỉ ở Theo tuần (đồ có sẵn đều là đồ để lâu).
   - **Nhãn "Dùng trong N ngày":** hiện ở cả hai chế độ.
@@ -602,6 +602,32 @@ Chọn phương án (3):
 3. Tab Đi chợ: lần đầu hiện **Theo tuần**, các lần sau nhớ chế độ dùng gần nhất (D-SHP-06).
 
 Ghi chú: 3 hình mục tiêu đang được Research vẽ lại vì chưa rõ nghĩa (giảm mỡ, tăng cơ). Dev dùng bản mới khi Research báo xong.
+
+**D-SHP-09 — Tiền "Theo ngày" cao hơn mua một lần (PM, 2026-11-16).** Nguồn: `docs/dev/t116-notes.md`.
+- Số đo trên 18 hồ sơ golden (seed 1): tăng từ +4% đến **+43%**; p01 từ 925k lên 1.323k ₫. Trung vị ≈ +11%; 6/18 hồ sơ tăng hơn 20%. Chi phí so ngân sách không đổi.
+- Nguyên nhân: mỗi đợt làm tròn lên cả gói (cần 25 g thịt vẫn mua gói 300 g).
+- **Mức này không còn là "cao hơn một chút" như D-SHP-06 viết.** Không chấp nhận nguyên trạng.
+- **Phần lớn chênh lệch là giả.** 69/73 dòng giá là `cho_khac` (chợ), có "gói" 300–500 g chỉ là ước tính. Ở chợ, thịt, cá, rau được bán theo cân, nên làm tròn cả gói cho từng đợt là sai với thực tế.
+- **Quyết định:**
+  1. **Mua theo cân ở chợ (chỉ áp dụng cho các đợt Theo ngày).**
+     - Áp dụng cho dòng giá của `cho_khac`, quầy thịt, cá/hải sản, rau củ, trái cây.
+     - Mỗi đợt làm tròn lên bước 100 g, tối thiểu 100 g. Giá tính theo tỷ lệ `price_vnd / pack_g`.
+     - Dòng siêu thị (BHX) vẫn làm tròn theo gói thật, vì gói siêu thị là có thật.
+     - Theo tuần và `till_cost` của engine giữ nguyên, nên golden/parity không đổi.
+     - Không thêm trường dữ liệu: suy từ `store_id` + quầy.
+     - Không nới số ngày tươi của thịt cá để gộp đợt; an toàn thực phẩm đi trước.
+  2. **Hiện chênh lệch có dấu.**
+     - Hiện "+X ₫ do mua theo đợt", hoặc "−X ₫" nếu mua theo cân rẻ hơn mua cả gói một lần.
+     - Bỏ điều kiện "tổng Theo ngày ≥ tổng cũ" ở T-116 AC5.
+  3. **Gợi ý khi chênh lớn.**
+     - Khi chênh > 15% và tuần có thịt cá `freezable` đang ở Theo ngày, hiện dưới con số: "Mua thịt cá cả tuần rồi cấp đông để bớt khoảng Y ₫". Y là số tiền giảm được khi bật công tắc.
+     - Nút trong gợi ý bật công tắc luôn.
+  4. **"Hôm nay":** chỉ ghi khi ngày đợt trùng ngày hiện tại; tuần bắt đầu ngày mai thì đợt đầu ghi thứ/ngày. Chấp nhận cách Dev đã làm. D-SHP-06 sửa theo.
+- **AC đo được** (18 hồ sơ golden, seed 1, công tắc cấp đông tắt):
+  - Hồ sơ mua ở chợ: trung vị chênh ≤ +10%, cao nhất ≤ +20%.
+  - Hồ sơ mua ở siêu thị (gói thật): không đặt ngưỡng, ghi số đo vào `docs/dev/`; gợi ý ở mục 3 phải hiện khi chênh > 15%.
+  - Nếu quy tắc theo cân vẫn không đạt ngưỡng chợ thì báo PM kèm số liệu, không tự nới số ngày tươi.
+- Task: T-116b.
 
 **D-SHP-07 — Duyệt phân loại mua theo ngày/tuần và hình minh họa của Research (PM, 2026-11-16).** Nguồn: `docs/research/ingredient-storage-groups.md`, `docs/research/illustrations/`.
 - **Một nguồn sự thật:** nhóm mua **không lưu thành file dữ liệu thứ hai**. Engine suy ra nhóm từ `storage.json` (hợp đồng tiếng Anh D-P2-02/04/05) theo quy tắc dưới. `ingredient-storage-groups.json` của Research dùng làm **bảng kết quả mong đợi** cho unit test. Không đổi tên trường sang tiếng Việt, vì sẽ lệch với `storage.json` đã duyệt.

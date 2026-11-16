@@ -33,12 +33,18 @@ builder.Services.ConfigureHttpJsonOptions(o =>
 builder.Services.AddProblemDetails();
 builder.Services.AddCors(o => o.AddPolicy("dev", p => p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
 builder.Services.AddOpenApi();
+// T-117: làm nóng engine khi khởi động; /health/ready chỉ OK sau khi xong.
+builder.Services.AddSingleton<Readiness>();
+builder.Services.AddHostedService<WarmUpService>();
 
 var app = builder.Build();
 app.UseExceptionHandler();
 app.UseStatusCodePages();
 app.UseCors("dev");
 app.MapGet("/health", () => Results.Ok(new { status = "ok" })).ExcludeFromDescription();
+app.MapGet("/health/ready", (Readiness r) => r.IsReady
+    ? Results.Ok(new { status = "ready", warm_up_seconds = r.WarmUpSeconds, warm_up_plans = r.WarmUpPlans, warm_up_error = r.Error })
+    : Results.Json(new { status = "warming_up" }, statusCode: StatusCodes.Status503ServiceUnavailable)).ExcludeFromDescription();
 app.MapV1();
 app.MapOpenApi("/openapi/{documentName}.json");
 app.Run();

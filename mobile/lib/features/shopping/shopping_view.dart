@@ -166,7 +166,8 @@ class ModeTotals {
     required this.dailyCount,
     required this.weeklyBought,
     required this.dailyBought,
-    required this.batchExtra,
+    required this.delta,
+    required this.baseline,
   });
 
   final double weeklyTill;
@@ -176,8 +177,15 @@ class ModeTotals {
   final int weeklyBought;
   final int dailyBought;
 
-  /// Phần cao hơn mua một lần cả tuần do làm tròn gói theo đợt (≥ 0).
-  final double batchExtra;
+  /// Chênh so với mua một lần cả tuần (`till_cost` cũ, đã bỏ nhà có sẵn): dương = đắt hơn do mua theo đợt,
+  /// âm = rẻ hơn nhờ mua theo cân ở chợ (T-116b).
+  final double delta;
+
+  /// Tổng tiền tại quầy nếu mua một lần cả tuần (làm tròn 1.000 ₫), mốc để tính phần trăm chênh.
+  final double baseline;
+
+  /// Chênh theo phần trăm của [baseline] (0 khi không có mốc).
+  double get deltaRatio => baseline > 0 ? delta / baseline : 0;
 
   double get total => weeklyTill + dailyTill;
   int get count => weeklyCount + dailyCount;
@@ -200,7 +208,7 @@ ModeTotals modeTotals(ShoppingList s, ShoppingState st, ShopViewPrefs v) {
   final dCount = trips.fold(0, (a, t) => a + t.items.length);
   final dBought = trips.fold(0, (a, t) => a + t.bought);
   final weeklyR = roundVnd(weekly);
-  final extra = weeklyR + daily - roundVnd(oldTill);
+  final base = roundVnd(oldTill);
   return ModeTotals(
     weeklyTill: weeklyR,
     dailyTill: daily,
@@ -208,8 +216,29 @@ ModeTotals modeTotals(ShoppingList s, ShoppingState st, ShopViewPrefs v) {
     dailyCount: dCount,
     weeklyBought: wBought,
     dailyBought: dBought,
-    batchExtra: extra > 0 ? extra : 0,
+    delta: weeklyR + daily - base,
+    baseline: base,
   );
+}
+
+/// Ngưỡng chênh (so với mua một lần) từ đó gợi ý bật cấp đông (T-116b).
+const kFreezeHintRatio = 0.15;
+
+/// Gợi ý "Mua thịt cá cả tuần rồi cấp đông để bớt khoảng Y ₫": công tắc đang tắt, chênh > 15%, có thịt cá cấp đông được ở Theo ngày
+/// và bật công tắc thật sự rẻ hơn. Trả về số tiền bớt được (Y), hoặc null khi không gợi ý.
+double? freezeSavingHint(ShoppingList s, ShoppingState st, ShopViewPrefs v) {
+  if (v.freezeMeat || !hasBuyModes(s)) return null;
+  final now = modeTotals(s, st, v);
+  if (now.deltaRatio <= kFreezeHintRatio) return null;
+  final hasMeat = visibleTrips(
+    s,
+    st,
+    v,
+  ).any((t) => t.items.any((it) => it.freezableMeat == true));
+  if (!hasMeat) return null;
+  final saving =
+      now.total - modeTotals(s, st, v.copyWith(freezeMeat: true)).total;
+  return saving > 0 ? saving : null;
 }
 
 /// Nhãn đợt mua: "Hôm nay · Thứ Ba · 18/11" hoặc "Thứ Tư · 19/11"; đợt của ngày đã qua ghi thêm "Đã qua".

@@ -60,7 +60,7 @@ ShoppingItem _item(
   freezableMeat: group == null ? null : freezable,
 );
 
-ShoppingList sampleList() {
+ShoppingList sampleList({int chickenWeekPacks = 1}) {
   ShoppingItem chicken(double need, int packs) => _item(
     'uc_ga',
     'Ức gà',
@@ -124,7 +124,7 @@ ShoppingList sampleList() {
     fresh: 3,
     pantry: true,
   );
-  final items = [chicken(400, 1), sup, egg, fish, garlic];
+  final items = [chicken(400, chickenWeekPacks), sup, egg, fish, garlic];
   return ShoppingList(
     items: items,
     byAisle: [
@@ -382,6 +382,86 @@ void main() {
       },
     );
 
+    testWidgets(
+      'chênh > 15% và có thịt cá cấp đông được ở Theo ngày → gợi ý bật cấp đông; bấm nút thì bật công tắc',
+      (t) async {
+        final store = _seeded();
+        final c = await _pump(t, store: store);
+        // 84.000 so với 72.000 = +16,7% > 15%; bật cấp đông còn 72.000 → bớt 12.000
+        expect(
+          _text(t, 'shop-freeze-hint-text'),
+          'Mua thịt cá cả tuần rồi cấp đông để bớt khoảng 12.000 ₫',
+        );
+        expect(find.text('Bật cấp đông'), findsOneWidget);
+        await t.tap(find.byKey(const Key('shop-freeze-hint-on')));
+        await t.pumpAndSettle();
+        expect(c.read(shopViewProvider).freezeMeat, isTrue);
+        expect(
+          t
+              .widget<Switch>(
+                find.descendant(
+                  of: find.byKey(const Key('shop-freeze')),
+                  matching: find.byType(Switch),
+                ),
+              )
+              .value,
+          isTrue,
+        );
+        expect(find.byKey(const Key('shop-freeze-hint')), findsNothing);
+        expect(
+          jsonDecode(store.data[StoreKeys.shopView]!)['freeze_meat'],
+          true,
+        );
+      },
+    );
+
+    testWidgets('chênh ≤ 15% hoặc đã bật cấp đông thì không gợi ý', (t) async {
+      // gà 1 gói cả tuần nhưng đợt: 2 × 12.000 → 84.000/72.000. Đổi giá để chênh nhỏ: súp lơ đắt hơn làm mốc lớn hơn
+      final list = sampleList();
+      final bigger = ShoppingList(
+        items: [
+          for (final it in list.items)
+            it.ingredientId == 'trung_ga'
+                ? ShoppingItem(
+                    ingredientId: it.ingredientId,
+                    name: it.name,
+                    aisle: it.aisle,
+                    needG: it.needG,
+                    packs: it.packs,
+                    packG: it.packG,
+                    packLabel: it.packLabel,
+                    priceVndPerPack: 140000,
+                    usedCostVnd: 100000,
+                    tillCostVnd: 140000,
+                    displayQty: it.displayQty,
+                    buyGroup: 'week',
+                    freshDays: 21,
+                    noShelfInfo: false,
+                    freezableMeat: false,
+                  )
+                : it,
+        ],
+        byAisle: list.byAisle,
+        weekFoodCost: list.weekFoodCost,
+        tillCost: 172000,
+        trips: list.trips,
+      );
+      await _pump(t, store: _seeded(list: bigger));
+      // mốc 172.000, tổng mới 184.000 → +7% ≤ 15%
+      expect(find.byKey(const Key('shop-freeze-hint')), findsNothing);
+      expect(find.byKey(const Key('shop-batch-extra')), findsOneWidget);
+    });
+
+    testWidgets(
+      'chênh âm hiện "−X ₫ nhờ mua theo cân" và không gợi ý cấp đông',
+      (t) async {
+        // mua một lần: gà 3 gói (36.000); mua theo cân ở các đợt chỉ còn 2 × 12.000
+        await _pump(t, store: _seeded(list: sampleList(chickenWeekPacks: 3)));
+        expect(_text(t, 'shop-batch-extra'), '−12.000 ₫ nhờ mua theo cân');
+        expect(find.byKey(const Key('shop-freeze-hint')), findsNothing);
+      },
+    );
+
     testWidgets('chia sẻ theo đúng chế độ đang xem', (t) async {
       final share = _FakeShare();
       await _pump(t, share: share);
@@ -449,10 +529,12 @@ void main() {
       final off = modeTotals(l, st, const ShopViewPrefs());
       expect((off.weeklyTill, off.dailyTill, off.total), (40000, 44000, 84000));
       expect((off.weeklyCount, off.dailyCount), (1, 3));
-      expect(off.batchExtra, 12000);
+      expect(off.delta, 12000);
+      expect(off.baseline, 72000);
+      expect(off.deltaRatio, closeTo(12000 / 72000, 1e-9));
       final on = modeTotals(l, st, const ShopViewPrefs(freezeMeat: true));
       expect((on.weeklyTill, on.dailyTill), (52000, 20000));
-      expect(on.batchExtra, 0);
+      expect(on.delta, 0);
     });
 
     test('inWeekly: kế hoạch cũ không có nhóm → Theo tuần', () {

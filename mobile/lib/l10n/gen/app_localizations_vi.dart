@@ -1744,6 +1744,19 @@ class AppL10nVi extends AppL10n {
   String get shopTripPast => 'Đã qua';
 
   @override
+  String shopFreezeSavingHint(Object amount) {
+    return 'Mua thịt cá cả tuần rồi cấp đông để bớt khoảng $amount ₫';
+  }
+
+  @override
+  String get shopFreezeSwitchLabel => 'Bật cấp đông';
+
+  @override
+  String shopBatchSavingNegative(Object amount) {
+    return '−$amount ₫ nhờ mua theo cân';
+  }
+
+  @override
   String get onboardingRiceTitle => 'Thói quen ăn cơm';
 
   @override

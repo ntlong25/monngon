@@ -19,8 +19,10 @@ public class ShoppingTripsTests
     private static ShoppingMeal Meal(int day, params (string Id, double G)[] lines) =>
         new() { Day = day, Ingredients = lines.Select(l => new ShoppingIngredient(l.Id, l.G, l.G)).ToList() };
 
-    private static ShoppingList Build(params ShoppingMeal[] meals) =>
-        Shopping.BuildShoppingList(meals, new Household(1, 0), Data, "cho_khac", [], displayQty: true);
+    private static ShoppingList Build(params ShoppingMeal[] meals) => BuildAt("cho_khac", meals);
+
+    private static ShoppingList BuildAt(string storeId, params ShoppingMeal[] meals) =>
+        Shopping.BuildShoppingList(meals, new Household(1, 0), Data, storeId, [], displayQty: true);
 
     [Fact]
     public void Phan_loai_khop_bang_cua_Research_cho_moi_nguyen_lieu()
@@ -135,30 +137,77 @@ public class ShoppingTripsTests
     }
 
     [Fact]
-    public void Goi_lam_tron_rieng_tung_dot_nen_tong_tien_khong_thap_hon_mua_mot_lan()
+    public void O_sieu_thi_goi_lam_tron_rieng_tung_dot_nen_mua_hai_dot_dat_hon_mot_lan()
     {
-        // 2 bữa × 150 g ức gà: mua gộp 1 lần có thể vừa 1 gói, mua 2 đợt phải 2 gói
-        var list = Build(Meal(0, ("uc_ga_khong_da", 150)), Meal(3, ("uc_ga_khong_da", 150)));
+        // BHX có giá gói 200 g cho thịt heo xay: 2 bữa × 100 g mua gộp một lần vừa 1 gói, mua 2 đợt (thịt 1 ngày) phải 2 gói
+        var list = BuildAt("bach_hoa_xanh", Meal(0, ("thit_heo_xay_nac", 100)), Meal(3, ("thit_heo_xay_nac", 100)));
         var item = list.Items.Single();
-        var tripPacks = list.Trips!.SelectMany(t => t.Items).Sum(i => i.Packs);
-        Assert.True(tripPacks >= item.Packs);
+        Assert.Equal(1, item.Packs);
+        var lines = list.Trips!.SelectMany(t => t.Items).ToList();
+        Assert.All(lines, i => { Assert.Equal(1, i.Packs); Assert.Null(i.SoldByWeight); });
+        Assert.Equal(2, lines.Count);
         var totals = ShoppingGroups.TillTotals(list, new HashSet<string>(), freezeMeat: false);
         Assert.Equal(0, totals.Week);
-        Assert.True(totals.Total >= list.TillCost - 1e-6);
+        Assert.True(totals.Total > list.TillCost);
+    }
+
+    [Fact]
+    public void O_cho_thit_ca_rau_qua_mua_theo_can_lam_tron_len_100_g_toi_thieu_100_g()
+    {
+        var chicken = Data.IngredientsById["uc_ga_khong_da"];
+        var price = Data.PricesByIngredient["uc_ga_khong_da"]["cho_khac"];
+        Assert.Equal("cho_khac", price.StoreId);
+        // cần 25 g (sau phần ăn được) → 100 g, giá = 100 × đơn giá/g
+        var list = Build(Meal(0, ("uc_ga_khong_da", 25 * chicken.EdiblePortion)));
+        var line = Assert.Single(Assert.Single(list.Trips!).Items);
+        Assert.True(line.SoldByWeight);
+        Assert.Equal(25, line.NeedG, 6);
+        Assert.Equal(100, line.PackG);
+        Assert.Equal(1, line.Packs);
+        Assert.Equal("100 g", line.DisplayQty);
+        Assert.Equal(100 * price.PriceVnd / price.PackG, line.TillCostVnd, 6);
+        Assert.Equal(75, line.LeftoverG, 6);
+        // rau 230 g → 300 g
+        var tomato = Data.IngredientsById["ca_chua"];
+        var veg = Build(Meal(0, ("ca_chua", 230 * tomato.EdiblePortion)));
+        var vl = Assert.Single(Assert.Single(veg.Trips!).Items);
+        Assert.Equal((3, "300 g"), (vl.Packs, vl.DisplayQty));
+        var vp = Data.PricesByIngredient["ca_chua"]["cho_khac"];
+        Assert.Equal(300 * vp.PriceVnd / vp.PackG, vl.TillCostVnd, 6);
+        // đúng 300 g không bị làm tròn lên thành 400 g
+        var exact = Build(Meal(0, ("ca_chua", 300 * tomato.EdiblePortion)));
+        Assert.Equal(3, exact.Trips!.Single().Items.Single().Packs);
+    }
+
+    [Fact]
+    public void Ngoai_quay_thit_ca_rau_qua_hoac_o_sieu_thi_van_theo_goi_va_theo_tuan_khong_doi()
+    {
+        // quầy khác (trứng/đậu phụ) ở chợ vẫn theo gói: đậu phụ là Theo ngày
+        var tofu = Build(Meal(0, ("dau_phu", 40))).Trips!.Single().Items.Single();
+        Assert.Null(tofu.SoldByWeight);
+        Assert.Equal(Data.PricesByIngredient["dau_phu"]["cho_khac"].PackG, tofu.PackG);
+        // siêu thị có giá gói: 25 g thịt → 1 gói
+        var bhx = BuildAt("bach_hoa_xanh", Meal(0, ("thit_heo_xay_nac", 25))).Trips!.Single().Items.Single();
+        Assert.Null(bhx.SoldByWeight);
+        Assert.Equal((1, 200.0), (bhx.Packs, bhx.PackG));
+        // items (cả tuần) và till_cost vẫn theo gói
+        var week = Build(Meal(0, ("uc_ga_khong_da", 25)));
+        Assert.Null(week.Items.Single().SoldByWeight);
+        Assert.Equal(Data.PricesByIngredient["uc_ga_khong_da"]["cho_khac"].PackG, week.Items.Single().PackG);
     }
 
     [Fact]
     public void Cong_tac_cap_dong_chuyen_thit_ca_cap_dong_duoc_sang_theo_tuan()
     {
-        var list = Build(Meal(0, ("uc_ga_khong_da", 150), ("sup_lo_xanh", 100)), Meal(3, ("uc_ga_khong_da", 150), ("sup_lo_xanh", 100)));
+        var list = BuildAt("bach_hoa_xanh", Meal(0, ("thit_heo_xay_nac", 100), ("sup_lo_xanh", 100)), Meal(3, ("thit_heo_xay_nac", 100), ("sup_lo_xanh", 100)));
         var off = ShoppingGroups.TillTotals(list, new HashSet<string>(), freezeMeat: false);
         var on = ShoppingGroups.TillTotals(list, new HashSet<string>(), freezeMeat: true);
-        var chicken = list.Items.Single(i => i.IngredientId == "uc_ga_khong_da");
+        var chicken = list.Items.Single(i => i.IngredientId == "thit_heo_xay_nac");
         Assert.Equal(0, off.Week);
         Assert.Equal(Shopping.RoundMoney(chicken.TillCostVnd), on.Week);
         Assert.True(on.Day < off.Day); // thịt rút khỏi các đợt
-        // mua cả tuần một lần (gói làm tròn một lần) không đắt hơn mua hai đợt
-        Assert.True(on.Total <= off.Total + 1e-6);
+        // thịt mua cả tuần một lần (1 gói) rẻ hơn hai gói của hai đợt ở siêu thị
+        Assert.True(on.Total < off.Total);
     }
 
     [Fact]
@@ -224,19 +273,20 @@ public class ShoppingTripsTests
                 Assert.Equal("day", week.BuyGroup);
                 Assert.Equal(week.NeedG, g.Sum(i => i.NeedG), 6);
                 Assert.Equal(week.UsedCostVnd, g.Sum(i => i.UsedCostVnd), 4);
-                Assert.True(g.Sum(i => i.TillCostVnd) >= week.TillCostVnd - 1e-6, $"{tp.Id} {g.Key}: mua theo đợt không thể rẻ hơn mua một lần");
+                // T-116b: lượng mua (gói hoặc cân) ≥ lượng dùng ở từng đợt
+                Assert.All(g, i => Assert.True(i.Packs * i.PackG >= i.NeedG - 1e-6, $"{tp.Id} {g.Key}: mua {i.Packs * i.PackG} g < dùng {i.NeedG} g"));
+                Assert.All(g.Where(i => i.SoldByWeight == true), i => Assert.True(i.PackG == 100 && i.Packs >= 1 && i.Packs * 100 - i.NeedG < 100 + 1e-6));
             }
             Assert.Equal(list.Items.Where(i => i.BuyGroup == "day").Select(i => i.IngredientId).OrderBy(x => x), tripItems.Select(i => i.IngredientId).Distinct().OrderBy(x => x));
             Assert.Equal(list.Trips!.Select(t => t.DayIndex).OrderBy(x => x), list.Trips!.Select(t => t.DayIndex));
             Assert.All(list.Trips!, t => Assert.InRange(t.DayIndex, 0, 6));
 
-            // Tổng cả tuần ≥ cách cũ (mua một lần), cả hai trạng thái công tắc; chênh = làm tròn gói theo đợt.
+            // Tổng cả tuần = tuần + các đợt, ở cả hai trạng thái công tắc (chênh so với mua một lần có dấu, không ràng buộc ≥ nữa).
             var pantry = list.Items.Where(i => i.IsPantry == true).Select(i => i.IngredientId).ToHashSet();
             foreach (var freeze in new[] { false, true })
             {
                 var t = ShoppingGroups.TillTotals(list, pantry, freeze);
                 Assert.Equal(t.Week + t.Day, t.Total);
-                Assert.True(t.Total >= list.TillCost - 1000 - 1e-6, $"{tp.Id} freeze={freeze}: tổng {t.Total} thấp hơn cũ {list.TillCost}");
             }
             checkedProfiles++;
         }

@@ -46,6 +46,9 @@ public sealed class ShoppingItem
     /// </summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public bool? IsPantry { get; init; }
+    /// <summary>T-116b: dòng trong đợt Theo ngày được mua theo cân (bước 100 g) thay vì theo gói; `pack_g` = 100 và `price_vnd_per_pack` = giá 100 g. Không có khi mua theo gói.</summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public bool? SoldByWeight { get; init; }
     /// <summary>T-116 / D-SHP-06: "week" (Theo tuần) hoặc "day" (Theo ngày), suy từ `storage.json`. null khi chạy chế độ parity.</summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public string? BuyGroup { get; init; }

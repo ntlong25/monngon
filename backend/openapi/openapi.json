@@ -2074,6 +2074,12 @@
               "boolean"
             ]
           },
+          "sold_by_weight": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
           "buy_group": {
             "type": [
               "null",

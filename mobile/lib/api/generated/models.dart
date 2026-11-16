@@ -2513,6 +2513,7 @@ class ShoppingItem {
     this.displayQty,
     this.isDefaultPantry,
     this.isPantry,
+    this.soldByWeight,
     this.buyGroup,
     this.freshDays,
     this.noShelfInfo,
@@ -2557,6 +2558,9 @@ class ShoppingItem {
         ? null
         : json['is_default_pantry'] as bool,
     isPantry: json['is_pantry'] == null ? null : json['is_pantry'] as bool,
+    soldByWeight: json['sold_by_weight'] == null
+        ? null
+        : json['sold_by_weight'] as bool,
     buyGroup: json['buy_group'] == null ? null : json['buy_group'] as String,
     freshDays: json['fresh_days'] == null
         ? null
@@ -2586,6 +2590,7 @@ class ShoppingItem {
   final String? displayQty;
   final bool? isDefaultPantry;
   final bool? isPantry;
+  final bool? soldByWeight;
   final String? buyGroup;
   final int? freshDays;
   final bool? noShelfInfo;
@@ -2610,6 +2615,7 @@ class ShoppingItem {
     String? displayQty,
     bool? isDefaultPantry,
     bool? isPantry,
+    bool? soldByWeight,
     String? buyGroup,
     int? freshDays,
     bool? noShelfInfo,
@@ -2632,6 +2638,7 @@ class ShoppingItem {
     displayQty: displayQty ?? this.displayQty,
     isDefaultPantry: isDefaultPantry ?? this.isDefaultPantry,
     isPantry: isPantry ?? this.isPantry,
+    soldByWeight: soldByWeight ?? this.soldByWeight,
     buyGroup: buyGroup ?? this.buyGroup,
     freshDays: freshDays ?? this.freshDays,
     noShelfInfo: noShelfInfo ?? this.noShelfInfo,
@@ -2656,6 +2663,7 @@ class ShoppingItem {
     if (displayQty != null) 'display_qty': displayQty,
     if (isDefaultPantry != null) 'is_default_pantry': isDefaultPantry,
     if (isPantry != null) 'is_pantry': isPantry,
+    if (soldByWeight != null) 'sold_by_weight': soldByWeight,
     if (buyGroup != null) 'buy_group': buyGroup,
     if (freshDays != null) 'fresh_days': freshDays,
     if (noShelfInfo != null) 'no_shelf_info': noShelfInfo,

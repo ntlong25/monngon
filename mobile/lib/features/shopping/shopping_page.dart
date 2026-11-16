@@ -60,6 +60,7 @@ class ShoppingPage extends ConsumerWidget {
     final now = ref.watch(clockProvider)();
     final totals = totalsOf(list, state);
     final mt = modes ? modeTotals(list, state, view) : null;
+    final freezeHint = modes ? freezeSavingHint(list, state, view) : null;
     final aisles = orderedAisles(list);
     final pantry = [
       for (final it in list.items)
@@ -105,11 +106,12 @@ class ShoppingPage extends ConsumerWidget {
           _CostCards(
             foodCost: totals.foodCost,
             tillCost: mt?.total ?? totals.tillCost,
-            batchExtra: mt?.batchExtra ?? 0,
+            batchDelta: mt?.delta ?? 0,
             budget: saved.plan.budgetVnd,
             surveyDate: surveyDate,
             notSurveyed: notSurveyed,
           ),
+          if (freezeHint != null) _FreezeHint(saving: freezeHint),
           const SizedBox(height: AppSpacing.md),
           _Progress(
             bought: mt?.bought ?? totals.bought,
@@ -223,6 +225,51 @@ List<Widget> _dailySections(
         initiallyExpanded: false,
       ),
   ];
+}
+
+/// Gợi ý bật cấp đông khi mua theo đợt đắt hơn nhiều so với mua một lần (T-116b).
+class _FreezeHint extends ConsumerWidget {
+  const _FreezeHint({required this.saving});
+
+  final double saving;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppL10n.of(context);
+    final theme = Theme.of(context);
+    return Padding(
+      padding: const EdgeInsets.only(top: AppSpacing.sm),
+      child: Card(
+        key: const Key('shop-freeze-hint'),
+        child: Padding(
+          padding: const EdgeInsets.all(AppSpacing.md),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                l.shopFreezeSavingHint(formatVnd(saving)),
+                key: const Key('shop-freeze-hint-text'),
+                style: theme.textTheme.bodyMedium,
+              ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: TextButton(
+                  key: const Key('shop-freeze-hint-on'),
+                  style: TextButton.styleFrom(
+                    minimumSize: const Size(kMinTouch, kMinTouch),
+                  ),
+                  onPressed: () => ref
+                      .read(shopViewProvider.notifier)
+                      .setFreezeMeat(on: true),
+                  child: Text(l.shopFreezeSwitchLabel),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 class _ModeBar extends ConsumerWidget {
@@ -361,7 +408,7 @@ class _CostCards extends StatelessWidget {
   const _CostCards({
     required this.foodCost,
     required this.tillCost,
-    this.batchExtra = 0,
+    this.batchDelta = 0,
     required this.budget,
     required this.surveyDate,
     this.notSurveyed = false,
@@ -372,8 +419,8 @@ class _CostCards extends StatelessWidget {
   /// Tổng "ước tính trả tại quầy" cả tuần (cả hai chế độ nếu có).
   final double tillCost;
 
-  /// Phần cao hơn mua một lần do mua theo đợt (0 = không hiện).
-  final double batchExtra;
+  /// Chênh so với mua một lần: dương "+X ₫ do mua theo đợt", âm "−X ₫ nhờ mua theo cân" (0 = không hiện).
+  final double batchDelta;
   final double budget;
   final String? surveyDate;
 
@@ -414,9 +461,11 @@ class _CostCards extends StatelessWidget {
                 title: l.shopTillCost,
                 value: '${formatVnd(tillCost)} ₫',
                 hint: l.shopTillCostHint,
-                extra: batchExtra > 0
-                    ? l.shopBatchExtra(formatVnd(batchExtra))
-                    : null,
+                extra: batchDelta >= 500
+                    ? l.shopBatchExtra(formatVnd(batchDelta))
+                    : (batchDelta <= -500
+                          ? l.shopBatchSavingNegative(formatVnd(-batchDelta))
+                          : null),
                 extraKey: const Key('shop-batch-extra'),
               ),
             ),

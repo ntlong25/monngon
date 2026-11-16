@@ -3057,6 +3057,24 @@ abstract class AppL10n {
   /// **'Đã qua'**
   String get shopTripPast;
 
+  /// No description provided for @shopFreezeSavingHint.
+  ///
+  /// In vi, this message translates to:
+  /// **'Mua thịt cá cả tuần rồi cấp đông để bớt khoảng {amount} ₫'**
+  String shopFreezeSavingHint(Object amount);
+
+  /// No description provided for @shopFreezeSwitchLabel.
+  ///
+  /// In vi, this message translates to:
+  /// **'Bật cấp đông'**
+  String get shopFreezeSwitchLabel;
+
+  /// No description provided for @shopBatchSavingNegative.
+  ///
+  /// In vi, this message translates to:
+  /// **'−{amount} ₫ nhờ mua theo cân'**
+  String shopBatchSavingNegative(Object amount);
+
   /// No description provided for @onboardingRiceTitle.
   ///
   /// In vi, this message translates to:

@@ -669,6 +669,11 @@ public class V1Tests(WebApplicationFactory<Program> factory) : IClassFixture<Web
         Assert.Equal([0, 3], trips.Select(t => t!["day_index"]!.GetValue<int>()));
         Assert.All(trips, t => Assert.Equal("uc_ga_khong_da", Assert.Single(t!["items"]!.AsArray())!["ingredient_id"]!.GetValue<string>()));
         Assert.True(trips[0]!["till_cost"]!.GetValue<double>() > 0);
+        // T-116b: ở chợ (cho_khac) thịt trong đợt mua theo cân, bước 100 g; dòng cả tuần vẫn theo gói
+        var line = trips[0]!["items"]![0]!;
+        Assert.True(line["sold_by_weight"]!.GetValue<bool>());
+        Assert.Equal(100, line["pack_g"]!.GetValue<double>());
+        Assert.Null(Item("uc_ga_khong_da")["sold_by_weight"]);
     }
 
     [Fact]

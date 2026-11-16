@@ -55,7 +55,8 @@ API không cần khóa bí mật nào. CORS hiện mở cho mọi nguồn (chín
 ## 4. Health check
 
 - `GET /health` → `200 {"status":"ok"}` khi tiến trình lên (dữ liệu hợp lệ mới tới được bước này).
-- Dockerfile có `HEALTHCHECK` gọi `/health` mỗi 30 giây (`docker ps` hiện `healthy`).
+- `GET /health/ready` (T-117) → `503 {"status":"warming_up"}` cho tới khi làm nóng engine xong (lập 4 tuần mẫu, mỗi mức cơm một tuần; ~2,5 s thực / ~7 s CPU trên máy dev 12 lõi), rồi `200 {"status":"ready","warm_up_seconds":…}`. Tắt: `WarmUp__Enabled=false`; chọn mức: `WarmUp__Levels=it,vua`.
+- Dockerfile có `HEALTHCHECK` gọi `/health/ready` mỗi 30 giây, `start-period` 60 s (`docker ps` hiện `healthy` sau khi làm nóng; chưa chạy thử Docker trong phiên này). Rolling restart: đợi `healthy` rồi mới tắt bản cũ.
 - Phiên bản dữ liệu đang chạy: `GET /v1/reference` → `data_version` (băm nội dung `data/`).
 - Hợp đồng API: `GET /openapi/v1.json`.
 

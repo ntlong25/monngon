@@ -34,6 +34,13 @@ public static class ShoppingGroups
     /// <summary>Quầy đồ khô, khô/gia vị: khi chưa có dữ liệu → Theo tuần (D-SHP-07).</summary>
     private static bool DryAisle(string aisle) => aisle is "gao_do_kho" or "gia_vi_dau";
 
+    /// <summary>T-116b / D-SHP-09: bước làm tròn khi mua theo cân ở chợ (g), cũng là lượng tối thiểu.</summary>
+    public const double WeightStepG = 100;
+
+    /// <summary>Quầy bán theo cân ở chợ (thịt, cá/hải sản, rau củ, trái cây); chợ = dòng giá `cho_khac`.</summary>
+    public static bool SoldByWeight(string aisle, string priceStoreId) =>
+        priceStoreId == Dataset.FallbackStoreId && aisle is "thit" or "ca_hai_san" or "rau_cu" or "trai_cay";
+
     private static bool FreshMeatAisle(string aisle) => aisle is "thit" or "ca_hai_san";
 
     /// <summary>
@@ -86,20 +93,27 @@ public static class ShoppingGroups
                 while (i < days.Count && days[i] <= buyDay + window - 1) { grams += uses[days[i]]; i++; }
                 if (grams <= 0) continue;
                 var need = grams / ing.EdiblePortion;
-                var packs = (int)Math.Max(1, Math.Ceiling(need / price.PackG - 1e-9));
+                // Đợt Theo ngày ở chợ: thịt/cá/rau/quả mua theo cân (làm tròn lên 100 g, tối thiểu 100 g), giá theo đơn giá/g của "gói" ước tính.
+                // Dòng siêu thị (và các quầy khác) vẫn làm tròn theo gói.
+                var byWeight = SoldByWeight(ing.Aisle, price.StoreId);
+                var packG = byWeight ? WeightStepG : price.PackG;
+                var packPrice = byWeight ? price.PriceVnd / price.PackG * WeightStepG : price.PriceVnd;
+                var packLabel = byWeight ? $"{WeightStepG:0} g" : price.PackLabel;
+                var packs = (int)Math.Max(1, Math.Ceiling(need / packG - 1e-9));
                 if (!byDay.TryGetValue(buyDay, out var list)) byDay[buyDay] = list = [];
                 list.Add(new ShoppingItem
                 {
                     IngredientId = id, Name = ing.Name, Aisle = ing.Aisle, NeedG = need, Packs = packs,
-                    PackG = price.PackG, PackLabel = price.PackLabel, PriceVndPerPack = price.PriceVnd,
+                    PackG = packG, PackLabel = packLabel, PriceVndPerPack = packPrice,
                     UsedCostVnd = need / price.PackG * price.PriceVnd,
-                    TillCostVnd = packs * price.PriceVnd,
-                    LeftoverG = packs * price.PackG - need,
+                    TillCostVnd = packs * packPrice,
+                    LeftoverG = packs * packG - need,
                     LeftoverDays = price.ShelfLifeDays,
                     PriceStoreId = price.StoreId, PriceFallback = fallback,
-                    DisplayQty = displayQty ? Shopping.DisplayQtyOf(packs, price.PackLabel) : null,
+                    DisplayQty = displayQty ? (byWeight ? $"{packs * WeightStepG:0} g" : Shopping.DisplayQtyOf(packs, price.PackLabel)) : null,
                     IsDefaultPantry = displayQty ? ing.DefaultPantry : null,
                     IsPantry = displayQty ? pantry.Contains(id) : null,
+                    SoldByWeight = byWeight ? true : null,
                     BuyGroup = "day", FreshDays = bi.FreshDays, NoShelfInfo = bi.NoShelfInfo, FreezableMeat = bi.FreezableMeat,
                 });
             }
