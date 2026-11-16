@@ -538,6 +538,16 @@ Chọn phương án (3):
 - Không chọn (2): bỏ ràng buộc CPU che mất rủi ro máy chủ ít lõi.
 - T-105 được phép đổi thuật toán, với điều kiện: đổi golden có giải thích; giữ mọi AC sản phẩm của T-094/T-096/T-098 (theo D-COM-05/07); giữ tính tất định; thời gian thực không lùi. Ngoài ra đo trên cấu hình máy chủ dự kiến trước phát hành (D-PERF-01).
 
+**D-PERF-03 — Duyệt T-105 (PM, 2026-11-16).** Nguồn: `docs/dev/perf-t105.md`. CPU p95: ít 0,08 · vừa 0,03 · nhiều 0,92 · rất nhiều 1,84 s (trước 5,05 s). Thời gian thực p95 ≤ 0,9 s. Tất định 216 × 20: 0 khác. Engine 248/248, Api 49/49, engine-report 18/18 đạt 7/7.
+1. **Đổi kết quả 62/216 ô: chấp nhận.** Phần lớn chỉ đổi món tráng miệng. 5 ô đổi phương án thắng, đều qua AC D-COM-05 (Rice98). Golden parity không đổi, danh sách ngoại lệ không dài thêm, 216/216 "ready". Đúng điều kiện D-PERF-02.
+2. **AC1 (CPU p95 ≤ 2 s): đạt cho bản này.** Lần đo 2,08 s xảy ra trên máy dev dùng chung, nhiễu ±10–15%. Không bắt tối ưu thêm bây giờ. Biên mỏng được xử lý ở cổng phát hành (mục 3) và ở T-118 nếu cổng không qua.
+3. **AC4: cấu hình đo và cách tính đạt.**
+   - Cấu hình mặc định: **2 vCPU**, cấu hình nhỏ nhất hợp lý cho máy chủ đầu tiên. Đo bằng `DOTNET_PROCESSOR_COUNT=2` cho tới khi chọn hosting thật. Khi người dùng chọn gói hosting (cùng lúc với DB ở T-029), đo lại trên máy thật trước phát hành.
+   - Cách tính đạt: chạy `bench` **10 lần**, gộp toàn bộ mẫu (10 × 54 ô mỗi mức) rồi tính p95. Đạt khi **p95 gộp ≤ 2 s ở mọi mức** và **không ô nào > 3 s**. Không tính từng lần riêng lẻ, vì một lần đo nhiễu không nói lên tải thật.
+   - Nếu không đạt trên máy thật thì mở T-118 (tối ưu `RescueDayWithFullMeal` / cấu trúc phương án), không hạ ngưỡng.
+4. **App tổng p95 ≤ 5 s:** đo lại trên emulator **sau T-116**, trong cùng một buổi đo, trước phát hành. Không chặn commit, vì thời gian thực phía server đã giảm (rất nhiều 1,75 → 0,88 s) so với lần T-101 đo app ≤ 2,0 s.
+5. **Tiến trình lạnh** (kế hoạch đầu tiên tốn ~12 s CPU để nạp bộ đệm `Scaler`) là rủi ro thật với người dùng đầu tiên sau mỗi lần deploy. Đây là điều kiện phát hành: T-117.
+
 **D-ONB-07 — Màn vuốt thẻ khẩu vị: sửa bố cục và cử chỉ (PM, 2026-11-16).** Người dùng báo màn vuốt (bước 2) "rất xấu, thẻ lệch trái nhiều", muốn quẹt giống Tinder. Nguồn: `docs/research/swipe-tinder-ux.md`.
 - **Nguyên nhân lệch trái:** `Card` trong `Dismissible` không có ràng buộc chiều rộng, còn khung onboarding căn nội dung về trái (`crossAxisAlignment.start`).
 - **Tự viết, không thêm package.** Cử chỉ cần làm đơn giản: `GestureDetector` + `AnimationController` + `Transform`. Tự viết khớp sẵn logic thích/ít hơn/hoàn tác/thay thế hiện có, và giữ được trợ năng. Không thêm dependency khi chưa có lý do; `flutter_card_swiper` chỉ là phương án dự phòng nếu tự viết vượt quá 2 ngày công, khi đó báo PM.
@@ -932,3 +942,9 @@ Quyết định:
 - **Dòng ghi chú cố định** dưới khối giá/khuyến mãi trên tab Đi chợ, đúng câu người dùng: "Chi tiết chương trình khuyến mãi vui lòng truy cập vào trang chủ siêu thị" (chuỗi i18n, Research thêm). US-7.2 sửa theo: hiện giá gốc, giá bán, thời hạn nếu trang có, kèm dòng ghi chú này. Không diễn giải điều kiện khuyến mãi.
 - **Email liên hệ của bộ thu thập** do người dùng cung cấp, đặt trong cấu hình (ADR-002), không viết cứng trong mã.
 
+
+**D-P2-09 — T-112 phần dữ liệu xong; bỏ bản nháp storage (PM, 2026-11-16).**
+- Dev đã chuyển dữ liệu vào `data/storage.json` (69 dòng, giống hệt bản nháp), thêm `Dataset.Storage`, kiểm trong `DataValidator`, thêm 6 test và cập nhật `golden/manifest.json`.
+- **Xóa `docs/research/storage-draft.json` trong cùng commit.** Hai bản giống hệt nhau thì sớm muộn sẽ lệch nhau. Lịch sử git vẫn giữ bản nháp. Từ nay **`data/storage.json` là nguồn duy nhất**: Research sửa thẳng file này và chạy validator; mỗi lần sửa phải regen golden/fixture, vì `data_version` đổi.
+- `docs/research/ingredient-storage-groups.json` **giữ lại**: đây là bảng kết quả mong đợi cho test của T-116 (AC0), không phải bản sao dữ liệu.
+- **T-112 chưa đóng.** Phần tính năng US-8.1…8.3 vẫn mở: nhãn độ tươi, ưu tiên mềm cho bữa có nguyên liệu hạn ngắn, gợi ý cấp đông, thẻ Bảo quản, chọn ngày đi chợ.

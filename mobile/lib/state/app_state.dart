@@ -144,6 +144,32 @@ class ShoppingState {
   };
 }
 
+/// Chế độ xem của tab Đi chợ (D-SHP-06): mua một lần theo tuần hay chia đợt theo ngày.
+enum ShopMode { weekly, daily }
+
+/// Lựa chọn xem tab Đi chợ, nhớ trên máy: chế độ gần nhất (lần đầu: Theo tuần) và công tắc "Mua thịt cá cả tuần rồi cấp đông".
+class ShopViewPrefs {
+  const ShopViewPrefs({this.mode = ShopMode.weekly, this.freezeMeat = false});
+
+  factory ShopViewPrefs.fromJson(Map<String, dynamic> j) => ShopViewPrefs(
+    mode: j['mode'] == 'daily' ? ShopMode.daily : ShopMode.weekly,
+    freezeMeat: j['freeze_meat'] == true,
+  );
+
+  final ShopMode mode;
+  final bool freezeMeat;
+
+  ShopViewPrefs copyWith({ShopMode? mode, bool? freezeMeat}) => ShopViewPrefs(
+    mode: mode ?? this.mode,
+    freezeMeat: freezeMeat ?? this.freezeMeat,
+  );
+
+  Map<String, dynamic> toJson() => {
+    'mode': mode == ShopMode.daily ? 'daily' : 'weekly',
+    'freeze_meat': freezeMeat,
+  };
+}
+
 /// Giá trị khởi tạo cho hồ sơ/lựa chọn trước khi người dùng nhập.
 abstract final class Defaults {
   static const profile = Profile(

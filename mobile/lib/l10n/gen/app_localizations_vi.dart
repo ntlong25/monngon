@@ -1716,6 +1716,34 @@ class AppL10nVi extends AppL10n {
   String get shopNoShelfInfo => 'Chưa có thông tin hạn dùng';
 
   @override
+  String shopTripTotal(Object amount) {
+    return 'Đợt này: $amount ₫';
+  }
+
+  @override
+  String shopModeTotalWeekly(Object amount) {
+    return 'Mua theo tuần: $amount ₫';
+  }
+
+  @override
+  String shopModeTotalDaily(Object amount) {
+    return 'Mua theo ngày: $amount ₫';
+  }
+
+  @override
+  String get shopFreezeTip =>
+      'Cấp đông ngay sau khi mua, rã đông trước 1 ngày khi nấu.';
+
+  @override
+  String get shopWeeklyEmpty => 'Không có nguyên liệu nào cần mua theo tuần.';
+
+  @override
+  String get shopDailyEmpty => 'Không có nguyên liệu tươi cần mua theo ngày.';
+
+  @override
+  String get shopTripPast => 'Đã qua';
+
+  @override
   String get onboardingRiceTitle => 'Thói quen ăn cơm';
 
   @override

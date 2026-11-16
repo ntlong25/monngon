@@ -2073,6 +2073,31 @@
               "null",
               "boolean"
             ]
+          },
+          "buy_group": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "fresh_days": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
+          },
+          "no_shelf_info": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "freezable_meat": {
+            "type": [
+              "null",
+              "boolean"
+            ]
           }
         }
       },
@@ -2127,6 +2152,15 @@
               "number"
             ],
             "format": "double"
+          },
+          "trips": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/ShoppingTrip"
+            }
           }
         }
       },
@@ -2172,6 +2206,29 @@
           },
           "eaten_out": {
             "type": "boolean"
+          },
+          "day_index": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "ShoppingTrip": {
+        "type": "object",
+        "properties": {
+          "day_index": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShoppingItem"
+            }
+          },
+          "till_cost": {
+            "type": "number",
+            "format": "double"
           }
         }
       },

@@ -284,6 +284,8 @@ public sealed class ShoppingMealDto
     public List<ShoppingLineDto> Ingredients { get; set; } = [];
     /// <summary>true = bữa ăn ngoài: bỏ khỏi danh sách đi chợ.</summary>
     public bool EatenOut { get; set; }
+    /// <summary>Ngày trong tuần của bữa (0 = ngày đầu kế hoạch) — để chia đợt mua theo ngày (T-116). Không gửi → 0.</summary>
+    public int DayIndex { get; set; }
 }
 
 public sealed class ShoppingListRequest

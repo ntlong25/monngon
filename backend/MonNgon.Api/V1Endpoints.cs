@@ -227,7 +227,7 @@ public static class V1Endpoints
                 if (!data.IngredientsById.ContainsKey(req.PantryIds![i])) e.Add($"pantry_ids[{i}]", $"nguyên liệu \"{req.PantryIds[i]}\" không tồn tại");
             if (e.Any) return TypedResults.ValidationProblem(e.ToDictionary());
             var meals = req.Meals.Where(m => !m.EatenOut)
-                .Select(m => new ShoppingMeal { Ingredients = m.Ingredients.Select(l => new ShoppingIngredient(l.IngredientId, l.Grams, l.StandardGrams)).ToList() }).ToList();
+                .Select(m => new ShoppingMeal { Day = Math.Max(0, m.DayIndex), Ingredients = m.Ingredients.Select(l => new ShoppingIngredient(l.IngredientId, l.Grams, l.StandardGrams)).ToList() }).ToList();
             return TypedResults.Ok(Shopping.BuildShoppingList(meals, new Household(req.Adults, req.Children), data, req.StoreId, req.PantryIds, displayQty: true));
         }).WithName("BuildShoppingList").WithSummary("Tính lại danh sách đi chợ (stateless): nhà có sẵn, ăn ngoài");
 

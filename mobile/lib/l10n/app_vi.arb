@@ -487,6 +487,13 @@
   "shopFreezeMeatSwitch": "Mua thịt cá cả tuần rồi cấp đông",
   "shopBatchExtra": "+{amount} ₫ do mua theo đợt",
   "shopNoShelfInfo": "Chưa có thông tin hạn dùng",
+  "shopTripTotal": "Đợt này: {amount} ₫",
+  "shopModeTotalWeekly": "Mua theo tuần: {amount} ₫",
+  "shopModeTotalDaily": "Mua theo ngày: {amount} ₫",
+  "shopFreezeTip": "Cấp đông ngay sau khi mua, rã đông trước 1 ngày khi nấu.",
+  "shopWeeklyEmpty": "Không có nguyên liệu nào cần mua theo tuần.",
+  "shopDailyEmpty": "Không có nguyên liệu tươi cần mua theo ngày.",
+  "shopTripPast": "Đã qua",
   "onboardingRiceTitle": "Thói quen ăn cơm",
   "onboardingRiceQuestion": "Mỗi bữa trưa/tối bạn thường ăn mấy chén cơm?",
   "onboardingRiceNote": "Chỉ áp cho bạn. Người lớn khác ăn mức Vừa, trẻ em ăn 0,6 suất.",
@@ -1252,6 +1259,27 @@
     }
   },
   "@shopBatchExtra": {
+    "placeholders": {
+      "amount": {
+        "type": "Object"
+      }
+    }
+  },
+  "@shopTripTotal": {
+    "placeholders": {
+      "amount": {
+        "type": "Object"
+      }
+    }
+  },
+  "@shopModeTotalWeekly": {
+    "placeholders": {
+      "amount": {
+        "type": "Object"
+      }
+    }
+  },
+  "@shopModeTotalDaily": {
     "placeholders": {
       "amount": {
         "type": "Object"

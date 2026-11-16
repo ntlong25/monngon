@@ -40,7 +40,7 @@ static int Bench(string[] a)
     var cpuP95Ms = double.Parse(Opt("cpu-p95-ms", "0"), System.Globalization.CultureInfo.InvariantCulture);
     var levels = Opt("levels", string.Join(',', MonNgon.Engine.Types.Enums.RiceHabits)).Split(',', StringSplitOptions.RemoveEmptyEntries);
     var profiles = TestProfile.LoadFile(Opt("profiles", Path.Combine(dataDir, "test-profiles.json"))).Where(p => only.Length == 0 || p.Id.Contains(only)).ToList();
-    var options = new PlanOptions { RiceOnlyAttempt = int.Parse(Opt("attempt", "0")), LiftToLowerLevel = Opt("lift", "true") != "false", MaxParallelAttempts = int.Parse(Opt("par", "2")), DayParallelism = int.Parse(Opt("daypar", "-1")), SkipRankedOverBudgetRatio = double.Parse(Opt("skip", "0"), System.Globalization.CultureInfo.InvariantCulture), WaitForRicePresence = Opt("wait", "true") != "false" };
+    var options = new PlanOptions { RiceOnlyAttempt = int.Parse(Opt("attempt", "0")), LiftToLowerLevel = Opt("lift", "true") != "false", MaxParallelAttempts = int.Parse(Opt("par", "1")), DayParallelism = int.Parse(Opt("daypar", "-1")), SkipRankedOverBudgetRatio = double.Parse(Opt("skip", "0"), System.Globalization.CultureInfo.InvariantCulture), WaitForRicePresence = Opt("wait", "true") != "false", DessertRescueTrials = int.Parse(Opt("drt", "3")), RepairDessertAlts = int.Parse(Opt("rda", "2")) };
     PlanWeekInput Input(TestProfile tp, string level, long seed)
     {
         var prefs = System.Text.Json.JsonSerializer.Deserialize<MonNgon.Engine.Types.Preferences>(System.Text.Json.JsonSerializer.Serialize(tp.Preferences, JsonOptions.Default), JsonOptions.Default)!;

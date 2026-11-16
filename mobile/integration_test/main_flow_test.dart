@@ -5,6 +5,7 @@
 
 import 'package:fitpro_mamdu/api/generated/models.dart';
 import 'package:fitpro_mamdu/app.dart';
+import 'package:fitpro_mamdu/state/app_state.dart';
 import 'package:fitpro_mamdu/state/providers.dart';
 import 'package:fitpro_mamdu/state/storage.dart';
 import 'package:flutter/material.dart';
@@ -477,6 +478,40 @@ void main() {
         isNot(progressBefore),
       );
       await shot(t, 'it-08-di-cho-da-mua');
+
+      // T-116 / D-SHP-06: hai chế độ Theo tuần / Theo ngày trên dữ liệu API thật.
+      final listNow = containerOf(t).read(currentPlanProvider)!.plan.shopping;
+      expect(
+        listNow.items.every((i) => i.buyGroup != null),
+        isTrue,
+        reason: 'server trả nhóm mua cho mọi dòng',
+      );
+      final trips = listNow.trips ?? const <ShoppingTrip>[];
+      expect(trips, isNotEmpty, reason: 'có đợt mua theo ngày');
+      // Lần đầu (kho đã xóa ở bước 1): Theo tuần.
+      await t.drag(shopList, const Offset(0, 6000));
+      await breathe(t);
+      await waitFor(t, find.byKey(const Key('shop-mode')));
+      expect(
+        containerOf(t).read(shopViewProvider).mode,
+        ShopMode.weekly,
+        reason: 'lần đầu mở là Theo tuần',
+      );
+      await shot(t, 'it-08-di-cho-theo-tuan');
+      await tapKey(t, 'shop-mode-daily');
+      await breathe(t, 800);
+      expect(containerOf(t).read(shopViewProvider).mode, ShopMode.daily);
+      await waitFor(t, find.byKey(Key('trip-${trips.first.dayIndex}')));
+      await shot(t, 'it-08-di-cho-theo-ngay');
+      if (find.byKey(const Key('shop-freeze')).evaluate().isNotEmpty) {
+        await tapKey(t, 'shop-freeze');
+        await breathe(t, 800);
+        await shot(t, 'it-08-di-cho-cap-dong');
+        await tapKey(t, 'shop-freeze');
+        await breathe(t, 400);
+      }
+      await tapKey(t, 'shop-mode-weekly');
+      await breathe(t, 600);
 
       // ---------------------------------------------------------------- 9. Tab Bạn: Xóa dữ liệu → về onboarding
       await tabTo(t, lOf(t).tabProfile);

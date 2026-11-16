@@ -510,6 +510,22 @@ T-001 (khởi tạo Expo), T-013…T-028 (UI Expo): **CANCELLED**, thay bằng T
   2. Thời gian thực không lùi (ít/vừa p95 ≤ 1 s; nhiều/3+ ≤ 2 s); tất định 100% (mỗi ô 20 lần).
   3. Mọi AC sản phẩm T-094/T-096/T-098 theo D-COM-05/07 giữ nguyên (danh sách ngoại lệ không được dài thêm).
   4. Đo trên cấu hình máy chủ dự kiến (số lõi thật), ghi `docs/dev/`; app tổng p95 ≤ 5 s ở mọi mức.
+- **Trạng thái (2026-11-16, D-PERF-03):** **AC1–AC3 đạt, PM duyệt** (`docs/dev/perf-t105.md`), được commit. PM chấp nhận 62/216 ô đổi kết quả. **AC4 còn mở, là cổng phát hành:**
+  - (a) Cấu hình đo 2 vCPU (`DOTNET_PROCESSOR_COUNT=2`). Khi đã chọn hosting thật thì đo lại trên máy thật.
+  - (b) Chạy `bench` 10 lần, gộp mẫu: p95 ≤ 2 s ở mọi mức, không ô nào > 3 s.
+  - (c) App tổng p95 ≤ 5 s trên emulator, đo sau T-116.
+  - Nếu (a)/(b) không đạt thì mở T-118.
+
+### T-117 — Làm nóng engine khi khởi động API · DEV · **P1 (điều kiện phát hành)**
+- **Mô tả (D-PERF-03 mục 5):** Ở tiến trình lạnh, kế hoạch đầu tiên của hồ sơ nặng tốn ~12 s CPU vì phải nạp bộ đệm `Scaler`. Khi API khởi động, chạy làm nóng (vd lập 1–2 tuần mẫu, hoặc dựng sẵn bộ đệm) trước khi báo sẵn sàng.
+- **AC:**
+  1. Readiness (`/health/ready` hoặc tương đương) chỉ trả OK sau khi làm nóng xong. Liveness vẫn trả OK ngay.
+  2. Lần lập tuần đầu tiên sau khởi động, hồ sơ nặng (p01 mức rất nhiều): CPU và thời gian thực nằm trong ngưỡng D-PERF-01/03.
+  3. Kết quả làm nóng không ảnh hưởng kết quả lập tuần (tất định, băm giống bản không làm nóng).
+  4. Ghi thời gian khởi động thêm vào `docs/dev/`.
+
+### T-118 — Tối ưu thêm CPU mức rất nhiều · DEV · P2 (**chỉ mở nếu** T-105 AC4 không đạt trên cấu hình thật)
+- **Mô tả:** Cắt chi phí lặp trong `RescueDayWithFullMeal` / chọn ứng viên, hoặc đổi cấu trúc phương án. Hiện các phương án thất bại chạy đủ 12 vòng ở p01/p02/p14. Điều kiện như D-PERF-02: không hạ ngưỡng, giữ AC sản phẩm, giữ tính tất định, đổi golden có giải thích.
 
 ### T-102 — Nhãn "TINH BỘT" + dọn chuỗi cũ · DEV · P2 (sau T-101; cần chuỗi từ T-057d)
 - **Mô tả:** Danh sách mâm: vai trò hiện "CƠM" khi `rice.kind = com`, "TINH BỘT" khi `other` (D-COM-06). Xóa `onboardingRiceWarning` cũ và mọi chỗ dùng.
@@ -672,7 +688,7 @@ T-001 (khởi tạo Expo), T-013…T-028 (UI Expo): **CANCELLED**, thay bằng T
   - Ghi danh sách thay đổi vào `docs/research/data-batch-D1.md`.
 
 ### Thứ tự ưu tiên sau T-050
-**Thứ tự Dev đã chốt (2026-11-10):** kiểm tất định (P0 nếu lỗi) → T-101 phần còn lại (ngoại lệ p01, BudgetTests, CPU ≤ 2 s) → T-103 → **T-106 (sửa màn vuốt, người dùng báo lỗi)** → **T-107 (Mục tiêu thẻ quẹt)** → **T-108 (dụng cụ có hình)** → T-105 (CPU, điều kiện phát hành) → T-112 → **T-116 (Đi chợ 2 chế độ)** → T-115 → T-113 → T-114. (Cập nhật 2026-11-16; dòng cũ bên dưới giữ để tham khảo.) Cũ: **T-106 (sửa màn vuốt)** → phase 2: T-112 (độ tươi) và T-115 (tự sửa giá) → T-113 (nguồn giá BHX) → T-114 (UI giá). T-105 (CPU ≤ 2 s, đổi thuật toán được; **P1, điều kiện phát hành**) xếp sau T-103, trước hoặc song song phase 2 tùy Dev (khác file với T-112/T-115 Flutter).
+**Thứ tự Dev đã chốt (2026-11-10):** kiểm tất định (P0 nếu lỗi) → T-101 phần còn lại (ngoại lệ p01, BudgetTests, CPU ≤ 2 s) → T-103 → **T-106 (sửa màn vuốt, người dùng báo lỗi)** → **T-107 (Mục tiêu thẻ quẹt)** → **T-108 (dụng cụ có hình)** → T-105 (CPU, điều kiện phát hành; AC1–3 xong 2026-11-16) → T-112 phần dữ liệu (xong) → **T-117 (làm nóng API)** → T-112 phần tính năng → **T-116 (Đi chợ 2 chế độ)** → đo emulator T-105 AC4c → T-115 → T-113 → T-114. (Cập nhật 2026-11-16; dòng cũ bên dưới giữ để tham khảo.) Cũ: **T-106 (sửa màn vuốt)** → phase 2: T-112 (độ tươi) và T-115 (tự sửa giá) → T-113 (nguồn giá BHX) → T-114 (UI giá). T-105 (CPU ≤ 2 s, đổi thuật toán được; **P1, điều kiện phát hành**) xếp sau T-103, trước hoặc song song phase 2 tùy Dev (khác file với T-112/T-115 Flutter).
 
 1. **Dev:** xong việc điều tra số test .NET dao động → T-093 mục 1 (L-03) → 2 (L-09) → 3 (L-01) → 4 (L-02) → T-078 phần pantry → **T-094 (lượng cơm theo thói quen, D-COM-01, xong) → T-095 (Flutter) ∥ T-096 (giữ cơm khi chọn mâm, D-COM-02; song song được vì khác file)** → **T-098 (2–3 chén đủ bữa có cơm, D-COM-04)** → T-097 (L-12, L-13) → T-099 (thẻ tinh bột, Flutter, xong PR #2) → **T-104 (regen golden sau đợt giá D2, làm ngay)** → **T-101 (hiệu năng mức cơm cao, P0)** → T-102 (nhãn TINH BỘT, P2) → **T-103 (thẻ vuốt lên bước 2, D-ONB-06)** → T-093 mục 5 (L-08) → mục 6 (L-05).
 2. **Research:** **T-057f (hình mục tiêu + dụng cụ, chuỗi; làm ngay)** · **T-110 lượt 3 (robots.txt + ánh xạ sản phẩm BHX HCM, D-P2-06)** · T-054d xong · **T-054e (nguồn cho 44 dòng giá, P2)** · (sau T-057d: T-110/T-111 phase 2, mức thấp) · **T-057e (TC theo thứ tự onboarding mới + chuỗi cho T-103)**, **T-057d (2 hồ sơ test hộ đông người + ngân sách sát, chuỗi TINH BỘT)**; T-057c (sửa TC-E-04, TC-E-09) bất cứ lúc nào; **T-059c ngay (số liệu chén cơm, dữ liệu `max_g`, chuỗi; Dev cần trước T-095)**, T-057b (tài liệu, không chạm dữ liệu) → chờ Dev xong mục 1–4 → T-050b → T-050c (sau T-094/T-095/T-096) → T-054b (mở băng D1) → các task dữ liệu còn lại (T-053, T-054…).
@@ -844,7 +860,7 @@ T-001 (khởi tạo Expo), T-013…T-028 (UI Expo): **CANCELLED**, thay bằng T
 ## Tổng hợp v0.2
 | Owner | DONE | CANCELLED | Còn mở P0 | Còn mở P1 | Còn mở P2 |
 |---|---|---|---|---|---|
-| DEV | 11 (T-002…T-012) | 17 (T-001, T-013…T-028) | 31 (T-051, T-052, T-060…T-066, T-069…T-072, T-074, T-076, T-078, T-080…T-089, T-093…T-098, T-101) + T-104, T-105 (P1) | 13 (T-067, T-068, T-073, T-077, T-099, T-103, T-106, T-107, T-108, T-116, T-090…T-092) | 5 (T-029, T-075, T-079, T-100, T-102) |
+| DEV | 11 (T-002…T-012) | 17 (T-001, T-013…T-028) | 31 (T-051, T-052, T-060…T-066, T-069…T-072, T-074, T-076, T-078, T-080…T-089, T-093…T-098, T-101) + T-104, T-105, T-117 (P1) | 13 (T-067, T-068, T-073, T-077, T-099, T-103, T-106, T-107, T-108, T-116, T-090…T-092) | 6 (T-029, T-075, T-079, T-100, T-102, T-118 có điều kiện) |
 | RESEARCH | 5 (T-041, T-043, T-047, T-048, T-049) | 1 (T-044) | 12 (T-058, T-053, T-054, T-055, T-057, T-059, T-059c, T-042c, T-050b, T-050c, T-057b, T-057c) | 8 (T-042b, T-056, T-054b, T-054c, T-054d, T-057d, T-057e, T-057f) · P2: T-054e · T-050 DONE | 0 |
 
 Ghi chú: các task RESEARCH PARTIAL (T-040, T-042, T-045, T-046) đã được gộp vào T-054, T-042b, T-055.
@@ -879,6 +895,7 @@ Nguồn: PRD §13, ADR-002 (đề xuất). **Task DEV ở đây chưa giao** cho
 - **AC:** 100% nguyên liệu có dữ liệu hoặc ghi "chưa có nguồn"; mỗi dòng có nguồn; dữ liệu qua validator; câu miễn trừ và chuỗi i18n cho thẻ "Bảo quản".
 
 ### T-112 — Độ tươi + thứ tự nấu + thẻ bảo quản · DEV · P1 phase 2 (**chưa giao**; sau T-103 và T-111)
+- **Trạng thái (2026-11-16, D-P2-09):** **phần dữ liệu XONG.** Đã có `data/storage.json` (69 dòng), `Dataset.Storage`, validator, 6 test và manifest golden. Bản nháp `docs/research/storage-draft.json` bị xóa trong cùng commit; từ nay `data/storage.json` là nguồn duy nhất. **Phần tính năng US-8.1…8.3 còn mở** (mô tả bên dưới).
 - **Việc kèm khi mở (D-P2-03):** chuyển `docs/research/storage-draft.json` → `data/storage.json`, thêm vào validator, regen golden/fixture một lần.
 - **Điều kiện mở (D-P2-02, sửa ở D-P2-04):** mọi nguyên liệu tươi trong `storage.json` có `status` ∈ `ok` | `gan_dung` | `uoc_tinh_vn` và có mẹo + dấu hiệu hỏng; nấm rơm đóng hộp không tính là tươi. Mở sau T-103. **Điều kiện dữ liệu ĐÃ ĐẠT** (T-111 xong 2026-11-09). Chỉ còn chờ T-103. Nhãn theo ngưỡng D-P2-02 (không tính ngăn đông); "Cấp đông được" là huy hiệu riêng. Việc kèm: thêm `storage.json` vào validator dữ liệu.
 - **Mô tả:** US-8.1, US-8.2, US-8.3: nhãn độ tươi trên danh sách đi chợ; ưu tiên mềm xếp bữa hạn ngắn đầu tuần; gợi ý cấp đông; thẻ Bảo quản; chọn ngày đi chợ.

@@ -1286,7 +1286,7 @@
       "grams": [
        {
         "ingredient_id": "dau_phu",
-        "grams": 135
+        "grams": 140
        },
        {
         "ingredient_id": "com_trang",
@@ -1338,11 +1338,11 @@
       "extras": [],
       "substitutions": [],
       "macros": {
-       "kcal": 269.90000000000003,
-       "protein_g": 25.269,
-       "carb_g": 10.004000000000001,
-       "fat_g": 17.048999999999996,
-       "fiber_g": 4.725
+       "kcal": 277.1,
+       "protein_g": 26.133999999999997,
+       "carb_g": 10.143,
+       "fat_g": 17.484999999999996,
+       "fiber_g": 4.84
       },
       "batch_group_id": "sang_chay_tofu_scramble#2026-11-11-breakfast",
       "forced_zero_carb": false,
@@ -1355,7 +1355,7 @@
         "grams": [
          {
           "ingredient_id": "dau_phu",
-          "grams": 135
+          "grams": 140
          },
          {
           "ingredient_id": "com_trang",
@@ -1379,11 +1379,11 @@
          }
         ],
         "macros": {
-         "kcal": 269.90000000000003,
-         "protein_g": 25.269000000000002,
-         "carb_g": 10.004000000000001,
-         "fat_g": 17.049,
-         "fiber_g": 4.725
+         "kcal": 277.1,
+         "protein_g": 26.133999999999997,
+         "carb_g": 10.143,
+         "fat_g": 17.484999999999996,
+         "fiber_g": 4.84
         }
        }
       ]
@@ -1396,7 +1396,7 @@
       "grams": [
        {
         "ingredient_id": "uc_ga_khong_da",
-        "grams": 115
+        "grams": 85
        },
        {
         "ingredient_id": "cai_ngot",
@@ -1451,7 +1451,7 @@
         "grams": 1
        },
        {
-        "ingredient_id": "com_trang",
+        "ingredient_id": "gao_lut_nau_chin",
         "grams": 150
        }
       ],
@@ -1513,7 +1513,7 @@
         "grams": 1
        },
        {
-        "ingredient_id": "com_trang",
+        "ingredient_id": "gao_lut_nau_chin",
         "grams": 150
        }
       ],
@@ -1523,18 +1523,13 @@
         "grams": 10
        }
       ],
-      "substitutions": [
-       {
-        "from": "gao_lut_nau_chin",
-        "to": "com_trang"
-       }
-      ],
+      "substitutions": [],
       "macros": {
-       "kcal": 572.58,
-       "protein_g": 49.6733,
-       "carb_g": 70.801,
-       "fat_g": 12.445600000000002,
-       "fiber_g": 9.056000000000001
+       "kcal": 593.64,
+       "protein_g": 43.2483,
+       "carb_g": 90.291,
+       "fat_g": 9.8406,
+       "fiber_g": 13.666
       },
       "batch_group_id": "mam:bun_tron_ga_xe_mam+canh_gia_do_nam_rom_chay+cai_thao_luoc_an_nguoi+com_gao_lut_nau#2026-11-11-lunch",
       "forced_zero_carb": false,
@@ -1547,7 +1542,7 @@
         "grams": [
          {
           "ingredient_id": "uc_ga_khong_da",
-          "grams": 115
+          "grams": 85
          },
          {
           "ingredient_id": "cai_ngot",
@@ -1571,10 +1566,10 @@
          }
         ],
         "macros": {
-         "kcal": 216.2,
-         "protein_g": 30.343999999999994,
+         "kcal": 184.10000000000002,
+         "protein_g": 23.594,
          "carb_g": 9.452000000000002,
-         "fat_g": 7.319500000000001,
+         "fat_g": 6.740500000000001,
          "fiber_g": 1.9100000000000001
         }
        },
@@ -1644,34 +1639,38 @@
         "name": "Cơm gạo lứt",
         "grams": [
          {
-          "ingredient_id": "com_trang",
+          "ingredient_id": "gao_lut_nau_chin",
           "grams": 150
          }
         ],
         "macros": {
-         "kcal": 195,
-         "protein_g": 4.035,
-         "carb_g": 42.3,
-         "fat_g": 0.42000000000000004,
-         "fiber_g": 0.6000000000000001
+         "kcal": 184.5,
+         "protein_g": 4.11,
+         "carb_g": 38.400000000000006,
+         "fat_g": 1.455,
+         "fiber_g": 2.4000000000000004
         }
        },
        {
         "role": "dessert",
-        "recipe_id": "dessert_sua_dau_nanh_khong_duong",
-        "name": "Sữa đậu nành không đường",
+        "recipe_id": "dessert_che_dau_do",
+        "name": "Chè đậu đỏ ít đường",
         "grams": [
          {
-          "ingredient_id": "sua_dau_nanh",
-          "grams": 200
+          "ingredient_id": "dau_do",
+          "grams": 30
+         },
+         {
+          "ingredient_id": "duong",
+          "grams": 8
          }
         ],
         "macros": {
-         "kcal": 66,
-         "protein_g": 5.72,
-         "carb_g": 3.48,
-         "fat_g": 3.22,
-         "fiber_g": 1
+         "kcal": 129.66,
+         "protein_g": 5.97,
+         "carb_g": 26.869999999999997,
+         "fat_g": 0.159,
+         "fiber_g": 3.8099999999999996
         }
        },
        {
@@ -1693,11 +1692,15 @@
         }
        }
       ],
-      "dessert_id": "dessert_sua_dau_nanh_khong_duong",
+      "dessert_id": "dessert_che_dau_do",
       "dessert": [
        {
-        "ingredient_id": "sua_dau_nanh",
-        "grams": 200
+        "ingredient_id": "dau_do",
+        "grams": 30
+       },
+       {
+        "ingredient_id": "duong",
+        "grams": 8
        }
       ],
       "rice": {
@@ -1786,130 +1789,216 @@
       "date": "2026-11-11",
       "slot": "dinner",
       "status": "planned",
-      "recipe_id": "mam:canh_bi_xanh_thit_bam_mam+bi_xanh_luoc_an_nguoi+com_nguoi_mang_di",
+      "recipe_id": "mam:main_tom_rim_mang_di+canh_bap_cai_nam_rom_chay+bap_cai_luoc_an_nguoi+com_gao_lut_nau",
       "grams": [
        {
-        "ingredient_id": "thit_heo_xay_nac",
-        "grams": 165
-       },
-       {
-        "ingredient_id": "bi_xanh",
-        "grams": 200
-       },
-       {
-        "ingredient_id": "hanh_la",
-        "grams": 10
+        "ingredient_id": "tom",
+        "grams": 115
        },
        {
         "ingredient_id": "toi",
-        "grams": 3
+        "grams": 5
        },
        {
         "ingredient_id": "nuoc_mam",
         "grams": 5
        },
        {
-        "ingredient_id": "bi_xanh",
+        "ingredient_id": "duong",
+        "grams": 5
+       },
+       {
+        "ingredient_id": "dau_an",
+        "grams": 5
+       },
+       {
+        "ingredient_id": "bap_cai",
         "grams": 150
+       },
+       {
+        "ingredient_id": "nam_rom",
+        "grams": 60
+       },
+       {
+        "ingredient_id": "toi",
+        "grams": 3
        },
        {
         "ingredient_id": "muoi",
         "grams": 1
        },
        {
-        "ingredient_id": "com_trang",
+        "ingredient_id": "tieu_den",
+        "grams": 1
+       },
+       {
+        "ingredient_id": "bap_cai",
+        "grams": 150
+       },
+       {
+        "ingredient_id": "toi",
+        "grams": 2
+       },
+       {
+        "ingredient_id": "muoi",
+        "grams": 1
+       },
+       {
+        "ingredient_id": "gao_lut_nau_chin",
         "grams": 150
        }
       ],
       "standard_grams": [
        {
-        "ingredient_id": "thit_heo_xay_nac",
-        "grams": 100
-       },
-       {
-        "ingredient_id": "bi_xanh",
-        "grams": 200
-       },
-       {
-        "ingredient_id": "hanh_la",
-        "grams": 10
+        "ingredient_id": "tom",
+        "grams": 150
        },
        {
         "ingredient_id": "toi",
-        "grams": 3
+        "grams": 5
        },
        {
         "ingredient_id": "nuoc_mam",
         "grams": 5
        },
        {
-        "ingredient_id": "bi_xanh",
+        "ingredient_id": "duong",
+        "grams": 5
+       },
+       {
+        "ingredient_id": "dau_an",
+        "grams": 5
+       },
+       {
+        "ingredient_id": "bap_cai",
         "grams": 150
+       },
+       {
+        "ingredient_id": "nam_rom",
+        "grams": 60
+       },
+       {
+        "ingredient_id": "toi",
+        "grams": 3
        },
        {
         "ingredient_id": "muoi",
         "grams": 1
        },
        {
-        "ingredient_id": "com_trang",
+        "ingredient_id": "tieu_den",
+        "grams": 1
+       },
+       {
+        "ingredient_id": "bap_cai",
+        "grams": 150
+       },
+       {
+        "ingredient_id": "toi",
+        "grams": 2
+       },
+       {
+        "ingredient_id": "muoi",
+        "grams": 1
+       },
+       {
+        "ingredient_id": "gao_lut_nau_chin",
         "grams": 150
        }
       ],
       "extras": [],
       "substitutions": [],
       "macros": {
-       "kcal": 581.28,
-       "protein_g": 49.68680000000001,
-       "carb_g": 79.09049999999999,
-       "fat_g": 8.462,
-       "fiber_g": 8.498000000000001
+       "kcal": 547.66,
+       "protein_g": 49.656,
+       "carb_g": 73.116,
+       "fat_g": 8.4176,
+       "fiber_g": 11.863
       },
-      "batch_group_id": "mam:canh_bi_xanh_thit_bam_mam+bi_xanh_luoc_an_nguoi+com_nguoi_mang_di#0",
+      "batch_group_id": "mam:main_tom_rim_mang_di+canh_bap_cai_nam_rom_chay+bap_cai_luoc_an_nguoi+com_gao_lut_nau#0",
       "forced_zero_carb": false,
       "scale_infeasible": false,
       "dishes": [
        {
         "role": "main",
-        "recipe_id": "canh_bi_xanh_thit_bam_mam",
-        "name": "Canh bí xanh thịt bằm (món chính)",
+        "recipe_id": "main_tom_rim_mang_di",
+        "name": "Tôm rim (mang đi)",
         "grams": [
          {
-          "ingredient_id": "thit_heo_xay_nac",
-          "grams": 165
+          "ingredient_id": "tom",
+          "grams": 115
          },
          {
-          "ingredient_id": "bi_xanh",
-          "grams": 200
+          "ingredient_id": "toi",
+          "grams": 5
          },
          {
-          "ingredient_id": "hanh_la",
-          "grams": 10
+          "ingredient_id": "nuoc_mam",
+          "grams": 5
+         },
+         {
+          "ingredient_id": "duong",
+          "grams": 5
+         },
+         {
+          "ingredient_id": "dau_an",
+          "grams": 5
+         }
+        ],
+        "macros": {
+         "kcal": 170.5,
+         "protein_g": 23.686,
+         "carb_g": 6.837,
+         "fat_g": 5.612,
+         "fiber_g": 0.10500000000000001
+        }
+       },
+       {
+        "role": "soup",
+        "recipe_id": "canh_bap_cai_nam_rom_chay",
+        "name": "Canh bắp cải nấm rơm (chay)",
+        "grams": [
+         {
+          "ingredient_id": "bap_cai",
+          "grams": 150
+         },
+         {
+          "ingredient_id": "nam_rom",
+          "grams": 60
          },
          {
           "ingredient_id": "toi",
           "grams": 3
          },
          {
-          "ingredient_id": "nuoc_mam",
-          "grams": 5
+          "ingredient_id": "muoi",
+          "grams": 1
+         },
+         {
+          "ingredient_id": "tieu_den",
+          "grams": 1
          }
         ],
         "macros": {
-         "kcal": 243.06999999999996,
-         "protein_g": 37.8618,
-         "carb_g": 8.4755,
-         "fat_g": 7.274499999999999,
-         "fiber_g": 2.323
+         "kcal": 63.68,
+         "protein_g": 4.5128,
+         "carb_g": 13.116999999999999,
+         "fat_g": 0.6056,
+         "fiber_g": 5.566
         }
        },
        {
         "role": "side_veg",
-        "recipe_id": "bi_xanh_luoc_an_nguoi",
-        "name": "Bí xanh luộc ăn nguội",
+        "recipe_id": "bap_cai_luoc_an_nguoi",
+        "name": "Bắp cải luộc ăn nguội",
         "grams": [
          {
-          "ingredient_id": "bi_xanh",
+          "ingredient_id": "bap_cai",
           "grams": 150
+         },
+         {
+          "ingredient_id": "toi",
+          "grams": 2
          },
          {
           "ingredient_id": "muoi",
@@ -1917,63 +2006,55 @@
          }
         ],
         "macros": {
-         "kcal": 25.5,
-         "protein_g": 1.815,
-         "carb_g": 4.665,
-         "fat_g": 0.48,
-         "fiber_g": 1.5
+         "kcal": 40.48,
+         "protein_g": 2.0472,
+         "carb_g": 9.362,
+         "fat_g": 0.16000000000000003,
+         "fiber_g": 3.792
         }
        },
        {
         "role": "carb_base",
-        "recipe_id": "com_nguoi_mang_di",
-        "name": "Cơm nguội mang đi",
+        "recipe_id": "com_gao_lut_nau",
+        "name": "Cơm gạo lứt",
         "grams": [
          {
-          "ingredient_id": "com_trang",
+          "ingredient_id": "gao_lut_nau_chin",
           "grams": 150
          }
         ],
         "macros": {
-         "kcal": 195,
-         "protein_g": 4.035,
-         "carb_g": 42.3,
-         "fat_g": 0.42000000000000004,
-         "fiber_g": 0.6000000000000001
+         "kcal": 184.5,
+         "protein_g": 4.11,
+         "carb_g": 38.400000000000006,
+         "fat_g": 1.455,
+         "fiber_g": 2.4000000000000004
         }
        },
        {
         "role": "dessert",
-        "recipe_id": "dessert_che_dau_xanh",
-        "name": "Chè đậu xanh ít đường",
+        "recipe_id": "dessert_sua_chua_hy_lap",
+        "name": "Sữa chua Hy Lạp không đường",
         "grams": [
          {
-          "ingredient_id": "dau_xanh",
-          "grams": 25
-         },
-         {
-          "ingredient_id": "duong",
-          "grams": 8
+          "ingredient_id": "sua_chua_khong_duong",
+          "grams": 150
          }
         ],
         "macros": {
-         "kcal": 117.71000000000001,
-         "protein_g": 5.975,
-         "carb_g": 23.65,
-         "fat_g": 0.2875,
-         "fiber_g": 4.075
+         "kcal": 88.5,
+         "protein_g": 15.299999999999999,
+         "carb_g": 5.4,
+         "fat_g": 0.585,
+         "fiber_g": 0
         }
        }
       ],
-      "dessert_id": "dessert_che_dau_xanh",
+      "dessert_id": "dessert_sua_chua_hy_lap",
       "dessert": [
        {
-        "ingredient_id": "dau_xanh",
-        "grams": 25
-       },
-       {
-        "ingredient_id": "duong",
-        "grams": 8
+        "ingredient_id": "sua_chua_khong_duong",
+        "grams": 150
        }
       ],
       "rice": {
@@ -1986,10 +2067,10 @@
      }
     ],
     "totals": {
-     "kcal": 1467.67,
-     "protein_g": 125.74109999999999,
-     "carb_g": 169.9555,
-     "fat_g": 38.0492
+     "kcal": 1462.31,
+     "protein_g": 120.15029999999999,
+     "carb_g": 183.61,
+     "fat_g": 35.83579999999999
     }
    },
    {
@@ -2708,11 +2789,11 @@
       "date": "2026-11-13",
       "slot": "lunch",
       "status": "planned",
-      "recipe_id": "mam:canh_bi_xanh_thit_bam_mam+su_su_luoc_an_nguoi+gao_lut_nguoi_mang_di",
+      "recipe_id": "mam:canh_bi_xanh_thit_bam_mam+bi_xanh_luoc_an_nguoi+com_nguoi_mang_di",
       "grams": [
        {
         "ingredient_id": "thit_heo_xay_nac",
-        "grams": 125
+        "grams": 120
        },
        {
         "ingredient_id": "bi_xanh",
@@ -2731,7 +2812,7 @@
         "grams": 5
        },
        {
-        "ingredient_id": "su_su",
+        "ingredient_id": "bi_xanh",
         "grams": 150
        },
        {
@@ -2739,7 +2820,7 @@
         "grams": 1
        },
        {
-        "ingredient_id": "gao_lut_nau_chin",
+        "ingredient_id": "com_trang",
         "grams": 150
        }
       ],
@@ -2765,7 +2846,7 @@
         "grams": 5
        },
        {
-        "ingredient_id": "su_su",
+        "ingredient_id": "bi_xanh",
         "grams": 150
        },
        {
@@ -2773,20 +2854,20 @@
         "grams": 1
        },
        {
-        "ingredient_id": "gao_lut_nau_chin",
+        "ingredient_id": "com_trang",
         "grams": 150
        }
       ],
       "extras": [],
       "substitutions": [],
       "macros": {
-       "kcal": 537.3299999999999,
-       "protein_g": 40.7318,
-       "carb_g": 80.4265,
-       "fat_g": 7.483499999999999,
-       "fiber_g": 11.082999999999998
+       "kcal": 538.78,
+       "protein_g": 40.186800000000005,
+       "carb_g": 82.216,
+       "fat_g": 6.533499999999999,
+       "fiber_g": 8.233
       },
-      "batch_group_id": "mam:canh_bi_xanh_thit_bam_mam+su_su_luoc_an_nguoi+gao_lut_nguoi_mang_di#0",
+      "batch_group_id": "mam:canh_bi_xanh_thit_bam_mam+bi_xanh_luoc_an_nguoi+com_nguoi_mang_di#0",
       "forced_zero_carb": false,
       "scale_infeasible": false,
       "dishes": [
@@ -2797,7 +2878,7 @@
         "grams": [
          {
           "ingredient_id": "thit_heo_xay_nac",
-          "grams": 125
+          "grams": 120
          },
          {
           "ingredient_id": "bi_xanh",
@@ -2817,20 +2898,20 @@
          }
         ],
         "macros": {
-         "kcal": 194.67,
-         "protein_g": 29.4218,
-         "carb_g": 8.3915,
-         "fat_g": 5.674499999999999,
+         "kcal": 188.61999999999998,
+         "protein_g": 28.3668,
+         "carb_g": 8.381,
+         "fat_g": 5.474499999999999,
          "fiber_g": 2.323
         }
        },
        {
         "role": "side_veg",
-        "recipe_id": "su_su_luoc_an_nguoi",
-        "name": "Su su luộc ăn nguội",
+        "recipe_id": "bi_xanh_luoc_an_nguoi",
+        "name": "Bí xanh luộc ăn nguội",
         "grams": [
          {
-          "ingredient_id": "su_su",
+          "ingredient_id": "bi_xanh",
           "grams": 150
          },
          {
@@ -2839,29 +2920,29 @@
          }
         ],
         "macros": {
-         "kcal": 28.5,
-         "protein_g": 1.23,
-         "carb_g": 6.765,
-         "fat_g": 0.195,
-         "fiber_g": 2.55
+         "kcal": 25.5,
+         "protein_g": 1.815,
+         "carb_g": 4.665,
+         "fat_g": 0.48,
+         "fiber_g": 1.5
         }
        },
        {
         "role": "carb_base",
-        "recipe_id": "gao_lut_nguoi_mang_di",
-        "name": "Gạo lứt nguội mang đi",
+        "recipe_id": "com_nguoi_mang_di",
+        "name": "Cơm nguội mang đi",
         "grams": [
          {
-          "ingredient_id": "gao_lut_nau_chin",
+          "ingredient_id": "com_trang",
           "grams": 150
          }
         ],
         "macros": {
-         "kcal": 184.5,
-         "protein_g": 4.11,
-         "carb_g": 38.400000000000006,
-         "fat_g": 1.455,
-         "fiber_g": 2.4000000000000004
+         "kcal": 195,
+         "protein_g": 4.035,
+         "carb_g": 42.3,
+         "fat_g": 0.42000000000000004,
+         "fiber_g": 0.6000000000000001
         }
        },
        {
@@ -3196,10 +3277,10 @@
      }
     ],
     "totals": {
-     "kcal": 1461.52,
-     "protein_g": 120.8255,
-     "carb_g": 168.58100000000002,
-     "fat_g": 39.088499999999996
+     "kcal": 1462.9699999999998,
+     "protein_g": 120.2805,
+     "carb_g": 170.3705,
+     "fat_g": 38.13849999999999
     }
    },
    {
@@ -3312,11 +3393,11 @@
       "date": "2026-11-14",
       "slot": "lunch",
       "status": "planned",
-      "recipe_id": "mam:canh_bi_xanh_tom_mam+gia_do_tron_mang_di+gao_lut_nguoi_mang_di",
+      "recipe_id": "mam:canh_bi_xanh_thit_bam_mam+su_su_luoc_an_nguoi+gao_lut_nguoi_mang_di",
       "grams": [
        {
-        "ingredient_id": "tom",
-        "grams": 125
+        "ingredient_id": "thit_heo_xay_nac",
+        "grams": 130
        },
        {
         "ingredient_id": "bi_xanh",
@@ -3335,30 +3416,22 @@
         "grams": 5
        },
        {
-        "ingredient_id": "gia_do",
-        "grams": 100
-       },
-       {
-        "ingredient_id": "ca_rot",
-        "grams": 40
-       },
-       {
-        "ingredient_id": "dau_an",
-        "grams": 5
+        "ingredient_id": "su_su",
+        "grams": 150
        },
        {
         "ingredient_id": "muoi",
         "grams": 1
        },
        {
-        "ingredient_id": "gao_lut_nau_chin",
+        "ingredient_id": "com_trang",
         "grams": 150
        }
       ],
       "standard_grams": [
        {
-        "ingredient_id": "tom",
-        "grams": 120
+        "ingredient_id": "thit_heo_xay_nac",
+        "grams": 100
        },
        {
         "ingredient_id": "bi_xanh",
@@ -3377,47 +3450,44 @@
         "grams": 5
        },
        {
-        "ingredient_id": "gia_do",
-        "grams": 100
-       },
-       {
-        "ingredient_id": "ca_rot",
-        "grams": 40
-       },
-       {
-        "ingredient_id": "dau_an",
-        "grams": 5
+        "ingredient_id": "su_su",
+        "grams": 150
        },
        {
         "ingredient_id": "muoi",
         "grams": 1
        },
        {
-        "ingredient_id": "gao_lut_nau_chin",
+        "ingredient_id": "com_trang",
         "grams": 150
        }
       ],
       "extras": [],
-      "substitutions": [],
+      "substitutions": [
+       {
+        "from": "gao_lut_nau_chin",
+        "to": "com_trang"
+       }
+      ],
       "macros": {
-       "kcal": 542.48,
-       "protein_g": 41.668800000000005,
-       "carb_g": 79.951,
-       "fat_g": 8.330499999999999,
-       "fiber_g": 11.718
+       "kcal": 541.93,
+       "protein_g": 41.7168,
+       "carb_g": 81.11699999999999,
+       "fat_g": 6.776999999999999,
+       "fiber_g": 9.548
       },
-      "batch_group_id": "mam:canh_bi_xanh_tom_mam+gia_do_tron_mang_di+gao_lut_nguoi_mang_di#0",
+      "batch_group_id": "mam:canh_bi_xanh_thit_bam_mam+su_su_luoc_an_nguoi+gao_lut_nguoi_mang_di#0",
       "forced_zero_carb": false,
-      "scale_infeasible": true,
+      "scale_infeasible": false,
       "dishes": [
        {
         "role": "main",
-        "recipe_id": "canh_bi_xanh_tom_mam",
-        "name": "Canh bí xanh nấu tôm (món chính)",
+        "recipe_id": "canh_bi_xanh_thit_bam_mam",
+        "name": "Canh bí xanh thịt bằm (món chính)",
         "grams": [
          {
-          "ingredient_id": "tom",
-          "grams": 125
+          "ingredient_id": "thit_heo_xay_nac",
+          "grams": 130
          },
          {
           "ingredient_id": "bi_xanh",
@@ -3437,29 +3507,21 @@
          }
         ],
         "macros": {
-         "kcal": 149.67,
-         "protein_g": 28.1718,
-         "carb_g": 8.129,
-         "fat_g": 1.3119999999999996,
+         "kcal": 200.72,
+         "protein_g": 30.4768,
+         "carb_g": 8.402,
+         "fat_g": 5.874499999999999,
          "fiber_g": 2.323
         }
        },
        {
         "role": "side_veg",
-        "recipe_id": "gia_do_tron_mang_di",
-        "name": "Giá đỗ trộn cà rốt (mang đi)",
+        "recipe_id": "su_su_luoc_an_nguoi",
+        "name": "Su su luộc ăn nguội",
         "grams": [
          {
-          "ingredient_id": "gia_do",
-          "grams": 100
-         },
-         {
-          "ingredient_id": "ca_rot",
-          "grams": 40
-         },
-         {
-          "ingredient_id": "dau_an",
-          "grams": 5
+          "ingredient_id": "su_su",
+          "grams": 150
          },
          {
           "ingredient_id": "muoi",
@@ -3467,11 +3529,11 @@
          }
         ],
         "macros": {
-         "kcal": 90.60000000000001,
-         "protein_g": 3.412,
-         "carb_g": 9.772,
-         "fat_g": 5.276,
-         "fiber_g": 2.92
+         "kcal": 28.5,
+         "protein_g": 1.23,
+         "carb_g": 6.765,
+         "fat_g": 0.195,
+         "fiber_g": 2.55
         }
        },
        {
@@ -3480,16 +3542,16 @@
         "name": "Gạo lứt nguội mang đi",
         "grams": [
          {
-          "ingredient_id": "gao_lut_nau_chin",
+          "ingredient_id": "com_trang",
           "grams": 150
          }
         ],
         "macros": {
-         "kcal": 184.5,
-         "protein_g": 4.11,
-         "carb_g": 38.400000000000006,
-         "fat_g": 1.455,
-         "fiber_g": 2.4000000000000004
+         "kcal": 195,
+         "protein_g": 4.035,
+         "carb_g": 42.3,
+         "fat_g": 0.42000000000000004,
+         "fiber_g": 0.6000000000000001
         }
        },
        {
@@ -3898,10 +3960,10 @@
      }
     ],
     "totals": {
-     "kcal": 1468.3300000000002,
-     "protein_g": 122.5686,
-     "carb_g": 172.42399999999998,
-     "fat_g": 34.922200000000004
+     "kcal": 1467.7800000000002,
+     "protein_g": 122.6166,
+     "carb_g": 173.58999999999997,
+     "fat_g": 33.368700000000004
     }
    },
    {
@@ -4596,45 +4658,57 @@
      "price_fallback": false,
      "display_qty": "1 × thịt đùi heo C.P 300 g (giá thường)",
      "is_default_pantry": false,
-     "is_pantry": false
+     "is_pantry": false,
+     "buy_group": "day",
+     "fresh_days": 7,
+     "no_shelf_info": false,
+     "freezable_meat": true
     },
     {
      "ingredient_id": "thit_heo_xay_nac",
      "name": "Thịt heo xay (nạc ~96%)",
      "aisle": "thit",
-     "need_g": 1180,
+     "need_g": 1140,
      "packs": 6,
      "pack_g": 200,
      "pack_label": "thịt heo xay CP khay 200 g (giá thường)",
      "price_vnd_per_pack": 25500,
-     "used_cost_vnd": 150450,
+     "used_cost_vnd": 145350,
      "till_cost_vnd": 153000,
-     "leftover_g": 20,
+     "leftover_g": 60,
      "leftover_days": 3,
      "price_store_id": "bach_hoa_xanh",
      "price_fallback": false,
      "display_qty": "6 × thịt heo xay CP khay 200 g (giá thường)",
      "is_default_pantry": false,
-     "is_pantry": false
+     "is_pantry": false,
+     "buy_group": "day",
+     "fresh_days": 1,
+     "no_shelf_info": false,
+     "freezable_meat": true
     },
     {
      "ingredient_id": "uc_ga_khong_da",
      "name": "Ức gà, không xương, không da",
      "aisle": "thit",
-     "need_g": 270,
+     "need_g": 240,
      "packs": 1,
      "pack_g": 300,
      "pack_label": "Ức gà không xương 300 g (ước tính)",
      "price_vnd_per_pack": 63000,
-     "used_cost_vnd": 56700,
+     "used_cost_vnd": 50400,
      "till_cost_vnd": 63000,
-     "leftover_g": 30,
+     "leftover_g": 60,
      "leftover_days": 3,
      "price_store_id": "cho_khac",
      "price_fallback": true,
      "display_qty": "1 × Ức gà không xương 300 g (ước tính)",
      "is_default_pantry": false,
-     "is_pantry": false
+     "is_pantry": false,
+     "buy_group": "day",
+     "fresh_days": 1,
+     "no_shelf_info": false,
+     "freezable_meat": true
     },
     {
      "ingredient_id": "ca_basa",
@@ -4653,45 +4727,57 @@
      "price_fallback": true,
      "display_qty": "2 × Cá basa phi lê 300 g (ước tính)",
      "is_default_pantry": false,
-     "is_pantry": false
+     "is_pantry": false,
+     "buy_group": "day",
+     "fresh_days": 1,
+     "no_shelf_info": false,
+     "freezable_meat": true
     },
     {
      "ingredient_id": "tom",
      "name": "Tôm sú / tôm thẻ (làm sạch)",
      "aisle": "ca_hai_san",
-     "need_g": 125,
+     "need_g": 115,
      "packs": 1,
      "pack_g": 250,
      "pack_label": "Tôm làm sạch 250 g (ước tính)",
      "price_vnd_per_pack": 102000,
-     "used_cost_vnd": 51000,
+     "used_cost_vnd": 46920,
      "till_cost_vnd": 102000,
-     "leftover_g": 125,
+     "leftover_g": 135,
      "leftover_days": 2,
      "price_store_id": "cho_khac",
      "price_fallback": true,
      "display_qty": "1 × Tôm làm sạch 250 g (ước tính)",
      "is_default_pantry": false,
-     "is_pantry": false
+     "is_pantry": false,
+     "buy_group": "day",
+     "fresh_days": 1,
+     "no_shelf_info": false,
+     "freezable_meat": true
     },
     {
      "ingredient_id": "dau_phu",
      "name": "Đậu hũ (đậu phụ) cứng",
      "aisle": "trung_dau_phu",
-     "need_g": 1050,
+     "need_g": 1055,
      "packs": 4,
      "pack_g": 300,
      "pack_label": "bìa 300 g (ước tính)",
      "price_vnd_per_pack": 12000,
-     "used_cost_vnd": 42000,
+     "used_cost_vnd": 42200,
      "till_cost_vnd": 48000,
-     "leftover_g": 150,
+     "leftover_g": 145,
      "leftover_days": 5,
      "price_store_id": "cho_khac",
      "price_fallback": true,
      "display_qty": "4 × bìa 300 g (ước tính)",
      "is_default_pantry": false,
-     "is_pantry": false
+     "is_pantry": false,
+     "buy_group": "day",
+     "fresh_days": 1,
+     "no_shelf_info": false,
+     "freezable_meat": false
     },
     {
      "ingredient_id": "trung_ga",
@@ -4710,45 +4796,57 @@
      "price_fallback": true,
      "display_qty": "1 hộp",
      "is_default_pantry": false,
-     "is_pantry": false
+     "is_pantry": false,
+     "buy_group": "week",
+     "fresh_days": 21,
+     "no_shelf_info": false,
+     "freezable_meat": false
     },
     {
      "ingredient_id": "bap_cai",
      "name": "Bắp cải",
      "aisle": "rau_cu",
-     "need_g": 200,
+     "need_g": 500,
      "packs": 1,
      "pack_g": 500,
      "pack_label": "Bắp cải 500 g (ước tính)",
      "price_vnd_per_pack": 14000,
-     "used_cost_vnd": 5600,
+     "used_cost_vnd": 14000,
      "till_cost_vnd": 14000,
-     "leftover_g": 300,
+     "leftover_g": 0,
      "leftover_days": 7,
      "price_store_id": "cho_khac",
      "price_fallback": true,
      "display_qty": "1 × Bắp cải 500 g (ước tính)",
      "is_default_pantry": false,
-     "is_pantry": false
+     "is_pantry": false,
+     "buy_group": "week",
+     "fresh_days": 7,
+     "no_shelf_info": false,
+     "freezable_meat": false
     },
     {
      "ingredient_id": "bi_xanh",
      "name": "Bí xanh (PROXY bí ngòi)",
      "aisle": "rau_cu",
-     "need_g": 1850,
+     "need_g": 1650,
      "packs": 4,
      "pack_g": 500,
      "pack_label": "Bí xanh 500 g (ước tính)",
      "price_vnd_per_pack": 8000,
-     "used_cost_vnd": 29600,
+     "used_cost_vnd": 26400,
      "till_cost_vnd": 32000,
-     "leftover_g": 150,
+     "leftover_g": 350,
      "leftover_days": 7,
      "price_store_id": "cho_khac",
      "price_fallback": true,
      "display_qty": "4 × Bí xanh 500 g (ước tính)",
      "is_default_pantry": false,
-     "is_pantry": false
+     "is_pantry": false,
+     "buy_group": "day",
+     "fresh_days": 4,
+     "no_shelf_info": false,
+     "freezable_meat": false
     },
     {
      "ingredient_id": "ca_chua",
@@ -4767,26 +4865,34 @@
      "price_fallback": true,
      "display_qty": "1 × Cà chua 500 g (ước tính)",
      "is_default_pantry": false,
-     "is_pantry": false
+     "is_pantry": false,
+     "buy_group": "day",
+     "fresh_days": 4,
+     "no_shelf_info": false,
+     "freezable_meat": false
     },
     {
      "ingredient_id": "ca_rot",
      "name": "Cà rốt",
      "aisle": "rau_cu",
-     "need_g": 90,
+     "need_g": 50,
      "packs": 1,
      "pack_g": 500,
      "pack_label": "Cà rốt 500 g (ước tính)",
      "price_vnd_per_pack": 14000,
-     "used_cost_vnd": 2520,
+     "used_cost_vnd": 1400,
      "till_cost_vnd": 14000,
-     "leftover_g": 410,
+     "leftover_g": 450,
      "leftover_days": 14,
      "price_store_id": "cho_khac",
      "price_fallback": true,
      "display_qty": "1 × Cà rốt 500 g (ước tính)",
      "is_default_pantry": false,
-     "is_pantry": false
+     "is_pantry": false,
+     "buy_group": "week",
+     "fresh_days": 14,
+     "no_shelf_info": false,
+     "freezable_meat": false
     },
     {
      "ingredient_id": "cai_ngot",
@@ -4805,7 +4911,11 @@
      "price_fallback": true,
      "display_qty": "1 × 500 g (ước tính)",
      "is_default_pantry": false,
-     "is_pantry": false
+     "is_pantry": false,
+     "buy_group": "day",
+     "fresh_days": 2,
+     "no_shelf_info": false,
+     "freezable_meat": false
     },
     {
      "ingredient_id": "cai_thao",
@@ -4824,45 +4934,57 @@
      "price_fallback": true,
      "display_qty": "2 × Cải thảo 500 g (ước tính)",
      "is_default_pantry": false,
-     "is_pantry": false
+     "is_pantry": false,
+     "buy_group": "week",
+     "fresh_days": 7,
+     "no_shelf_info": false,
+     "freezable_meat": false
     },
     {
      "ingredient_id": "gia_do",
      "name": "Giá đỗ (mầm đậu xanh)",
      "aisle": "rau_cu",
-     "need_g": 200,
+     "need_g": 100,
      "packs": 1,
      "pack_g": 300,
      "pack_label": "gói 300 g (ước tính)",
      "price_vnd_per_pack": 8000,
-     "used_cost_vnd": 5333.333333333333,
+     "used_cost_vnd": 2666.6666666666665,
      "till_cost_vnd": 8000,
-     "leftover_g": 100,
+     "leftover_g": 200,
      "leftover_days": 2,
      "price_store_id": "cho_khac",
      "price_fallback": true,
      "display_qty": "1 gói",
      "is_default_pantry": false,
-     "is_pantry": false
+     "is_pantry": false,
+     "buy_group": "day",
+     "fresh_days": 5,
+     "no_shelf_info": false,
+     "freezable_meat": false
     },
     {
      "ingredient_id": "hanh_la",
      "name": "Hành lá",
      "aisle": "rau_cu",
-     "need_g": 165,
+     "need_g": 155,
      "packs": 2,
      "pack_g": 100,
      "pack_label": "100 g (ước tính)",
      "price_vnd_per_pack": 6000,
-     "used_cost_vnd": 9900,
+     "used_cost_vnd": 9300,
      "till_cost_vnd": 12000,
-     "leftover_g": 35,
+     "leftover_g": 45,
      "leftover_days": 5,
      "price_store_id": "cho_khac",
      "price_fallback": true,
      "display_qty": "2 × 100 g (ước tính)",
      "is_default_pantry": false,
-     "is_pantry": false
+     "is_pantry": false,
+     "buy_group": "week",
+     "fresh_days": 7,
+     "no_shelf_info": false,
+     "freezable_meat": false
     },
     {
      "ingredient_id": "hanh_tay",
@@ -4881,7 +5003,11 @@
      "price_fallback": true,
      "display_qty": "1 × Hành tây 500 g (ước tính)",
      "is_default_pantry": false,
-     "is_pantry": false
+     "is_pantry": false,
+     "buy_group": "week",
+     "fresh_days": 60,
+     "no_shelf_info": false,
+     "freezable_meat": false
     },
     {
      "ingredient_id": "khoai_lang",
@@ -4900,7 +5026,11 @@
      "price_fallback": true,
      "display_qty": "2 × Khoai lang 500 g (ước tính)",
      "is_default_pantry": false,
-     "is_pantry": false
+     "is_pantry": false,
+     "buy_group": "week",
+     "fresh_days": 15,
+     "no_shelf_info": false,
+     "freezable_meat": false
     },
     {
      "ingredient_id": "khoai_tay",
@@ -4919,26 +5049,33 @@
      "price_fallback": true,
      "display_qty": "1 × Khoai tây 500 g (ước tính)",
      "is_default_pantry": false,
-     "is_pantry": false
+     "is_pantry": false,
+     "buy_group": "week",
+     "fresh_days": 15,
+     "no_shelf_info": false,
+     "freezable_meat": false
     },
     {
      "ingredient_id": "nam_rom",
      "name": "Nấm rơm đóng hộp (đã ráo nước)",
      "aisle": "rau_cu",
-     "need_g": 160,
+     "need_g": 220,
      "packs": 1,
      "pack_g": 400,
      "pack_label": "lon 400 g (ước tính)",
      "price_vnd_per_pack": 22000,
-     "used_cost_vnd": 8800,
+     "used_cost_vnd": 12100.000000000002,
      "till_cost_vnd": 22000,
-     "leftover_g": 240,
+     "leftover_g": 180,
      "leftover_days": 365,
      "price_store_id": "cho_khac",
      "price_fallback": true,
      "display_qty": "1 lon",
      "is_default_pantry": false,
-     "is_pantry": false
+     "is_pantry": false,
+     "buy_group": "week",
+     "no_shelf_info": true,
+     "freezable_meat": false
     },
     {
      "ingredient_id": "su_su",
@@ -4957,45 +5094,56 @@
      "price_fallback": true,
      "display_qty": "1 × Su su 500 g (ước tính)",
      "is_default_pantry": false,
-     "is_pantry": false
+     "is_pantry": false,
+     "buy_group": "day",
+     "fresh_days": 4,
+     "no_shelf_info": false,
+     "freezable_meat": false
     },
     {
      "ingredient_id": "dau_do",
      "name": "Đậu đỏ khô",
      "aisle": "gao_do_kho",
-     "need_g": 170,
+     "need_g": 200,
      "packs": 1,
      "pack_g": 500,
      "pack_label": "gói 500 g (ước tính)",
      "price_vnd_per_pack": 25000,
-     "used_cost_vnd": 8500,
+     "used_cost_vnd": 10000,
      "till_cost_vnd": 25000,
-     "leftover_g": 330,
+     "leftover_g": 300,
      "leftover_days": 365,
      "price_store_id": "cho_khac",
      "price_fallback": true,
      "display_qty": "1 gói",
      "is_default_pantry": false,
-     "is_pantry": false
+     "is_pantry": false,
+     "buy_group": "week",
+     "no_shelf_info": true,
+     "freezable_meat": false
     },
     {
      "ingredient_id": "dau_xanh",
      "name": "Đậu xanh khô (hạt)",
      "aisle": "gao_do_kho",
-     "need_g": 145,
+     "need_g": 120,
      "packs": 1,
      "pack_g": 500,
      "pack_label": "500 g (ước tính)",
      "price_vnd_per_pack": 40000,
-     "used_cost_vnd": 11600,
+     "used_cost_vnd": 9600,
      "till_cost_vnd": 40000,
-     "leftover_g": 355,
+     "leftover_g": 380,
      "leftover_days": 365,
      "price_store_id": "cho_khac",
      "price_fallback": true,
      "display_qty": "1 × 500 g (ước tính)",
      "is_default_pantry": false,
-     "is_pantry": false
+     "is_pantry": false,
+     "buy_group": "week",
+     "fresh_days": 365,
+     "no_shelf_info": false,
+     "freezable_meat": false
     },
     {
      "ingredient_id": "gao_lut",
@@ -5014,7 +5162,10 @@
      "price_fallback": true,
      "display_qty": "1 × Gạo lứt 1 kg (ước tính)",
      "is_default_pantry": false,
-     "is_pantry": false
+     "is_pantry": false,
+     "buy_group": "week",
+     "no_shelf_info": true,
+     "freezable_meat": false
     },
     {
      "ingredient_id": "gao_te",
@@ -5033,7 +5184,10 @@
      "price_fallback": true,
      "display_qty": "1 × Gạo tẻ 1 kg (ước tính)",
      "is_default_pantry": true,
-     "is_pantry": true
+     "is_pantry": true,
+     "buy_group": "week",
+     "no_shelf_info": true,
+     "freezable_meat": false
     },
     {
      "ingredient_id": "lac",
@@ -5052,7 +5206,11 @@
      "price_fallback": true,
      "display_qty": "1 × Lạc sống 200 g (ước tính)",
      "is_default_pantry": false,
-     "is_pantry": false
+     "is_pantry": false,
+     "buy_group": "week",
+     "fresh_days": 360,
+     "no_shelf_info": false,
+     "freezable_meat": false
     },
     {
      "ingredient_id": "dau_an",
@@ -5071,26 +5229,32 @@
      "price_fallback": true,
      "display_qty": "1 × Dầu ăn 500 g (ước tính)",
      "is_default_pantry": true,
-     "is_pantry": true
+     "is_pantry": true,
+     "buy_group": "week",
+     "no_shelf_info": true,
+     "freezable_meat": false
     },
     {
      "ingredient_id": "duong",
      "name": "Đường trắng (tinh luyện)",
      "aisle": "gia_vi_dau",
-     "need_g": 93,
+     "need_g": 98,
      "packs": 1,
      "pack_g": 500,
      "pack_label": "Đường trắng 500 g (ước tính)",
      "price_vnd_per_pack": 15000,
-     "used_cost_vnd": 2790,
+     "used_cost_vnd": 2940,
      "till_cost_vnd": 15000,
-     "leftover_g": 407,
+     "leftover_g": 402,
      "leftover_days": 730,
      "price_store_id": "cho_khac",
      "price_fallback": true,
      "display_qty": "1 × Đường trắng 500 g (ước tính)",
      "is_default_pantry": true,
-     "is_pantry": true
+     "is_pantry": true,
+     "buy_group": "week",
+     "no_shelf_info": false,
+     "freezable_meat": false
     },
     {
      "ingredient_id": "gung",
@@ -5109,26 +5273,33 @@
      "price_fallback": true,
      "display_qty": "1 × 100 g (ước tính)",
      "is_default_pantry": true,
-     "is_pantry": true
+     "is_pantry": true,
+     "buy_group": "week",
+     "fresh_days": 14,
+     "no_shelf_info": false,
+     "freezable_meat": false
     },
     {
      "ingredient_id": "muoi",
      "name": "Muối ăn",
      "aisle": "gia_vi_dau",
-     "need_g": 21,
+     "need_g": 22,
      "packs": 1,
      "pack_g": 250,
      "pack_label": "Muối ăn 250 g (ước tính)",
      "price_vnd_per_pack": 4000,
-     "used_cost_vnd": 336,
+     "used_cost_vnd": 352,
      "till_cost_vnd": 4000,
-     "leftover_g": 229,
+     "leftover_g": 228,
      "leftover_days": 1000,
      "price_store_id": "cho_khac",
      "price_fallback": true,
      "display_qty": "1 × Muối ăn 250 g (ước tính)",
      "is_default_pantry": true,
-     "is_pantry": true
+     "is_pantry": true,
+     "buy_group": "week",
+     "no_shelf_info": false,
+     "freezable_meat": false
     },
     {
      "ingredient_id": "nuoc_mam",
@@ -5147,7 +5318,10 @@
      "price_fallback": true,
      "display_qty": "1 × Nước mắm 250 g (ước tính)",
      "is_default_pantry": true,
-     "is_pantry": true
+     "is_pantry": true,
+     "buy_group": "week",
+     "no_shelf_info": true,
+     "freezable_meat": false
     },
     {
      "ingredient_id": "nuoc_mam_chay",
@@ -5166,64 +5340,100 @@
      "price_fallback": true,
      "display_qty": "1 × Nước mắm chay 250 g (ước tính)",
      "is_default_pantry": true,
-     "is_pantry": true
+     "is_pantry": true,
+     "buy_group": "week",
+     "no_shelf_info": true,
+     "freezable_meat": false
     },
     {
      "ingredient_id": "tieu_den",
      "name": "Tiêu đen (hạt)",
      "aisle": "gia_vi_dau",
-     "need_g": 7,
+     "need_g": 8,
      "packs": 1,
      "pack_g": 50,
      "pack_label": "50 g (ước tính)",
      "price_vnd_per_pack": 20000,
-     "used_cost_vnd": 2800.0000000000005,
+     "used_cost_vnd": 3200,
      "till_cost_vnd": 20000,
-     "leftover_g": 43,
+     "leftover_g": 42,
      "leftover_days": 365,
      "price_store_id": "cho_khac",
      "price_fallback": true,
      "display_qty": "1 × 50 g (ước tính)",
      "is_default_pantry": true,
-     "is_pantry": true
+     "is_pantry": true,
+     "buy_group": "week",
+     "no_shelf_info": true,
+     "freezable_meat": false
     },
     {
      "ingredient_id": "toi",
      "name": "Tỏi (củ)",
      "aisle": "gia_vi_dau",
-     "need_g": 36,
+     "need_g": 43,
      "packs": 1,
      "pack_g": 100,
      "pack_label": "100 g (ước tính)",
      "price_vnd_per_pack": 15000,
-     "used_cost_vnd": 5400,
+     "used_cost_vnd": 6450,
      "till_cost_vnd": 15000,
-     "leftover_g": 64,
+     "leftover_g": 57,
      "leftover_days": 30,
      "price_store_id": "cho_khac",
      "price_fallback": true,
      "display_qty": "1 × 100 g (ước tính)",
      "is_default_pantry": true,
-     "is_pantry": true
+     "is_pantry": true,
+     "buy_group": "day",
+     "fresh_days": 3,
+     "no_shelf_info": false,
+     "freezable_meat": false
+    },
+    {
+     "ingredient_id": "sua_chua_khong_duong",
+     "name": "Sữa chua Hy Lạp không đường",
+     "aisle": "sua",
+     "need_g": 150,
+     "packs": 1,
+     "pack_g": 200,
+     "pack_label": "Sữa chua Hy Lạp không đường 200 g (ước tính)",
+     "price_vnd_per_pack": 31000,
+     "used_cost_vnd": 23250,
+     "till_cost_vnd": 31000,
+     "leftover_g": 50,
+     "leftover_days": 14,
+     "price_store_id": "cho_khac",
+     "price_fallback": true,
+     "display_qty": "1 × Sữa chua Hy Lạp không đường 200 g (ước tính)",
+     "is_default_pantry": false,
+     "is_pantry": false,
+     "buy_group": "week",
+     "fresh_days": 7,
+     "no_shelf_info": false,
+     "freezable_meat": false
     },
     {
      "ingredient_id": "sua_dau_nanh",
      "name": "Sữa đậu nành không đường",
      "aisle": "sua",
-     "need_g": 600,
-     "packs": 2,
+     "need_g": 400,
+     "packs": 1,
      "pack_g": 500,
      "pack_label": "Sữa đậu nành không đường 500 g (ước tính)",
      "price_vnd_per_pack": 14000,
-     "used_cost_vnd": 16800,
-     "till_cost_vnd": 28000,
-     "leftover_g": 400,
+     "used_cost_vnd": 11200,
+     "till_cost_vnd": 14000,
+     "leftover_g": 100,
      "leftover_days": 180,
      "price_store_id": "cho_khac",
      "price_fallback": true,
-     "display_qty": "2 × Sữa đậu nành không đường 500 g (ước tính)",
+     "display_qty": "1 × Sữa đậu nành không đường 500 g (ước tính)",
      "is_default_pantry": false,
-     "is_pantry": false
+     "is_pantry": false,
+     "buy_group": "week",
+     "no_shelf_info": false,
+     "freezable_meat": false
     }
    ],
    "by_aisle": [
@@ -5247,45 +5457,57 @@
        "price_fallback": false,
        "display_qty": "1 × thịt đùi heo C.P 300 g (giá thường)",
        "is_default_pantry": false,
-       "is_pantry": false
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 7,
+       "no_shelf_info": false,
+       "freezable_meat": true
       },
       {
        "ingredient_id": "thit_heo_xay_nac",
        "name": "Thịt heo xay (nạc ~96%)",
        "aisle": "thit",
-       "need_g": 1180,
+       "need_g": 1140,
        "packs": 6,
        "pack_g": 200,
        "pack_label": "thịt heo xay CP khay 200 g (giá thường)",
        "price_vnd_per_pack": 25500,
-       "used_cost_vnd": 150450,
+       "used_cost_vnd": 145350,
        "till_cost_vnd": 153000,
-       "leftover_g": 20,
+       "leftover_g": 60,
        "leftover_days": 3,
        "price_store_id": "bach_hoa_xanh",
        "price_fallback": false,
        "display_qty": "6 × thịt heo xay CP khay 200 g (giá thường)",
        "is_default_pantry": false,
-       "is_pantry": false
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 1,
+       "no_shelf_info": false,
+       "freezable_meat": true
       },
       {
        "ingredient_id": "uc_ga_khong_da",
        "name": "Ức gà, không xương, không da",
        "aisle": "thit",
-       "need_g": 270,
+       "need_g": 240,
        "packs": 1,
        "pack_g": 300,
        "pack_label": "Ức gà không xương 300 g (ước tính)",
        "price_vnd_per_pack": 63000,
-       "used_cost_vnd": 56700,
+       "used_cost_vnd": 50400,
        "till_cost_vnd": 63000,
-       "leftover_g": 30,
+       "leftover_g": 60,
        "leftover_days": 3,
        "price_store_id": "cho_khac",
        "price_fallback": true,
        "display_qty": "1 × Ức gà không xương 300 g (ước tính)",
        "is_default_pantry": false,
-       "is_pantry": false
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 1,
+       "no_shelf_info": false,
+       "freezable_meat": true
       }
      ]
     },
@@ -5309,26 +5531,34 @@
        "price_fallback": true,
        "display_qty": "2 × Cá basa phi lê 300 g (ước tính)",
        "is_default_pantry": false,
-       "is_pantry": false
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 1,
+       "no_shelf_info": false,
+       "freezable_meat": true
       },
       {
        "ingredient_id": "tom",
        "name": "Tôm sú / tôm thẻ (làm sạch)",
        "aisle": "ca_hai_san",
-       "need_g": 125,
+       "need_g": 115,
        "packs": 1,
        "pack_g": 250,
        "pack_label": "Tôm làm sạch 250 g (ước tính)",
        "price_vnd_per_pack": 102000,
-       "used_cost_vnd": 51000,
+       "used_cost_vnd": 46920,
        "till_cost_vnd": 102000,
-       "leftover_g": 125,
+       "leftover_g": 135,
        "leftover_days": 2,
        "price_store_id": "cho_khac",
        "price_fallback": true,
        "display_qty": "1 × Tôm làm sạch 250 g (ước tính)",
        "is_default_pantry": false,
-       "is_pantry": false
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 1,
+       "no_shelf_info": false,
+       "freezable_meat": true
       }
      ]
     },
@@ -5339,20 +5569,24 @@
        "ingredient_id": "dau_phu",
        "name": "Đậu hũ (đậu phụ) cứng",
        "aisle": "trung_dau_phu",
-       "need_g": 1050,
+       "need_g": 1055,
        "packs": 4,
        "pack_g": 300,
        "pack_label": "bìa 300 g (ước tính)",
        "price_vnd_per_pack": 12000,
-       "used_cost_vnd": 42000,
+       "used_cost_vnd": 42200,
        "till_cost_vnd": 48000,
-       "leftover_g": 150,
+       "leftover_g": 145,
        "leftover_days": 5,
        "price_store_id": "cho_khac",
        "price_fallback": true,
        "display_qty": "4 × bìa 300 g (ước tính)",
        "is_default_pantry": false,
-       "is_pantry": false
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 1,
+       "no_shelf_info": false,
+       "freezable_meat": false
       },
       {
        "ingredient_id": "trung_ga",
@@ -5371,7 +5605,11 @@
        "price_fallback": true,
        "display_qty": "1 hộp",
        "is_default_pantry": false,
-       "is_pantry": false
+       "is_pantry": false,
+       "buy_group": "week",
+       "fresh_days": 21,
+       "no_shelf_info": false,
+       "freezable_meat": false
       }
      ]
     },
@@ -5382,39 +5620,47 @@
        "ingredient_id": "bap_cai",
        "name": "Bắp cải",
        "aisle": "rau_cu",
-       "need_g": 200,
+       "need_g": 500,
        "packs": 1,
        "pack_g": 500,
        "pack_label": "Bắp cải 500 g (ước tính)",
        "price_vnd_per_pack": 14000,
-       "used_cost_vnd": 5600,
+       "used_cost_vnd": 14000,
        "till_cost_vnd": 14000,
-       "leftover_g": 300,
+       "leftover_g": 0,
        "leftover_days": 7,
        "price_store_id": "cho_khac",
        "price_fallback": true,
        "display_qty": "1 × Bắp cải 500 g (ước tính)",
        "is_default_pantry": false,
-       "is_pantry": false
+       "is_pantry": false,
+       "buy_group": "week",
+       "fresh_days": 7,
+       "no_shelf_info": false,
+       "freezable_meat": false
       },
       {
        "ingredient_id": "bi_xanh",
        "name": "Bí xanh (PROXY bí ngòi)",
        "aisle": "rau_cu",
-       "need_g": 1850,
+       "need_g": 1650,
        "packs": 4,
        "pack_g": 500,
        "pack_label": "Bí xanh 500 g (ước tính)",
        "price_vnd_per_pack": 8000,
-       "used_cost_vnd": 29600,
+       "used_cost_vnd": 26400,
        "till_cost_vnd": 32000,
-       "leftover_g": 150,
+       "leftover_g": 350,
        "leftover_days": 7,
        "price_store_id": "cho_khac",
        "price_fallback": true,
        "display_qty": "4 × Bí xanh 500 g (ước tính)",
        "is_default_pantry": false,
-       "is_pantry": false
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 4,
+       "no_shelf_info": false,
+       "freezable_meat": false
       },
       {
        "ingredient_id": "ca_chua",
@@ -5433,26 +5679,34 @@
        "price_fallback": true,
        "display_qty": "1 × Cà chua 500 g (ước tính)",
        "is_default_pantry": false,
-       "is_pantry": false
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 4,
+       "no_shelf_info": false,
+       "freezable_meat": false
       },
       {
        "ingredient_id": "ca_rot",
        "name": "Cà rốt",
        "aisle": "rau_cu",
-       "need_g": 90,
+       "need_g": 50,
        "packs": 1,
        "pack_g": 500,
        "pack_label": "Cà rốt 500 g (ước tính)",
        "price_vnd_per_pack": 14000,
-       "used_cost_vnd": 2520,
+       "used_cost_vnd": 1400,
        "till_cost_vnd": 14000,
-       "leftover_g": 410,
+       "leftover_g": 450,
        "leftover_days": 14,
        "price_store_id": "cho_khac",
        "price_fallback": true,
        "display_qty": "1 × Cà rốt 500 g (ước tính)",
        "is_default_pantry": false,
-       "is_pantry": false
+       "is_pantry": false,
+       "buy_group": "week",
+       "fresh_days": 14,
+       "no_shelf_info": false,
+       "freezable_meat": false
       },
       {
        "ingredient_id": "cai_ngot",
@@ -5471,7 +5725,11 @@
        "price_fallback": true,
        "display_qty": "1 × 500 g (ước tính)",
        "is_default_pantry": false,
-       "is_pantry": false
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 2,
+       "no_shelf_info": false,
+       "freezable_meat": false
       },
       {
        "ingredient_id": "cai_thao",
@@ -5490,45 +5748,57 @@
        "price_fallback": true,
        "display_qty": "2 × Cải thảo 500 g (ước tính)",
        "is_default_pantry": false,
-       "is_pantry": false
+       "is_pantry": false,
+       "buy_group": "week",
+       "fresh_days": 7,
+       "no_shelf_info": false,
+       "freezable_meat": false
       },
       {
        "ingredient_id": "gia_do",
        "name": "Giá đỗ (mầm đậu xanh)",
        "aisle": "rau_cu",
-       "need_g": 200,
+       "need_g": 100,
        "packs": 1,
        "pack_g": 300,
        "pack_label": "gói 300 g (ước tính)",
        "price_vnd_per_pack": 8000,
-       "used_cost_vnd": 5333.333333333333,
+       "used_cost_vnd": 2666.6666666666665,
        "till_cost_vnd": 8000,
-       "leftover_g": 100,
+       "leftover_g": 200,
        "leftover_days": 2,
        "price_store_id": "cho_khac",
        "price_fallback": true,
        "display_qty": "1 gói",
        "is_default_pantry": false,
-       "is_pantry": false
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 5,
+       "no_shelf_info": false,
+       "freezable_meat": false
       },
       {
        "ingredient_id": "hanh_la",
        "name": "Hành lá",
        "aisle": "rau_cu",
-       "need_g": 165,
+       "need_g": 155,
        "packs": 2,
        "pack_g": 100,
        "pack_label": "100 g (ước tính)",
        "price_vnd_per_pack": 6000,
-       "used_cost_vnd": 9900,
+       "used_cost_vnd": 9300,
        "till_cost_vnd": 12000,
-       "leftover_g": 35,
+       "leftover_g": 45,
        "leftover_days": 5,
        "price_store_id": "cho_khac",
        "price_fallback": true,
        "display_qty": "2 × 100 g (ước tính)",
        "is_default_pantry": false,
-       "is_pantry": false
+       "is_pantry": false,
+       "buy_group": "week",
+       "fresh_days": 7,
+       "no_shelf_info": false,
+       "freezable_meat": false
       },
       {
        "ingredient_id": "hanh_tay",
@@ -5547,7 +5817,11 @@
        "price_fallback": true,
        "display_qty": "1 × Hành tây 500 g (ước tính)",
        "is_default_pantry": false,
-       "is_pantry": false
+       "is_pantry": false,
+       "buy_group": "week",
+       "fresh_days": 60,
+       "no_shelf_info": false,
+       "freezable_meat": false
       },
       {
        "ingredient_id": "khoai_lang",
@@ -5566,7 +5840,11 @@
        "price_fallback": true,
        "display_qty": "2 × Khoai lang 500 g (ước tính)",
        "is_default_pantry": false,
-       "is_pantry": false
+       "is_pantry": false,
+       "buy_group": "week",
+       "fresh_days": 15,
+       "no_shelf_info": false,
+       "freezable_meat": false
       },
       {
        "ingredient_id": "khoai_tay",
@@ -5585,26 +5863,33 @@
        "price_fallback": true,
        "display_qty": "1 × Khoai tây 500 g (ước tính)",
        "is_default_pantry": false,
-       "is_pantry": false
+       "is_pantry": false,
+       "buy_group": "week",
+       "fresh_days": 15,
+       "no_shelf_info": false,
+       "freezable_meat": false
       },
       {
        "ingredient_id": "nam_rom",
        "name": "Nấm rơm đóng hộp (đã ráo nước)",
        "aisle": "rau_cu",
-       "need_g": 160,
+       "need_g": 220,
        "packs": 1,
        "pack_g": 400,
        "pack_label": "lon 400 g (ước tính)",
        "price_vnd_per_pack": 22000,
-       "used_cost_vnd": 8800,
+       "used_cost_vnd": 12100.000000000002,
        "till_cost_vnd": 22000,
-       "leftover_g": 240,
+       "leftover_g": 180,
        "leftover_days": 365,
        "price_store_id": "cho_khac",
        "price_fallback": true,
        "display_qty": "1 lon",
        "is_default_pantry": false,
-       "is_pantry": false
+       "is_pantry": false,
+       "buy_group": "week",
+       "no_shelf_info": true,
+       "freezable_meat": false
       },
       {
        "ingredient_id": "su_su",
@@ -5623,7 +5908,11 @@
        "price_fallback": true,
        "display_qty": "1 × Su su 500 g (ước tính)",
        "is_default_pantry": false,
-       "is_pantry": false
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 4,
+       "no_shelf_info": false,
+       "freezable_meat": false
       }
      ]
     },
@@ -5634,39 +5923,46 @@
        "ingredient_id": "dau_do",
        "name": "Đậu đỏ khô",
        "aisle": "gao_do_kho",
-       "need_g": 170,
+       "need_g": 200,
        "packs": 1,
        "pack_g": 500,
        "pack_label": "gói 500 g (ước tính)",
        "price_vnd_per_pack": 25000,
-       "used_cost_vnd": 8500,
+       "used_cost_vnd": 10000,
        "till_cost_vnd": 25000,
-       "leftover_g": 330,
+       "leftover_g": 300,
        "leftover_days": 365,
        "price_store_id": "cho_khac",
        "price_fallback": true,
        "display_qty": "1 gói",
        "is_default_pantry": false,
-       "is_pantry": false
+       "is_pantry": false,
+       "buy_group": "week",
+       "no_shelf_info": true,
+       "freezable_meat": false
       },
       {
        "ingredient_id": "dau_xanh",
        "name": "Đậu xanh khô (hạt)",
        "aisle": "gao_do_kho",
-       "need_g": 145,
+       "need_g": 120,
        "packs": 1,
        "pack_g": 500,
        "pack_label": "500 g (ước tính)",
        "price_vnd_per_pack": 40000,
-       "used_cost_vnd": 11600,
+       "used_cost_vnd": 9600,
        "till_cost_vnd": 40000,
-       "leftover_g": 355,
+       "leftover_g": 380,
        "leftover_days": 365,
        "price_store_id": "cho_khac",
        "price_fallback": true,
        "display_qty": "1 × 500 g (ước tính)",
        "is_default_pantry": false,
-       "is_pantry": false
+       "is_pantry": false,
+       "buy_group": "week",
+       "fresh_days": 365,
+       "no_shelf_info": false,
+       "freezable_meat": false
       },
       {
        "ingredient_id": "gao_lut",
@@ -5685,7 +5981,10 @@
        "price_fallback": true,
        "display_qty": "1 × Gạo lứt 1 kg (ước tính)",
        "is_default_pantry": false,
-       "is_pantry": false
+       "is_pantry": false,
+       "buy_group": "week",
+       "no_shelf_info": true,
+       "freezable_meat": false
       },
       {
        "ingredient_id": "gao_te",
@@ -5704,7 +6003,10 @@
        "price_fallback": true,
        "display_qty": "1 × Gạo tẻ 1 kg (ước tính)",
        "is_default_pantry": true,
-       "is_pantry": true
+       "is_pantry": true,
+       "buy_group": "week",
+       "no_shelf_info": true,
+       "freezable_meat": false
       },
       {
        "ingredient_id": "lac",
@@ -5723,7 +6025,11 @@
        "price_fallback": true,
        "display_qty": "1 × Lạc sống 200 g (ước tính)",
        "is_default_pantry": false,
-       "is_pantry": false
+       "is_pantry": false,
+       "buy_group": "week",
+       "fresh_days": 360,
+       "no_shelf_info": false,
+       "freezable_meat": false
       }
      ]
     },
@@ -5747,26 +6053,32 @@
        "price_fallback": true,
        "display_qty": "1 × Dầu ăn 500 g (ước tính)",
        "is_default_pantry": true,
-       "is_pantry": true
+       "is_pantry": true,
+       "buy_group": "week",
+       "no_shelf_info": true,
+       "freezable_meat": false
       },
       {
        "ingredient_id": "duong",
        "name": "Đường trắng (tinh luyện)",
        "aisle": "gia_vi_dau",
-       "need_g": 93,
+       "need_g": 98,
        "packs": 1,
        "pack_g": 500,
        "pack_label": "Đường trắng 500 g (ước tính)",
        "price_vnd_per_pack": 15000,
-       "used_cost_vnd": 2790,
+       "used_cost_vnd": 2940,
        "till_cost_vnd": 15000,
-       "leftover_g": 407,
+       "leftover_g": 402,
        "leftover_days": 730,
        "price_store_id": "cho_khac",
        "price_fallback": true,
        "display_qty": "1 × Đường trắng 500 g (ước tính)",
        "is_default_pantry": true,
-       "is_pantry": true
+       "is_pantry": true,
+       "buy_group": "week",
+       "no_shelf_info": false,
+       "freezable_meat": false
       },
       {
        "ingredient_id": "gung",
@@ -5785,26 +6097,33 @@
        "price_fallback": true,
        "display_qty": "1 × 100 g (ước tính)",
        "is_default_pantry": true,
-       "is_pantry": true
+       "is_pantry": true,
+       "buy_group": "week",
+       "fresh_days": 14,
+       "no_shelf_info": false,
+       "freezable_meat": false
       },
       {
        "ingredient_id": "muoi",
        "name": "Muối ăn",
        "aisle": "gia_vi_dau",
-       "need_g": 21,
+       "need_g": 22,
        "packs": 1,
        "pack_g": 250,
        "pack_label": "Muối ăn 250 g (ước tính)",
        "price_vnd_per_pack": 4000,
-       "used_cost_vnd": 336,
+       "used_cost_vnd": 352,
        "till_cost_vnd": 4000,
-       "leftover_g": 229,
+       "leftover_g": 228,
        "leftover_days": 1000,
        "price_store_id": "cho_khac",
        "price_fallback": true,
        "display_qty": "1 × Muối ăn 250 g (ước tính)",
        "is_default_pantry": true,
-       "is_pantry": true
+       "is_pantry": true,
+       "buy_group": "week",
+       "no_shelf_info": false,
+       "freezable_meat": false
       },
       {
        "ingredient_id": "nuoc_mam",
@@ -5823,7 +6142,10 @@
        "price_fallback": true,
        "display_qty": "1 × Nước mắm 250 g (ước tính)",
        "is_default_pantry": true,
-       "is_pantry": true
+       "is_pantry": true,
+       "buy_group": "week",
+       "no_shelf_info": true,
+       "freezable_meat": false
       },
       {
        "ingredient_id": "nuoc_mam_chay",
@@ -5842,45 +6164,55 @@
        "price_fallback": true,
        "display_qty": "1 × Nước mắm chay 250 g (ước tính)",
        "is_default_pantry": true,
-       "is_pantry": true
+       "is_pantry": true,
+       "buy_group": "week",
+       "no_shelf_info": true,
+       "freezable_meat": false
       },
       {
        "ingredient_id": "tieu_den",
        "name": "Tiêu đen (hạt)",
        "aisle": "gia_vi_dau",
-       "need_g": 7,
+       "need_g": 8,
        "packs": 1,
        "pack_g": 50,
        "pack_label": "50 g (ước tính)",
        "price_vnd_per_pack": 20000,
-       "used_cost_vnd": 2800.0000000000005,
+       "used_cost_vnd": 3200,
        "till_cost_vnd": 20000,
-       "leftover_g": 43,
+       "leftover_g": 42,
        "leftover_days": 365,
        "price_store_id": "cho_khac",
        "price_fallback": true,
        "display_qty": "1 × 50 g (ước tính)",
        "is_default_pantry": true,
-       "is_pantry": true
+       "is_pantry": true,
+       "buy_group": "week",
+       "no_shelf_info": true,
+       "freezable_meat": false
       },
       {
        "ingredient_id": "toi",
        "name": "Tỏi (củ)",
        "aisle": "gia_vi_dau",
-       "need_g": 36,
+       "need_g": 43,
        "packs": 1,
        "pack_g": 100,
        "pack_label": "100 g (ước tính)",
        "price_vnd_per_pack": 15000,
-       "used_cost_vnd": 5400,
+       "used_cost_vnd": 6450,
        "till_cost_vnd": 15000,
-       "leftover_g": 64,
+       "leftover_g": 57,
        "leftover_days": 30,
        "price_store_id": "cho_khac",
        "price_fallback": true,
        "display_qty": "1 × 100 g (ước tính)",
        "is_default_pantry": true,
-       "is_pantry": true
+       "is_pantry": true,
+       "buy_group": "day",
+       "fresh_days": 3,
+       "no_shelf_info": false,
+       "freezable_meat": false
       }
      ]
     },
@@ -5888,23 +6220,49 @@
      "aisle": "sua",
      "items": [
       {
+       "ingredient_id": "sua_chua_khong_duong",
+       "name": "Sữa chua Hy Lạp không đường",
+       "aisle": "sua",
+       "need_g": 150,
+       "packs": 1,
+       "pack_g": 200,
+       "pack_label": "Sữa chua Hy Lạp không đường 200 g (ước tính)",
+       "price_vnd_per_pack": 31000,
+       "used_cost_vnd": 23250,
+       "till_cost_vnd": 31000,
+       "leftover_g": 50,
+       "leftover_days": 14,
+       "price_store_id": "cho_khac",
+       "price_fallback": true,
+       "display_qty": "1 × Sữa chua Hy Lạp không đường 200 g (ước tính)",
+       "is_default_pantry": false,
+       "is_pantry": false,
+       "buy_group": "week",
+       "fresh_days": 7,
+       "no_shelf_info": false,
+       "freezable_meat": false
+      },
+      {
        "ingredient_id": "sua_dau_nanh",
        "name": "Sữa đậu nành không đường",
        "aisle": "sua",
-       "need_g": 600,
-       "packs": 2,
+       "need_g": 400,
+       "packs": 1,
        "pack_g": 500,
        "pack_label": "Sữa đậu nành không đường 500 g (ước tính)",
        "price_vnd_per_pack": 14000,
-       "used_cost_vnd": 16800,
-       "till_cost_vnd": 28000,
-       "leftover_g": 400,
+       "used_cost_vnd": 11200,
+       "till_cost_vnd": 14000,
+       "leftover_g": 100,
        "leftover_days": 180,
        "price_store_id": "cho_khac",
        "price_fallback": true,
-       "display_qty": "2 × Sữa đậu nành không đường 500 g (ước tính)",
+       "display_qty": "1 × Sữa đậu nành không đường 500 g (ước tính)",
        "is_default_pantry": false,
-       "is_pantry": false
+       "is_pantry": false,
+       "buy_group": "week",
+       "no_shelf_info": false,
+       "freezable_meat": false
       }
      ]
     }
@@ -5920,14 +6278,863 @@
     "tieu_den",
     "toi"
    ],
-   "week_food_cost": 615000,
-   "till_cost": 908000,
-   "pantry_cost_if_buy_vnd": 160000
+   "week_food_cost": 622000,
+   "till_cost": 925000,
+   "pantry_cost_if_buy_vnd": 160000,
+   "trips": [
+    {
+     "day_index": 0,
+     "items": [
+      {
+       "ingredient_id": "thit_heo_nac_dui",
+       "name": "Thịt heo nạc đùi",
+       "aisle": "thit",
+       "need_g": 135,
+       "packs": 1,
+       "pack_g": 300,
+       "pack_label": "thịt đùi heo C.P 300 g (giá thường)",
+       "price_vnd_per_pack": 35700,
+       "used_cost_vnd": 16065,
+       "till_cost_vnd": 35700,
+       "leftover_g": 165,
+       "leftover_days": 3,
+       "price_store_id": "bach_hoa_xanh",
+       "price_fallback": false,
+       "display_qty": "1 × thịt đùi heo C.P 300 g (giá thường)",
+       "is_default_pantry": false,
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 7,
+       "no_shelf_info": false,
+       "freezable_meat": true
+      },
+      {
+       "ingredient_id": "thit_heo_xay_nac",
+       "name": "Thịt heo xay (nạc ~96%)",
+       "aisle": "thit",
+       "need_g": 150,
+       "packs": 1,
+       "pack_g": 200,
+       "pack_label": "thịt heo xay CP khay 200 g (giá thường)",
+       "price_vnd_per_pack": 25500,
+       "used_cost_vnd": 19125,
+       "till_cost_vnd": 25500,
+       "leftover_g": 50,
+       "leftover_days": 3,
+       "price_store_id": "bach_hoa_xanh",
+       "price_fallback": false,
+       "display_qty": "1 × thịt heo xay CP khay 200 g (giá thường)",
+       "is_default_pantry": false,
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 1,
+       "no_shelf_info": false,
+       "freezable_meat": true
+      },
+      {
+       "ingredient_id": "dau_phu",
+       "name": "Đậu hũ (đậu phụ) cứng",
+       "aisle": "trung_dau_phu",
+       "need_g": 345,
+       "packs": 2,
+       "pack_g": 300,
+       "pack_label": "bìa 300 g (ước tính)",
+       "price_vnd_per_pack": 12000,
+       "used_cost_vnd": 13799.999999999998,
+       "till_cost_vnd": 24000,
+       "leftover_g": 255,
+       "leftover_days": 5,
+       "price_store_id": "cho_khac",
+       "price_fallback": true,
+       "display_qty": "2 × bìa 300 g (ước tính)",
+       "is_default_pantry": false,
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 1,
+       "no_shelf_info": false,
+       "freezable_meat": false
+      },
+      {
+       "ingredient_id": "bi_xanh",
+       "name": "Bí xanh (PROXY bí ngòi)",
+       "aisle": "rau_cu",
+       "need_g": 750,
+       "packs": 2,
+       "pack_g": 500,
+       "pack_label": "Bí xanh 500 g (ước tính)",
+       "price_vnd_per_pack": 8000,
+       "used_cost_vnd": 12000,
+       "till_cost_vnd": 16000,
+       "leftover_g": 250,
+       "leftover_days": 7,
+       "price_store_id": "cho_khac",
+       "price_fallback": true,
+       "display_qty": "2 × Bí xanh 500 g (ước tính)",
+       "is_default_pantry": false,
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 4,
+       "no_shelf_info": false,
+       "freezable_meat": false
+      },
+      {
+       "ingredient_id": "ca_chua",
+       "name": "Cà chua",
+       "aisle": "rau_cu",
+       "need_g": 300,
+       "packs": 1,
+       "pack_g": 500,
+       "pack_label": "Cà chua 500 g (ước tính)",
+       "price_vnd_per_pack": 17000,
+       "used_cost_vnd": 10200,
+       "till_cost_vnd": 17000,
+       "leftover_g": 200,
+       "leftover_days": 7,
+       "price_store_id": "cho_khac",
+       "price_fallback": true,
+       "display_qty": "1 × Cà chua 500 g (ước tính)",
+       "is_default_pantry": false,
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 4,
+       "no_shelf_info": false,
+       "freezable_meat": false
+      },
+      {
+       "ingredient_id": "cai_ngot",
+       "name": "Cải ngọt (cải bẹ xanh, PROXY)",
+       "aisle": "rau_cu",
+       "need_g": 120,
+       "packs": 1,
+       "pack_g": 500,
+       "pack_label": "500 g (ước tính)",
+       "price_vnd_per_pack": 15000,
+       "used_cost_vnd": 3600,
+       "till_cost_vnd": 15000,
+       "leftover_g": 380,
+       "leftover_days": 3,
+       "price_store_id": "cho_khac",
+       "price_fallback": true,
+       "display_qty": "1 × 500 g (ước tính)",
+       "is_default_pantry": false,
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 2,
+       "no_shelf_info": false,
+       "freezable_meat": false
+      },
+      {
+       "ingredient_id": "toi",
+       "name": "Tỏi (củ)",
+       "aisle": "gia_vi_dau",
+       "need_g": 21,
+       "packs": 1,
+       "pack_g": 100,
+       "pack_label": "100 g (ước tính)",
+       "price_vnd_per_pack": 15000,
+       "used_cost_vnd": 3150,
+       "till_cost_vnd": 15000,
+       "leftover_g": 79,
+       "leftover_days": 30,
+       "price_store_id": "cho_khac",
+       "price_fallback": true,
+       "display_qty": "1 × 100 g (ước tính)",
+       "is_default_pantry": true,
+       "is_pantry": true,
+       "buy_group": "day",
+       "fresh_days": 3,
+       "no_shelf_info": false,
+       "freezable_meat": false
+      }
+     ],
+     "till_cost": 133000
+    },
+    {
+     "day_index": 1,
+     "items": [
+      {
+       "ingredient_id": "thit_heo_xay_nac",
+       "name": "Thịt heo xay (nạc ~96%)",
+       "aisle": "thit",
+       "need_g": 185,
+       "packs": 1,
+       "pack_g": 200,
+       "pack_label": "thịt heo xay CP khay 200 g (giá thường)",
+       "price_vnd_per_pack": 25500,
+       "used_cost_vnd": 23587.5,
+       "till_cost_vnd": 25500,
+       "leftover_g": 15,
+       "leftover_days": 3,
+       "price_store_id": "bach_hoa_xanh",
+       "price_fallback": false,
+       "display_qty": "1 × thịt heo xay CP khay 200 g (giá thường)",
+       "is_default_pantry": false,
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 1,
+       "no_shelf_info": false,
+       "freezable_meat": true
+      },
+      {
+       "ingredient_id": "ca_basa",
+       "name": "Cá basa phi lê",
+       "aisle": "ca_hai_san",
+       "need_g": 130,
+       "packs": 1,
+       "pack_g": 300,
+       "pack_label": "Cá basa phi lê 300 g (ước tính)",
+       "price_vnd_per_pack": 43000,
+       "used_cost_vnd": 18633.333333333336,
+       "till_cost_vnd": 43000,
+       "leftover_g": 170,
+       "leftover_days": 2,
+       "price_store_id": "cho_khac",
+       "price_fallback": true,
+       "display_qty": "1 × Cá basa phi lê 300 g (ước tính)",
+       "is_default_pantry": false,
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 1,
+       "no_shelf_info": false,
+       "freezable_meat": true
+      },
+      {
+       "ingredient_id": "dau_phu",
+       "name": "Đậu hũ (đậu phụ) cứng",
+       "aisle": "trung_dau_phu",
+       "need_g": 140,
+       "packs": 1,
+       "pack_g": 300,
+       "pack_label": "bìa 300 g (ước tính)",
+       "price_vnd_per_pack": 12000,
+       "used_cost_vnd": 5600,
+       "till_cost_vnd": 12000,
+       "leftover_g": 160,
+       "leftover_days": 5,
+       "price_store_id": "cho_khac",
+       "price_fallback": true,
+       "display_qty": "1 × bìa 300 g (ước tính)",
+       "is_default_pantry": false,
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 1,
+       "no_shelf_info": false,
+       "freezable_meat": false
+      },
+      {
+       "ingredient_id": "su_su",
+       "name": "Su su (quả)",
+       "aisle": "rau_cu",
+       "need_g": 300,
+       "packs": 1,
+       "pack_g": 500,
+       "pack_label": "Su su 500 g (ước tính)",
+       "price_vnd_per_pack": 11000,
+       "used_cost_vnd": 6600,
+       "till_cost_vnd": 11000,
+       "leftover_g": 200,
+       "leftover_days": 14,
+       "price_store_id": "cho_khac",
+       "price_fallback": true,
+       "display_qty": "1 × Su su 500 g (ước tính)",
+       "is_default_pantry": false,
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 4,
+       "no_shelf_info": false,
+       "freezable_meat": false
+      }
+     ],
+     "till_cost": 92000
+    },
+    {
+     "day_index": 2,
+     "items": [
+      {
+       "ingredient_id": "uc_ga_khong_da",
+       "name": "Ức gà, không xương, không da",
+       "aisle": "thit",
+       "need_g": 85,
+       "packs": 1,
+       "pack_g": 300,
+       "pack_label": "Ức gà không xương 300 g (ước tính)",
+       "price_vnd_per_pack": 63000,
+       "used_cost_vnd": 17850,
+       "till_cost_vnd": 63000,
+       "leftover_g": 215,
+       "leftover_days": 3,
+       "price_store_id": "cho_khac",
+       "price_fallback": true,
+       "display_qty": "1 × Ức gà không xương 300 g (ước tính)",
+       "is_default_pantry": false,
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 1,
+       "no_shelf_info": false,
+       "freezable_meat": true
+      },
+      {
+       "ingredient_id": "tom",
+       "name": "Tôm sú / tôm thẻ (làm sạch)",
+       "aisle": "ca_hai_san",
+       "need_g": 115,
+       "packs": 1,
+       "pack_g": 250,
+       "pack_label": "Tôm làm sạch 250 g (ước tính)",
+       "price_vnd_per_pack": 102000,
+       "used_cost_vnd": 46920,
+       "till_cost_vnd": 102000,
+       "leftover_g": 135,
+       "leftover_days": 2,
+       "price_store_id": "cho_khac",
+       "price_fallback": true,
+       "display_qty": "1 × Tôm làm sạch 250 g (ước tính)",
+       "is_default_pantry": false,
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 1,
+       "no_shelf_info": false,
+       "freezable_meat": true
+      },
+      {
+       "ingredient_id": "dau_phu",
+       "name": "Đậu hũ (đậu phụ) cứng",
+       "aisle": "trung_dau_phu",
+       "need_g": 140,
+       "packs": 1,
+       "pack_g": 300,
+       "pack_label": "bìa 300 g (ước tính)",
+       "price_vnd_per_pack": 12000,
+       "used_cost_vnd": 5600,
+       "till_cost_vnd": 12000,
+       "leftover_g": 160,
+       "leftover_days": 5,
+       "price_store_id": "cho_khac",
+       "price_fallback": true,
+       "display_qty": "1 × bìa 300 g (ước tính)",
+       "is_default_pantry": false,
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 1,
+       "no_shelf_info": false,
+       "freezable_meat": false
+      },
+      {
+       "ingredient_id": "cai_ngot",
+       "name": "Cải ngọt (cải bẹ xanh, PROXY)",
+       "aisle": "rau_cu",
+       "need_g": 80,
+       "packs": 1,
+       "pack_g": 500,
+       "pack_label": "500 g (ước tính)",
+       "price_vnd_per_pack": 15000,
+       "used_cost_vnd": 2400,
+       "till_cost_vnd": 15000,
+       "leftover_g": 420,
+       "leftover_days": 3,
+       "price_store_id": "cho_khac",
+       "price_fallback": true,
+       "display_qty": "1 × 500 g (ước tính)",
+       "is_default_pantry": false,
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 2,
+       "no_shelf_info": false,
+       "freezable_meat": false
+      },
+      {
+       "ingredient_id": "gia_do",
+       "name": "Giá đỗ (mầm đậu xanh)",
+       "aisle": "rau_cu",
+       "need_g": 100,
+       "packs": 1,
+       "pack_g": 300,
+       "pack_label": "gói 300 g (ước tính)",
+       "price_vnd_per_pack": 8000,
+       "used_cost_vnd": 2666.6666666666665,
+       "till_cost_vnd": 8000,
+       "leftover_g": 200,
+       "leftover_days": 2,
+       "price_store_id": "cho_khac",
+       "price_fallback": true,
+       "display_qty": "1 gói",
+       "is_default_pantry": false,
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 5,
+       "no_shelf_info": false,
+       "freezable_meat": false
+      }
+     ],
+     "till_cost": 200000
+    },
+    {
+     "day_index": 3,
+     "items": [
+      {
+       "ingredient_id": "thit_heo_xay_nac",
+       "name": "Thịt heo xay (nạc ~96%)",
+       "aisle": "thit",
+       "need_g": 205,
+       "packs": 2,
+       "pack_g": 200,
+       "pack_label": "thịt heo xay CP khay 200 g (giá thường)",
+       "price_vnd_per_pack": 25500,
+       "used_cost_vnd": 26137.499999999996,
+       "till_cost_vnd": 51000,
+       "leftover_g": 195,
+       "leftover_days": 3,
+       "price_store_id": "bach_hoa_xanh",
+       "price_fallback": false,
+       "display_qty": "2 × thịt heo xay CP khay 200 g (giá thường)",
+       "is_default_pantry": false,
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 1,
+       "no_shelf_info": false,
+       "freezable_meat": true
+      },
+      {
+       "ingredient_id": "ca_basa",
+       "name": "Cá basa phi lê",
+       "aisle": "ca_hai_san",
+       "need_g": 60,
+       "packs": 1,
+       "pack_g": 300,
+       "pack_label": "Cá basa phi lê 300 g (ước tính)",
+       "price_vnd_per_pack": 43000,
+       "used_cost_vnd": 8600,
+       "till_cost_vnd": 43000,
+       "leftover_g": 240,
+       "leftover_days": 2,
+       "price_store_id": "cho_khac",
+       "price_fallback": true,
+       "display_qty": "1 × Cá basa phi lê 300 g (ước tính)",
+       "is_default_pantry": false,
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 1,
+       "no_shelf_info": false,
+       "freezable_meat": true
+      },
+      {
+       "ingredient_id": "dau_phu",
+       "name": "Đậu hũ (đậu phụ) cứng",
+       "aisle": "trung_dau_phu",
+       "need_g": 145,
+       "packs": 1,
+       "pack_g": 300,
+       "pack_label": "bìa 300 g (ước tính)",
+       "price_vnd_per_pack": 12000,
+       "used_cost_vnd": 5800,
+       "till_cost_vnd": 12000,
+       "leftover_g": 155,
+       "leftover_days": 5,
+       "price_store_id": "cho_khac",
+       "price_fallback": true,
+       "display_qty": "1 × bìa 300 g (ước tính)",
+       "is_default_pantry": false,
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 1,
+       "no_shelf_info": false,
+       "freezable_meat": false
+      },
+      {
+       "ingredient_id": "toi",
+       "name": "Tỏi (củ)",
+       "aisle": "gia_vi_dau",
+       "need_g": 14,
+       "packs": 1,
+       "pack_g": 100,
+       "pack_label": "100 g (ước tính)",
+       "price_vnd_per_pack": 15000,
+       "used_cost_vnd": 2100,
+       "till_cost_vnd": 15000,
+       "leftover_g": 86,
+       "leftover_days": 30,
+       "price_store_id": "cho_khac",
+       "price_fallback": true,
+       "display_qty": "1 × 100 g (ước tính)",
+       "is_default_pantry": true,
+       "is_pantry": true,
+       "buy_group": "day",
+       "fresh_days": 3,
+       "no_shelf_info": false,
+       "freezable_meat": false
+      }
+     ],
+     "till_cost": 106000
+    },
+    {
+     "day_index": 4,
+     "items": [
+      {
+       "ingredient_id": "thit_heo_xay_nac",
+       "name": "Thịt heo xay (nạc ~96%)",
+       "aisle": "thit",
+       "need_g": 235,
+       "packs": 2,
+       "pack_g": 200,
+       "pack_label": "thịt heo xay CP khay 200 g (giá thường)",
+       "price_vnd_per_pack": 25500,
+       "used_cost_vnd": 29962.5,
+       "till_cost_vnd": 51000,
+       "leftover_g": 165,
+       "leftover_days": 3,
+       "price_store_id": "bach_hoa_xanh",
+       "price_fallback": false,
+       "display_qty": "2 × thịt heo xay CP khay 200 g (giá thường)",
+       "is_default_pantry": false,
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 1,
+       "no_shelf_info": false,
+       "freezable_meat": true
+      },
+      {
+       "ingredient_id": "ca_basa",
+       "name": "Cá basa phi lê",
+       "aisle": "ca_hai_san",
+       "need_g": 60,
+       "packs": 1,
+       "pack_g": 300,
+       "pack_label": "Cá basa phi lê 300 g (ước tính)",
+       "price_vnd_per_pack": 43000,
+       "used_cost_vnd": 8600,
+       "till_cost_vnd": 43000,
+       "leftover_g": 240,
+       "leftover_days": 2,
+       "price_store_id": "cho_khac",
+       "price_fallback": true,
+       "display_qty": "1 × Cá basa phi lê 300 g (ước tính)",
+       "is_default_pantry": false,
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 1,
+       "no_shelf_info": false,
+       "freezable_meat": true
+      },
+      {
+       "ingredient_id": "dau_phu",
+       "name": "Đậu hũ (đậu phụ) cứng",
+       "aisle": "trung_dau_phu",
+       "need_g": 145,
+       "packs": 1,
+       "pack_g": 300,
+       "pack_label": "bìa 300 g (ước tính)",
+       "price_vnd_per_pack": 12000,
+       "used_cost_vnd": 5800,
+       "till_cost_vnd": 12000,
+       "leftover_g": 155,
+       "leftover_days": 5,
+       "price_store_id": "cho_khac",
+       "price_fallback": true,
+       "display_qty": "1 × bìa 300 g (ước tính)",
+       "is_default_pantry": false,
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 1,
+       "no_shelf_info": false,
+       "freezable_meat": false
+      },
+      {
+       "ingredient_id": "bi_xanh",
+       "name": "Bí xanh (PROXY bí ngòi)",
+       "aisle": "rau_cu",
+       "need_g": 900,
+       "packs": 2,
+       "pack_g": 500,
+       "pack_label": "Bí xanh 500 g (ước tính)",
+       "price_vnd_per_pack": 8000,
+       "used_cost_vnd": 14400,
+       "till_cost_vnd": 16000,
+       "leftover_g": 100,
+       "leftover_days": 7,
+       "price_store_id": "cho_khac",
+       "price_fallback": true,
+       "display_qty": "2 × Bí xanh 500 g (ước tính)",
+       "is_default_pantry": false,
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 4,
+       "no_shelf_info": false,
+       "freezable_meat": false
+      },
+      {
+       "ingredient_id": "ca_chua",
+       "name": "Cà chua",
+       "aisle": "rau_cu",
+       "need_g": 100,
+       "packs": 1,
+       "pack_g": 500,
+       "pack_label": "Cà chua 500 g (ước tính)",
+       "price_vnd_per_pack": 17000,
+       "used_cost_vnd": 3400,
+       "till_cost_vnd": 17000,
+       "leftover_g": 400,
+       "leftover_days": 7,
+       "price_store_id": "cho_khac",
+       "price_fallback": true,
+       "display_qty": "1 × Cà chua 500 g (ước tính)",
+       "is_default_pantry": false,
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 4,
+       "no_shelf_info": false,
+       "freezable_meat": false
+      },
+      {
+       "ingredient_id": "cai_ngot",
+       "name": "Cải ngọt (cải bẹ xanh, PROXY)",
+       "aisle": "rau_cu",
+       "need_g": 120,
+       "packs": 1,
+       "pack_g": 500,
+       "pack_label": "500 g (ước tính)",
+       "price_vnd_per_pack": 15000,
+       "used_cost_vnd": 3600,
+       "till_cost_vnd": 15000,
+       "leftover_g": 380,
+       "leftover_days": 3,
+       "price_store_id": "cho_khac",
+       "price_fallback": true,
+       "display_qty": "1 × 500 g (ước tính)",
+       "is_default_pantry": false,
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 2,
+       "no_shelf_info": false,
+       "freezable_meat": false
+      }
+     ],
+     "till_cost": 154000
+    },
+    {
+     "day_index": 5,
+     "items": [
+      {
+       "ingredient_id": "thit_heo_xay_nac",
+       "name": "Thịt heo xay (nạc ~96%)",
+       "aisle": "thit",
+       "need_g": 130,
+       "packs": 1,
+       "pack_g": 200,
+       "pack_label": "thịt heo xay CP khay 200 g (giá thường)",
+       "price_vnd_per_pack": 25500,
+       "used_cost_vnd": 16575,
+       "till_cost_vnd": 25500,
+       "leftover_g": 70,
+       "leftover_days": 3,
+       "price_store_id": "bach_hoa_xanh",
+       "price_fallback": false,
+       "display_qty": "1 × thịt heo xay CP khay 200 g (giá thường)",
+       "is_default_pantry": false,
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 1,
+       "no_shelf_info": false,
+       "freezable_meat": true
+      },
+      {
+       "ingredient_id": "uc_ga_khong_da",
+       "name": "Ức gà, không xương, không da",
+       "aisle": "thit",
+       "need_g": 100,
+       "packs": 1,
+       "pack_g": 300,
+       "pack_label": "Ức gà không xương 300 g (ước tính)",
+       "price_vnd_per_pack": 63000,
+       "used_cost_vnd": 21000,
+       "till_cost_vnd": 63000,
+       "leftover_g": 200,
+       "leftover_days": 3,
+       "price_store_id": "cho_khac",
+       "price_fallback": true,
+       "display_qty": "1 × Ức gà không xương 300 g (ước tính)",
+       "is_default_pantry": false,
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 1,
+       "no_shelf_info": false,
+       "freezable_meat": true
+      },
+      {
+       "ingredient_id": "ca_basa",
+       "name": "Cá basa phi lê",
+       "aisle": "ca_hai_san",
+       "need_g": 60,
+       "packs": 1,
+       "pack_g": 300,
+       "pack_label": "Cá basa phi lê 300 g (ước tính)",
+       "price_vnd_per_pack": 43000,
+       "used_cost_vnd": 8600,
+       "till_cost_vnd": 43000,
+       "leftover_g": 240,
+       "leftover_days": 2,
+       "price_store_id": "cho_khac",
+       "price_fallback": true,
+       "display_qty": "1 × Cá basa phi lê 300 g (ước tính)",
+       "is_default_pantry": false,
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 1,
+       "no_shelf_info": false,
+       "freezable_meat": true
+      },
+      {
+       "ingredient_id": "su_su",
+       "name": "Su su (quả)",
+       "aisle": "rau_cu",
+       "need_g": 150,
+       "packs": 1,
+       "pack_g": 500,
+       "pack_label": "Su su 500 g (ước tính)",
+       "price_vnd_per_pack": 11000,
+       "used_cost_vnd": 3300,
+       "till_cost_vnd": 11000,
+       "leftover_g": 350,
+       "leftover_days": 14,
+       "price_store_id": "cho_khac",
+       "price_fallback": true,
+       "display_qty": "1 × Su su 500 g (ước tính)",
+       "is_default_pantry": false,
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 4,
+       "no_shelf_info": false,
+       "freezable_meat": false
+      }
+     ],
+     "till_cost": 143000
+    },
+    {
+     "day_index": 6,
+     "items": [
+      {
+       "ingredient_id": "thit_heo_xay_nac",
+       "name": "Thịt heo xay (nạc ~96%)",
+       "aisle": "thit",
+       "need_g": 235,
+       "packs": 2,
+       "pack_g": 200,
+       "pack_label": "thịt heo xay CP khay 200 g (giá thường)",
+       "price_vnd_per_pack": 25500,
+       "used_cost_vnd": 29962.5,
+       "till_cost_vnd": 51000,
+       "leftover_g": 165,
+       "leftover_days": 3,
+       "price_store_id": "bach_hoa_xanh",
+       "price_fallback": false,
+       "display_qty": "2 × thịt heo xay CP khay 200 g (giá thường)",
+       "is_default_pantry": false,
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 1,
+       "no_shelf_info": false,
+       "freezable_meat": true
+      },
+      {
+       "ingredient_id": "uc_ga_khong_da",
+       "name": "Ức gà, không xương, không da",
+       "aisle": "thit",
+       "need_g": 55,
+       "packs": 1,
+       "pack_g": 300,
+       "pack_label": "Ức gà không xương 300 g (ước tính)",
+       "price_vnd_per_pack": 63000,
+       "used_cost_vnd": 11550,
+       "till_cost_vnd": 63000,
+       "leftover_g": 245,
+       "leftover_days": 3,
+       "price_store_id": "cho_khac",
+       "price_fallback": true,
+       "display_qty": "1 × Ức gà không xương 300 g (ước tính)",
+       "is_default_pantry": false,
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 1,
+       "no_shelf_info": false,
+       "freezable_meat": true
+      },
+      {
+       "ingredient_id": "dau_phu",
+       "name": "Đậu hũ (đậu phụ) cứng",
+       "aisle": "trung_dau_phu",
+       "need_g": 140,
+       "packs": 1,
+       "pack_g": 300,
+       "pack_label": "bìa 300 g (ước tính)",
+       "price_vnd_per_pack": 12000,
+       "used_cost_vnd": 5600,
+       "till_cost_vnd": 12000,
+       "leftover_g": 160,
+       "leftover_days": 5,
+       "price_store_id": "cho_khac",
+       "price_fallback": true,
+       "display_qty": "1 × bìa 300 g (ước tính)",
+       "is_default_pantry": false,
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 1,
+       "no_shelf_info": false,
+       "freezable_meat": false
+      },
+      {
+       "ingredient_id": "cai_ngot",
+       "name": "Cải ngọt (cải bẹ xanh, PROXY)",
+       "aisle": "rau_cu",
+       "need_g": 120,
+       "packs": 1,
+       "pack_g": 500,
+       "pack_label": "500 g (ước tính)",
+       "price_vnd_per_pack": 15000,
+       "used_cost_vnd": 3600,
+       "till_cost_vnd": 15000,
+       "leftover_g": 380,
+       "leftover_days": 3,
+       "price_store_id": "cho_khac",
+       "price_fallback": true,
+       "display_qty": "1 × 500 g (ước tính)",
+       "is_default_pantry": false,
+       "is_pantry": false,
+       "buy_group": "day",
+       "fresh_days": 2,
+       "no_shelf_info": false,
+       "freezable_meat": false
+      },
+      {
+       "ingredient_id": "toi",
+       "name": "Tỏi (củ)",
+       "aisle": "gia_vi_dau",
+       "need_g": 8,
+       "packs": 1,
+       "pack_g": 100,
+       "pack_label": "100 g (ước tính)",
+       "price_vnd_per_pack": 15000,
+       "used_cost_vnd": 1200,
+       "till_cost_vnd": 15000,
+       "leftover_g": 92,
+       "leftover_days": 30,
+       "price_store_id": "cho_khac",
+       "price_fallback": true,
+       "display_qty": "1 × 100 g (ước tính)",
+       "is_default_pantry": true,
+       "is_pantry": true,
+       "buy_group": "day",
+       "fresh_days": 3,
+       "no_shelf_info": false,
+       "freezable_meat": false
+      }
+     ],
+     "till_cost": 141000
+    }
+   ]
   },
   "budget_vnd": 650000,
   "iterations": 1,
   "distinct_recipes": 18,
-  "repairs": 18,
+  "repairs": 19,
   "unfilled_slots": [],
   "meal_style": "auto"
  },
@@ -6880,13 +8087,13 @@
     {
      "ingredient_id": "dau_phu",
      "name": "Đậu hũ (đậu phụ) cứng",
-     "grams": 135,
+     "grams": 140,
      "macros": {
-      "kcal": 194.4,
-      "protein_g": 23.355000000000004,
-      "carb_g": 3.753,
-      "fat_g": 11.772000000000002,
-      "fiber_g": 3.105
+      "kcal": 201.6,
+      "protein_g": 24.22,
+      "carb_g": 3.8919999999999995,
+      "fat_g": 12.208,
+      "fiber_g": 3.2199999999999998
      },
      "source": "USDA FDC #172475"
     },
@@ -6959,11 +8166,11 @@
    "extras": [],
    "dessert": [],
    "total": {
-    "kcal": 269.90000000000003,
-    "protein_g": 25.269000000000002,
-    "carb_g": 10.004000000000001,
-    "fat_g": 17.049,
-    "fiber_g": 4.725
+    "kcal": 277.1,
+    "protein_g": 26.133999999999997,
+    "carb_g": 10.143,
+    "fat_g": 17.484999999999996,
+    "fiber_g": 4.84
    }
   },
   {
@@ -6974,12 +8181,12 @@
     {
      "ingredient_id": "uc_ga_khong_da",
      "name": "Ức gà, không xương, không da",
-     "grams": 115,
+     "grams": 85,
      "macros": {
-      "kcal": 123.05,
-      "protein_g": 25.874999999999996,
+      "kcal": 90.95,
+      "protein_g": 19.125,
       "carb_g": 0,
-      "fat_g": 2.2194999999999996,
+      "fat_g": 1.6404999999999998,
       "fiber_g": 0
      },
      "source": "USDA FDC #2646170"
@@ -7154,17 +8361,17 @@
      "source": "USDA FDC #173468"
     },
     {
-     "ingredient_id": "com_trang",
-     "name": "Cơm trắng (đã nấu chín)",
+     "ingredient_id": "gao_lut_nau_chin",
+     "name": "Gạo lứt nấu chín",
      "grams": 150,
      "macros": {
-      "kcal": 195,
-      "protein_g": 4.035,
-      "carb_g": 42.3,
-      "fat_g": 0.42000000000000004,
-      "fiber_g": 0.6000000000000001
+      "kcal": 184.5,
+      "protein_g": 4.11,
+      "carb_g": 38.400000000000006,
+      "fat_g": 1.455,
+      "fiber_g": 2.4000000000000004
      },
-     "source": "USDA FDC #168878"
+     "source": "USDA FDC #169704"
     }
    ],
    "extras": [
@@ -7184,25 +8391,38 @@
    ],
    "dessert": [
     {
-     "ingredient_id": "sua_dau_nanh",
-     "name": "Sữa đậu nành không đường",
-     "grams": 200,
+     "ingredient_id": "dau_do",
+     "name": "Đậu đỏ khô",
+     "grams": 30,
      "macros": {
-      "kcal": 66,
-      "protein_g": 5.72,
-      "carb_g": 3.48,
-      "fat_g": 3.22,
-      "fiber_g": 1
+      "kcal": 98.7,
+      "protein_g": 5.97,
+      "carb_g": 18.869999999999997,
+      "fat_g": 0.159,
+      "fiber_g": 3.8099999999999996
      },
-     "source": "USDA FDC #175215"
+     "source": "USDA FDC #173727"
+    },
+    {
+     "ingredient_id": "duong",
+     "name": "Đường trắng (tinh luyện)",
+     "grams": 8,
+     "macros": {
+      "kcal": 30.96,
+      "protein_g": 0,
+      "carb_g": 8,
+      "fat_g": 0,
+      "fiber_g": 0
+     },
+     "source": "USDA FDC #169655"
     }
    ],
    "total": {
-    "kcal": 572.58,
-    "protein_g": 49.6733,
-    "carb_g": 70.801,
-    "fat_g": 12.445600000000002,
-    "fiber_g": 9.056
+    "kcal": 593.64,
+    "protein_g": 43.2483,
+    "carb_g": 90.291,
+    "fat_g": 9.840600000000002,
+    "fiber_g": 13.666
    }
   },
   {
@@ -7263,57 +8483,31 @@
   {
    "date": "2026-11-11",
    "slot": "dinner",
-   "recipe_id": "mam:canh_bi_xanh_thit_bam_mam+bi_xanh_luoc_an_nguoi+com_nguoi_mang_di",
+   "recipe_id": "mam:main_tom_rim_mang_di+canh_bap_cai_nam_rom_chay+bap_cai_luoc_an_nguoi+com_gao_lut_nau",
    "lines": [
     {
-     "ingredient_id": "thit_heo_xay_nac",
-     "name": "Thịt heo xay (nạc ~96%)",
-     "grams": 165,
+     "ingredient_id": "tom",
+     "name": "Tôm sú / tôm thẻ (làm sạch)",
+     "grams": 115,
      "macros": {
-      "kcal": 199.64999999999998,
-      "protein_g": 34.815,
-      "carb_g": 0.3465,
-      "fat_g": 6.6,
+      "kcal": 97.74999999999999,
+      "protein_g": 23.115,
+      "carb_g": 0,
+      "fat_g": 0.5864999999999999,
       "fiber_g": 0
      },
-     "source": "USDA FDC #169190"
-    },
-    {
-     "ingredient_id": "bi_xanh",
-     "name": "Bí xanh (PROXY bí ngòi)",
-     "grams": 200,
-     "macros": {
-      "kcal": 34,
-      "protein_g": 2.42,
-      "carb_g": 6.22,
-      "fat_g": 0.64,
-      "fiber_g": 2
-     },
-     "source": "USDA FDC #169291"
-    },
-    {
-     "ingredient_id": "hanh_la",
-     "name": "Hành lá",
-     "grams": 10,
-     "macros": {
-      "kcal": 3.2,
-      "protein_g": 0.18300000000000002,
-      "carb_g": 0.734,
-      "fat_g": 0.019000000000000003,
-      "fiber_g": 0.26
-     },
-     "source": "USDA FDC #170005"
+     "source": "USDA FDC #175179"
     },
     {
      "ingredient_id": "toi",
      "name": "Tỏi (củ)",
-     "grams": 3,
+     "grams": 5,
      "macros": {
-      "kcal": 4.47,
-      "protein_g": 0.1908,
-      "carb_g": 0.993,
-      "fat_g": 0.015,
-      "fiber_g": 0.063
+      "kcal": 7.45,
+      "protein_g": 0.31800000000000006,
+      "carb_g": 1.6550000000000002,
+      "fat_g": 0.025,
+      "fiber_g": 0.10500000000000001
      },
      "source": "USDA FDC #169230"
     },
@@ -7331,17 +8525,69 @@
      "source": "USDA FDC #174531"
     },
     {
-     "ingredient_id": "bi_xanh",
-     "name": "Bí xanh (PROXY bí ngòi)",
+     "ingredient_id": "duong",
+     "name": "Đường trắng (tinh luyện)",
+     "grams": 5,
+     "macros": {
+      "kcal": 19.35,
+      "protein_g": 0,
+      "carb_g": 5,
+      "fat_g": 0,
+      "fiber_g": 0
+     },
+     "source": "USDA FDC #169655"
+    },
+    {
+     "ingredient_id": "dau_an",
+     "name": "Dầu ăn (đậu nành)",
+     "grams": 5,
+     "macros": {
+      "kcal": 44.2,
+      "protein_g": 0,
+      "carb_g": 0,
+      "fat_g": 5,
+      "fiber_g": 0
+     },
+     "source": "USDA FDC #171411"
+    },
+    {
+     "ingredient_id": "bap_cai",
+     "name": "Bắp cải",
      "grams": 150,
      "macros": {
-      "kcal": 25.5,
-      "protein_g": 1.815,
-      "carb_g": 4.665,
-      "fat_g": 0.48,
+      "kcal": 37.5,
+      "protein_g": 1.92,
+      "carb_g": 8.7,
+      "fat_g": 0.15000000000000002,
+      "fiber_g": 3.75
+     },
+     "source": "USDA FDC #169975"
+    },
+    {
+     "ingredient_id": "nam_rom",
+     "name": "Nấm rơm đóng hộp (đã ráo nước)",
+     "grams": 60,
+     "macros": {
+      "kcal": 19.2,
+      "protein_g": 2.298,
+      "carb_g": 2.784,
+      "fat_g": 0.40800000000000003,
       "fiber_g": 1.5
      },
-     "source": "USDA FDC #169291"
+     "source": "USDA FDC #168582"
+    },
+    {
+     "ingredient_id": "toi",
+     "name": "Tỏi (củ)",
+     "grams": 3,
+     "macros": {
+      "kcal": 4.47,
+      "protein_g": 0.1908,
+      "carb_g": 0.993,
+      "fat_g": 0.015,
+      "fiber_g": 0.063
+     },
+     "source": "USDA FDC #169230"
     },
     {
      "ingredient_id": "muoi",
@@ -7357,54 +8603,93 @@
      "source": "USDA FDC #173468"
     },
     {
-     "ingredient_id": "com_trang",
-     "name": "Cơm trắng (đã nấu chín)",
+     "ingredient_id": "tieu_den",
+     "name": "Tiêu đen (hạt)",
+     "grams": 1,
+     "macros": {
+      "kcal": 2.5100000000000002,
+      "protein_g": 0.10400000000000001,
+      "carb_g": 0.64,
+      "fat_g": 0.0326,
+      "fiber_g": 0.253
+     },
+     "source": "USDA FDC #170931"
+    },
+    {
+     "ingredient_id": "bap_cai",
+     "name": "Bắp cải",
      "grams": 150,
      "macros": {
-      "kcal": 195,
-      "protein_g": 4.035,
-      "carb_g": 42.3,
-      "fat_g": 0.42000000000000004,
-      "fiber_g": 0.6000000000000001
+      "kcal": 37.5,
+      "protein_g": 1.92,
+      "carb_g": 8.7,
+      "fat_g": 0.15000000000000002,
+      "fiber_g": 3.75
      },
-     "source": "USDA FDC #168878"
+     "source": "USDA FDC #169975"
+    },
+    {
+     "ingredient_id": "toi",
+     "name": "Tỏi (củ)",
+     "grams": 2,
+     "macros": {
+      "kcal": 2.98,
+      "protein_g": 0.1272,
+      "carb_g": 0.662,
+      "fat_g": 0.01,
+      "fiber_g": 0.042
+     },
+     "source": "USDA FDC #169230"
+    },
+    {
+     "ingredient_id": "muoi",
+     "name": "Muối ăn",
+     "grams": 1,
+     "macros": {
+      "kcal": 0,
+      "protein_g": 0,
+      "carb_g": 0,
+      "fat_g": 0,
+      "fiber_g": 0
+     },
+     "source": "USDA FDC #173468"
+    },
+    {
+     "ingredient_id": "gao_lut_nau_chin",
+     "name": "Gạo lứt nấu chín",
+     "grams": 150,
+     "macros": {
+      "kcal": 184.5,
+      "protein_g": 4.11,
+      "carb_g": 38.400000000000006,
+      "fat_g": 1.455,
+      "fiber_g": 2.4000000000000004
+     },
+     "source": "USDA FDC #169704"
     }
    ],
    "extras": [],
    "dessert": [
     {
-     "ingredient_id": "dau_xanh",
-     "name": "Đậu xanh khô (hạt)",
-     "grams": 25,
+     "ingredient_id": "sua_chua_khong_duong",
+     "name": "Sữa chua Hy Lạp không đường",
+     "grams": 150,
      "macros": {
-      "kcal": 86.75,
-      "protein_g": 5.975,
-      "carb_g": 15.65,
-      "fat_g": 0.2875,
-      "fiber_g": 4.075
-     },
-     "source": "USDA FDC #174256"
-    },
-    {
-     "ingredient_id": "duong",
-     "name": "Đường trắng (tinh luyện)",
-     "grams": 8,
-     "macros": {
-      "kcal": 30.96,
-      "protein_g": 0,
-      "carb_g": 8,
-      "fat_g": 0,
+      "kcal": 88.5,
+      "protein_g": 15.299999999999999,
+      "carb_g": 5.4,
+      "fat_g": 0.585,
       "fiber_g": 0
      },
-     "source": "USDA FDC #169655"
+     "source": "USDA FDC #170894"
     }
    ],
    "total": {
-    "kcal": 581.28,
-    "protein_g": 49.6868,
-    "carb_g": 79.09049999999999,
-    "fat_g": 8.461999999999998,
-    "fiber_g": 8.498000000000001
+    "kcal": 547.66,
+    "protein_g": 49.656,
+    "carb_g": 73.11600000000001,
+    "fat_g": 8.4176,
+    "fiber_g": 11.863
    }
   },
   {
@@ -7947,17 +9232,17 @@
   {
    "date": "2026-11-13",
    "slot": "lunch",
-   "recipe_id": "mam:canh_bi_xanh_thit_bam_mam+su_su_luoc_an_nguoi+gao_lut_nguoi_mang_di",
+   "recipe_id": "mam:canh_bi_xanh_thit_bam_mam+bi_xanh_luoc_an_nguoi+com_nguoi_mang_di",
    "lines": [
     {
      "ingredient_id": "thit_heo_xay_nac",
      "name": "Thịt heo xay (nạc ~96%)",
-     "grams": 125,
+     "grams": 120,
      "macros": {
-      "kcal": 151.25,
-      "protein_g": 26.375,
-      "carb_g": 0.2625,
-      "fat_g": 5,
+      "kcal": 145.2,
+      "protein_g": 25.32,
+      "carb_g": 0.252,
+      "fat_g": 4.8,
       "fiber_g": 0
      },
      "source": "USDA FDC #169190"
@@ -8015,17 +9300,17 @@
      "source": "USDA FDC #174531"
     },
     {
-     "ingredient_id": "su_su",
-     "name": "Su su (quả)",
+     "ingredient_id": "bi_xanh",
+     "name": "Bí xanh (PROXY bí ngòi)",
      "grams": 150,
      "macros": {
-      "kcal": 28.5,
-      "protein_g": 1.23,
-      "carb_g": 6.765,
-      "fat_g": 0.195,
-      "fiber_g": 2.55
+      "kcal": 25.5,
+      "protein_g": 1.815,
+      "carb_g": 4.665,
+      "fat_g": 0.48,
+      "fiber_g": 1.5
      },
-     "source": "USDA FDC #170402"
+     "source": "USDA FDC #169291"
     },
     {
      "ingredient_id": "muoi",
@@ -8041,17 +9326,17 @@
      "source": "USDA FDC #173468"
     },
     {
-     "ingredient_id": "gao_lut_nau_chin",
-     "name": "Gạo lứt nấu chín",
+     "ingredient_id": "com_trang",
+     "name": "Cơm trắng (đã nấu chín)",
      "grams": 150,
      "macros": {
-      "kcal": 184.5,
-      "protein_g": 4.11,
-      "carb_g": 38.400000000000006,
-      "fat_g": 1.455,
-      "fiber_g": 2.4000000000000004
+      "kcal": 195,
+      "protein_g": 4.035,
+      "carb_g": 42.3,
+      "fat_g": 0.42000000000000004,
+      "fiber_g": 0.6000000000000001
      },
-     "source": "USDA FDC #169704"
+     "source": "USDA FDC #168878"
     }
    ],
    "extras": [],
@@ -8084,11 +9369,11 @@
     }
    ],
    "total": {
-    "kcal": 537.3299999999999,
-    "protein_g": 40.7318,
-    "carb_g": 80.4265,
-    "fat_g": 7.483499999999999,
-    "fiber_g": 11.082999999999998
+    "kcal": 538.78,
+    "protein_g": 40.186800000000005,
+    "carb_g": 82.216,
+    "fat_g": 6.533499999999999,
+    "fiber_g": 8.233
    }
   },
   {
@@ -8390,20 +9675,20 @@
   {
    "date": "2026-11-14",
    "slot": "lunch",
-   "recipe_id": "mam:canh_bi_xanh_tom_mam+gia_do_tron_mang_di+gao_lut_nguoi_mang_di",
+   "recipe_id": "mam:canh_bi_xanh_thit_bam_mam+su_su_luoc_an_nguoi+gao_lut_nguoi_mang_di",
    "lines": [
     {
-     "ingredient_id": "tom",
-     "name": "Tôm sú / tôm thẻ (làm sạch)",
-     "grams": 125,
+     "ingredient_id": "thit_heo_xay_nac",
+     "name": "Thịt heo xay (nạc ~96%)",
+     "grams": 130,
      "macros": {
-      "kcal": 106.25,
-      "protein_g": 25.125,
-      "carb_g": 0,
-      "fat_g": 0.6375,
+      "kcal": 157.3,
+      "protein_g": 27.430000000000003,
+      "carb_g": 0.273,
+      "fat_g": 5.2,
       "fiber_g": 0
      },
-     "source": "USDA FDC #175179"
+     "source": "USDA FDC #169190"
     },
     {
      "ingredient_id": "bi_xanh",
@@ -8458,43 +9743,17 @@
      "source": "USDA FDC #174531"
     },
     {
-     "ingredient_id": "gia_do",
-     "name": "Giá đỗ (mầm đậu xanh)",
-     "grams": 100,
+     "ingredient_id": "su_su",
+     "name": "Su su (quả)",
+     "grams": 150,
      "macros": {
-      "kcal": 30,
-      "protein_g": 3.04,
-      "carb_g": 5.94,
-      "fat_g": 0.18,
-      "fiber_g": 1.8
+      "kcal": 28.5,
+      "protein_g": 1.23,
+      "carb_g": 6.765,
+      "fat_g": 0.195,
+      "fiber_g": 2.55
      },
-     "source": "USDA FDC #169957"
-    },
-    {
-     "ingredient_id": "ca_rot",
-     "name": "Cà rốt",
-     "grams": 40,
-     "macros": {
-      "kcal": 16.400000000000002,
-      "protein_g": 0.37200000000000005,
-      "carb_g": 3.8320000000000003,
-      "fat_g": 0.096,
-      "fiber_g": 1.1199999999999999
-     },
-     "source": "USDA FDC #170393"
-    },
-    {
-     "ingredient_id": "dau_an",
-     "name": "Dầu ăn (đậu nành)",
-     "grams": 5,
-     "macros": {
-      "kcal": 44.2,
-      "protein_g": 0,
-      "carb_g": 0,
-      "fat_g": 5,
-      "fiber_g": 0
-     },
-     "source": "USDA FDC #171411"
+     "source": "USDA FDC #170402"
     },
     {
      "ingredient_id": "muoi",
@@ -8510,17 +9769,17 @@
      "source": "USDA FDC #173468"
     },
     {
-     "ingredient_id": "gao_lut_nau_chin",
-     "name": "Gạo lứt nấu chín",
+     "ingredient_id": "com_trang",
+     "name": "Cơm trắng (đã nấu chín)",
      "grams": 150,
      "macros": {
-      "kcal": 184.5,
-      "protein_g": 4.11,
-      "carb_g": 38.400000000000006,
-      "fat_g": 1.455,
-      "fiber_g": 2.4000000000000004
+      "kcal": 195,
+      "protein_g": 4.035,
+      "carb_g": 42.3,
+      "fat_g": 0.42000000000000004,
+      "fiber_g": 0.6000000000000001
      },
-     "source": "USDA FDC #169704"
+     "source": "USDA FDC #168878"
     }
    ],
    "extras": [],
@@ -8553,11 +9812,11 @@
     }
    ],
    "total": {
-    "kcal": 542.48,
-    "protein_g": 41.668800000000005,
-    "carb_g": 79.951,
-    "fat_g": 8.330499999999999,
-    "fiber_g": 11.718
+    "kcal": 541.9300000000001,
+    "protein_g": 41.7168,
+    "carb_g": 81.11699999999999,
+    "fat_g": 6.776999999999999,
+    "fiber_g": 9.547999999999998
    }
   },
   {
@@ -9297,7 +10556,7 @@
    }
   }
  ],
- "data_version": "b9380b17b895a1aee268040efb12edd605aeee257e79fbf3c4c8a46294d4d73c",
+ "data_version": "796cee06574de8b06cdeb13ace6c6ebcae9ac963a5a588a0294e6e6cd144a5e0",
  "recipes": {
   "mam:canh_bi_xanh_thit_bam_mam+cai_ngot_luoc_an_nguoi+khoai_lang_hap": {
    "id": "mam:canh_bi_xanh_thit_bam_mam+cai_ngot_luoc_an_nguoi+khoai_lang_hap",
@@ -9880,6 +11139,176 @@
    "low_carb_ok": false,
    "image_group": "canh"
   },
+  "mam:main_tom_rim_mang_di+canh_bap_cai_nam_rom_chay+bap_cai_luoc_an_nguoi+com_gao_lut_nau": {
+   "id": "mam:main_tom_rim_mang_di+canh_bap_cai_nam_rom_chay+bap_cai_luoc_an_nguoi+com_gao_lut_nau",
+   "name": "Tôm rim (mang đi) + Canh bắp cải nấm rơm (chay) + Bắp cải luộc ăn nguội + Cơm gạo lứt",
+   "meal_types": [
+    "lunch",
+    "dinner"
+   ],
+   "lunch_style": [
+    "packed"
+   ],
+   "snack_style": null,
+   "cuisine_tags": [
+    "rim",
+    "mang_di",
+    "canh",
+    "chay",
+    "luoc",
+    "com",
+    "nhieu_xo"
+   ],
+   "health_tags": [
+    "giau_dam",
+    "it_beo",
+    "nhieu_xo",
+    "it_duong",
+    "tot_cho_tim"
+   ],
+   "equipment": [
+    "bep",
+    "noi_com_dien"
+   ],
+   "cook_minutes": 80,
+   "batchable": true,
+   "is_low_carb": false,
+   "ingredients": [
+    {
+     "ingredient_id": "tom",
+     "grams": 150,
+     "role": "protein",
+     "min_g": 100,
+     "max_g": 250,
+     "swap_group": "hai_san"
+    },
+    {
+     "ingredient_id": "toi",
+     "grams": 5,
+     "role": "seasoning",
+     "min_g": 5,
+     "max_g": 5,
+     "swap_group": null
+    },
+    {
+     "ingredient_id": "nuoc_mam",
+     "grams": 5,
+     "role": "seasoning",
+     "min_g": 5,
+     "max_g": 5,
+     "swap_group": null
+    },
+    {
+     "ingredient_id": "duong",
+     "grams": 5,
+     "role": "seasoning",
+     "min_g": 5,
+     "max_g": 5,
+     "swap_group": null
+    },
+    {
+     "ingredient_id": "dau_an",
+     "grams": 5,
+     "role": "fat",
+     "min_g": 5,
+     "max_g": 5,
+     "swap_group": null
+    },
+    {
+     "ingredient_id": "bap_cai",
+     "grams": 150,
+     "role": "veg",
+     "min_g": 150,
+     "max_g": 150,
+     "swap_group": "rau_canh"
+    },
+    {
+     "ingredient_id": "nam_rom",
+     "grams": 60,
+     "role": "veg",
+     "min_g": 60,
+     "max_g": 60,
+     "swap_group": "rau_canh"
+    },
+    {
+     "ingredient_id": "toi",
+     "grams": 3,
+     "role": "seasoning",
+     "min_g": 3,
+     "max_g": 3,
+     "swap_group": null
+    },
+    {
+     "ingredient_id": "muoi",
+     "grams": 1,
+     "role": "seasoning",
+     "min_g": 1,
+     "max_g": 1,
+     "swap_group": null
+    },
+    {
+     "ingredient_id": "tieu_den",
+     "grams": 1,
+     "role": "seasoning",
+     "min_g": 1,
+     "max_g": 1,
+     "swap_group": null
+    },
+    {
+     "ingredient_id": "bap_cai",
+     "grams": 150,
+     "role": "veg",
+     "min_g": 150,
+     "max_g": 150,
+     "swap_group": null
+    },
+    {
+     "ingredient_id": "toi",
+     "grams": 2,
+     "role": "seasoning",
+     "min_g": 2,
+     "max_g": 2,
+     "swap_group": null
+    },
+    {
+     "ingredient_id": "muoi",
+     "grams": 1,
+     "role": "seasoning",
+     "min_g": 1,
+     "max_g": 1,
+     "swap_group": null
+    },
+    {
+     "ingredient_id": "gao_lut_nau_chin",
+     "grams": 150,
+     "role": "carb",
+     "min_g": 0,
+     "max_g": 500,
+     "swap_group": "tinh_bot"
+    }
+   ],
+   "steps": [
+    "— Tôm rim (mang đi) —",
+    "Phi tỏi, xào tôm với nước mắm và đường.",
+    "Rim lửa nhỏ 5 phút, để nguội.",
+    "— Canh bắp cải nấm rơm (chay) —",
+    "Đun 500 ml nước với tỏi.",
+    "Cho bắp cải và nấm vào, đun 8 phút.",
+    "Nêm muối, tiêu.",
+    "— Bắp cải luộc ăn nguội —",
+    "Thái bắp cải, luộc 3 phút.",
+    "Ráo nước, để nguội; trộn tỏi băm và muối.",
+    "— Cơm gạo lứt —",
+    "Dùng gạo lứt đã nấu chín sẵn.",
+    "Hâm nóng trước khi ăn."
+   ],
+   "image": null,
+   "dish_role": "mam",
+   "pairs_with": [],
+   "portable": false,
+   "low_carb_ok": false,
+   "image_group": "kho"
+  },
   "mam:canh_bi_xanh_thit_bam_mam+su_su_luoc_an_nguoi+gao_lut_nguoi_mang_di": {
    "id": "mam:canh_bi_xanh_thit_bam_mam+su_su_luoc_an_nguoi+gao_lut_nguoi_mang_di",
    "name": "Canh bí xanh thịt bằm (món chính) + Su su luộc ăn nguội + Gạo lứt nguội mang đi",
@@ -10227,137 +11656,6 @@
    "portable": false,
    "low_carb_ok": false,
    "image_group": "luoc_hap"
-  },
-  "mam:canh_bi_xanh_tom_mam+gia_do_tron_mang_di+gao_lut_nguoi_mang_di": {
-   "id": "mam:canh_bi_xanh_tom_mam+gia_do_tron_mang_di+gao_lut_nguoi_mang_di",
-   "name": "Canh bí xanh nấu tôm (món chính) + Giá đỗ trộn cà rốt (mang đi) + Gạo lứt nguội mang đi",
-   "meal_types": [
-    "lunch",
-    "dinner"
-   ],
-   "lunch_style": [
-    "hot"
-   ],
-   "snack_style": null,
-   "cuisine_tags": [
-    "canh",
-    "nhe",
-    "tron",
-    "chay",
-    "mang_di",
-    "com",
-    "nhieu_xo"
-   ],
-   "health_tags": [
-    "giau_dam",
-    "it_beo"
-   ],
-   "equipment": [
-    "bep"
-   ],
-   "cook_minutes": 28,
-   "batchable": true,
-   "is_low_carb": false,
-   "ingredients": [
-    {
-     "ingredient_id": "tom",
-     "grams": 120,
-     "role": "protein",
-     "min_g": 80,
-     "max_g": 200,
-     "swap_group": "hai_san"
-    },
-    {
-     "ingredient_id": "bi_xanh",
-     "grams": 200,
-     "role": "veg",
-     "min_g": 200,
-     "max_g": 200,
-     "swap_group": "rau_canh"
-    },
-    {
-     "ingredient_id": "hanh_la",
-     "grams": 10,
-     "role": "veg",
-     "min_g": 10,
-     "max_g": 10,
-     "swap_group": null
-    },
-    {
-     "ingredient_id": "toi",
-     "grams": 3,
-     "role": "seasoning",
-     "min_g": 3,
-     "max_g": 3,
-     "swap_group": null
-    },
-    {
-     "ingredient_id": "nuoc_mam",
-     "grams": 5,
-     "role": "seasoning",
-     "min_g": 5,
-     "max_g": 5,
-     "swap_group": null
-    },
-    {
-     "ingredient_id": "gia_do",
-     "grams": 100,
-     "role": "veg",
-     "min_g": 100,
-     "max_g": 100,
-     "swap_group": null
-    },
-    {
-     "ingredient_id": "ca_rot",
-     "grams": 40,
-     "role": "veg",
-     "min_g": 40,
-     "max_g": 40,
-     "swap_group": null
-    },
-    {
-     "ingredient_id": "dau_an",
-     "grams": 5,
-     "role": "fat",
-     "min_g": 5,
-     "max_g": 5,
-     "swap_group": null
-    },
-    {
-     "ingredient_id": "muoi",
-     "grams": 1,
-     "role": "seasoning",
-     "min_g": 1,
-     "max_g": 1,
-     "swap_group": null
-    },
-    {
-     "ingredient_id": "gao_lut_nau_chin",
-     "grams": 150,
-     "role": "carb",
-     "min_g": 0,
-     "max_g": 500,
-     "swap_group": "tinh_bot"
-    }
-   ],
-   "steps": [
-    "— Canh bí xanh nấu tôm (món chính) —",
-    "Ninh nước với tỏi.",
-    "Thả bí xanh thái miếng, nấu đến khi mềm.",
-    "Thả tôm vào, nấu chín đỏ.",
-    "Dọn nóng, ăn kèm canh và rau trong mâm.",
-    "— Giá đỗ trộn cà rốt (mang đi) —",
-    "Chần giá đỗ 30 giây, cà rốt thái sợi luộc chín.",
-    "Trộn với dầu và muối.",
-    "— Gạo lứt nguội mang đi —",
-    "Dùng gạo lứt đã nấu sẵn, để nguội trong hộp."
-   ],
-   "image": null,
-   "dish_role": "mam",
-   "pairs_with": [],
-   "portable": false,
-   "low_carb_ok": false,
-   "image_group": "canh"
   },
   "mam:main_ga_xe_tron_mang_di+canh_nam_rom_cai_thao_chay+cai_thao_luoc_an_nguoi+com_nguoi_mang_di": {
    "id": "mam:main_ga_xe_tron_mang_di+canh_nam_rom_cai_thao_chay+cai_thao_luoc_an_nguoi+com_nguoi_mang_di",
@@ -11881,6 +13179,306 @@
    "low_carb_ok": false,
    "image_group": "com"
   },
+  "dessert_sua_chua_hy_lap": {
+   "id": "dessert_sua_chua_hy_lap",
+   "name": "Sữa chua Hy Lạp không đường",
+   "meal_types": [
+    "lunch",
+    "dinner"
+   ],
+   "lunch_style": [
+    "hot",
+    "packed"
+   ],
+   "snack_style": null,
+   "cuisine_tags": [
+    "sua"
+   ],
+   "health_tags": [
+    "giau_dam",
+    "it_beo"
+   ],
+   "equipment": [],
+   "cook_minutes": 1,
+   "batchable": false,
+   "is_low_carb": true,
+   "ingredients": [
+    {
+     "ingredient_id": "sua_chua_khong_duong",
+     "grams": 150,
+     "role": "protein",
+     "min_g": 120,
+     "max_g": 180,
+     "swap_group": null
+    }
+   ],
+   "steps": [
+    "Mở hũ, dùng ngay."
+   ],
+   "image": null,
+   "dish_role": "dessert",
+   "pairs_with": [],
+   "portable": true,
+   "low_carb_ok": true,
+   "image_group": "phu"
+  },
+  "main_tom_rim_mang_di": {
+   "id": "main_tom_rim_mang_di",
+   "name": "Tôm rim (mang đi)",
+   "meal_types": [
+    "lunch",
+    "dinner"
+   ],
+   "lunch_style": [
+    "packed"
+   ],
+   "snack_style": null,
+   "cuisine_tags": [
+    "rim",
+    "mang_di"
+   ],
+   "health_tags": [
+    "giau_dam",
+    "it_beo"
+   ],
+   "equipment": [
+    "bep"
+   ],
+   "cook_minutes": 20,
+   "batchable": true,
+   "is_low_carb": true,
+   "ingredients": [
+    {
+     "ingredient_id": "tom",
+     "grams": 150,
+     "role": "protein",
+     "min_g": 100,
+     "max_g": 250,
+     "swap_group": "hai_san"
+    },
+    {
+     "ingredient_id": "toi",
+     "grams": 5,
+     "role": "seasoning",
+     "min_g": 5,
+     "max_g": 5,
+     "swap_group": null
+    },
+    {
+     "ingredient_id": "nuoc_mam",
+     "grams": 5,
+     "role": "seasoning",
+     "min_g": 5,
+     "max_g": 5,
+     "swap_group": null
+    },
+    {
+     "ingredient_id": "duong",
+     "grams": 5,
+     "role": "seasoning",
+     "min_g": 5,
+     "max_g": 5,
+     "swap_group": null
+    },
+    {
+     "ingredient_id": "dau_an",
+     "grams": 5,
+     "role": "fat",
+     "min_g": 5,
+     "max_g": 5,
+     "swap_group": null
+    }
+   ],
+   "steps": [
+    "Phi tỏi, xào tôm với nước mắm và đường.",
+    "Rim lửa nhỏ 5 phút, để nguội."
+   ],
+   "image": null,
+   "dish_role": "main",
+   "pairs_with": [],
+   "portable": false,
+   "low_carb_ok": false,
+   "image_group": "kho"
+  },
+  "canh_bap_cai_nam_rom_chay": {
+   "id": "canh_bap_cai_nam_rom_chay",
+   "name": "Canh bắp cải nấm rơm (chay)",
+   "meal_types": [
+    "lunch",
+    "dinner"
+   ],
+   "lunch_style": [
+    "hot"
+   ],
+   "snack_style": null,
+   "cuisine_tags": [
+    "canh",
+    "chay"
+   ],
+   "health_tags": [
+    "nhieu_xo",
+    "it_duong",
+    "tot_cho_tim",
+    "it_beo"
+   ],
+   "equipment": [
+    "bep"
+   ],
+   "cook_minutes": 12,
+   "batchable": true,
+   "is_low_carb": true,
+   "ingredients": [
+    {
+     "ingredient_id": "bap_cai",
+     "grams": 150,
+     "role": "veg",
+     "min_g": 150,
+     "max_g": 150,
+     "swap_group": "rau_canh"
+    },
+    {
+     "ingredient_id": "nam_rom",
+     "grams": 60,
+     "role": "veg",
+     "min_g": 60,
+     "max_g": 60,
+     "swap_group": "rau_canh"
+    },
+    {
+     "ingredient_id": "toi",
+     "grams": 3,
+     "role": "seasoning",
+     "min_g": 3,
+     "max_g": 3,
+     "swap_group": null
+    },
+    {
+     "ingredient_id": "muoi",
+     "grams": 1,
+     "role": "seasoning",
+     "min_g": 1,
+     "max_g": 1,
+     "swap_group": null
+    },
+    {
+     "ingredient_id": "tieu_den",
+     "grams": 1,
+     "role": "seasoning",
+     "min_g": 1,
+     "max_g": 1,
+     "swap_group": null
+    }
+   ],
+   "steps": [
+    "Đun 500 ml nước với tỏi.",
+    "Cho bắp cải và nấm vào, đun 8 phút.",
+    "Nêm muối, tiêu."
+   ],
+   "image": null,
+   "dish_role": "soup",
+   "pairs_with": [
+    "chay",
+    "chay_trung",
+    "chien",
+    "dam_da",
+    "ham",
+    "hap",
+    "kho",
+    "nhanh_de",
+    "nhe",
+    "sot",
+    "tang_co",
+    "thanh_dam",
+    "tron",
+    "vi_song",
+    "xao"
+   ],
+   "portable": false,
+   "low_carb_ok": false,
+   "image_group": "canh"
+  },
+  "bap_cai_luoc_an_nguoi": {
+   "id": "bap_cai_luoc_an_nguoi",
+   "name": "Bắp cải luộc ăn nguội",
+   "meal_types": [
+    "lunch",
+    "dinner"
+   ],
+   "lunch_style": [
+    "packed"
+   ],
+   "snack_style": null,
+   "cuisine_tags": [
+    "luoc",
+    "chay",
+    "mang_di"
+   ],
+   "health_tags": [
+    "it_beo"
+   ],
+   "equipment": [
+    "bep"
+   ],
+   "cook_minutes": 8,
+   "batchable": true,
+   "is_low_carb": true,
+   "ingredients": [
+    {
+     "ingredient_id": "bap_cai",
+     "grams": 150,
+     "role": "veg",
+     "min_g": 150,
+     "max_g": 150,
+     "swap_group": null
+    },
+    {
+     "ingredient_id": "toi",
+     "grams": 2,
+     "role": "seasoning",
+     "min_g": 2,
+     "max_g": 2,
+     "swap_group": null
+    },
+    {
+     "ingredient_id": "muoi",
+     "grams": 1,
+     "role": "seasoning",
+     "min_g": 1,
+     "max_g": 1,
+     "swap_group": null
+    }
+   ],
+   "steps": [
+    "Thái bắp cải, luộc 3 phút.",
+    "Ráo nước, để nguội; trộn tỏi băm và muối."
+   ],
+   "image": null,
+   "dish_role": "side_veg",
+   "pairs_with": [
+    "canh",
+    "chay",
+    "chay_trung",
+    "chien",
+    "dam_da",
+    "ham",
+    "hap",
+    "kho",
+    "mang_di",
+    "nhanh_de",
+    "nhe",
+    "nuong",
+    "rim",
+    "sot",
+    "tang_co",
+    "thanh_dam",
+    "tron",
+    "vi_song",
+    "xao"
+   ],
+   "portable": false,
+   "low_carb_ok": false,
+   "image_group": "luoc_hap"
+  },
   "sang_khoai_lang_thit_bam_trung": {
    "id": "sang_khoai_lang_thit_bam_trung",
    "name": "Khoai lang, thịt bằm và trứng sáng",
@@ -12329,174 +13927,6 @@
    "portable": false,
    "low_carb_ok": false,
    "image_group": "sang"
-  },
-  "canh_bi_xanh_tom_mam": {
-   "id": "canh_bi_xanh_tom_mam",
-   "name": "Canh bí xanh nấu tôm (món chính)",
-   "meal_types": [
-    "lunch",
-    "dinner"
-   ],
-   "lunch_style": [
-    "hot"
-   ],
-   "snack_style": null,
-   "cuisine_tags": [
-    "canh",
-    "nhe"
-   ],
-   "health_tags": [
-    "giau_dam",
-    "it_beo"
-   ],
-   "equipment": [
-    "bep"
-   ],
-   "cook_minutes": 20,
-   "batchable": true,
-   "is_low_carb": true,
-   "ingredients": [
-    {
-     "ingredient_id": "tom",
-     "grams": 120,
-     "role": "protein",
-     "min_g": 80,
-     "max_g": 200,
-     "swap_group": "hai_san"
-    },
-    {
-     "ingredient_id": "bi_xanh",
-     "grams": 200,
-     "role": "veg",
-     "min_g": 200,
-     "max_g": 200,
-     "swap_group": "rau_canh"
-    },
-    {
-     "ingredient_id": "hanh_la",
-     "grams": 10,
-     "role": "veg",
-     "min_g": 10,
-     "max_g": 10,
-     "swap_group": null
-    },
-    {
-     "ingredient_id": "toi",
-     "grams": 3,
-     "role": "seasoning",
-     "min_g": 3,
-     "max_g": 3,
-     "swap_group": null
-    },
-    {
-     "ingredient_id": "nuoc_mam",
-     "grams": 5,
-     "role": "seasoning",
-     "min_g": 5,
-     "max_g": 5,
-     "swap_group": null
-    }
-   ],
-   "steps": [
-    "Ninh nước với tỏi.",
-    "Thả bí xanh thái miếng, nấu đến khi mềm.",
-    "Thả tôm vào, nấu chín đỏ.",
-    "Dọn nóng, ăn kèm canh và rau trong mâm."
-   ],
-   "image": null,
-   "dish_role": "main",
-   "pairs_with": [],
-   "portable": false,
-   "low_carb_ok": false,
-   "image_group": "canh"
-  },
-  "gia_do_tron_mang_di": {
-   "id": "gia_do_tron_mang_di",
-   "name": "Giá đỗ trộn cà rốt (mang đi)",
-   "meal_types": [
-    "lunch",
-    "dinner"
-   ],
-   "lunch_style": [
-    "packed"
-   ],
-   "snack_style": null,
-   "cuisine_tags": [
-    "tron",
-    "chay",
-    "mang_di"
-   ],
-   "health_tags": [],
-   "equipment": [
-    "bep"
-   ],
-   "cook_minutes": 6,
-   "batchable": true,
-   "is_low_carb": true,
-   "ingredients": [
-    {
-     "ingredient_id": "gia_do",
-     "grams": 100,
-     "role": "veg",
-     "min_g": 100,
-     "max_g": 100,
-     "swap_group": null
-    },
-    {
-     "ingredient_id": "ca_rot",
-     "grams": 40,
-     "role": "veg",
-     "min_g": 40,
-     "max_g": 40,
-     "swap_group": null
-    },
-    {
-     "ingredient_id": "dau_an",
-     "grams": 5,
-     "role": "fat",
-     "min_g": 5,
-     "max_g": 5,
-     "swap_group": null
-    },
-    {
-     "ingredient_id": "muoi",
-     "grams": 1,
-     "role": "seasoning",
-     "min_g": 1,
-     "max_g": 1,
-     "swap_group": null
-    }
-   ],
-   "steps": [
-    "Chần giá đỗ 30 giây, cà rốt thái sợi luộc chín.",
-    "Trộn với dầu và muối."
-   ],
-   "image": null,
-   "dish_role": "side_veg",
-   "pairs_with": [
-    "canh",
-    "chay",
-    "chay_trung",
-    "chien",
-    "dam_da",
-    "ham",
-    "hap",
-    "kho",
-    "mang_di",
-    "nhanh_de",
-    "nhe",
-    "nuong",
-    "rim",
-    "sot",
-    "tang_co",
-    "thanh_dam",
-    "tron",
-    "vi_song",
-    "xao"
-   ],
-   "portable": false,
-   "low_carb_ok": false,
-   "image_group": "luoc_hap"
   },
   "main_ga_xe_tron_mang_di": {
    "id": "main_ga_xe_tron_mang_di",
@@ -13154,6 +14584,17 @@
    "name": "Su su (quả)",
    "aisle": "rau_cu",
    "household_units": [],
+   "default_pantry": false
+  },
+  "sua_chua_khong_duong": {
+   "name": "Sữa chua Hy Lạp không đường",
+   "aisle": "sua",
+   "household_units": [
+    {
+     "unit": "hũ 100 g",
+     "grams": 100
+    }
+   ],
    "default_pantry": false
   },
   "sua_dau_nanh": {

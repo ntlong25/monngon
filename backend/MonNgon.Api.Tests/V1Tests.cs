@@ -654,6 +654,24 @@ public class V1Tests(WebApplicationFactory<Program> factory) : IClassFixture<Web
     }
 
     [Fact]
+    public async Task ShoppingList_co_nhom_mua_va_dot_mua_theo_ngay_T_116()
+    {
+        object Meal(int day, double g) => new { day_index = day, eaten_out = false, ingredients = new[] { new { ingredient_id = "uc_ga_khong_da", grams = g, standard_grams = g }, new { ingredient_id = "trung_ga", grams = 50.0, standard_grams = 50.0 } } };
+        var r = await _c.PostAsJsonAsync("/v1/shopping-list", new { meals = new[] { Meal(0, 150), Meal(3, 150) }, store_id = "cho_khac", adults = 1, children = 0, pantry_ids = Array.Empty<string>() });
+        Assert.Equal(HttpStatusCode.OK, r.StatusCode);
+        var j = await Json(r);
+        JsonNode Item(string id) => j["items"]!.AsArray().First(i => i!["ingredient_id"]!.GetValue<string>() == id)!;
+        Assert.Equal("day", Item("uc_ga_khong_da")["buy_group"]!.GetValue<string>());
+        Assert.True(Item("uc_ga_khong_da")["freezable_meat"]!.GetValue<bool>());
+        Assert.Equal("week", Item("trung_ga")["buy_group"]!.GetValue<string>());
+        Assert.Equal(21, Item("trung_ga")["fresh_days"]!.GetValue<int>());
+        var trips = j["trips"]!.AsArray();
+        Assert.Equal([0, 3], trips.Select(t => t!["day_index"]!.GetValue<int>()));
+        Assert.All(trips, t => Assert.Equal("uc_ga_khong_da", Assert.Single(t!["items"]!.AsArray())!["ingredient_id"]!.GetValue<string>()));
+        Assert.True(trips[0]!["till_cost"]!.GetValue<double>() > 0);
+    }
+
+    [Fact]
     public async Task ShoppingList_dau_vao_sai_tra_400_kem_duong_dan()
     {
         var r = await _c.PostAsJsonAsync("/v1/shopping-list", new

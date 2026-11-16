@@ -158,6 +158,100 @@ public class DataValidatorTests
         Assert.Contains(res.Dataset.Recipes, x => x.DishRole == "soup");
     }
 
+    // ---- T-112: data/storage.json (bảo quản) ----
+
+    private static RawDataset WithStorage(Raw r, JsonNode storage)
+    {
+        var raw = r.ToRaw();
+        return new RawDataset { Ingredients = raw.Ingredients, Recipes = raw.Recipes, Stores = raw.Stores, Prices = raw.Prices, Storage = JsonDocument.Parse(storage.ToJsonString()).RootElement };
+    }
+
+    private static JsonObject StorageRow(string ingredientId, string status = "ok") => new()
+    {
+        ["ingredient_id"] = ingredientId, ["status"] = status, ["fridge_days"] = 3, ["pantry_days"] = null, ["freezer_days"] = 90,
+        ["freezable"] = true, ["long_term"] = false, ["tips_vi"] = "Cất ngăn mát.", ["spoilage_signs_vi"] = "Mùi lạ.",
+        ["source"] = new JsonObject { ["org"] = "USDA FSIS", ["title"] = "FoodKeeper" },
+    };
+
+    private static List<DataIssue> StorageErrors(Raw r, params JsonObject[] rows) =>
+        DataValidator.Validate(WithStorage(r, new JsonArray(rows.Select(x => x.DeepClone()).ToArray()))).Issues.Where(i => i.Severity == "error").ToList();
+
+    [Fact]
+    public void Storage_hop_le_va_duoc_nap_vao_Dataset()
+    {
+        var r = new Raw();
+        var id = (string)r.Ingredients[0]!["id"]!;
+        var res = DataValidator.Validate(WithStorage(r, new JsonArray(StorageRow(id))));
+        Assert.DoesNotContain(res.Issues, i => i.Severity == "error");
+        Assert.Equal(3, res.Dataset.StorageByIngredient[id].FridgeDays);
+        Assert.Null(res.Dataset.StorageByIngredient[id].PantryDays);
+        Assert.Equal("USDA FSIS", res.Dataset.StorageByIngredient[id].Source!.Org);
+    }
+
+    [Fact]
+    public void Khong_co_file_storage_thi_bo_qua_va_Dataset_rong()
+    {
+        var res = DataValidator.Validate(new Raw().ToRaw());
+        Assert.DoesNotContain(res.Issues, i => i.File == "storage");
+        Assert.Empty(res.Dataset.Storage);
+    }
+
+    [Fact]
+    public void Storage_loi_schema_chi_ro_file_id_truong()
+    {
+        var r = new Raw();
+        var id = (string)r.Ingredients[0]!["id"]!;
+        Assert.Contains(StorageErrors(r, StorageRow(id, "khong_co")), e => e.File == "storage" && e.Id == id && e.Field == "status");
+        var neg = StorageRow(id); neg["fridge_days"] = -1;
+        Assert.Contains(StorageErrors(r, neg), e => e.Id == id && e.Field == "fridge_days");
+        var frac = StorageRow(id); frac["freezer_days"] = 1.5;
+        Assert.Contains(StorageErrors(r, frac), e => e.Id == id && e.Field == "freezer_days");
+        var blank = StorageRow(id); blank["tips_vi"] = "";
+        Assert.Contains(StorageErrors(r, blank), e => e.Id == id && e.Field == "tips_vi");
+    }
+
+    [Fact]
+    public void Storage_nguyen_lieu_khong_ton_tai_va_trung_la_loi()
+    {
+        var r = new Raw();
+        var id = (string)r.Ingredients[0]!["id"]!;
+        Assert.Contains(StorageErrors(r, StorageRow("khong_co_nguyen_lieu_nay")), e => e.Field == "ingredient_id" && e.Message.Contains("không tồn tại"));
+        Assert.Contains(StorageErrors(r, StorageRow(id), StorageRow(id)), e => e.Id == id && e.Message.Contains("trùng"));
+    }
+
+    [Fact]
+    public void Storage_status_co_so_lieu_phai_co_so_ngay_hoac_long_term_va_nguon()
+    {
+        var r = new Raw();
+        var id = (string)r.Ingredients[0]!["id"]!;
+        var noNumber = StorageRow(id);
+        noNumber["fridge_days"] = null; noNumber["freezer_days"] = null;
+        Assert.Contains(StorageErrors(r, noNumber), e => e.Id == id && e.Field == "status");
+        noNumber["long_term"] = true;
+        Assert.DoesNotContain(StorageErrors(r, noNumber), e => e.Id == id && e.Field == "status");
+        var noSource = StorageRow(id); noSource["source"] = null;
+        Assert.Contains(StorageErrors(r, noSource), e => e.Id == id && e.Field == "source");
+        // chua_co_nguon: không cần số ngày hay nguồn, chỉ cảnh báo.
+        JsonObject None() => new() { ["ingredient_id"] = id, ["status"] = "chua_co_nguon", ["long_term"] = false };
+        Assert.Empty(StorageErrors(r, None()));
+        var res = DataValidator.Validate(WithStorage(r, new JsonArray(None())));
+        Assert.Contains(res.Issues, i => i.Severity == "warning" && i.File == "storage" && i.Message.Contains("chưa có nguồn"));
+        var notFreezable = StorageRow(id); notFreezable["freezable"] = false;
+        Assert.Contains(StorageErrors(r, notFreezable), e => e.Id == id && e.Field == "freezer_days");
+    }
+
+    [Fact]
+    public void Storage_du_lieu_that_phu_het_nguyen_lieu_va_co_met_tips_cho_do_tuoi()
+    {
+        var res = DataValidator.Validate(RawDataset.ReadDirectory(TestPaths.Data));
+        Assert.Equal(0, res.Errors);
+        Assert.Equal(res.Dataset.Ingredients.Count, res.Dataset.Storage.Count);
+        Assert.All(res.Dataset.Ingredients, i => Assert.True(res.Dataset.StorageByIngredient.ContainsKey(i.Id), i.Id));
+        // Research: 50 đồ tươi đều có mẹo và dấu hiệu hỏng; mẹo và dấu hiệu luôn đi cùng nhau.
+        Assert.True(res.Dataset.Storage.Count(x => !string.IsNullOrWhiteSpace(x.TipsVi)) >= 50);
+        Assert.All(res.Dataset.Storage, x => Assert.Equal(string.IsNullOrWhiteSpace(x.TipsVi), string.IsNullOrWhiteSpace(x.SpoilageSignsVi)));
+    }
+
     // ---- T-104: source_note của giá cho_khac ----
 
     private static JsonObject FirstChoKhac(Raw r, int skip = 0) => ((JsonArray)r.Prices).Select(p => (JsonObject)p!).Where(p => (string?)p["store_id"] == "cho_khac").Skip(skip).First();

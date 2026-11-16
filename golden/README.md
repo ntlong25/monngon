@@ -7,7 +7,7 @@ npm run export-golden
 ```
 
 - Ngày xuất: 2026-11-06 (cố định trong script; `--date` để đổi). Đầu ra không phụ thuộc đồng hồ: chạy lại cho ra file giống hệt từng byte.
-- Phiên bản dữ liệu (SHA-256 của `data/*.json` theo tên file): `b9380b17b895a1aee268040efb12edd605aeee257e79fbf3c4c8a46294d4d73c`; chi tiết từng file ở `manifest.json`.
+- Phiên bản dữ liệu (SHA-256 của `data/*.json` theo tên file): `796cee06574de8b06cdeb13ace6c6ebcae9ac963a5a588a0294e6e6cd144a5e0`; chi tiết từng file ở `manifest.json`.
 - Engine TS đã đóng băng: chỉ sửa lỗi, và khi sửa phải xuất lại golden.
 - JSON: khóa sắp tăng dần, thụt 1 khoảng trắng; số là double đúng như JS (macro so với sai số ≤ 1e-6, chi phí/gram khớp tuyệt đối).
 - Nếu Research đổi `data/`, `manifest.json` sẽ lệch phiên bản dữ liệu: chạy lại lệnh trên và báo PM.

@@ -3015,6 +3015,48 @@ abstract class AppL10n {
   /// **'Chưa có thông tin hạn dùng'**
   String get shopNoShelfInfo;
 
+  /// No description provided for @shopTripTotal.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đợt này: {amount} ₫'**
+  String shopTripTotal(Object amount);
+
+  /// No description provided for @shopModeTotalWeekly.
+  ///
+  /// In vi, this message translates to:
+  /// **'Mua theo tuần: {amount} ₫'**
+  String shopModeTotalWeekly(Object amount);
+
+  /// No description provided for @shopModeTotalDaily.
+  ///
+  /// In vi, this message translates to:
+  /// **'Mua theo ngày: {amount} ₫'**
+  String shopModeTotalDaily(Object amount);
+
+  /// No description provided for @shopFreezeTip.
+  ///
+  /// In vi, this message translates to:
+  /// **'Cấp đông ngay sau khi mua, rã đông trước 1 ngày khi nấu.'**
+  String get shopFreezeTip;
+
+  /// No description provided for @shopWeeklyEmpty.
+  ///
+  /// In vi, this message translates to:
+  /// **'Không có nguyên liệu nào cần mua theo tuần.'**
+  String get shopWeeklyEmpty;
+
+  /// No description provided for @shopDailyEmpty.
+  ///
+  /// In vi, this message translates to:
+  /// **'Không có nguyên liệu tươi cần mua theo ngày.'**
+  String get shopDailyEmpty;
+
+  /// No description provided for @shopTripPast.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đã qua'**
+  String get shopTripPast;
+
   /// No description provided for @onboardingRiceTitle.
   ///
   /// In vi, this message translates to:

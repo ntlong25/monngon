@@ -12,18 +12,23 @@ public sealed class Dataset
     public IReadOnlyList<Recipe> Recipes { get; }
     public IReadOnlyList<Store> Stores { get; }
     public IReadOnlyList<Price> Prices { get; }
+    /// <summary>T-112: bảo quản theo nguyên liệu (file data/storage.json, tùy chọn: thiếu file thì rỗng).</summary>
+    public IReadOnlyList<StorageEntry> Storage { get; }
+    public IReadOnlyDictionary<string, StorageEntry> StorageByIngredient { get; }
     public IReadOnlyDictionary<string, Ingredient> IngredientsById { get; }
     public IReadOnlyDictionary<string, Recipe> RecipesById { get; }
     public IReadOnlyDictionary<string, Store> StoresById { get; }
     /// <summary>ingredient_id → store_id → Price</summary>
     public IReadOnlyDictionary<string, IReadOnlyDictionary<string, Price>> PricesByIngredient { get; }
 
-    public Dataset(IEnumerable<Ingredient> ingredients, IEnumerable<Recipe> recipes, IEnumerable<Store> stores, IEnumerable<Price> prices)
+    public Dataset(IEnumerable<Ingredient> ingredients, IEnumerable<Recipe> recipes, IEnumerable<Store> stores, IEnumerable<Price> prices, IEnumerable<StorageEntry>? storage = null)
     {
         Ingredients = ingredients.ToList();
         Recipes = recipes.ToList();
         Stores = stores.ToList();
         Prices = prices.ToList();
+        Storage = (storage ?? []).ToList();
+        StorageByIngredient = Last(Storage, x => x.IngredientId);
         IngredientsById = Last(Ingredients, i => i.Id);
         RecipesById = Last(Recipes, r => r.Id);
         StoresById = Last(Stores, s => s.Id);
@@ -70,13 +75,15 @@ public sealed class DataException(IReadOnlyList<DataIssue> issues)
     public IReadOnlyList<DataIssue> Issues { get; } = issues;
 }
 
-/// <summary>Bốn file dữ liệu dạng JSON thô.</summary>
+/// <summary>Bốn file dữ liệu bắt buộc + storage.json (tùy chọn) dạng JSON thô.</summary>
 public sealed class RawDataset
 {
     public JsonElement Ingredients { get; init; }
     public JsonElement Recipes { get; init; }
     public JsonElement Stores { get; init; }
     public JsonElement Prices { get; init; }
+    /// <summary>storage.json; ValueKind = Undefined khi không có file (bỏ qua kiểm).</summary>
+    public JsonElement Storage { get; init; }
 
     public static RawDataset ReadDirectory(string dir)
     {
@@ -85,6 +92,10 @@ public sealed class RawDataset
             using var doc = JsonDocument.Parse(File.ReadAllText(Path.Combine(dir, name + ".json")));
             return doc.RootElement.Clone();
         }
-        return new RawDataset { Ingredients = Rd("ingredients"), Recipes = Rd("recipes"), Stores = Rd("stores"), Prices = Rd("prices") };
+        return new RawDataset
+        {
+            Ingredients = Rd("ingredients"), Recipes = Rd("recipes"), Stores = Rd("stores"), Prices = Rd("prices"),
+            Storage = File.Exists(Path.Combine(dir, "storage.json")) ? Rd("storage") : default,
+        };
     }
 }

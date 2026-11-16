@@ -138,6 +138,31 @@ public sealed class Recipe
     }
 }
 
+/// <summary>T-112: bảo quản một nguyên liệu (nguồn: docs/research/storage-draft.json → data/storage.json). Số ngày null = không có số liệu.</summary>
+public sealed class StorageEntry
+{
+    public string IngredientId { get; set; } = "";
+    /// <summary>ok | gan_dung | uoc_tinh_vn | chua_co_nguon</summary>
+    public string Status { get; set; } = "";
+    public int? FridgeDays { get; set; }
+    public int? PantryDays { get; set; }
+    public int? FreezerDays { get; set; }
+    public bool? Freezable { get; set; }
+    public bool LongTerm { get; set; }
+    public string? TipsVi { get; set; }
+    public string? SpoilageSignsVi { get; set; }
+    public StorageSource? Source { get; set; }
+}
+
+public sealed class StorageSource
+{
+    public string? Org { get; set; }
+    public string? Title { get; set; }
+    public string? Url { get; set; }
+    public string? Accessed { get; set; }
+    public bool AdjustedForVn { get; set; }
+}
+
 public sealed class Store
 {
     public string Id { get; set; } = "";

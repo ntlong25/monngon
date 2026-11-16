@@ -120,10 +120,11 @@
   "ingredients.json": "975e18760c9b026f8eb089d58a790ab3ae0e6841aa217f932d0a07a74fe0390d",
   "prices.json": "bcca4049853bf6e1729d8f2050b68041262cfb75513c89ea70841f13ae34e6ea",
   "recipes.json": "a484abb921617b207c48b9882a73bdff2988c9019e311aa6ee04363b64fb0d14",
+  "storage.json": "3fe22ce01719961ae43327160074b4f799122b72bb0f5a1b00312e081f8a2579",
   "stores.json": "fef56a5b98ded1d6d4a7904476eb514e64998e9d8a8675ec76bd4b880aa15799",
   "test-profiles.json": "553c9d723821867f5865446399941b6f4fb46421d87c46071174d93aae7be649"
  },
- "data_version_sha256": "b9380b17b895a1aee268040efb12edd605aeee257e79fbf3c4c8a46294d4d73c",
+ "data_version_sha256": "796cee06574de8b06cdeb13ace6c6ebcae9ac963a5a588a0294e6e6cd144a5e0",
  "engine": "ts-reference",
  "format": 1,
  "profiles": [

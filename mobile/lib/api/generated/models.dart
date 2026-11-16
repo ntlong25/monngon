@@ -2513,6 +2513,10 @@ class ShoppingItem {
     this.displayQty,
     this.isDefaultPantry,
     this.isPantry,
+    this.buyGroup,
+    this.freshDays,
+    this.noShelfInfo,
+    this.freezableMeat,
   });
 
   factory ShoppingItem.fromJson(Map<String, dynamic> json) => ShoppingItem(
@@ -2553,6 +2557,16 @@ class ShoppingItem {
         ? null
         : json['is_default_pantry'] as bool,
     isPantry: json['is_pantry'] == null ? null : json['is_pantry'] as bool,
+    buyGroup: json['buy_group'] == null ? null : json['buy_group'] as String,
+    freshDays: json['fresh_days'] == null
+        ? null
+        : (json['fresh_days'] as num).toInt(),
+    noShelfInfo: json['no_shelf_info'] == null
+        ? null
+        : json['no_shelf_info'] as bool,
+    freezableMeat: json['freezable_meat'] == null
+        ? null
+        : json['freezable_meat'] as bool,
   );
 
   final String ingredientId;
@@ -2572,6 +2586,10 @@ class ShoppingItem {
   final String? displayQty;
   final bool? isDefaultPantry;
   final bool? isPantry;
+  final String? buyGroup;
+  final int? freshDays;
+  final bool? noShelfInfo;
+  final bool? freezableMeat;
 
   /// Bản sao với vài trường đổi (trường nullable không thể đặt lại về null).
   ShoppingItem copyWith({
@@ -2592,6 +2610,10 @@ class ShoppingItem {
     String? displayQty,
     bool? isDefaultPantry,
     bool? isPantry,
+    String? buyGroup,
+    int? freshDays,
+    bool? noShelfInfo,
+    bool? freezableMeat,
   }) => ShoppingItem(
     ingredientId: ingredientId ?? this.ingredientId,
     name: name ?? this.name,
@@ -2610,6 +2632,10 @@ class ShoppingItem {
     displayQty: displayQty ?? this.displayQty,
     isDefaultPantry: isDefaultPantry ?? this.isDefaultPantry,
     isPantry: isPantry ?? this.isPantry,
+    buyGroup: buyGroup ?? this.buyGroup,
+    freshDays: freshDays ?? this.freshDays,
+    noShelfInfo: noShelfInfo ?? this.noShelfInfo,
+    freezableMeat: freezableMeat ?? this.freezableMeat,
   );
 
   Map<String, dynamic> toJson() => {
@@ -2630,6 +2656,10 @@ class ShoppingItem {
     if (displayQty != null) 'display_qty': displayQty,
     if (isDefaultPantry != null) 'is_default_pantry': isDefaultPantry,
     if (isPantry != null) 'is_pantry': isPantry,
+    if (buyGroup != null) 'buy_group': buyGroup,
+    if (freshDays != null) 'fresh_days': freshDays,
+    if (noShelfInfo != null) 'no_shelf_info': noShelfInfo,
+    if (freezableMeat != null) 'freezable_meat': freezableMeat,
   };
 }
 
@@ -2683,6 +2713,7 @@ class ShoppingList {
     this.weekFoodCost = 0,
     this.tillCost = 0,
     this.pantryCostIfBuyVnd,
+    this.trips,
   });
 
   factory ShoppingList.fromJson(Map<String, dynamic> json) => ShoppingList(
@@ -2708,6 +2739,11 @@ class ShoppingList {
     pantryCostIfBuyVnd: json['pantry_cost_if_buy_vnd'] == null
         ? null
         : (json['pantry_cost_if_buy_vnd'] as num).toDouble(),
+    trips: json['trips'] == null
+        ? null
+        : (json['trips'] as List<dynamic>)
+              .map((e) => ShoppingTrip.fromJson(e as Map<String, dynamic>))
+              .toList(),
   );
 
   final List<ShoppingItem> items;
@@ -2716,6 +2752,7 @@ class ShoppingList {
   final double weekFoodCost;
   final double tillCost;
   final double? pantryCostIfBuyVnd;
+  final List<ShoppingTrip>? trips;
 
   /// Bản sao với vài trường đổi (trường nullable không thể đặt lại về null).
   ShoppingList copyWith({
@@ -2725,6 +2762,7 @@ class ShoppingList {
     double? weekFoodCost,
     double? tillCost,
     double? pantryCostIfBuyVnd,
+    List<ShoppingTrip>? trips,
   }) => ShoppingList(
     items: items ?? this.items,
     byAisle: byAisle ?? this.byAisle,
@@ -2732,6 +2770,7 @@ class ShoppingList {
     weekFoodCost: weekFoodCost ?? this.weekFoodCost,
     tillCost: tillCost ?? this.tillCost,
     pantryCostIfBuyVnd: pantryCostIfBuyVnd ?? this.pantryCostIfBuyVnd,
+    trips: trips ?? this.trips,
   );
 
   Map<String, dynamic> toJson() => {
@@ -2742,6 +2781,7 @@ class ShoppingList {
     'till_cost': tillCost,
     if (pantryCostIfBuyVnd != null)
       'pantry_cost_if_buy_vnd': pantryCostIfBuyVnd,
+    if (trips != null) 'trips': trips!.map((e) => e.toJson()).toList(),
   };
 }
 
@@ -2803,7 +2843,11 @@ class ShoppingListRequest {
 
 /// Schema `ShoppingMealDto`.
 class ShoppingMealDto {
-  const ShoppingMealDto({this.ingredients = const [], this.eatenOut = false});
+  const ShoppingMealDto({
+    this.ingredients = const [],
+    this.eatenOut = false,
+    this.dayIndex = 0,
+  });
 
   factory ShoppingMealDto.fromJson(Map<String, dynamic> json) =>
       ShoppingMealDto(
@@ -2815,23 +2859,74 @@ class ShoppingMealDto {
                   )
                   .toList(),
         eatenOut: json['eaten_out'] == null ? false : json['eaten_out'] as bool,
+        dayIndex: json['day_index'] == null
+            ? 0
+            : (json['day_index'] as num).toInt(),
       );
 
   final List<ShoppingLineDto> ingredients;
   final bool eatenOut;
+  final int dayIndex;
 
   /// Bản sao với vài trường đổi (trường nullable không thể đặt lại về null).
   ShoppingMealDto copyWith({
     List<ShoppingLineDto>? ingredients,
     bool? eatenOut,
+    int? dayIndex,
   }) => ShoppingMealDto(
     ingredients: ingredients ?? this.ingredients,
     eatenOut: eatenOut ?? this.eatenOut,
+    dayIndex: dayIndex ?? this.dayIndex,
   );
 
   Map<String, dynamic> toJson() => {
     'ingredients': ingredients.map((e) => e.toJson()).toList(),
     'eaten_out': eatenOut,
+    'day_index': dayIndex,
+  };
+}
+
+/// Schema `ShoppingTrip`.
+class ShoppingTrip {
+  const ShoppingTrip({
+    this.dayIndex = 0,
+    this.items = const [],
+    this.tillCost = 0,
+  });
+
+  factory ShoppingTrip.fromJson(Map<String, dynamic> json) => ShoppingTrip(
+    dayIndex: json['day_index'] == null
+        ? 0
+        : (json['day_index'] as num).toInt(),
+    items: json['items'] == null
+        ? const []
+        : (json['items'] as List<dynamic>)
+              .map((e) => ShoppingItem.fromJson(e as Map<String, dynamic>))
+              .toList(),
+    tillCost: json['till_cost'] == null
+        ? 0
+        : (json['till_cost'] as num).toDouble(),
+  );
+
+  final int dayIndex;
+  final List<ShoppingItem> items;
+  final double tillCost;
+
+  /// Bản sao với vài trường đổi (trường nullable không thể đặt lại về null).
+  ShoppingTrip copyWith({
+    int? dayIndex,
+    List<ShoppingItem>? items,
+    double? tillCost,
+  }) => ShoppingTrip(
+    dayIndex: dayIndex ?? this.dayIndex,
+    items: items ?? this.items,
+    tillCost: tillCost ?? this.tillCost,
+  );
+
+  Map<String, dynamic> toJson() => {
+    'day_index': dayIndex,
+    'items': items.map((e) => e.toJson()).toList(),
+    'till_cost': tillCost,
   };
 }
 

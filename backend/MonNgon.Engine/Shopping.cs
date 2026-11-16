@@ -9,6 +9,8 @@ public sealed record ShoppingIngredient(string IngredientId, double Grams, doubl
 
 public sealed class ShoppingMeal
 {
+    /// <summary>Ngày trong tuần (0 = ngày đầu) của bữa — dùng chia đợt mua theo ngày (T-116). Mặc định 0.</summary>
+    public int Day { get; init; }
     public List<ShoppingIngredient> Ingredients { get; init; } = [];
 }
 
@@ -44,6 +46,18 @@ public sealed class ShoppingItem
     /// </summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public bool? IsPantry { get; init; }
+    /// <summary>T-116 / D-SHP-06: "week" (Theo tuần) hoặc "day" (Theo ngày), suy từ `storage.json`. null khi chạy chế độ parity.</summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public string? BuyGroup { get; init; }
+    /// <summary>Nhãn "Dùng trong N ngày" (cận dưới, theo `storage.json`); null khi không có số.</summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public int? FreshDays { get; init; }
+    /// <summary>true = chưa có thông tin hạn dùng ("Chưa có thông tin hạn dùng").</summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public bool? NoShelfInfo { get; init; }
+    /// <summary>true = thịt/cá tươi cấp đông được: công tắc "Mua thịt cá cả tuần rồi cấp đông" chuyển dòng sang Theo tuần.</summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public bool? FreezableMeat { get; init; }
 }
 
 public sealed class AisleGroup
@@ -64,6 +78,12 @@ public sealed class ShoppingList
     /// <summary>"Nếu phải mua": tiền theo gói của các dòng nhà có sẵn, làm tròn 1.000 ₫. null khi chạy chế độ parity.</summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public double? PantryCostIfBuyVnd { get; init; }
+    /// <summary>
+    /// T-116: các đợt mua của nhóm Theo ngày (mỗi nguyên liệu gộp mua sớm theo độ tươi, gói làm tròn từng đợt), theo ngày tăng dần.
+    /// `items` vẫn là danh sách cả tuần (gram và gói tính một lần). null khi chạy chế độ parity.
+    /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public List<ShoppingTrip>? Trips { get; init; }
 }
 
 public static class Shopping
@@ -72,7 +92,7 @@ public static class Shopping
     public const double MoneyRoundVnd = 1000;
     private const double Eps = 1e-9;
 
-    private static double RoundMoney(double x) => Js.Round(x / MoneyRoundVnd) * MoneyRoundVnd;
+    public static double RoundMoney(double x) => Js.Round(x / MoneyRoundVnd) * MoneyRoundVnd;
 
     public static List<string> DefaultPantryIds(IEnumerable<Ingredient> ingredients) =>
         ingredients.Where(i => i.DefaultPantry).Select(i => i.Id).ToList();
@@ -104,16 +124,24 @@ public static class Shopping
         // Giữ thứ tự chèn đầu tiên (như Map của JS).
         var order = new List<string>();
         var eatenG = new Dictionary<string, double>();
+        var usage = new Dictionary<string, SortedDictionary<int, double>>();
         foreach (var meal in meals)
             foreach (var li in meal.Ingredients)
             {
                 // D-SHP-02: chỉ ở chế độ hiển thị; parity giữ nguyên bản TS (không có purchase_as).
                 var (key, factor) = displayQty ? PurchaseTarget(book, li.IngredientId) : (li.IngredientId, 1.0);
                 if (!eatenG.TryGetValue(key, out var cur)) { order.Add(key); cur = 0; }
-                eatenG[key] = cur + (li.Grams + others * li.StandardGrams) * factor;
+                var g = (li.Grams + others * li.StandardGrams) * factor;
+                eatenG[key] = cur + g;
+                if (displayQty)
+                {
+                    if (!usage.TryGetValue(key, out var byDay)) usage[key] = byDay = [];
+                    byDay[meal.Day] = byDay.GetValueOrDefault(meal.Day) + g;
+                }
             }
 
         var items = new List<ShoppingItem>();
+        var info = new Dictionary<string, BuyInfo>();
         var skipped = new List<string>();
         foreach (var id in order)
         {
@@ -125,6 +153,8 @@ public static class Shopping
             var (price, fallback) = ResolvePrice(book, id, storeId);
             var need = grams / ing.EdiblePortion;
             var packs = (int)Math.Max(1, Math.Ceiling(need / price.PackG - Eps));
+            BuyInfo? bi = null;
+            if (displayQty) info[id] = bi = ShoppingGroups.Classify(book, id);
             items.Add(new ShoppingItem
             {
                 IngredientId = id, Name = ing.Name, Aisle = ing.Aisle, NeedG = need, Packs = packs,
@@ -137,6 +167,8 @@ public static class Shopping
                 DisplayQty = displayQty ? DisplayQtyOf(packs, price.PackLabel) : null,
                 IsDefaultPantry = displayQty ? ing.DefaultPantry : null,
                 IsPantry = displayQty ? inPantry : null,
+                BuyGroup = bi is null ? null : bi.Group == BuyMode.Day ? "day" : "week",
+                FreshDays = bi?.FreshDays, NoShelfInfo = bi?.NoShelfInfo, FreezableMeat = bi?.FreezableMeat,
             });
         }
 
@@ -157,6 +189,7 @@ public static class Shopping
         {
             Items = sorted, ByAisle = byAisle, SkippedPantry = skipped, WeekFoodCost = RoundMoney(used), TillCost = RoundMoney(till),
             PantryCostIfBuyVnd = displayQty ? RoundMoney(ifBuy) : null,
+            Trips = displayQty ? ShoppingGroups.BuildTrips(book, storeId, usage, info, displayQty, pantry) : null,
         };
     }
 

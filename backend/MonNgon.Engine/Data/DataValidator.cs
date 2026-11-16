@@ -44,6 +44,10 @@ public static partial class DataValidator
         Dupes("recipes", recipes.Select(r => r.Id), issues);
         Dupes("stores", stores.Select(s => s.Id), issues);
         Dupes("prices", prices.Select(p => $"{p.IngredientId}@{p.StoreId}"), issues);
+        var storage = raw.Storage.ValueKind == JsonValueKind.Undefined
+            ? new List<StorageEntry>()
+            : ParseEach<StorageEntry>("storage", raw.Storage, StorageId, CheckStorage, issues);
+        Dupes("storage", storage.Select(x => x.IngredientId), issues);
 
         var ingIds = ingredients.Select(i => i.Id).ToHashSet();
         var storeIds = stores.Select(s => s.Id).ToHashSet();
@@ -112,6 +116,28 @@ public static partial class DataValidator
         if (noSource > 0)
             Warn(issues, "prices", $"({Dataset.FallbackStoreId})", "source_note", $"{noSource} dòng giá \"{Dataset.FallbackStoreId}\" ghi \"{NoSource}\" (giá ước lượng)");
 
+        if (raw.Storage.ValueKind != JsonValueKind.Undefined)
+        {
+            foreach (var x in storage)
+            {
+                if (!ingIds.Contains(x.IngredientId)) Err(issues, "storage", x.IngredientId, "ingredient_id", $"nguyên liệu \"{x.IngredientId}\" không tồn tại");
+                var hasNumber = x.FridgeDays is not null || x.PantryDays is not null || x.FreezerDays is not null;
+                if (x.Status != "chua_co_nguon" && !hasNumber && !x.LongTerm)
+                    Err(issues, "storage", x.IngredientId, "status", $"status \"{x.Status}\" phải có ít nhất một số ngày (ngăn mát / nhiệt độ phòng / ngăn đông) hoặc long_term");
+                if (x.Status != "chua_co_nguon" && x.Source is null)
+                    Err(issues, "storage", x.IngredientId, "source", $"status \"{x.Status}\" phải ghi nguồn");
+                if (x.Freezable == false && x.FreezerDays is not null)
+                    Err(issues, "storage", x.IngredientId, "freezer_days", "freezable = false thì không được có freezer_days");
+            }
+            var stored = storage.Select(x => x.IngredientId).ToHashSet();
+            var missing = ingredients.Where(i => !stored.Contains(i.Id)).Select(i => i.Id).ToList();
+            if (missing.Count > 0)
+                Warn(issues, "storage", $"({missing.Count} nguyên liệu)", "ingredient_id", $"chưa có dòng bảo quản: {string.Join(", ", missing.Take(5))}{(missing.Count > 5 ? ", …" : "")}");
+            var noSourceN = storage.Count(x => x.Status == "chua_co_nguon");
+            if (noSourceN > 0)
+                Warn(issues, "storage", "(chua_co_nguon)", "status", $"{noSourceN} nguyên liệu chưa có nguồn bảo quản");
+        }
+
         foreach (var i in ingredients)
         {
             var dev = KcalDeviation(i.Per100g);
@@ -119,7 +145,7 @@ public static partial class DataValidator
                 Warn(issues, "ingredients", i.Id, "per_100g.kcal",
                     $"kcal khai báo lệch {(dev * 100).ToString("F0", CultureInfo.InvariantCulture)}% so với 4/4/9 (ngưỡng {Num(KcalTolerance * 100)}%)");
         }
-        return new ValidationResult(issues, new Dataset(ingredients, recipes, stores, prices));
+        return new ValidationResult(issues, new Dataset(ingredients, recipes, stores, prices, storage));
     }
 
     /// <summary>Giá trị <c>source_note</c> hợp lệ nhưng bị cảnh báo: dòng giá chưa khảo sát được nguồn (T-104).</summary>
@@ -132,6 +158,9 @@ public static partial class DataValidator
 
     private static string RowId(JsonElement r) =>
         r.ValueKind == JsonValueKind.Object && r.TryGetProperty("id", out var v) && v.ValueKind == JsonValueKind.String ? v.GetString()! : "";
+
+    private static string StorageId(JsonElement r) =>
+        r.ValueKind == JsonValueKind.Object && r.TryGetProperty("ingredient_id", out var v) && v.ValueKind == JsonValueKind.String ? v.GetString()! : "";
 
     private static string PriceId(JsonElement r)
     {
@@ -322,6 +351,30 @@ public static partial class DataValidator
         o.Enum("dish_role", Enums.DishRoles, required: false);
         o.StrArray("pairs_with");
         o.Bool("portable"); o.Bool("low_carb_ok");
+    }
+
+    private static readonly string[] StorageStatuses = ["ok", "gan_dung", "uoc_tinh_vn", "chua_co_nguon"];
+
+    /// <summary>T-112: bảo quản. Số ngày là số nguyên ≥ 0 hoặc null; chữ mẹo / dấu hiệu hỏng nếu có thì không rỗng.</summary>
+    private static void CheckStorage(JsonElement e, Action<string, string> fail)
+    {
+        var o = Root(e, fail);
+        if (o is null) return;
+        o.Id("ingredient_id"); o.Enum("status", StorageStatuses);
+        foreach (var k in new[] { "fridge_days", "pantry_days", "freezer_days" })
+        {
+            var d = o.Num(k, required: false, nonNeg: true);
+            if (d is { } v && v != Math.Floor(v)) fail(k, "phải là số nguyên");
+        }
+        if (o.Has("freezable", out var fz) && fz.ValueKind != JsonValueKind.Null && fz.ValueKind != JsonValueKind.True && fz.ValueKind != JsonValueKind.False) fail("freezable", "phải là true/false hoặc null");
+        o.Bool("long_term");
+        o.Str("tips_vi", required: false, minLen1: true); o.Str("spoilage_signs_vi", required: false, minLen1: true);
+        if (o.Has("source", out var src) && src.ValueKind == JsonValueKind.Object)
+        {
+            var s = o.Child("source")!;
+            s.Str("org", required: false, minLen1: true); s.Str("title", required: false, minLen1: true);
+        }
+        else if (o.Has("source", out src) && src.ValueKind != JsonValueKind.Null) fail("source", "phải là đối tượng hoặc null");
     }
 
     private static void CheckStore(JsonElement e, Action<string, string> fail)
