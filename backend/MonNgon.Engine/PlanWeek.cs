@@ -27,8 +27,8 @@ public sealed record PlanOptions
     /// <summary>Sửa ngân sách bằng đổi món/nguyên liệu rẻ hơn.</summary>
     public bool BudgetRepair { get; init; } = true;
     public int RepairIterations { get; init; } = 30;
-    public int RepairMealsPerIter { get; init; } = 10;
-    public int RepairRecipeAlts { get; init; } = 8;
+    public int RepairMealsPerIter { get; init; } = 20;
+    public int RepairRecipeAlts { get; init; } = 20;
     /// <summary>T-066. Mặc định auto: trưa/tối là trọn suất hoặc mâm ghép. full_meal_only = hành vi parity T-064.</summary>
     public MealStyle MealStyle { get; init; } = MealStyle.Auto;
     /// <summary>Số biến thể (canh/rau/cơm khác nhau) tạo cho mỗi món chính.</summary>
@@ -80,6 +80,14 @@ public sealed record PlanOptions
     public bool PinFullMealRice { get; init; } = true;
     /// <summary>Chỉ để chẩn đoán (engine-report --rice-attempt n): chỉ chạy phương án xếp hạng cơm thứ n (1–7) thay vì thử lần lượt; 0 = thử lần lượt.</summary>
     public int RiceOnlyAttempt { get; init; }
+    /// <summary>Số phương án xếp hạng cơm chạy cùng lúc tối đa (≥ 1; mặc định 1 = lần lượt theo thứ tự ưu tiên; đo: CPU p95 mỗi lần lập 1,7 s so với 2,5 s khi 2 phương án chạy cùng lúc). Chỉ ảnh hưởng thời gian/CPU, không ảnh hưởng kết quả.</summary>
+    public int MaxParallelAttempts { get; init; } = 2;
+    /// <summary>Số ngày tinh chỉnh song song tối đa trong một vòng (-1 = mặc định của .NET). Chỉ ảnh hưởng thời gian/CPU.</summary>
+    public int DayParallelism { get; init; } = -1;
+    /// <summary>Phương án xếp hạng vượt ngân sách quá tỉ lệ này (so với ngân sách) thì bỏ qua các phương án xếp hạng sau nó; 0 = không bỏ qua.</summary>
+    public double SkipRankedOverBudgetRatio { get; init; } = 0;
+    /// <summary>Phương án đạt 7/7 nhưng < 12/14 bữa có cơm chưa được nhận ngay nếu còn phương án sau (ưu tiên cơm hơn). Tắt để đo chi phí.</summary>
+    public bool WaitForRicePresence { get; init; } = true;
     /// <summary>Huỷ giữa chừng (các phương án chạy song song): Planner dừng ở đầu vòng lặp kế tiếp.</summary>
     public CancellationToken Cancel { get; init; }
     /// <summary>T-098: nhật ký mỗi lần chọn món trưa/tối (bậc của món được chọn và bậc cao nhất trong ứng viên) — dùng cho test bất biến thứ tự xếp hạng.</summary>
@@ -339,6 +347,13 @@ public static partial class WeekPlanner
         return true;
     }
 
+    /// <summary>≥ 12/14 bữa trưa/tối lên thực đơn có dòng cơm (<see cref="RiceFeasibility.EnoughMealsOf14"/>).</summary>
+    private static bool RicePresenceEnough(WeekPlan w)
+    {
+        var ld = w.Days.SelectMany(d => d.Meals).Where(m => m.Slot is "lunch" or "dinner" && m.Status == "planned" && m.RecipeId is not null).ToList();
+        return ld.Count(m => m.Rice is not null) >= (int)Math.Ceiling(ld.Count * RiceFeasibility.EnoughMealsOf14 / 14.0);
+    }
+
     private static WeekPlan RunChain(PlanWeekInput input)
     {
         var opt = input.Options ?? new PlanOptions();
@@ -366,8 +381,31 @@ public static partial class WeekPlanner
 
         // Các phương án độc lập nên chạy song song (thời gian chờ = phương án chậm nhất thay vì tổng); kết quả vẫn chọn theo thứ tự ưu tiên nên không phụ thuộc thời điểm hoàn thành.
         using var cts = new CancellationTokenSource();
-        var tasks = Enumerable.Range(0, plans.Length).Select(i => Task.Run(() => Run(i, cts.Token))).ToArray();
-        WeekPlan? best = null, bestReady = null;
+        // PM D-PERF-01: giới hạn số phương án chạy cùng lúc (MaxParallelAttempts) để tổng CPU mỗi lần lập không tăng theo số phương án chạy dở khi một phương án đứng trước đã thắng.
+        // Phương án chạy theo đúng thứ tự ưu tiên, kết quả mỗi phương án không phụ thuộc phương án khác nên kết quả cuối giống hệt chạy song song hết.
+        var tcs = Enumerable.Range(0, plans.Length).Select(_ => new TaskCompletionSource<WeekPlan>(TaskCreationOptions.RunContinuationsAsynchronously)).ToArray();
+        var nextToStart = 0;
+        var skipFrom = int.MaxValue;
+        void StartNext()
+        {
+            int i;
+            lock (tcs)
+            {
+                // Chỉ tiết kiệm CPU: phương án bị bỏ qua (skipFrom..plans.Length-2) không cần khởi động; kết quả cuối do vòng nhận kết quả quyết định, không phụ thuộc chỗ này.
+                while (nextToStart < plans.Length && ((nextToStart >= skipFrom && nextToStart <= plans.Length - 2))) { tcs[nextToStart].TrySetCanceled(); nextToStart++; }
+                if (cts.IsCancellationRequested || nextToStart >= plans.Length) return;
+                i = nextToStart++;
+            }
+            Task.Run(() =>
+            {
+                try { tcs[i].SetResult(Run(i, cts.Token)); }
+                catch (Exception e) { tcs[i].SetException(e); }
+                finally { StartNext(); }
+            });
+        }
+        for (var k = 0; k < Math.Max(1, opt.MaxParallelAttempts); k++) StartNext();
+        var tasks = tcs.Select(x => x.Task).ToArray();
+        WeekPlan? best = null, bestReady = null, firstDiverseReady = null;
         var bestReadyDistinct = -1;
         var attempts = new List<AttemptSummary>();
         static AttemptSummary Summ(WeekPlan w)
@@ -377,8 +415,12 @@ public static partial class WeekPlanner
         }
         try
         {
-            foreach (var t in tasks)
+            var skipRankedUpTo = -1;
+            for (var idx = 0; idx < tasks.Length; idx++)
             {
+                // Bỏ qua các phương án xếp hạng còn lại (không bỏ phương án 7 — không xếp hạng cơm) khi một phương án đứng trước vượt ngân sách quá xa: chúng chung ràng buộc ngân sách nên chắc thua.
+                if (idx <= skipRankedUpTo) continue;
+                var t = tasks[idx];
                 WeekPlan plan;
                 try { plan = t.Result; }
                 catch (AggregateException ae) when (ae.InnerException is not null) { System.Runtime.ExceptionServices.ExceptionDispatchInfo.Capture(ae.InnerException).Throw(); throw; }
@@ -388,13 +430,21 @@ public static partial class WeekPlanner
                 {
                     // D-DIV-01/02: phương án ưu tiên cơm nhưng chỉ còn vài món trưa/tối (kho món bị thu hẹp) không được nhận nếu còn phương án khác đủ đa dạng.
                     var distinct = MainDistinct(plan);
-                    if (distinct >= opt.MinMainDistinct) return plan;
+                    if (distinct >= opt.MinMainDistinct)
+                    {
+                        // T-104: phương án đạt 7/7 + đủ đa dạng nhưng ít bữa có cơm hơn mức "đủ" (≥ 12/14, D-COM-05) chưa nhận ngay: chờ các phương án sau (ưu tiên cơm hơn) trong cùng lần chạy.
+                        // Không phương án nào đủ cơm thì dùng phương án đầu tiên đạt như trước.
+                        if (!opt.WaitForRicePresence || RicePresenceEnough(plan)) return plan;
+                        firstDiverseReady ??= plan;
+                        continue;
+                    }
                     if (bestReady is null || distinct > bestReadyDistinct) { bestReady = plan; bestReadyDistinct = distinct; }
                     continue;
                 }
                 if (best is null || Rank(plan, input.Targets) < Rank(best, input.Targets) - 1e-9) best = plan;
+                if (opt.SkipRankedOverBudgetRatio > 0 && idx < plans.Length - 1 && plan.Validation.BudgetOverVnd > opt.SkipRankedOverBudgetRatio * input.Prefs.WeeklyBudgetVnd) { skipRankedUpTo = plans.Length - 2; lock (tcs) skipFrom = idx + 1; }
             }
-            return bestReady ?? best!;
+            return firstDiverseReady ?? bestReady ?? best!;
         }
         finally { cts.Cancel(); }
     }
@@ -1026,14 +1076,16 @@ public static partial class WeekPlanner
                 }
 
                 // 3. Tinh chỉnh theo ngày, ghép món phụ, chỉnh tinh.
-                foreach (var dayMeals in meals)
+                // T-101: các ngày độc lập nhau (mỗi ngày chỉ đọc dữ liệu chung, chỉ ghi vào bữa của chính ngày đó) nên tinh chỉnh song song: kết quả giống hệt chạy tuần tự.
+                // RiceOnlyAttempt (chẩn đoán/đo ngân sách công việc) chạy tuần tự trên luồng gọi để số liệu đo trên luồng đó đầy đủ.
+                Parallel.ForEach(meals, new ParallelOptions { MaxDegreeOfParallelism = _opt.RiceOnlyAttempt > 0 ? 1 : _opt.DayParallelism }, dayMeals =>
                 {
                     RefineDay(dayMeals);
                     if (_opt.Extras) AddExtras(dayMeals);
                     PolishDay(dayMeals);
                     RescueDayWithDessert(dayMeals);
                     if (it >= _opt.RiceRescueFromIteration) { RescueDayWithRice(dayMeals); RescueDayWithFullMeal(dayMeals); }
-                }
+                });
 
                 var plan = Finalize(meals, iterations, 0);
                 // T-077: ở các vòng còn ưu tiên mâm (it < 3), vượt ngân sách thì sửa ngân sách ngay trên vòng này (đổi canh/rau rẻ hơn trước khi hạ xuống trọn suất)
@@ -1058,12 +1110,17 @@ public static partial class WeekPlanner
             // 4. Sửa ngân sách.
             if (_opt.BudgetRepair && result.Validation.BudgetOverVnd > 0)
             {
-                var work = best.Value.Meals.Select(d => d.Select(m => m.Clone()).ToList()).ToList();
-                var repairs = RepairDesserts(work) + RepairBudget(work);
-                if (repairs > 0)
+                // T-104: sửa ngân sách với mức tìm kiếm rộng dần: chỉ khi mức trước vẫn vượt ngân sách mới thử mức sau (kết quả đã đạt ngân sách không đổi).
+                // Giá thịt heo xay tăng 13% làm tuần cơm rẻ của p01 mức rất nhiều chỉ còn cách ngân sách vài chục nghìn, mà mức mặc định (8 công thức thay thế mỗi bữa) không tìm ra.
+                for (var level = 0; level < RepairLevels.Length && result.Validation.BudgetOverVnd > 0; level++)
                 {
-                    var after = Finalize(work, iterations, repairs);
-                    if (BadnessOf(after.Validation, _targets) <= best.Value.Badness + 1e-9) result = after;
+                    var work = best.Value.Meals.Select(d => d.Select(m => m.Clone()).ToList()).ToList();
+                    var repairs = RepairDesserts(work, level) + RepairBudget(work, level);
+                    if (repairs > 0)
+                    {
+                        var after = Finalize(work, iterations, repairs);
+                        if (BadnessOf(after.Validation, _targets) <= best.Value.Badness + 1e-9) result = after;
+                    }
                 }
             }
             result.Iterations = iterations;
@@ -1328,19 +1385,20 @@ public static partial class WeekPlanner
                 Math.Max(0, _targets.ProteinG - protein) * 4 + Math.Max(0, _targets.KcalMin - kcal) + Math.Max(0, kcal - _targets.KcalMax);
             var mealsP = dayMeals.Where(m => m.Status == "planned" && (mutable is null || mutable.Contains(m))).ToList();
             var extraIds = new[] { _extrasPick.Carb, _extrasPick.Protein }.Where(x => !string.IsNullOrEmpty(x)).Select(x => x!).ToList();
+            // T-101: ứng viên tốt nhất lưu dạng giá trị (loại, bữa, dòng, gram mới, bước) thay vì closure/mảng mới cho mỗi ứng viên — cùng thứ tự duyệt, cùng phép tính nên cùng kết quả.
+            const int KRecipe = 1, KDessert = 2, KExtra = 3;
+            double[] steps = [5.0, -5.0];
             for (var step = 0; step < 80; step++)
             {
                 var tot = DayTot(dayMeals);
                 var v0 = Viol(tot.ProteinG, tot.Kcal);
                 if (v0 <= 1e-9) return;
                 double bestV = 0;
-                Action? bestApply = null;
-                void Consider(string ingId, double d, Action apply)
-                {
-                    var dm = Nutrition.MacrosOf(_data.IngredientsById[ingId], d);
-                    var v = Viol(tot.ProteinG + dm.ProteinG, tot.Kcal + dm.Kcal);
-                    if (v < v0 - 1e-9 && (bestApply is null || v < bestV)) { bestV = v; bestApply = apply; }
-                }
+                var bestKind = 0;
+                PlanMeal? bestM = null;
+                GramLine? bestGl = null;
+                string? bestId = null;
+                double bestG = 0, bestD = 0;
                 foreach (var m in mealsP)
                 {
                     var recipe = _data.RecipesById[m.RecipeId!];
@@ -1351,18 +1409,15 @@ public static partial class WeekPlanner
                         if (li.Role == "carb" && m.ForcedZeroCarb) continue;
                         if (li.RiceTargetG is not null) continue; // cơm đã ghim theo mức người dùng chọn (D-COM-01); chỉ bước cứu ngày mới giảm
                         var gl = m.Grams[i];
-                        foreach (var d in new[] { 5.0, -5.0 })
+                        var ing = _data.IngredientsById[gl.IngredientId];
+                        foreach (var d in steps)
                         {
                             var g = gl.Grams + d;
                             if (g < li.MinG || g > li.MaxG) continue;
-                            var dd = d;
-                            var mm = m;
-                            if (d < 0 && m.Macros.Kcal + Nutrition.MacrosOf(_data.IngredientsById[gl.IngredientId], d).Kcal < SnackFloor(m.Slot)) continue;
-                            Consider(gl.IngredientId, d, () =>
-                            {
-                                gl.Grams = g;
-                                mm.Macros += Nutrition.MacrosOf(_data.IngredientsById[gl.IngredientId], dd);
-                            });
+                            var dm = Nutrition.MacrosOf(ing, d);
+                            if (d < 0 && m.Macros.Kcal + dm.Kcal < SnackFloor(m.Slot)) continue;
+                            var v = Viol(tot.ProteinG + dm.ProteinG, tot.Kcal + dm.Kcal);
+                            if (v < v0 - 1e-9 && (bestKind == 0 || v < bestV)) { bestV = v; bestKind = KRecipe; bestM = m; bestGl = gl; bestG = g; bestD = d; }
                         }
                     }
                     if (m.DessertId is not null && m.Dessert is not null)
@@ -1375,17 +1430,14 @@ public static partial class WeekPlanner
                             // Núm khẩu phần chỉ chạm dòng scale được và luôn trong [min_g, max_g] (D-QA-04); dòng cố định giữ nguyên.
                             if (li.MinG >= li.MaxG) continue;
                             var gl = m.Dessert[i];
-                            foreach (var d in new[] { 5.0, -5.0 })
+                            var ing = _data.IngredientsById[gl.IngredientId];
+                            foreach (var d in steps)
                             {
                                 var g = gl.Grams + d;
                                 if (g < li.MinG || g > li.MaxG) continue;
-                                var dd = d;
-                                var mm = m;
-                                Consider(gl.IngredientId, d, () =>
-                                {
-                                    gl.Grams = g;
-                                    mm.Macros += Nutrition.MacrosOf(_data.IngredientsById[gl.IngredientId], dd);
-                                });
+                                var dm = Nutrition.MacrosOf(ing, d);
+                                var v = Viol(tot.ProteinG + dm.ProteinG, tot.Kcal + dm.Kcal);
+                                if (v < v0 - 1e-9 && (bestKind == 0 || v < bestV)) { bestV = v; bestKind = KDessert; bestM = m; bestGl = gl; bestG = g; bestD = d; }
                             }
                         }
                     }
@@ -1395,28 +1447,34 @@ public static partial class WeekPlanner
                         {
                             if (id == _extrasPick.Carb && (m.ForcedZeroCarb || HasCarbBase(m))) continue;
                             var cap = id == _extrasPick.Carb ? _opt.ExtraCarbMaxG : _opt.ExtraProteinMaxG;
-                            var cur = m.Extras.FirstOrDefault(e => e.IngredientId == id);
-                            foreach (var d in new[] { 5.0, -5.0 })
+                            GramLine? cur = null;
+                            foreach (var e in m.Extras) if (e.IngredientId == id) { cur = e; break; }
+                            var ing = _data.IngredientsById[id];
+                            foreach (var d in steps)
                             {
                                 var g = (cur?.Grams ?? 0) + d;
                                 if (g < 0 || g > cap) continue;
-                                var dd = d;
-                                var mm = m;
-                                var idc = id;
-                                Consider(id, d, () =>
-                                {
-                                    var e = mm.Extras.FirstOrDefault(x => x.IngredientId == idc);
-                                    if (e is not null) e.Grams = g;
-                                    else mm.Extras.Add(new GramLine(idc, g));
-                                    mm.Extras = mm.Extras.Where(x => x.Grams > 0).ToList();
-                                    mm.Macros += Nutrition.MacrosOf(_data.IngredientsById[idc], dd);
-                                });
+                                var dm = Nutrition.MacrosOf(ing, d);
+                                var v = Viol(tot.ProteinG + dm.ProteinG, tot.Kcal + dm.Kcal);
+                                if (v < v0 - 1e-9 && (bestKind == 0 || v < bestV)) { bestV = v; bestKind = KExtra; bestM = m; bestId = id; bestG = g; bestD = d; }
                             }
                         }
                     }
                 }
-                if (bestApply is null) return;
-                bestApply();
+                if (bestKind == 0) return;
+                if (bestKind == KExtra)
+                {
+                    var e = bestM!.Extras.FirstOrDefault(x => x.IngredientId == bestId);
+                    if (e is not null) e.Grams = bestG;
+                    else bestM.Extras.Add(new GramLine(bestId!, bestG));
+                    bestM.Extras = bestM.Extras.Where(x => x.Grams > 0).ToList();
+                    bestM.Macros += Nutrition.MacrosOf(_data.IngredientsById[bestId!], bestD);
+                }
+                else
+                {
+                    bestGl!.Grams = bestG;
+                    bestM!.Macros += Nutrition.MacrosOf(_data.IngredientsById[bestGl.IngredientId], bestD);
+                }
             }
         }
 
@@ -1440,19 +1498,67 @@ public static partial class WeekPlanner
             public string Key = "";
         }
 
-        private double UsedCost(List<List<PlanMeal>> mm) => ShoppingOf(mm).Items.Aggregate(0.0, (s, i) => s + i.UsedCostVnd);
+        private Dictionary<string, int>? _usedRank;
+
+        /// <summary>
+        /// Chi phí theo gram dùng của cả tuần (chưa làm tròn) — đúng bằng tổng <c>UsedCostVnd</c> của <see cref="ShoppingOf"/> nhưng không dựng danh sách đi chợ (sắp xếp tiếng Việt, DisplayQty...):
+        /// vòng sửa ngân sách gọi hàm này hàng nghìn lần. Cộng theo đúng thứ tự (dãy hàng rồi tên) của danh sách đi chợ để kết quả trùng từng bit.
+        /// </summary>
+        private double UsedCost(List<List<PlanMeal>> mm)
+        {
+            _usedRank ??= _data.Ingredients.Select((ing, idx) => (ing, idx)).OrderBy(x => Array.IndexOf(Enums.Aisles, x.ing.Aisle)).ThenBy(x => x.ing.Name, ViCollator.Instance).ThenBy(x => x.idx)
+                .Select((x, k) => (x.ing.Id, k)).GroupBy(x => x.Id).ToDictionary(g => g.Key, g => g.Last().k);
+            var order = new List<string>();
+            var eaten = new Dictionary<string, double>();
+            void Add(string id, double grams, double std)
+            {
+                var (key, factor) = Pa ? Shopping.PurchaseTarget(_data, id) : (id, 1.0);
+                if (!eaten.TryGetValue(key, out var cur)) { order.Add(key); cur = 0; }
+                eaten[key] = cur + (grams + _others * std) * factor;
+            }
+            foreach (var day in mm)
+                foreach (var m in day)
+                {
+                    if (m.Status != "planned") continue;
+                    for (var i = 0; i < m.Grams.Count; i++) Add(m.Grams[i].IngredientId, m.Grams[i].Grams, m.StandardGrams[i].Grams);
+                    foreach (var e in m.Extras) Add(e.IngredientId, e.Grams, 0);
+                    if (m.DessertId is not null && m.Dessert is not null)
+                    {
+                        var dr = _data.RecipesById[m.DessertId];
+                        for (var i = 0; i < m.Dessert.Count; i++) Add(m.Dessert[i].IngredientId, m.Dessert[i].Grams, dr.Ingredients[i].Grams);
+                    }
+                }
+            var used = new List<(int Rank, int Seq, double Cost)>(order.Count);
+            for (var k = 0; k < order.Count; k++)
+            {
+                var id = order[k];
+                var grams = eaten[id];
+                if (grams <= 0) continue;
+                if (!_data.IngredientsById.TryGetValue(id, out var ing)) throw new InvalidOperationException($"Nguyên liệu không tồn tại: {id}");
+                var (price, _) = Shopping.ResolvePrice(_data, id, _prefs.StoreId);
+                var need = grams / ing.EdiblePortion;
+                used.Add((_usedRank.GetValueOrDefault(id, int.MaxValue), k, need / price.PackG * price.PriceVnd));
+            }
+            used.Sort((a, b) => a.Rank != b.Rank ? a.Rank.CompareTo(b.Rank) : a.Seq.CompareTo(b.Seq));
+            var total = 0.0;
+            foreach (var u in used) total += u.Cost;
+            return total;
+        }
 
         /// <summary>
         /// Vượt ngân sách: thử đổi tráng miệng sang món rẻ hơn (vẫn hợp lệ cho bữa, không trùng trong ngày), tính lại ngày, giữ nếu rẻ hơn và ngày không xấu đi.
         /// Tráng miệng không bị bỏ — chỉ đổi món (D-DES-01).
         /// </summary>
-        private int RepairDesserts(List<List<PlanMeal>> meals)
+        private int RepairDesserts(List<List<PlanMeal>> meals, int level = 0)
         {
             if (_desserts.Count == 0) return 0;
             var budget = _prefs.WeeklyBudgetVnd;
             var applied = 0;
             var cost = UsedCost(meals);
-            for (var iter = 0; iter < _opt.RepairIterations && cost > budget; iter++)
+            // T-101: kết quả thử một tráng miệng thay thế (chỉnh lại gram cả ngày) chỉ phụ thuộc đúng ngày đó nên giữ lại giữa các vòng; chỉ ngày vừa được áp dụng mới phải thử lại
+            // (trước đây mỗi vòng thử lại toàn bộ ~100–400 phương án dù chỉ một ngày đổi).
+            var trials = new Dictionary<(int Day, int Meal, string Alt), (List<PlanMeal>? Day, bool Skip)>();
+            for (var iter = 0; iter < RepairLevels[level].Iterations && cost > budget; iter++)
             {
                 (int Day, List<PlanMeal> NewDay, double Cost)? best = null;
                 for (var d = 0; d < meals.Count; d++)
@@ -1463,17 +1569,24 @@ public static partial class WeekPlanner
                             (!_prefs.LowCarb || x.LowCarbOk) && !(m.Slot == "lunch" && _prefs.Slots.LunchStyle == "packed" && !x.Portable) &&
                             !meals[d].Any(o => !ReferenceEquals(o, m) && o.DessertId == x.Id)))
                         {
-                            var day = meals[d].Select(x => x.Clone()).ToList();
-                            var cm = day[meals[d].IndexOf(m)];
-                            var oldM = DessertMacros(cm);
-                            cm.DessertId = alt.Id;
-                            cm.Dessert = alt.Ingredients.Select(i => new GramLine(i.IngredientId, i.Grams)).ToList();
-                            cm.Macros = cm.Macros - oldM + DessertMacros(cm);
-                            RefineDay(day);
-                            PolishDay(day);
-                            var before = DayTot(meals[d]);
-                            var after = DayTot(day);
-                            if (DayOk(before.Kcal, before.ProteinG) && !DayOk(after.Kcal, after.ProteinG)) continue;
+                            var mealIdx = meals[d].IndexOf(m);
+                            if (!trials.TryGetValue((d, mealIdx, alt.Id), out var tr))
+                            {
+                                var newDay = meals[d].Select(x => x.Clone()).ToList();
+                                var cm = newDay[mealIdx];
+                                var oldM = DessertMacros(cm);
+                                cm.DessertId = alt.Id;
+                                cm.Dessert = alt.Ingredients.Select(i => new GramLine(i.IngredientId, i.Grams)).ToList();
+                                cm.Macros = cm.Macros - oldM + DessertMacros(cm);
+                                RefineDay(newDay);
+                                PolishDay(newDay);
+                                var before = DayTot(meals[d]);
+                                var after = DayTot(newDay);
+                                tr = (newDay, DayOk(before.Kcal, before.ProteinG) && !DayOk(after.Kcal, after.ProteinG));
+                                trials[(d, mealIdx, alt.Id)] = tr;
+                            }
+                            if (tr.Skip) continue;
+                            var day = tr.Day!;
                             var trial = meals.Select((dm, i) => i == d ? day : dm).ToList();
                             var c = UsedCost(trial);
                             if (c < cost - 1e-6 && (best is null || c < best.Value.Cost)) best = (d, day, c);
@@ -1481,14 +1594,24 @@ public static partial class WeekPlanner
                     }
                 if (best is null) break;
                 meals[best.Value.Day] = best.Value.NewDay;
+                foreach (var k in trials.Keys.Where(k => k.Day == best.Value.Day).ToList()) trials.Remove(k);
                 cost = best.Value.Cost;
                 applied++;
             }
             return applied;
         }
 
-        private int RepairBudget(List<List<PlanMeal>> meals)
+        /// <summary>Mức tìm kiếm của <see cref="RepairBudget"/>: (số vòng, số bữa đắt nhất thử mỗi vòng, số công thức thay thế mỗi bữa). Mức đầu là mặc định; các mức sau chỉ dùng khi vẫn vượt ngân sách (T-104).</summary>
+        private (int Iterations, int MealsPerIter, int Alts)[] RepairLevels => [(_opt.RepairIterations, _opt.RepairMealsPerIter, _opt.RepairRecipeAlts), (300, 30, 40)];
+
+        private const int MaxRepairUses = 2;
+
+        /// <summary>Số món trưa/tối khác nhau sau khi bữa đang xét đổi sang <paramref name="alt"/> (weekUses = số bữa dùng mỗi món, không tính bữa đang xét).</summary>
+        private static int DistinctAfterSwap(Dictionary<string, int> weekUses, string alt) => weekUses.Count + (weekUses.ContainsKey(alt) ? 0 : 1);
+
+        private int RepairBudget(List<List<PlanMeal>> meals, int level = 0)
         {
+            var (repairIterations, repairMealsPerIter, repairAlts) = RepairLevels[level];
             var budget = _prefs.WeeklyBudgetVnd;
             var cost = UsedCost(meals);
             if (cost <= budget) return 0;
@@ -1496,9 +1619,10 @@ public static partial class WeekPlanner
                 Shopping.ServingCostVnd(grams, _data, _prefs.StoreId, Pa) + _others * Shopping.ServingCostVnd(std, _data, _prefs.StoreId, Pa);
             var swapPool = BuildSwapPool(_data, _banned);
             var tabu = new HashSet<string>();
+            var evalCache = new Dictionary<PlanMeal, Dictionary<string, (ScaleResult Res, double Saving)>>(ReferenceEqualityComparer.Instance);
             var applied = 0;
 
-            for (var iter = 0; iter < _opt.RepairIterations; iter++)
+            for (var iter = 0; iter < repairIterations; iter++)
             {
                 if (ShoppingOf(meals).WeekFoodCost <= budget) break;
                 Cand? bestC = null;
@@ -1508,9 +1632,13 @@ public static partial class WeekPlanner
                     .Where(x => x.m.Status == "planned")
                     .Select(x => (x.m, x.day, x.idx, c: MealCost(x.m.Grams, x.m.StandardGrams)))
                     .OrderByDescending(x => x.c)
-                    .Take(_opt.RepairMealsPerIter)
+                    .Take(repairMealsPerIter)
                     .ToList();
 
+                // Lần đầu mỗi món trưa/tối dùng tối đa MaxRepairUses bữa/tuần (giữ đa dạng); không tìm được phương án nào thì bỏ giới hạn.
+                foreach (var repairUseCap in new[] { MaxRepairUses, int.MaxValue })
+                {
+                if (bestC is not null) break;
                 foreach (var (m, day, _, curCost) in ranked)
                 {
                     var sc = _slotCtx[m.Slot];
@@ -1529,8 +1657,17 @@ public static partial class WeekPlanner
                     foreach (var o in meals.SelectMany(d => d))
                         if (!ReferenceEquals(o, m) && o.RecipeId is not null && _mam.TryGetValue(o.RecipeId, out var oi) && oi.SoupId is not null)
                             soupCount[oi.SoupId] = soupCount.GetValueOrDefault(oi.SoupId) + 1;
+                    // T-104: sửa ngân sách rộng hơn hay chọn lại đúng vài món rẻ nhất cho nhiều bữa → thực đơn trưa/tối co lại (D-DIV-01); mỗi món trưa/tối không quá MaxRepairUses bữa/tuần.
+                    var weekUses = new Dictionary<string, int>();
+                    if (GroupOf(m.Slot) == "main")
+                        foreach (var o in meals.SelectMany(d => d))
+                            if (!ReferenceEquals(o, m) && o.Status == "planned" && o.Slot is "lunch" or "dinner" && o.RecipeId is not null)
+                                weekUses[o.RecipeId] = weekUses.GetValueOrDefault(o.RecipeId) + 1;
+                    // Không đổi món nếu làm số món trưa/tối khác nhau tụt xuống dưới MinMainDistinct (hoặc dưới mức hiện có nếu đã thấp hơn).
+                    var distinctNow = weekUses.Count + (weekUses.ContainsKey(m.RecipeId!) ? 0 : 1);
                     var altPool = sc.Cands
-                        .Where(cd => cd.Recipe.Id != m.RecipeId && !(GroupOf(m.Slot) == "main" && sameDay.Contains(cd.Recipe.Id)))
+                        .Where(cd => cd.Recipe.Id != m.RecipeId && !(GroupOf(m.Slot) == "main" && sameDay.Contains(cd.Recipe.Id)) && weekUses.GetValueOrDefault(cd.Recipe.Id) < repairUseCap)
+                        .Where(cd => GroupOf(m.Slot) != "main" || DistinctAfterSwap(weekUses, cd.Recipe.Id) >= Math.Min(_opt.MinMainDistinct, distinctNow))
                         .Where(cd => !_mam.TryGetValue(cd.Recipe.Id, out var ci) ||
                             (!sameDayMainIds.Contains(ci.MainId) && (ci.SoupId is null || soupCount.GetValueOrDefault(ci.SoupId) < _opt.MaxSoupUses)));
                     List<Alt> recipeAlts;
@@ -1539,13 +1676,13 @@ public static partial class WeekPlanner
                     if (curIsMam)
                     {
                         var pool = altPool.ToList();
-                        recipeAlts = pool.Where(cd => _mam.ContainsKey(cd.Recipe.Id)).OrderBy(cd => CostOf(cd.Recipe)).Take(_opt.RepairRecipeAlts)
-                            .Concat(pool.Where(cd => !_mam.ContainsKey(cd.Recipe.Id)).OrderBy(cd => CostOf(cd.Recipe)).Take(_opt.RepairRecipeAlts))
+                        recipeAlts = pool.Where(cd => _mam.ContainsKey(cd.Recipe.Id)).OrderBy(cd => CostOf(cd.Recipe)).Take(repairAlts)
+                            .Concat(pool.Where(cd => !_mam.ContainsKey(cd.Recipe.Id)).OrderBy(cd => CostOf(cd.Recipe)).Take(repairAlts))
                             .Select(cd => new Alt(cd.Recipe, cd.ForceZeroCarb, [], cd.Recipe.Id)).ToList();
                     }
                     else
                     {
-                        recipeAlts = altPool.OrderBy(cd => CostOf(cd.Recipe)).Take(_opt.RepairRecipeAlts)
+                        recipeAlts = altPool.OrderBy(cd => CostOf(cd.Recipe)).Take(repairAlts)
                             .Select(cd => new Alt(cd.Recipe, cd.ForceZeroCarb, [], cd.Recipe.Id)).ToList();
                     }
 
@@ -1581,9 +1718,16 @@ public static partial class WeekPlanner
                     {
                         var key = $"{day}|{m.Slot}|{alt.Key}";
                         if (tabu.Contains(key)) continue;
-                        var res = Scaler.Scale(alt.Recipe, _data.IngredientsById, target, new ScaleOptions { ForceZeroCarb = alt.Zero, RiceOverrideG = alt.Subs.Count > 0 ? RiceNow(m) : null });
-                        var stdAlt = alt.Recipe.Ingredients.Select(x => new GramLine(x.IngredientId, x.Grams)).ToList();
-                        var saving = curCost - MealCost(res.Grams, stdAlt);
+                        // T-104: kết quả (co giãn + chi phí) của một phương án thay thế chỉ phụ thuộc bữa đó nên nhớ lại giữa các vòng; bỏ nhớ khi bữa bị đổi.
+                        if (!evalCache.TryGetValue(m, out var perMeal)) evalCache[m] = perMeal = [];
+                        if (!perMeal.TryGetValue(alt.Key, out var ev))
+                        {
+                            var r0 = Scaler.Scale(alt.Recipe, _data.IngredientsById, target, new ScaleOptions { ForceZeroCarb = alt.Zero, RiceOverrideG = alt.Subs.Count > 0 ? RiceNow(m) : null });
+                            var stdAlt0 = alt.Recipe.Ingredients.Select(x => new GramLine(x.IngredientId, x.Grams)).ToList();
+                            perMeal[alt.Key] = ev = (r0, curCost - MealCost(r0.Grams, stdAlt0));
+                        }
+                        var res = ev.Res;
+                        var saving = ev.Saving;
                         var downgrade = curIsMam && !_mam.ContainsKey(alt.Recipe.Id);
                         if (saving <= 1) continue;
                         // Mâm rẻ hơn luôn được ưu tiên hơn việc hạ xuống trọn suất, dù trọn suất tiết kiệm nhiều hơn.
@@ -1594,6 +1738,7 @@ public static partial class WeekPlanner
                         if (!wasOk && (newProtein < dayTotNow.ProteinG - 1e-6 || Math.Abs(newKcal - _kMid) > Math.Abs(dayTotNow.Kcal - _kMid) + 1e-6)) continue;
                         bestC = new Cand { Day = day, Saving = saving, Meal = m, VariantRecipe = alt.Recipe, Res = res, Subs = alt.Subs, Key = key, Downgrade = downgrade };
                     }
+                }
                 }
                 if (bestC is null) break;
 
@@ -1613,6 +1758,7 @@ public static partial class WeekPlanner
                 {
                     cost = newCost;
                     applied++;
+                    evalCache.Remove(meal);
                 }
                 else
                 {

@@ -1927,13 +1927,13 @@
        "name": "Thịt heo xay (nạc ~96%)",
        "need_g": 480,
        "pack_g": 200,
-       "pack_label": "thịt heo xay C.P 200 g",
+       "pack_label": "thịt heo xay CP khay 200 g (giá thường)",
        "packs": 3,
        "price_fallback": false,
        "price_store_id": "bach_hoa_xanh",
-       "price_vnd_per_pack": 22478,
-       "till_cost_vnd": 67434,
-       "used_cost_vnd": 53947.2
+       "price_vnd_per_pack": 25500,
+       "till_cost_vnd": 76500,
+       "used_cost_vnd": 61200
       }
      ]
     },
@@ -2399,13 +2399,13 @@
      "name": "Thịt heo xay (nạc ~96%)",
      "need_g": 480,
      "pack_g": 200,
-     "pack_label": "thịt heo xay C.P 200 g",
+     "pack_label": "thịt heo xay CP khay 200 g (giá thường)",
      "packs": 3,
      "price_fallback": false,
      "price_store_id": "bach_hoa_xanh",
-     "price_vnd_per_pack": 22478,
-     "till_cost_vnd": 67434,
-     "used_cost_vnd": 53947.2
+     "price_vnd_per_pack": 25500,
+     "till_cost_vnd": 76500,
+     "used_cost_vnd": 61200
     },
     {
      "aisle": "trung_dau_phu",
@@ -2841,8 +2841,8 @@
     }
    ],
    "skipped_pantry": [],
-   "till_cost": 826000,
-   "week_food_cost": 457000
+   "till_cost": 836000,
+   "week_food_cost": 464000
   },
   "start_date": "2026-11-09",
   "status": "ready",

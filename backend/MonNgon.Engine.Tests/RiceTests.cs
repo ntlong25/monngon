@@ -25,6 +25,14 @@ public class RiceTests
 
     private static List<PlanMeal> RiceMeals(WeekPlan plan) => EngineReport.RiceMealsOf(plan);
 
+    /// <summary>Bản sao hồ sơ ở một mức cơm cố định (hồ sơ p18 mặc định mức Nhiều; các test mức Vừa/T-094 cần cả bộ hồ sơ ở mức Vừa).</summary>
+    private static TestProfile AtHabit(TestProfile p, string habit)
+    {
+        var prefs = System.Text.Json.JsonSerializer.Deserialize<Preferences>(System.Text.Json.JsonSerializer.Serialize(p.Preferences, JsonOptions.Default), JsonOptions.Default)!;
+        prefs.RiceHabit = habit;
+        return new TestProfile { Id = p.Id, Name = p.Name, Note = p.Note, Profile = p.Profile, Preferences = prefs, Expect = p.Expect };
+    }
+
     [Fact]
     public void Thieu_rice_habit_la_vua_va_gram_cac_muc_dung_theo_PRD()
     {
@@ -41,14 +49,14 @@ public class RiceTests
         Assert.Equal(225, RiceHabits.FloorG("rat_nhieu"));
     }
 
-    /// <summary>AC1: 16 hồ sơ × 3 seed, mức vừa — cơm đúng mức (±10 g) hoặc có ghi chú rice_reduced với cơm ≥ sàn; không giảm mà thiếu ghi chú.</summary>
+    /// <summary>AC1: mọi hồ sơ × 3 seed, mức vừa — cơm đúng mức (±10 g) hoặc có ghi chú rice_reduced với cơm ≥ sàn; không giảm mà thiếu ghi chú.</summary>
     [Fact]
     public void Bat_bien_com_dung_muc_hoac_co_ghi_chu_va_khong_duoi_san()
     {
         foreach (var p in Profiles)
             foreach (var seed in new long[] { 1, 2, 3 })
             {
-                var plan = Plan(p, null, seed);
+                var plan = Plan(p, "vua", seed);
                 foreach (var m in RiceMeals(plan))
                 {
                     var r = m.Rice!;
@@ -109,14 +117,14 @@ public class RiceTests
         Assert.True(raw[1] > raw[0], $"gạo cần mua không tăng từ ít lên vừa: {string.Join(" ≤ ", raw)}");
     }
 
-    /// <summary>AC4: 16 hồ sơ mức vừa vẫn đạt 7/7, kcal/protein, không vi phạm cứng, ≥ 60% bữa trưa/tối là mâm.</summary>
+    /// <summary>AC4: mọi hồ sơ (16 gốc + p17/p18 của T-098) ở mức vừa vẫn đạt 7/7, kcal/protein, không vi phạm cứng, ≥ 60% bữa trưa/tối là mâm.</summary>
     [Fact]
     public void Muc_vua_16_ho_so_van_dat_7_tren_7_va_ghep_mam_nhieu()
     {
-        var results = Profiles.Select(p => EngineReport.RunProfile(p, Data, 1, Start)).ToList();
+        var results = Profiles.Select(p => EngineReport.RunProfile(AtHabit(p, "vua"), Data, 1, Start)).ToList();
         var s = EngineReport.Summarize(results);
         Assert.Equal(0, s.HardViolations);
-        Assert.Equal(16, s.Ready);
+        Assert.Equal(Profiles.Count, s.Ready);
         Assert.Equal(s.DaysTotal, s.DaysOk);
         Assert.True(s.MamRatio >= 0.6, $"mâm {s.MamRatio:P0}");
         Assert.All(results, r => Assert.Equal(0, r.RiceBelowFloor));
@@ -131,7 +139,7 @@ public class RiceTests
             var ratios = new List<double>();
             foreach (var p in Profiles)
             {
-                var plan = Plan(p, null, seed);
+                var plan = Plan(p, "vua", seed);
                 if (RiceMeals(plan).Count == 0) continue;
                 var ratio = EngineReport.RiceNoteRatioOf(plan);
                 ratios.Add(ratio);

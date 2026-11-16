@@ -157,4 +157,42 @@ public class DataValidatorTests
         // v0.2: dish_role được đọc
         Assert.Contains(res.Dataset.Recipes, x => x.DishRole == "soup");
     }
+
+    // ---- T-104: source_note của giá cho_khac ----
+
+    private static JsonObject FirstChoKhac(Raw r, int skip = 0) => ((JsonArray)r.Prices).Select(p => (JsonObject)p!).Where(p => (string?)p["store_id"] == "cho_khac").Skip(skip).First();
+
+    [Fact]
+    public void Thieu_source_note_o_cho_khac_la_loi()
+    {
+        var r = new Raw();
+        var p = FirstChoKhac(r);
+        p.Remove("source_note");
+        Assert.Contains(r.Errors(), e => e.File == "prices" && e.Id == $"{(string)p["ingredient_id"]!}@cho_khac" && e.Field == "source_note");
+    }
+
+    [Fact]
+    public void Source_note_rong_la_loi_va_cua_hang_khac_khong_bat_buoc()
+    {
+        var r = new Raw();
+        FirstChoKhac(r)["source_note"] = "  ";
+        Assert.Single(r.Errors(), e => e.Field == "source_note");
+        var r2 = new Raw();
+        var clone = (JsonObject)((JsonArray)r2.Prices)[0]!.DeepClone();
+        clone["store_id"] = "bach_hoa_xanh";
+        clone.Remove("source_note");
+        ((JsonArray)r2.Prices).Add(clone);
+        Assert.DoesNotContain(r2.Errors(), e => e.Field == "source_note");
+    }
+
+    [Fact]
+    public void Chua_co_nguon_hop_le_nhung_duoc_dem_va_canh_bao_mot_lan()
+    {
+        var r = new Raw();
+        FirstChoKhac(r)["source_note"] = "chưa có nguồn";
+        FirstChoKhac(r, 1)["source_note"] = "Chưa có nguồn";
+        Assert.Empty(r.Errors());
+        var w = Assert.Single(r.All(), i => i.Severity == "warning" && i.Field == "source_note");
+        Assert.Contains("2 dòng", w.Message);
+    }
 }

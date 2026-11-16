@@ -84,7 +84,7 @@ public static class Shopping
     /// <summary>Hệ số nhân khẩu phần chuẩn cho những người ăn cùng ngoài "bạn".</summary>
     public static double OtherEatersFactor(Household h) => Math.Max(0, h.Adults - 1) + h.Children * ChildPortion;
 
-    private static (Price Price, bool Fallback) ResolvePrice(Dataset book, string ingredientId, string storeId)
+    internal static (Price Price, bool Fallback) ResolvePrice(Dataset book, string ingredientId, string storeId)
     {
         book.PricesByIngredient.TryGetValue(ingredientId, out var m);
         if (m is not null && m.TryGetValue(storeId, out var own)) return (own, false);

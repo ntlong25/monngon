@@ -52,7 +52,7 @@ public class BudgetTests
     }
 
     [Fact]
-    public void Tang_nguoi_hoac_so_bua_thi_min_uoc_tinh_max_khong_giam()
+    public void Tang_nguoi_thi_min_uoc_tinh_max_khong_giam()
     {
         var tp = Profiles.Single(p => p.Id.StartsWith("p01", StringComparison.Ordinal));
         var targets = TargetCalc.Compute(tp.Profile);
@@ -63,12 +63,31 @@ public class BudgetTests
             return BudgetEstimator.Compute(Data, targets, p);
         }
         var basis = R(_ => { });
-        foreach (var more in new[] { R(p => p.Adults += 1), R(p => p.Children += 1), R(p => p.Slots.SnackAm = "on"), R(p => { p.Adults += 1; p.Children += 1; }) })
+        var cases = new (string Name, BudgetRange Range)[] { ("+1 người lớn", R(p => p.Adults += 1)), ("+1 trẻ em", R(p => p.Children += 1)), ("+1 lớn +1 trẻ", R(p => { p.Adults += 1; p.Children += 1; })) };
+        foreach (var (name, more) in cases)
         {
-            Assert.True(more.MinVnd >= basis.MinVnd, $"min {more.MinVnd} < {basis.MinVnd}");
-            // Ước tính là chi phí của tuần mô phỏng (heuristic, có nhiễu chọn món): chấp nhận lệch ≤ 3% khi tăng số người/bữa (T-093/L-01: đổi tráng miệng cứu ngày chật calo làm nhiễu thêm; T-094: cơm ghim theo mức và bước giảm cơm/đổi trọn suất cũng làm nhiễu; max = ước tính × 2,5 làm tròn bậc 50.000 ₫ nên dung sai 3%).
-            Assert.True(more.EstimateVnd >= basis.EstimateVnd * 0.97, $"est {more.EstimateVnd} < {basis.EstimateVnd}");
-            Assert.True(more.MaxVnd >= basis.MaxVnd * 0.97, $"max {more.MaxVnd} < {basis.MaxVnd}");
+            Assert.True(more.MinVnd >= basis.MinVnd, $"{name}: min {more.MinVnd} < {basis.MinVnd}");
+            // Ước tính là chi phí của tuần mô phỏng (heuristic, có nhiễu chọn món): chấp nhận lệch ≤ 3% khi tăng số người (T-093/L-01: đổi tráng miệng cứu ngày chật calo làm nhiễu thêm; T-094: cơm ghim theo mức và bước giảm cơm/đổi trọn suất cũng làm nhiễu; max = ước tính × 2,5 làm tròn bậc 50.000 ₫ nên dung sai 3%).
+            Assert.True(more.EstimateVnd >= basis.EstimateVnd * 0.97, $"{name}: est {more.EstimateVnd} < {basis.EstimateVnd} × 0,97");
+            Assert.True(more.MaxVnd >= basis.MaxVnd * 0.97, $"{name}: max {more.MaxVnd} < {basis.MaxVnd} × 0,97");
+        }
+    }
+
+    /// <summary>
+    /// D-BUD-03: thêm bữa phụ KHÔNG nhất thiết làm tuần đắt hơn (bữa phụ lấy kcal của bữa chính nên bữa chính nhỏ đi; p01 + bữa phụ sáng rẻ hơn ~4%), nên không kiểm đơn điệu cho ca này.
+    /// Thay vào đó: khi có bữa phụ, ước tính của khoảng ngân sách lệch chi phí tuần thật (cùng hồ sơ, ngân sách không giới hạn) ≤ 3%.
+    /// </summary>
+    [Fact]
+    public void Co_bua_phu_thi_uoc_tinh_lech_chi_phi_tuan_that_khong_qua_3_phan_tram()
+    {
+        foreach (var tp in Profiles.Where(p => p.Id.StartsWith("p01", StringComparison.Ordinal) || p.Id.StartsWith("p03", StringComparison.Ordinal)))
+        {
+            var withSnack = new TestProfile { Id = tp.Id, Profile = tp.Profile, Preferences = Clone(tp.Preferences) };
+            withSnack.Preferences.Slots.SnackAm = "on";
+            var range = BudgetEstimator.Compute(Data, TargetCalc.Compute(withSnack.Profile), withSnack.Preferences);
+            var real = PlanWith(withSnack, BudgetEstimator.SimBudgetVnd).Shopping.WeekFoodCost;
+            var dev = Math.Abs(range.EstimateVnd - real) / real;
+            Assert.True(dev <= 0.03, $"{tp.Id} + bữa phụ sáng: ước tính {range.EstimateVnd:N0} so với chi phí thật {real:N0} (lệch {dev:P1})");
         }
     }
 

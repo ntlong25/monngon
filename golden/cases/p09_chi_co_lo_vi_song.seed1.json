@@ -69,7 +69,12 @@
      {
       "batch_group_id": "mw_sang_chay_dau_hu_com#2026-11-09-breakfast",
       "date": "2026-11-09",
-      "extras": [],
+      "extras": [
+       {
+        "grams": 5,
+        "ingredient_id": "thit_heo_nac_dui"
+       }
+      ],
       "forced_zero_carb": false,
       "grams": [
        {
@@ -91,10 +96,10 @@
       ],
       "macros": {
        "carb_g": 7.6579999999999995,
-       "fat_g": 17.221,
+       "fat_g": 17.4915,
        "fiber_g": 5.365,
-       "kcal": 296.5,
-       "protein_g": 35.749
+       "kcal": 303.3,
+       "protein_g": 36.774
       },
       "recipe_id": "mw_sang_chay_dau_hu_com",
       "scale_infeasible": true,
@@ -123,12 +128,7 @@
      {
       "batch_group_id": "com_hom_vi_song#0",
       "date": "2026-11-09",
-      "extras": [
-       {
-        "grams": 5,
-        "ingredient_id": "thit_heo_xay_nac"
-       }
-      ],
+      "extras": [],
       "forced_zero_carb": false,
       "grams": [
        {
@@ -137,11 +137,11 @@
        }
       ],
       "macros": {
-       "carb_g": 118.45049999999998,
-       "fat_g": 1.3760000000000001,
+       "carb_g": 118.43999999999998,
+       "fat_g": 1.1760000000000002,
        "fiber_g": 1.68,
-       "kcal": 552.05,
-       "protein_g": 12.353
+       "kcal": 546,
+       "protein_g": 11.298
       },
       "recipe_id": "com_hom_vi_song",
       "scale_infeasible": true,
@@ -233,10 +233,10 @@
      }
     ],
     "totals": {
-     "carb_g": 261.6735,
-     "fat_g": 19.910600000000002,
-     "kcal": 1469.51,
-     "protein_g": 61.26800000000001
+     "carb_g": 261.66299999999995,
+     "fat_g": 19.981099999999998,
+     "kcal": 1470.26,
+     "protein_g": 61.23800000000001
     }
    },
    {
@@ -245,7 +245,12 @@
      {
       "batch_group_id": "mw_sang_chay_dau_hu_com#2026-11-10-breakfast",
       "date": "2026-11-10",
-      "extras": [],
+      "extras": [
+       {
+        "grams": 5,
+        "ingredient_id": "thit_heo_nac_dui"
+       }
+      ],
       "forced_zero_carb": false,
       "grams": [
        {
@@ -267,10 +272,10 @@
       ],
       "macros": {
        "carb_g": 7.6579999999999995,
-       "fat_g": 17.221,
+       "fat_g": 17.4915,
        "fiber_g": 5.365,
-       "kcal": 296.5,
-       "protein_g": 35.749
+       "kcal": 303.3,
+       "protein_g": 36.774
       },
       "recipe_id": "mw_sang_chay_dau_hu_com",
       "scale_infeasible": true,
@@ -299,12 +304,7 @@
      {
       "batch_group_id": "com_hom_vi_song#0",
       "date": "2026-11-10",
-      "extras": [
-       {
-        "grams": 5,
-        "ingredient_id": "thit_heo_xay_nac"
-       }
-      ],
+      "extras": [],
       "forced_zero_carb": false,
       "grams": [
        {
@@ -313,11 +313,11 @@
        }
       ],
       "macros": {
-       "carb_g": 118.45049999999998,
-       "fat_g": 1.3760000000000001,
+       "carb_g": 118.43999999999998,
+       "fat_g": 1.1760000000000002,
        "fiber_g": 1.68,
-       "kcal": 552.05,
-       "protein_g": 12.353
+       "kcal": 546,
+       "protein_g": 11.298
       },
       "recipe_id": "com_hom_vi_song",
       "scale_infeasible": true,
@@ -409,10 +409,10 @@
      }
     ],
     "totals": {
-     "carb_g": 261.6735,
-     "fat_g": 19.910600000000002,
-     "kcal": 1469.51,
-     "protein_g": 61.26800000000001
+     "carb_g": 261.66299999999995,
+     "fat_g": 19.981099999999998,
+     "kcal": 1470.26,
+     "protein_g": 61.23800000000001
     }
    },
    {
@@ -421,7 +421,12 @@
      {
       "batch_group_id": "mw_sang_chay_dau_hu_com#2026-11-11-breakfast",
       "date": "2026-11-11",
-      "extras": [],
+      "extras": [
+       {
+        "grams": 5,
+        "ingredient_id": "thit_heo_nac_dui"
+       }
+      ],
       "forced_zero_carb": false,
       "grams": [
        {
@@ -443,10 +448,10 @@
       ],
       "macros": {
        "carb_g": 7.6579999999999995,
-       "fat_g": 17.221,
+       "fat_g": 17.4915,
        "fiber_g": 5.365,
-       "kcal": 296.5,
-       "protein_g": 35.749
+       "kcal": 303.3,
+       "protein_g": 36.774
       },
       "recipe_id": "mw_sang_chay_dau_hu_com",
       "scale_infeasible": true,
@@ -475,12 +480,7 @@
      {
       "batch_group_id": "com_hom_vi_song#1",
       "date": "2026-11-11",
-      "extras": [
-       {
-        "grams": 5,
-        "ingredient_id": "thit_heo_xay_nac"
-       }
-      ],
+      "extras": [],
       "forced_zero_carb": false,
       "grams": [
        {
@@ -489,11 +489,11 @@
        }
       ],
       "macros": {
-       "carb_g": 118.45049999999998,
-       "fat_g": 1.3760000000000001,
+       "carb_g": 118.43999999999998,
+       "fat_g": 1.1760000000000002,
        "fiber_g": 1.68,
-       "kcal": 552.05,
-       "protein_g": 12.353
+       "kcal": 546,
+       "protein_g": 11.298
       },
       "recipe_id": "com_hom_vi_song",
       "scale_infeasible": true,
@@ -585,10 +585,10 @@
      }
     ],
     "totals": {
-     "carb_g": 261.6735,
-     "fat_g": 19.910600000000002,
-     "kcal": 1469.51,
-     "protein_g": 61.26800000000001
+     "carb_g": 261.66299999999995,
+     "fat_g": 19.981099999999998,
+     "kcal": 1470.26,
+     "protein_g": 61.23800000000001
     }
    },
    {
@@ -599,12 +599,12 @@
       "date": "2026-11-12",
       "extras": [
        {
-        "grams": 10,
+        "grams": 5,
         "ingredient_id": "gao_te"
        },
        {
-        "grams": 20,
-        "ingredient_id": "thit_heo_xay_nac"
+        "grams": 25,
+        "ingredient_id": "thit_heo_nac_dui"
        }
       ],
       "forced_zero_carb": false,
@@ -623,11 +623,11 @@
        }
       ],
       "macros": {
-       "carb_g": 69.06200000000001,
-       "fat_g": 10.526000000000002,
-       "fiber_g": 9.13,
-       "kcal": 461.7,
-       "protein_g": 22.243000000000002
+       "carb_g": 65.02000000000001,
+       "fat_g": 11.0455,
+       "fiber_g": 9.065,
+       "kcal": 453.25,
+       "protein_g": 22.791500000000003
       },
       "recipe_id": "mw_sang_khoai_lang_trung",
       "scale_infeasible": true,
@@ -655,10 +655,10 @@
       "extras": [
        {
         "grams": 150,
-        "ingredient_id": "thit_heo_xay_nac"
+        "ingredient_id": "thit_heo_nac_dui"
        },
        {
-        "grams": 35,
+        "grams": 25,
         "ingredient_id": "gao_te"
        }
       ],
@@ -678,11 +678,11 @@
        }
       ],
       "macros": {
-       "carb_g": 33.642,
-       "fat_g": 6.721,
-       "fiber_g": 1.9969999999999999,
-       "kcal": 337.73,
-       "protein_g": 36.087700000000005
+       "carb_g": 25.326999999999998,
+       "fat_g": 8.77,
+       "fiber_g": 1.867,
+       "kcal": 323.73,
+       "protein_g": 34.4747
       },
       "recipe_id": "bi_xanh_hap_vi_song",
       "scale_infeasible": true,
@@ -756,7 +756,7 @@
       "extras": [
        {
         "grams": 150,
-        "ingredient_id": "thit_heo_xay_nac"
+        "ingredient_id": "thit_heo_nac_dui"
        },
        {
         "grams": 15,
@@ -779,11 +779,11 @@
        }
       ],
       "macros": {
-       "carb_g": 19.447000000000003,
-       "fat_g": 6.3035000000000005,
+       "carb_g": 19.132,
+       "fat_g": 8.4185,
        "fiber_g": 2.875,
-       "kcal": 266.34999999999997,
-       "protein_g": 34.041000000000004
+       "kcal": 288.85,
+       "protein_g": 33.141
       },
       "recipe_id": "su_su_hap_vi_song",
       "scale_infeasible": true,
@@ -807,10 +807,10 @@
      }
     ],
     "totals": {
-     "carb_g": 129.094,
-     "fat_g": 43.6165,
-     "kcal": 1400.33,
-     "protein_g": 132.5062
+     "carb_g": 116.42200000000001,
+     "fat_g": 48.300000000000004,
+     "kcal": 1400.38,
+     "protein_g": 130.5417
     }
    },
    {
@@ -821,12 +821,12 @@
       "date": "2026-11-13",
       "extras": [
        {
-        "grams": 10,
+        "grams": 5,
         "ingredient_id": "gao_te"
        },
        {
-        "grams": 20,
-        "ingredient_id": "thit_heo_xay_nac"
+        "grams": 25,
+        "ingredient_id": "thit_heo_nac_dui"
        }
       ],
       "forced_zero_carb": false,
@@ -845,11 +845,11 @@
        }
       ],
       "macros": {
-       "carb_g": 69.06200000000001,
-       "fat_g": 10.526000000000002,
-       "fiber_g": 9.13,
-       "kcal": 461.7,
-       "protein_g": 22.243000000000002
+       "carb_g": 65.02000000000001,
+       "fat_g": 11.0455,
+       "fiber_g": 9.065,
+       "kcal": 453.25,
+       "protein_g": 22.791500000000003
       },
       "recipe_id": "mw_sang_khoai_lang_trung",
       "scale_infeasible": true,
@@ -877,10 +877,10 @@
       "extras": [
        {
         "grams": 150,
-        "ingredient_id": "thit_heo_xay_nac"
+        "ingredient_id": "thit_heo_nac_dui"
        },
        {
-        "grams": 35,
+        "grams": 25,
         "ingredient_id": "gao_te"
        }
       ],
@@ -900,11 +900,11 @@
        }
       ],
       "macros": {
-       "carb_g": 33.642,
-       "fat_g": 6.721,
-       "fiber_g": 1.9969999999999999,
-       "kcal": 337.73,
-       "protein_g": 36.087700000000005
+       "carb_g": 25.326999999999998,
+       "fat_g": 8.77,
+       "fiber_g": 1.867,
+       "kcal": 323.73,
+       "protein_g": 34.4747
       },
       "recipe_id": "bi_xanh_hap_vi_song",
       "scale_infeasible": true,
@@ -978,7 +978,7 @@
       "extras": [
        {
         "grams": 150,
-        "ingredient_id": "thit_heo_xay_nac"
+        "ingredient_id": "thit_heo_nac_dui"
        },
        {
         "grams": 15,
@@ -1001,11 +1001,11 @@
        }
       ],
       "macros": {
-       "carb_g": 19.447000000000003,
-       "fat_g": 6.3035000000000005,
+       "carb_g": 19.132,
+       "fat_g": 8.4185,
        "fiber_g": 2.875,
-       "kcal": 266.34999999999997,
-       "protein_g": 34.041000000000004
+       "kcal": 288.85,
+       "protein_g": 33.141
       },
       "recipe_id": "su_su_hap_vi_song",
       "scale_infeasible": true,
@@ -1029,10 +1029,10 @@
      }
     ],
     "totals": {
-     "carb_g": 129.094,
-     "fat_g": 43.6165,
-     "kcal": 1400.33,
-     "protein_g": 132.5062
+     "carb_g": 116.42200000000001,
+     "fat_g": 48.300000000000004,
+     "kcal": 1400.38,
+     "protein_g": 130.5417
     }
    },
    {
@@ -1043,12 +1043,12 @@
       "date": "2026-11-14",
       "extras": [
        {
-        "grams": 10,
+        "grams": 5,
         "ingredient_id": "gao_te"
        },
        {
-        "grams": 20,
-        "ingredient_id": "thit_heo_xay_nac"
+        "grams": 25,
+        "ingredient_id": "thit_heo_nac_dui"
        }
       ],
       "forced_zero_carb": false,
@@ -1067,11 +1067,11 @@
        }
       ],
       "macros": {
-       "carb_g": 69.06200000000001,
-       "fat_g": 10.526000000000002,
-       "fiber_g": 9.13,
-       "kcal": 461.7,
-       "protein_g": 22.243000000000002
+       "carb_g": 65.02000000000001,
+       "fat_g": 11.0455,
+       "fiber_g": 9.065,
+       "kcal": 453.25,
+       "protein_g": 22.791500000000003
       },
       "recipe_id": "mw_sang_khoai_lang_trung",
       "scale_infeasible": true,
@@ -1099,10 +1099,10 @@
       "extras": [
        {
         "grams": 150,
-        "ingredient_id": "thit_heo_xay_nac"
+        "ingredient_id": "thit_heo_nac_dui"
        },
        {
-        "grams": 35,
+        "grams": 25,
         "ingredient_id": "gao_te"
        }
       ],
@@ -1122,11 +1122,11 @@
        }
       ],
       "macros": {
-       "carb_g": 33.642,
-       "fat_g": 6.721,
-       "fiber_g": 1.9969999999999999,
-       "kcal": 337.73,
-       "protein_g": 36.087700000000005
+       "carb_g": 25.326999999999998,
+       "fat_g": 8.77,
+       "fiber_g": 1.867,
+       "kcal": 323.73,
+       "protein_g": 34.4747
       },
       "recipe_id": "bi_xanh_hap_vi_song",
       "scale_infeasible": true,
@@ -1200,7 +1200,7 @@
       "extras": [
        {
         "grams": 150,
-        "ingredient_id": "thit_heo_xay_nac"
+        "ingredient_id": "thit_heo_nac_dui"
        },
        {
         "grams": 15,
@@ -1223,11 +1223,11 @@
        }
       ],
       "macros": {
-       "carb_g": 19.447000000000003,
-       "fat_g": 6.3035000000000005,
+       "carb_g": 19.132,
+       "fat_g": 8.4185,
        "fiber_g": 2.875,
-       "kcal": 266.34999999999997,
-       "protein_g": 34.041000000000004
+       "kcal": 288.85,
+       "protein_g": 33.141
       },
       "recipe_id": "su_su_hap_vi_song",
       "scale_infeasible": true,
@@ -1251,10 +1251,10 @@
      }
     ],
     "totals": {
-     "carb_g": 129.094,
-     "fat_g": 43.6165,
-     "kcal": 1400.33,
-     "protein_g": 132.5062
+     "carb_g": 116.42200000000001,
+     "fat_g": 48.300000000000004,
+     "kcal": 1400.38,
+     "protein_g": 130.5417
     }
    },
    {
@@ -1265,8 +1265,8 @@
       "date": "2026-11-15",
       "extras": [
        {
-        "grams": 35,
-        "ingredient_id": "thit_heo_xay_nac"
+        "grams": 40,
+        "ingredient_id": "thit_heo_nac_dui"
        },
        {
         "grams": 5,
@@ -1297,11 +1297,11 @@
        }
       ],
       "macros": {
-       "carb_g": 73.2325,
-       "fat_g": 15.625,
+       "carb_g": 73.159,
+       "fat_g": 16.389,
        "fiber_g": 1.1549999999999998,
-       "kcal": 639.95,
-       "protein_g": 48.242000000000004
+       "kcal": 652.0000000000001,
+       "protein_g": 49.05700000000001
       },
       "recipe_id": "mw_sang_thit_bam_trung_hap",
       "scale_infeasible": true,
@@ -1337,10 +1337,10 @@
       "extras": [
        {
         "grams": 150,
-        "ingredient_id": "thit_heo_xay_nac"
+        "ingredient_id": "thit_heo_nac_dui"
        },
        {
-        "grams": 30,
+        "grams": 20,
         "ingredient_id": "gao_te"
        }
       ],
@@ -1364,11 +1364,11 @@
        }
       ],
       "macros": {
-       "carb_g": 33.677,
-       "fat_g": 9.358,
-       "fiber_g": 4.1819999999999995,
-       "kcal": 358,
-       "protein_g": 35.836200000000005
+       "carb_g": 25.362000000000002,
+       "fat_g": 11.407,
+       "fiber_g": 4.052,
+       "kcal": 344,
+       "protein_g": 34.223200000000006
       },
       "recipe_id": "bap_cai_hap_vi_song",
       "scale_infeasible": true,
@@ -1438,10 +1438,10 @@
       "extras": [
        {
         "grams": 150,
-        "ingredient_id": "thit_heo_xay_nac"
+        "ingredient_id": "thit_heo_nac_dui"
        },
        {
-        "grams": 15,
+        "grams": 10,
         "ingredient_id": "gao_te"
        }
       ],
@@ -1461,11 +1461,11 @@
        }
       ],
       "macros": {
-       "carb_g": 16.247,
-       "fat_g": 6.409,
-       "fiber_g": 1.737,
-       "kcal": 258.73,
-       "protein_g": 35.0967
+       "carb_g": 11.932,
+       "fat_g": 8.491000000000001,
+       "fiber_g": 1.6720000000000002,
+       "kcal": 262.98,
+       "protein_g": 33.8402
       },
       "recipe_id": "cai_ngot_hap_vi_song",
       "scale_infeasible": true,
@@ -1489,10 +1489,10 @@
      }
     ],
     "totals": {
-     "carb_g": 123.87650000000001,
-     "fat_g": 40.902,
-     "kcal": 1399.68,
-     "protein_g": 131.7749
+     "carb_g": 111.17300000000002,
+     "fat_g": 45.797,
+     "kcal": 1401.98,
+     "protein_g": 129.7204
     }
    }
   ],
@@ -1507,19 +1507,35 @@
      "items": [
       {
        "aisle": "thit",
-       "ingredient_id": "thit_heo_xay_nac",
+       "ingredient_id": "thit_heo_nac_dui",
        "leftover_days": 3,
-       "leftover_g": 190,
-       "name": "Thịt heo xay (nạc ~96%)",
-       "need_g": 1410,
-       "pack_g": 200,
-       "pack_label": "thịt heo xay C.P 200 g",
-       "packs": 8,
+       "leftover_g": 170,
+       "name": "Thịt heo nạc đùi",
+       "need_g": 1330,
+       "pack_g": 300,
+       "pack_label": "thịt đùi heo C.P 300 g (giá thường)",
+       "packs": 5,
        "price_fallback": false,
        "price_store_id": "bach_hoa_xanh",
-       "price_vnd_per_pack": 22478,
-       "till_cost_vnd": 179824,
-       "used_cost_vnd": 158469.9
+       "price_vnd_per_pack": 35700,
+       "till_cost_vnd": 178500,
+       "used_cost_vnd": 158270
+      },
+      {
+       "aisle": "thit",
+       "ingredient_id": "thit_heo_xay_nac",
+       "leftover_days": 3,
+       "leftover_g": 100,
+       "name": "Thịt heo xay (nạc ~96%)",
+       "need_g": 100,
+       "pack_g": 200,
+       "pack_label": "thịt heo xay CP khay 200 g (giá thường)",
+       "packs": 1,
+       "price_fallback": false,
+       "price_store_id": "bach_hoa_xanh",
+       "price_vnd_per_pack": 25500,
+       "till_cost_vnd": 25500,
+       "used_cost_vnd": 12750
       }
      ]
     },
@@ -1700,9 +1716,9 @@
        "aisle": "gao_do_kho",
        "ingredient_id": "gao_te",
        "leftover_days": 180,
-       "leftover_g": 770,
+       "leftover_g": 830,
        "name": "Gạo tẻ (sống)",
-       "need_g": 230,
+       "need_g": 170,
        "pack_g": 1000,
        "pack_label": "Gạo tẻ 1 kg (ước tính)",
        "packs": 1,
@@ -1710,7 +1726,7 @@
        "price_store_id": "cho_khac",
        "price_vnd_per_pack": 22000,
        "till_cost_vnd": 22000,
-       "used_cost_vnd": 5060
+       "used_cost_vnd": 3740.0000000000005
       }
      ]
     },
@@ -1819,19 +1835,35 @@
    "items": [
     {
      "aisle": "thit",
-     "ingredient_id": "thit_heo_xay_nac",
+     "ingredient_id": "thit_heo_nac_dui",
      "leftover_days": 3,
-     "leftover_g": 190,
-     "name": "Thịt heo xay (nạc ~96%)",
-     "need_g": 1410,
-     "pack_g": 200,
-     "pack_label": "thịt heo xay C.P 200 g",
-     "packs": 8,
+     "leftover_g": 170,
+     "name": "Thịt heo nạc đùi",
+     "need_g": 1330,
+     "pack_g": 300,
+     "pack_label": "thịt đùi heo C.P 300 g (giá thường)",
+     "packs": 5,
      "price_fallback": false,
      "price_store_id": "bach_hoa_xanh",
-     "price_vnd_per_pack": 22478,
-     "till_cost_vnd": 179824,
-     "used_cost_vnd": 158469.9
+     "price_vnd_per_pack": 35700,
+     "till_cost_vnd": 178500,
+     "used_cost_vnd": 158270
+    },
+    {
+     "aisle": "thit",
+     "ingredient_id": "thit_heo_xay_nac",
+     "leftover_days": 3,
+     "leftover_g": 100,
+     "name": "Thịt heo xay (nạc ~96%)",
+     "need_g": 100,
+     "pack_g": 200,
+     "pack_label": "thịt heo xay CP khay 200 g (giá thường)",
+     "packs": 1,
+     "price_fallback": false,
+     "price_store_id": "bach_hoa_xanh",
+     "price_vnd_per_pack": 25500,
+     "till_cost_vnd": 25500,
+     "used_cost_vnd": 12750
     },
     {
      "aisle": "trung_dau_phu",
@@ -1997,9 +2029,9 @@
      "aisle": "gao_do_kho",
      "ingredient_id": "gao_te",
      "leftover_days": 180,
-     "leftover_g": 770,
+     "leftover_g": 830,
      "name": "Gạo tẻ (sống)",
-     "need_g": 230,
+     "need_g": 170,
      "pack_g": 1000,
      "pack_label": "Gạo tẻ 1 kg (ước tính)",
      "packs": 1,
@@ -2007,7 +2039,7 @@
      "price_store_id": "cho_khac",
      "price_vnd_per_pack": 22000,
      "till_cost_vnd": 22000,
-     "used_cost_vnd": 5060
+     "used_cost_vnd": 3740.0000000000005
     },
     {
      "aisle": "gia_vi_dau",
@@ -2107,8 +2139,8 @@
     }
    ],
    "skipped_pantry": [],
-   "till_cost": 556000,
-   "week_food_cost": 372000
+   "till_cost": 580000,
+   "week_food_cost": 383000
   },
   "start_date": "2026-11-09",
   "status": "partial",
@@ -2119,23 +2151,23 @@
     {
      "date": "2026-11-09",
      "exempt": false,
-     "kcal_delta": 0,
+     "kcal_delta": 0.2599999999999909,
      "ok": false,
-     "protein_short_g": 58.73199999999999
+     "protein_short_g": 58.76199999999999
     },
     {
      "date": "2026-11-10",
      "exempt": false,
-     "kcal_delta": 0,
+     "kcal_delta": 0.2599999999999909,
      "ok": false,
-     "protein_short_g": 58.73199999999999
+     "protein_short_g": 58.76199999999999
     },
     {
      "date": "2026-11-11",
      "exempt": false,
-     "kcal_delta": 0,
+     "kcal_delta": 0.2599999999999909,
      "ok": false,
-     "protein_short_g": 58.73199999999999
+     "protein_short_g": 58.76199999999999
     },
     {
      "date": "2026-11-12",
@@ -2170,19 +2202,34 @@
    "ok": false,
    "shortfalls": [
     {
-     "amount": 58.73199999999999,
+     "amount": 58.76199999999999,
      "date": "2026-11-09",
      "kind": "protein_low"
     },
     {
-     "amount": 58.73199999999999,
+     "amount": 0.2599999999999909,
+     "date": "2026-11-09",
+     "kind": "kcal_high"
+    },
+    {
+     "amount": 58.76199999999999,
      "date": "2026-11-10",
      "kind": "protein_low"
     },
     {
-     "amount": 58.73199999999999,
+     "amount": 0.2599999999999909,
+     "date": "2026-11-10",
+     "kind": "kcal_high"
+    },
+    {
+     "amount": 58.76199999999999,
      "date": "2026-11-11",
      "kind": "protein_low"
+    },
+    {
+     "amount": 0.2599999999999909,
+     "date": "2026-11-11",
+     "kind": "kcal_high"
     }
    ]
   }

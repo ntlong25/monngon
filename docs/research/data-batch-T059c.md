@@ -125,3 +125,23 @@ Kiểm: `gen_arb.py` chạy OK, 481 chuỗi. Trong ARB, `mealRiceCups` có `v1` 
 
 - TC-1-46: kiểm bốn nhãn chén và gram trong ngoặc.
 - TC-3-16: màn mâm hiện "1 chén cơm (~150 g)" hoặc "½ chén cơm (~75 g)"; ghi chú giảm cơm dạng "Bữa này bớt còn 1 chén cơm để giữ đúng calo."
+
+## 8. T-057d (09/11/2026): hai hồ sơ hộ đông người, ngân sách sát
+
+Thêm vào `data/test-profiles.json` (16 → 18 hồ sơ). Hồ sơ người chính dùng cùng chỉ tiêu với p11 (2.400 kcal, 125 g đạm) để tách biến hộ gia đình khỏi chỉ tiêu.
+
+| Hồ sơ | Hộ | Ngân sách | Mức cơm | Dụng cụ | budget-range min |
+|---|---|---|---|---|---|
+| `p17_ho_2_nguoi_lon_2_tre_ngan_sach_sat` | 2 người lớn + 2 trẻ | 2.100.000 ₫ | vua | bếp, nồi cơm điện | 2.100.000 ₫ |
+| `p18_ho_3_nguoi_lon_ngan_sach_sat_nhieu_com` | 3 người lớn | 1.950.000 ₫ | nhieu | bếp, nồi cơm điện | 1.950.000 ₫ |
+
+Cách lấy ngân sách: gọi `/v1/budget-range` với đúng hồ sơ, lấy `min_vnd` (đã làm tròn 50.000 ₫).
+
+Kiểm:
+- `npm run validate-data` và `dotnet ... validate-data data`: 0 lỗi, 1 cảnh báo (`rau_den`, đã biết).
+- Chạy `/v1/plans` (seed 1, bắt đầu 10/11/2026, bản data `13d35976…b124`, API local ở 127.0.0.1:5097):
+  - p17: 7/7 ngày đạt, 0 bữa bớt cơm, 0 bữa có hai canh, 17 món khác nhau.
+  - p18: 7/7 ngày đạt, 0 bữa bớt cơm, 0 bữa có hai canh, 14 món khác nhau.
+- Cả hai đều đạt ở ngân sách sát tối thiểu trên build hiện tại. Chưa thấy hồi quy T-098 (mất hết mâm) với hai hồ sơ này. Dev cần chạy `engine-report` và `check-tests` để xác nhận (AC T-057d).
+
+Lưu ý: hai hồ sơ dùng `preferences.rice_habit` (p17 `vua`, p18 `nhieu`). Các hồ sơ cũ không có trường này (mặc định `vua`).

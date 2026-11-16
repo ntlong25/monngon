@@ -7,12 +7,12 @@
   {
     "id": "winmart",
     "name": "WinMart",
-    "price_survey_date": "2026-11-06"
+    "price_survey_date": null
   },
   {
     "id": "coopmart",
     "name": "Co.opmart",
-    "price_survey_date": "2026-11-06"
+    "price_survey_date": null
   },
   {
     "id": "cho_khac",

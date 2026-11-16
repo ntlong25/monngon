@@ -101,6 +101,17 @@ public static partial class DataValidator
             if (!fallbackCovered.Contains(i.Id))
                 Err(issues, "prices", $"{i.Id}@{Dataset.FallbackStoreId}", "store_id", $"nguyên liệu \"{i.Id}\" chưa có giá ở \"cho_khac\"");
 
+        // T-104: dòng giá fallback `cho_khac` phải ghi nguồn (`source_note`). "chưa có nguồn" vẫn hợp lệ nhưng được đếm và cảnh báo (giá ước lượng).
+        var noSource = 0;
+        foreach (var p in prices.Where(p => p.StoreId == Dataset.FallbackStoreId))
+        {
+            var note = p.SourceNote?.Trim() ?? "";
+            if (note == "") Err(issues, "prices", $"{p.IngredientId}@{p.StoreId}", "source_note", $"dòng giá \"{Dataset.FallbackStoreId}\" bắt buộc có source_note (ghi \"{NoSource}\" nếu chưa khảo sát)");
+            else if (string.Equals(note, NoSource, StringComparison.OrdinalIgnoreCase)) noSource++;
+        }
+        if (noSource > 0)
+            Warn(issues, "prices", $"({Dataset.FallbackStoreId})", "source_note", $"{noSource} dòng giá \"{Dataset.FallbackStoreId}\" ghi \"{NoSource}\" (giá ước lượng)");
+
         foreach (var i in ingredients)
         {
             var dev = KcalDeviation(i.Per100g);
@@ -110,6 +121,9 @@ public static partial class DataValidator
         }
         return new ValidationResult(issues, new Dataset(ingredients, recipes, stores, prices));
     }
+
+    /// <summary>Giá trị <c>source_note</c> hợp lệ nhưng bị cảnh báo: dòng giá chưa khảo sát được nguồn (T-104).</summary>
+    public const string NoSource = "chưa có nguồn";
 
     // ---------- helpers ----------
     private static string Num(double d) => d.ToString("R", CultureInfo.InvariantCulture);
@@ -325,6 +339,6 @@ public static partial class DataValidator
         o.Num("price_vnd", nonNeg: true);
         var d = o.Num("shelf_life_days", positive: true);
         if (d is { } v && v != Math.Floor(v)) fail("shelf_life_days", "phải là số nguyên");
-        o.Str("source_url", required: false); o.Str("surveyed_on", required: false);
+        o.Str("source_url", required: false); o.Str("surveyed_on", required: false); o.Str("source_note", required: false);
     }
 }

@@ -155,6 +155,8 @@ public sealed class Price
     public int ShelfLifeDays { get; set; }
     public string? SourceUrl { get; set; }
     public string? SurveyedOn { get; set; }
+    /// <summary>T-104: nguồn của dòng giá; bắt buộc ở cửa hàng fallback <c>cho_khac</c> (<see cref="DataValidator.NoSource"/> = chưa khảo sát).</summary>
+    public string? SourceNote { get; set; }
 }
 
 // ----- Hồ sơ & lựa chọn người dùng -----

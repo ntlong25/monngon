@@ -68,7 +68,8 @@ public static class GoldenJson
                     if (a.ValueKind != JsonValueKind.Number) { diffs.Add($"{path}: kỳ vọng số"); return; }
                     var x = e.GetDouble();
                     var y = a.GetDouble();
-                    var tol = Exact(path) ? 0 : MacroTolerance;
+                    // Tiền (cost/_vnd): TS và C# cộng số thực theo thứ tự khác nhau nên chênh nhiễu ~1e-12 (hộ có trẻ em, hệ số bữa ăn của người khác, p17) — dung sai 1e-6 ₫ vẫn bắt mọi sai lệch thật.
+                    var tol = path.Contains("cost", StringComparison.Ordinal) || path.Contains("_vnd", StringComparison.Ordinal) ? 1e-6 : Exact(path) ? 0 : MacroTolerance;
                     if (Math.Abs(x - y) > tol) diffs.Add($"{path}: {x:R} ≠ {y:R}");
                     return;
                 }

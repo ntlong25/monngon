@@ -800,5 +800,105 @@
       "forbidden_ingredient_ids": [],
       "note": "Mới thêm: kiểm tra phủ món theo dụng cụ; kỳ vọng sẽ cập nhật theo kết quả đo."
     }
+  },
+  {
+    "id": "p17_ho_2_nguoi_lon_2_tre_ngan_sach_sat",
+    "name": "Hộ 2 người lớn + 2 trẻ, ngân sách sát tối thiểu, mức cơm 1 chén",
+    "note": "Hồi quy T-098: hộ đông người, ngân sách sát mức tối thiểu (budget-range 2.100.000 ₫ lúc lập hồ sơ), mức cơm vua. Hồ sơ người chính dùng persona p11 (chỉ tiêu 2.400 kcal, 125 g đạm).",
+    "profile": {
+      "goal": "hold",
+      "sex": "male",
+      "age": 40,
+      "height_cm": 168,
+      "weight_kg": 70,
+      "activity": "moderate",
+      "target_mode": "formula"
+    },
+    "preferences": {
+      "store_id": "bach_hoa_xanh",
+      "weekly_budget_vnd": 2100000,
+      "adults": 2,
+      "children": 2,
+      "slots": {
+        "breakfast": "on",
+        "lunch": "on",
+        "dinner": "on",
+        "snack_am": "skip",
+        "snack_pm": "on",
+        "lunch_style": "hot",
+        "snack_pm_style": "savory"
+      },
+      "diet": "none",
+      "low_carb": false,
+      "exclusions": [],
+      "disliked_ingredient_ids": [],
+      "health_leanings": [],
+      "cuisine_likes": [
+        "kho",
+        "canh"
+      ],
+      "cuisine_less": [],
+      "equipment": [
+        "bep",
+        "noi_com_dien"
+      ],
+      "blocked_recipe_ids": [],
+      "rice_habit": "vua"
+    },
+    "expect": {
+      "expect_all_days_pass": true,
+      "forbidden_ingredient_ids": [],
+      "note": "Kiểm: 7/7 ngày đạt; mỗi bữa vừa đủ mâm (không mất hết mâm như T-098); danh sách đi chợ nhân số người, trẻ 0,6 suất."
+    }
+  },
+  {
+    "id": "p18_ho_3_nguoi_lon_ngan_sach_sat_nhieu_com",
+    "name": "Hộ 3 người lớn, ngân sách sát tối thiểu, mức cơm 2 chén, ít dụng cụ",
+    "note": "Hồi quy T-098 và D-COM-05: hộ 3 người lớn, ngân sách sát (budget-range 1.950.000 ₫), mức cơm nhieu, chỉ bếp và nồi cơm điện. Hồ sơ người chính dùng persona p11.",
+    "profile": {
+      "goal": "hold",
+      "sex": "male",
+      "age": 40,
+      "height_cm": 168,
+      "weight_kg": 70,
+      "activity": "moderate",
+      "target_mode": "formula"
+    },
+    "preferences": {
+      "store_id": "bach_hoa_xanh",
+      "weekly_budget_vnd": 1950000,
+      "adults": 3,
+      "children": 0,
+      "slots": {
+        "breakfast": "on",
+        "lunch": "on",
+        "dinner": "on",
+        "snack_am": "skip",
+        "snack_pm": "on",
+        "lunch_style": "hot",
+        "snack_pm_style": "savory"
+      },
+      "diet": "none",
+      "low_carb": false,
+      "exclusions": [],
+      "disliked_ingredient_ids": [],
+      "health_leanings": [],
+      "cuisine_likes": [
+        "kho",
+        "canh"
+      ],
+      "cuisine_less": [],
+      "equipment": [
+        "bep",
+        "noi_com_dien"
+      ],
+      "blocked_recipe_ids": [],
+      "rice_habit": "nhieu"
+    },
+    "expect": {
+      "expect_all_days_pass": true,
+      "forbidden_ingredient_ids": [],
+      "note": "Kiểm: 7/7 ngày đạt; cảnh báo cơm (rice_reduced) được ghi nếu bữa bớt cơm; không có mâm 2 canh; mỗi bữa có ít nhất một món cơm/tinh bột khi khả thi."
+    }
   }
 ]

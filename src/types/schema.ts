@@ -85,7 +85,8 @@ export const RecipeSchema = z.object({
 export const StoreSchema = z.object({
   id,
   name: z.string().min(1),
-  price_survey_date: z.string().optional(),
+  // null = cửa hàng chưa khảo sát giá (WinMart, Co.opmart; T-054d): app hiện chuỗi "giá ước lượng" (L-16).
+  price_survey_date: z.string().nullable().optional(),
 });
 
 export const PriceSchema = z.object({
@@ -97,6 +98,8 @@ export const PriceSchema = z.object({
   shelf_life_days: z.number().int().positive(),
   source_url: z.string().optional(),
   surveyed_on: z.string().optional(),
+  // T-104: dòng giá fallback `cho_khac` bắt buộc có nguồn (hoặc "chưa có nguồn"); xem validate.ts.
+  source_note: z.string().optional(),
 });
 
 export type Aisle = z.infer<typeof AisleSchema>;

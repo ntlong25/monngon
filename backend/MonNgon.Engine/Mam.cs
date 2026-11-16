@@ -152,6 +152,8 @@ public static class RiceFeasibility
                 var pool = ok.Count > 0 ? ok : all.Where(a => all.Count > 0 && Score(a) == all.Max(Score)).ToList();
                 var c = pool.Select(a => a.CostVnd).DefaultIfEmpty(double.NaN).Min();
                 needed = double.IsNaN(c) ? null : Math.Ceiling(c / 1000) * 1000;
+                // Phương án thử lập đã nằm trong ngân sách mà vẫn thiếu cơm (chi phí ≤ ngân sách) thì chi phí đó không phải "ngân sách cần": không biết cần bao nhiêu → null (app hiện cảnh báo ngắn, không kèm số).
+                if (needed is { } n && prefs.WeeklyBudgetVnd is var wb && n <= wb && !ok.Any()) needed = null;
             }
             res.Add(new RiceFeasibilityItem
             {
