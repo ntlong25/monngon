@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:fitpro_mamdu/api/generated/models.dart';
 import 'package:fitpro_mamdu/app.dart';
@@ -116,6 +117,34 @@ void main() {
           textOf(t, 'shop-till-info'),
           'Lần đi chợ này ước tính 1.342.390 ₫, cao hơn ngân sách vì mua nguyên gói; phần dư dùng tiếp cho tuần sau.',
         );
+      },
+    );
+
+    testWidgets(
+      'L-16: cửa hàng chưa khảo sát giá (price_survey_date rỗng) → ghi "Giá ước lượng, chưa khảo sát tại cửa hàng này"; cửa hàng có ngày → ghi ngày',
+      (t) async {
+        // Bản chụp API hiện hành: WinMart và Co.opmart chưa có dòng giá khảo sát.
+        final reference =
+            jsonDecode(File('test/fixtures/reference.json').readAsStringSync())
+                as Map<String, dynamic>;
+        MemoryStore at(String storeId) {
+          final s = seeded();
+          s.data[StoreKeys.preferences] = jsonEncode(
+            Defaults.preferences.copyWith(storeId: storeId).toJson(),
+          );
+          return s;
+        }
+
+        FakeAdapter withRef() =>
+            FakeAdapter()..on('GET', '/v1/reference', reference);
+        await pumpShopping(t, store: at('winmart'), adapter: withRef());
+        expect(
+          textOf(t, 'shop-survey'),
+          'Giá ước lượng, chưa khảo sát tại cửa hàng này',
+        );
+        await t.pumpWidget(const SizedBox());
+        await pumpShopping(t, store: at('bach_hoa_xanh'), adapter: withRef());
+        expect(textOf(t, 'shop-survey'), 'Giá khảo sát ngày 06/11/2026');
       },
     );
 

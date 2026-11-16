@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:fitpro_mamdu/app.dart';
 import 'package:fitpro_mamdu/core/wakelock.dart';
+import 'package:fitpro_mamdu/features/onboarding/onboarding_nav.dart';
 import 'package:fitpro_mamdu/state/app_state.dart';
 import 'package:fitpro_mamdu/state/storage.dart';
 import 'package:fitpro_mamdu/state/week_changes.dart';
@@ -148,7 +149,7 @@ void main() {
   group('Onboarding ở chữ 1.3×', () {
     for (var step = 0; step <= 13; step++) {
       testWidgets('bước ${step + 1}/14', (t) async {
-        await _pump(t, onboardingAt(step));
+        await _pump(t, onboardingAtStep(OnboardingStep.values[step]));
         await _a11y(t);
       });
     }

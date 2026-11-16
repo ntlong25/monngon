@@ -6,9 +6,11 @@ import '../../l10n/gen/app_localizations.dart';
 import '../../state/providers.dart';
 import '../../ui/ui.dart';
 import '../common/reference_gate.dart';
+import 'onboarding_nav.dart';
 import 'onboarding_scaffold.dart';
+import 'swipe_deck.dart';
 
-/// Bước 11 — thẻ vuốt khẩu vị (US-1.5 AC1, AC2). Vuốt phải = thích, trái = ít hơn.
+/// Bước 2 — thẻ vuốt khẩu vị (US-1.5 AC1, AC2; D-ONB-06). Vuốt phải = thích, trái = ít hơn.
 /// Có nút ✕ / ♥ / hoàn tác / thay thế cho người không vuốt được.
 /// Kết quả ghi vào `cuisine_likes` / `cuisine_less` (trọng số mềm) theo `tag` của thẻ.
 class SwipeStep extends ConsumerStatefulWidget {
@@ -22,8 +24,10 @@ class _SwipeStepState extends ConsumerState<SwipeStep> {
   /// Thứ tự thẻ chưa vuốt có thể bị đẩy xuống cuối bởi "Thay thế" (chỉ trong phiên này).
   final List<String> _deferred = [];
 
-  /// Lịch sử quyết định trong phiên, để hoàn tác.
-  final List<String> _history = [];
+  /// Lịch sử quyết định trong phiên (mã thẻ, đã thích hay không), để hoàn tác và cho thẻ quay lại từ đúng phía.
+  final List<(String, bool)> _history = [];
+
+  final SwipeDeckController _deck = SwipeDeckController();
 
   List<SwipeCardDto> _remaining(ReferenceResponse r, List<String> swiped) {
     final pending = r.swipeCards.where((c) => !swiped.contains(c.id)).toList();
@@ -49,13 +53,13 @@ class _SwipeStepState extends ConsumerState<SwipeStep> {
     ref.read(onboardingProvider.notifier).markSwiped(card.id);
     setState(() {
       _deferred.remove(card.id);
-      _history.add(card.id);
+      _history.add((card.id, like));
     });
   }
 
   void _undo(ReferenceResponse r) {
-    if (_history.isEmpty) return;
-    final id = _history.removeLast();
+    if (_history.isEmpty || _deck.busy) return;
+    final (id, wasLike) = _history.removeLast();
     final card = r.swipeCards.firstWhere(
       (c) => c.id == id,
       orElse: () => const SwipeCardDto(),
@@ -70,9 +74,12 @@ class _SwipeStepState extends ConsumerState<SwipeStep> {
         );
     ref.read(onboardingProvider.notifier).unmarkSwiped(id);
     setState(() {});
+    // thẻ quay lại từ phía nó đã bay ra
+    _deck.enterFrom(like: wasLike);
   }
 
   void _replace(SwipeCardDto card) {
+    if (_deck.busy) return;
     setState(() {
       _deferred
         ..remove(card.id)
@@ -93,15 +100,38 @@ class _SwipeStepState extends ConsumerState<SwipeStep> {
     });
   }
 
+  /// "Bỏ qua" (D-ONB-06 ý 3): không gửi khẩu vị (như chưa vuốt), sang bước kế. Quay lại thì thẻ hiện lại từ đầu.
+  void _skipAll() {
+    ref
+        .read(preferencesProvider.notifier)
+        .update(
+          (p) => p.copyWith(cuisineLikes: const [], cuisineLess: const []),
+        );
+    ref.read(onboardingProvider.notifier).resetSwiped();
+    _history.clear();
+    _deferred.clear();
+    OnboardingNav(ref).next();
+  }
+
   @override
   Widget build(BuildContext context) {
     final l = AppL10n.of(context);
     final swiped = ref.watch(onboardingProvider.select((s) => s.swipedCardIds));
     final prefs = ref.watch(preferencesProvider);
+    // Còn thẻ chưa vuốt thì cho "Bỏ qua"; đã hết thẻ thì "Tiếp tục" giữ kết quả.
+    final cardsLeft = ref
+        .watch(referenceProvider)
+        .when(
+          data: (r) => _remaining(r, swiped).isNotEmpty,
+          loading: () => true,
+          error: (_, _) => true,
+        );
 
     return OnboardingScaffold(
       title: l.onboardingSwipeTitle,
       subtitle: l.onboardingSwipeHint,
+      secondaryLabel: cardsLeft ? l.onboardingSwipeSkipAll : null,
+      onSecondary: _skipAll,
       children: [
         ReferenceGate(
           builder: (context, r) {
@@ -119,46 +149,52 @@ class _SwipeStepState extends ConsumerState<SwipeStep> {
                 style: Theme.of(context).textTheme.labelLarge,
               ),
               const SizedBox(height: AppSpacing.md),
-              Dismissible(
-                key: ValueKey('swipe-${card.id}'),
-                // Chỉ cho vuốt ngang; vuốt phải = thích.
-                direction: DismissDirection.horizontal,
-                onDismissed: (d) =>
-                    _decide(card, like: d == DismissDirection.startToEnd),
-                child: _SwipeCard(card: card),
+              // Thẻ căn giữa, kéo theo ngón tay; vuốt phải = thích, trái = ít hơn (T-106).
+              SwipeDeck<SwipeCardDto>(
+                cards: remaining.take(3).toList(),
+                idOf: (c) => c.id,
+                controller: _deck,
+                onDecide: _decide,
+                faceBuilder: (context, c) => _SwipeFace(card: c),
+                likeLabel: l.onboardingSwipeLike,
+                lessLabel: l.onboardingSwipeLess,
               ),
               const SizedBox(height: AppSpacing.lg),
-              Wrap(
-                alignment: WrapAlignment.spaceEvenly,
-                runAlignment: WrapAlignment.center,
-                spacing: AppSpacing.md,
-                runSpacing: AppSpacing.md,
-                children: [
-                  _RoundAction(
-                    key: const Key('swipe-undo'),
-                    icon: Icons.undo,
-                    label: l.onboardingSwipeUndo,
-                    onTap: _history.isEmpty ? null : () => _undo(r),
-                  ),
-                  _RoundAction(
-                    key: const Key('swipe-dislike'),
-                    icon: Icons.close,
-                    label: l.onboardingSwipeDislike,
-                    onTap: () => _decide(card, like: false),
-                  ),
-                  _RoundAction(
-                    key: const Key('swipe-replace'),
-                    icon: Icons.autorenew,
-                    label: l.onboardingSwipeSkip,
-                    onTap: remaining.length > 1 ? () => _replace(card) : null,
-                  ),
-                  _RoundAction(
-                    key: const Key('swipe-like'),
-                    icon: Icons.favorite,
-                    label: l.onboardingSwipeLike,
-                    onTap: () => _decide(card, like: true),
-                  ),
-                ],
+              // Trải hết chiều rộng (Column căn trái nên Wrap sẽ co lại nếu không có SizedBox) để hàng nút căn giữa.
+              SizedBox(
+                width: double.infinity,
+                child: Wrap(
+                  alignment: WrapAlignment.spaceEvenly,
+                  runAlignment: WrapAlignment.center,
+                  spacing: AppSpacing.md,
+                  runSpacing: AppSpacing.md,
+                  children: [
+                    _RoundAction(
+                      key: const Key('swipe-undo'),
+                      icon: Icons.undo,
+                      label: l.onboardingSwipeUndo,
+                      onTap: _history.isEmpty ? null : () => _undo(r),
+                    ),
+                    _RoundAction(
+                      key: const Key('swipe-dislike'),
+                      icon: Icons.close,
+                      label: l.onboardingSwipeDislike,
+                      onTap: () => _deck.swipe(like: false),
+                    ),
+                    _RoundAction(
+                      key: const Key('swipe-replace'),
+                      icon: Icons.autorenew,
+                      label: l.onboardingSwipeSkip,
+                      onTap: remaining.length > 1 ? () => _replace(card) : null,
+                    ),
+                    _RoundAction(
+                      key: const Key('swipe-like'),
+                      icon: Icons.favorite,
+                      label: l.onboardingSwipeLike,
+                      onTap: () => _deck.swipe(like: true),
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(height: AppSpacing.lg),
               Text(
@@ -185,33 +221,41 @@ ImageGroup _groupOfTag(String tag) => switch (tag) {
   _ => ImageGroup.com,
 };
 
-class _SwipeCard extends StatelessWidget {
-  const _SwipeCard({required this.card});
+/// Mặt thẻ: ảnh minh họa ở phần trên, tên và nhãn nhóm món ở dưới. Khung, bo góc, bóng do [SwipeDeck] vẽ.
+class _SwipeFace extends StatelessWidget {
+  const _SwipeFace({required this.card});
 
   final SwipeCardDto card;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Card(
-      key: Key('swipe-card-${card.id}'),
-      child: ConstrainedBox(
-        // Chữ lớn thì thẻ cao thêm, không cắt nội dung.
-        constraints: const BoxConstraints(minHeight: 220),
-        child: Padding(
-          padding: const EdgeInsets.all(AppSpacing.xl),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ExcludeSemantics(
-                child: DishImage(
-                  group: _groupOfTag(card.tag),
-                  size: 96,
-                  borderRadius: AppRadius.lg,
+    return Column(
+      children: [
+        // Ảnh minh họa chiếm phần trên, co lại khi chữ lớn để không tràn.
+        Expanded(
+          child: Container(
+            color: AppColors.surfaceVariant,
+            width: double.infinity,
+            child: ExcludeSemantics(
+              child: LayoutBuilder(
+                builder: (context, c) => Center(
+                  child: DishImage(
+                    group: _groupOfTag(card.tag),
+                    size: (c.maxHeight - AppSpacing.xl).clamp(48.0, 128.0),
+                    borderRadius: AppRadius.lg,
+                  ),
                 ),
               ),
-              const SizedBox(height: AppSpacing.md),
+            ),
+          ),
+        ),
+        // Tên và nhãn nhóm món ở dưới.
+        Padding(
+          padding: const EdgeInsets.all(AppSpacing.lg),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
               Text(
                 card.title,
                 style: theme.textTheme.titleLarge,
@@ -228,7 +272,7 @@ class _SwipeCard extends StatelessWidget {
             ],
           ),
         ),
-      ),
+      ],
     );
   }
 }

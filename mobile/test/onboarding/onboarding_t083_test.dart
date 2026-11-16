@@ -1,4 +1,5 @@
 import 'package:fitpro_mamdu/app.dart';
+import 'package:fitpro_mamdu/features/onboarding/onboarding_nav.dart';
 import 'package:fitpro_mamdu/features/onboarding/onboarding_providers.dart';
 import 'package:fitpro_mamdu/state/providers.dart';
 import 'package:fitpro_mamdu/state/storage.dart';
@@ -42,25 +43,38 @@ void main() {
     expect(find.byKey(const Key('onboarding-back')), findsNothing);
   });
 
-  testWidgets('Chọn mục tiêu rồi Tiếp tục → bước cơ thể; Back giữ lựa chọn', (
-    t,
-  ) async {
-    final c = await pumpApp(t, store: MemoryStore());
-    await t.tap(find.text('Tăng cơ'));
-    await t.pump();
-    expect(c.read(profileProvider).goal, 'build');
-    await t.tap(find.text('Tiếp tục'));
-    await t.pumpAndSettle();
-    expect(find.text('Cho mình biết về cơ thể bạn'), findsOneWidget);
-    expect(c.read(onboardingProvider).step, 1);
+  testWidgets(
+    'Chọn mục tiêu (thẻ quẹt chọn 1) → tự sang bước khẩu vị; Back giữ lựa chọn',
+    (t) async {
+      t.view.devicePixelRatio = 1;
+      t.view.physicalSize = const Size(800, 1400);
+      addTearDown(t.view.reset);
+      final c = await pumpApp(
+        t,
+        store: MemoryStore(),
+        adapter: FakeAdapter()
+          ..on('POST', '/v1/targets', fixture('targets.json'))
+          ..on('GET', '/v1/reference', fixture('reference.json')),
+      );
+      await t.tap(find.byKey(const Key('goal-dot-build')));
+      await t.pumpAndSettle();
+      await t.tap(find.byKey(const Key('goal-choose')));
+      await t.pump();
+      expect(c.read(profileProvider).goal, 'build');
+      await t.pump(const Duration(milliseconds: 450));
+      await t.pumpAndSettle();
+      expect(find.text('Vuốt để chọn món bạn thích'), findsOneWidget);
+      expect(c.read(onboardingProvider).step, OnboardingStep.swipe.index);
 
-    await t.tap(find.byKey(const Key('onboarding-back')));
-    await t.pumpAndSettle();
-    expect(find.text('Bạn muốn đạt mục tiêu nào?'), findsOneWidget);
-    // thẻ "Tăng cơ" vẫn được chọn
-    expect(find.byIcon(Icons.check_circle), findsOneWidget);
-    expect(c.read(profileProvider).goal, 'build');
-  });
+      await t.tap(find.byKey(const Key('onboarding-back')));
+      await t.pumpAndSettle();
+      expect(find.text('Bạn muốn đạt mục tiêu nào?'), findsOneWidget);
+      // thẻ "Tăng cơ" vẫn được chọn và nằm trên cùng
+      expect(find.text('Đã chọn'), findsOneWidget);
+      expect(find.byKey(const Key('swipe-card-build')), findsOneWidget);
+      expect(c.read(profileProvider).goal, 'build');
+    },
+  );
 
   testWidgets('Tắt app giữa chừng → mở lại đúng bước và đúng lựa chọn', (
     t,
@@ -70,7 +84,7 @@ void main() {
     c
         .read(profileProvider.notifier)
         .update((p) => p.copyWith(weightKg: 77, goal: 'hold'));
-    c.read(onboardingProvider.notifier).goTo(2);
+    c.read(onboardingProvider.notifier).goTo(OnboardingStep.activity.index);
     await t.pumpAndSettle();
     expect(find.text('Bạn vận động mỗi tuần thế nào?'), findsOneWidget);
 

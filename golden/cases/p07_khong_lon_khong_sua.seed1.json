@@ -1921,13 +1921,13 @@
        "name": "Thịt bò đùi (nạc)",
        "need_g": 105,
        "pack_g": 200,
-       "pack_label": "Đùi bò 200 g (giá flash sale, giá gốc 63.400 ₫)",
+       "pack_label": "Đùi bò 200 g (giá thường; flash sale 58.929 ₫ ngày 09/11)",
        "packs": 1,
        "price_fallback": false,
        "price_store_id": "bach_hoa_xanh",
-       "price_vnd_per_pack": 58929,
-       "till_cost_vnd": 58929,
-       "used_cost_vnd": 30937.725000000002
+       "price_vnd_per_pack": 63400,
+       "till_cost_vnd": 63400,
+       "used_cost_vnd": 33285
       },
       {
        "aisle": "thit",
@@ -2318,13 +2318,13 @@
      "name": "Thịt bò đùi (nạc)",
      "need_g": 105,
      "pack_g": 200,
-     "pack_label": "Đùi bò 200 g (giá flash sale, giá gốc 63.400 ₫)",
+     "pack_label": "Đùi bò 200 g (giá thường; flash sale 58.929 ₫ ngày 09/11)",
      "packs": 1,
      "price_fallback": false,
      "price_store_id": "bach_hoa_xanh",
-     "price_vnd_per_pack": 58929,
-     "till_cost_vnd": 58929,
-     "used_cost_vnd": 30937.725000000002
+     "price_vnd_per_pack": 63400,
+     "till_cost_vnd": 63400,
+     "used_cost_vnd": 33285
     },
     {
      "aisle": "thit",
@@ -2680,8 +2680,8 @@
     }
    ],
    "skipped_pantry": [],
-   "till_cost": 764000,
-   "week_food_cost": 406000
+   "till_cost": 768000,
+   "week_food_cost": 408000
   },
   "start_date": "2026-11-09",
   "status": "ready",

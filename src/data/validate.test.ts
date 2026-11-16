@@ -150,3 +150,35 @@ describe('load', () => {
     expect(ds.pricesByIngredient.size).toBe(0);
   });
 });
+
+describe('source_note của giá cho_khac (T-104)', () => {
+  const chokhac = (r: Raw) => r.prices.filter((p) => p.store_id === 'cho_khac');
+
+  it('thiếu source_note ở dòng cho_khac là lỗi, chỉ rõ nguyên liệu', () => {
+    const r = raw();
+    const p = chokhac(r)[0];
+    delete p.source_note;
+    expect(errors(r)).toContainEqual(
+      expect.objectContaining({ file: 'prices', id: `${p.ingredient_id}@cho_khac`, field: 'source_note' }),
+    );
+  });
+
+  it('source_note rỗng cũng là lỗi; cửa hàng khác không bắt buộc', () => {
+    const r = raw();
+    chokhac(r)[0].source_note = '  ';
+    expect(errors(r).filter((e) => e.field === 'source_note')).toHaveLength(1);
+    const r2 = raw();
+    r2.prices.push({ ingredient_id: r2.prices[0].ingredient_id, store_id: 'bach_hoa_xanh', pack_g: 100, pack_label: 'x', price_vnd: 1000, shelf_life_days: 2 });
+    expect(errors(r2).filter((e) => e.field === 'source_note')).toEqual([]);
+  });
+
+  it('"chưa có nguồn" hợp lệ nhưng được đếm và cảnh báo một lần', () => {
+    const r = raw();
+    chokhac(r)[0].source_note = 'chưa có nguồn';
+    chokhac(r)[1]!.source_note = 'Chưa có nguồn';
+    expect(errors(r)).toEqual([]);
+    const w = validateDataset(r).filter((i) => i.severity === 'warning' && i.field === 'source_note');
+    expect(w).toHaveLength(1);
+    expect(w[0]!.message).toContain('2 dòng');
+  });
+});

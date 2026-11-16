@@ -67,16 +67,19 @@ Ngày: 06/11/2026 · Cập nhật: 07/11/2026 (T-057b) · Owner: RESEARCH · Că
 | TC-1-25 | P0 | Mở chip gợi ý món hay bị ghét | Có ≥ 6 chip; chọn một chip thì nguyên liệu vào danh sách loại (AC4) |
 | TC-1-26 | P0 | Chọn "Nhiều xơ" trong xu hướng nấu ăn | Chỉ là ưu tiên mềm; hiển thị dòng miễn trừ y tế bên cạnh (AC5) |
 
-### US-1.5 — Thẻ vuốt và dụng cụ bếp
+### US-1.5 — Thẻ vuốt (bước 2, D-ONB-06) và dụng cụ bếp (bước 13)
 
 | ID | P | Bước | Kết quả mong đợi |
 |---|---|---|---|
-| TC-1-27 | P0 | Vuốt phải 1 thẻ, trái 1 thẻ | Thẻ phải ghi "thích", thẻ trái ghi "ít hơn"; tiến đến thẻ kế tiếp (AC1) |
-| TC-1-28 | P0 | Dùng nút ✕, ♥ thay vì vuốt; bấm "Hoàn tác" | Nút hoạt động như vuốt; hoàn tác quay lại thẻ trước (AC1) |
-| TC-1-29 | P0 | Kiểm trên bàn phím và trình đọc màn hình | Mọi thao tác vuốt có nút thay thế (NFR trợ năng) |
-| TC-1-30 | P0 | Ở màn kết quả, bấm "Vuốt lại" | Kết quả xóa, thẻ hiện lại từ đầu (AC2) |
-| TC-1-31 | P0 | Bỏ chọn hết thiết bị nấu | App khóa nút Tiếp tục kèm lời nhắc cần ≥ 1 thiết bị nấu; API trả 400 khi `equipment` rỗng (AC3, D-QA-05) |
-| TC-1-32 | P0 | Chọn chỉ "Lò vi sóng" | Tạo tuần được; công thức cần bếp không xuất hiện (AC3) |
+| TC-1-27 | P0 | Ở bước 2 (ngay sau Mục tiêu): vuốt phải 1 thẻ, trái 1 thẻ | Thẻ phải ghi "thích", thẻ trái ghi "ít hơn"; tiến đến thẻ kế tiếp (AC1) |
+| TC-1-28 | P0 | Ở bước 2: dùng nút ✕, ♥ thay vì vuốt; bấm "Hoàn tác" | Nút hoạt động như vuốt; hoàn tác quay lại thẻ trước (AC1) |
+| TC-1-29 | P0 | Ở bước 2: kiểm trên bàn phím và trình đọc màn hình | Mọi thao tác vuốt có nút thay thế (NFR trợ năng) |
+| TC-1-30 | P0 | Ở bước 2, màn kết quả, bấm "Vuốt lại" | Kết quả xóa, thẻ hiện lại từ đầu (AC2) |
+| TC-1-31 | P0 | Ở bước 13 (Dụng cụ): bỏ chọn hết thiết bị nấu | App khóa nút Tiếp tục kèm lời nhắc cần ≥ 1 thiết bị nấu; API trả 400 khi `equipment` rỗng (AC3, D-QA-05) |
+| TC-1-32 | P0 | Ở bước 13: chọn chỉ "Lò vi sóng" | Tạo tuần được; công thức cần bếp không xuất hiện (AC3) |
+| TC-1-49 | P0 | Ở bước 2, bấm "Bỏ qua" (`onboarding.swipe.skip_all`) mà không vuốt thẻ nào; đi hết onboarding và tạo tuần | Sang bước 3 không lỗi. Request `POST /v1/plans` không có `cuisine_likes`/`cuisine_less`. Tổng kết ghi "Khẩu vị: chưa chọn" (`onboarding.summary.taste_none`). Tab Bạn có chỗ sửa khẩu vị (US-1.5 AC4, D-ONB-06 ý 3) |
+| TC-1-50 | P0 | Ở bước 2, vuốt phải thẻ "Xào nhanh" (`card_01`, có món thịt heo). Ở bước 10 (Chế độ ăn) chọn "Ăn chay" rồi tạo tuần | Tuần không có món có thịt ở mọi bữa của 7 ngày (kiểm qua API, `POST /v1/plans`). Ràng buộc chay thắng khẩu vị; không hỏi lại, không cảnh báo về khẩu vị; màn kết quả vuốt không hứa món cụ thể (D-ONB-06 ý 2) |
+| TC-1-51 | P0 | Trên bản cũ, làm dở và dừng ở bước "Ngân sách" (đã chọn mục tiêu, cơ thể, cửa hàng, hộ gia đình, chưa vuốt). Cập nhật lên bản mới (T-103), mở lại app | Về đúng bước "Ngân sách" theo tên, không nhảy sang bước khác. Các lựa chọn trước còn nguyên. Vì chưa vuốt nên bước 2 có thẻ vuốt khi người dùng quay lại. Không mất lựa chọn (US-1.6 AC4, D-ONB-06 ý 4) |
 
 ### US-1.6 — Tổng kết và tạo tuần
 
@@ -85,15 +88,15 @@ Ngày: 06/11/2026 · Cập nhật: 07/11/2026 (T-057b) · Owner: RESEARCH · Că
 | TC-1-33 | P0 | Đi tới màn tổng kết với các lựa chọn đã đặt | Checklist hiện lần lượt: mục tiêu, protein, calo, số bữa, xu hướng, đã loại, căn bếp, ngân sách; giá trị khớp lựa chọn (AC1) |
 | TC-1-34 | P0 | Bấm "Tạo thực đơn tuần" | UI không đơ; hoàn tất ≤ 5 giây với dữ liệu MVP trên máy tầm trung (AC2, hiệu năng) |
 | TC-1-35 | P0 | Tạo tuần xong | Chuyển sang tab Kế hoạch; ngày đầu tiên là ngày mai theo giờ máy (AC3) |
-| TC-1-36 | P0 | Quay lại từ bước 6 về bước 2 rồi tiến lại | Mọi lựa chọn giữ nguyên (AC4) |
-| TC-1-37 | P0 | Đóng app ở bước 5; mở lại | Tiếp tục đúng bước 5 với dữ liệu đã nhập (AC4) |
+| TC-1-36 | P0 | Từ bước 4 (Vận động) quay lại bước 2 (Khẩu vị, thẻ vuốt) rồi tiến lại | Mọi lựa chọn giữ nguyên, kể cả kết quả vuốt (AC4) |
+| TC-1-37 | P0 | Đóng app ở bước 5 (Chỉ tiêu); mở lại | Tiếp tục đúng bước 5 (Chỉ tiêu) với dữ liệu đã nhập (AC4) |
 | TC-1-38 | P0 | Ở màn tổng kết, kiểm xem có nút trả phí không | Không có paywall; chỉ có chỗ trống sau màn tổng kết (PRD 4.1, P2) |
 
 ### US-1.4b — Thói quen ăn cơm (D-COM-01, T-059c)
 
 | ID | P | Bước | Kết quả mong đợi |
 |---|---|---|---|
-| TC-1-39 | P0 | Vào bước "Thói quen ăn cơm" sau bước Kiêng/Ghét/Vuốt (giữa US-1.4 và US-1.5) | Có câu "Mỗi bữa trưa/tối bạn thường ăn mấy chén cơm?" và 4 nhãn đúng `onboarding.rice.*` trong vi.json; mặc định "Vừa (1 chén)" được chọn (US-1.4b AC1) |
+| TC-1-39 | P0 | Vào bước "Thói quen ăn cơm": ngay sau "Chế độ ăn" (bước 10), trước "Không muốn thấy" (bước 12), tức là bước 11 | Có câu "Mỗi bữa trưa/tối bạn thường ăn mấy chén cơm?" và 4 nhãn đúng `onboarding.rice.*` trong vi.json; mặc định "Vừa (1 chén)" được chọn (US-1.4b AC1) |
 | TC-1-40 | P0 | Đọc ghi chú dưới các nhãn | Có "Chỉ áp cho bạn. Người lớn khác ăn mức Vừa, trẻ em ăn 0,6 suất." (US-1.4b AC1) |
 | TC-1-41 | P0 | Hồ sơ giảm mỡ 1.400 kcal, 4 bữa: chọn "Rất nhiều (3 chén trở lên)" | Hiện "Với mức calo hiện tại, một số bữa sẽ phải bớt cơm. Bạn vẫn có thể giữ lựa chọn này."; nút Tiếp tục vẫn bật (không chặn). Quy tắc: kcal cơm của mức > 45% kcal trung bình một bữa chính (trưa và tối, lấy từ phân bổ US-1.3) (US-1.4b AC2). Tham số "bữa chính" cần PM xác nhận |
 | TC-1-42 | P0 | Ở US-1.4 chọn "Ít tinh bột" (`low_carb`), rồi đi tới bước thói quen | Bước được bỏ qua; tuần sau đó không có món cơm ở mâm trưa/tối (US-1.4b, D-COM-01) |
@@ -210,7 +213,7 @@ Ngày: 06/11/2026 · Cập nhật: 07/11/2026 (T-057b) · Owner: RESEARCH · Că
 | TC-E-04 | P0 | Mất mạng khi tạo tuần | Tắt mạng (Wi-Fi và dữ liệu) rồi bấm "Tạo thực đơn tuần" | Hiện "Chưa tạo được thực đơn" + thông báo "Không có mạng. Dữ liệu vẫn được giữ trên máy." + nút "Thử lại"; không crash; dữ liệu onboarding và tuần cũ trên máy giữ nguyên (D-QA-10, ADR-001). Sửa 2026-11-07 (T-057c), thay "tạo tuần vẫn chạy" |
 | TC-E-11 | P0 | Xem tuần đã tạo khi mất mạng | Tạo tuần khi có mạng; tắt mạng; mở tab Kế hoạch, mở một bữa và một công thức, mở tab Đi chợ | Kế hoạch, mâm, công thức (kể cả "Cách chúng mình tính") và danh sách đi chợ hiển thị đầy đủ từ dữ liệu trên máy, không lỗi mạng (D-QA-10, ADR-001). Tab Bạn hiện chỉ tiêu đã lưu (L-13) |
 | TC-E-12 | P0 | Thử lại khi có mạng trở lại | Từ TC-E-04 (màn lỗi), bật mạng, bấm "Thử lại" | Tuần được tạo; tab Kế hoạch hiện tuần mới (ngày đầu là ngày mai); không cần đóng và mở lại app (D-QA-10) |
-| TC-E-05 | P0 | Tắt app giữa onboarding | Đóng app ở bước 5; mở lại | Tiếp tục đúng bước (TC-1-37) |
+| TC-E-05 | P0 | Tắt app giữa onboarding | Đóng app ở bước 5 (Chỉ tiêu); mở lại | Tiếp tục đúng bước (TC-1-37) |
 | TC-E-06 | P0 | Đổi múi giờ hoặc qua ngày sang tuần mới | Đổi giờ máy sang ngày Chủ nhật 23:59 rồi sang thứ Hai | Tuần mới theo giờ máy; tuần cũ chuyển sang "Tuần đã lưu" |
 | TC-E-07 | P0 | Hiệu năng | Mở tab Kế hoạch | Mở ≤ 300 ms; tạo tuần ≤ 5 s (PRD 7) |
 | TC-E-08 | P0 | Trợ năng | Kiểm vùng chạm và tương phản | Vùng chạm ≥ 44 pt; tương phản WCAG AA |

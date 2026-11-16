@@ -62,9 +62,11 @@ abstract final class StoreKeys {
   static const currentPlan = 'plan.current';
   static const savedPlans = 'plan.saved';
   static const shopping = 'shopping';
+  static const shopView = 'shop_view';
   static const cooked = 'cooked_steps';
   static const swapCount = 'swap_count';
   static const reference = 'cache.reference';
+
   /// Chỉ tiêu mỗi ngày đã tính gần nhất kèm hồ sơ dùng để tính (D-QA-09): tab Bạn đọc lại khi offline.
   static const targets = 'cache.targets';
   static const ingredientNames = 'ingredient_names';

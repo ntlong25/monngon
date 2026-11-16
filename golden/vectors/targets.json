@@ -651,6 +651,74 @@
      "tdee": 1689.875
     }
    }
+  },
+  {
+   "bmr": 1555,
+   "id": "p17_ho_2_nguoi_lon_2_tre_ngan_sach_sat",
+   "profile": {
+    "activity": "moderate",
+    "age": 40,
+    "goal": "hold",
+    "height_cm": 168,
+    "sex": "male",
+    "target_mode": "formula",
+    "weight_kg": 70
+   },
+   "reference_weight_kg": 70,
+   "targets": {
+    "kcal_max": 2520,
+    "kcal_min": 2280,
+    "kcal_target": 2400,
+    "mode": "formula",
+    "protein_g": 125,
+    "steps": {
+     "activity_factor": 1.55,
+     "bmr": 1555,
+     "goal_factor": 1,
+     "kcal_unrounded": 2410.25,
+     "protein_cap_g": 210,
+     "protein_floor_g": 84,
+     "protein_g_per_kg": 1.8,
+     "protein_limited_by": "none",
+     "protein_raw_g": 125,
+     "reference_weight_kg": 70,
+     "tdee": 2410.25
+    }
+   }
+  },
+  {
+   "bmr": 1555,
+   "id": "p18_ho_3_nguoi_lon_ngan_sach_sat_nhieu_com",
+   "profile": {
+    "activity": "moderate",
+    "age": 40,
+    "goal": "hold",
+    "height_cm": 168,
+    "sex": "male",
+    "target_mode": "formula",
+    "weight_kg": 70
+   },
+   "reference_weight_kg": 70,
+   "targets": {
+    "kcal_max": 2520,
+    "kcal_min": 2280,
+    "kcal_target": 2400,
+    "mode": "formula",
+    "protein_g": 125,
+    "steps": {
+     "activity_factor": 1.55,
+     "bmr": 1555,
+     "goal_factor": 1,
+     "kcal_unrounded": 2410.25,
+     "protein_cap_g": 210,
+     "protein_floor_g": 84,
+     "protein_g_per_kg": 1.8,
+     "protein_limited_by": "none",
+     "protein_raw_g": 125,
+     "reference_weight_kg": 70,
+     "tdee": 2410.25
+    }
+   }
   }
  ]
 }

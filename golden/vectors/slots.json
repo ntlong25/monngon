@@ -862,5 +862,113 @@
    "snack_pm": "skip",
    "snack_pm_style": "savory"
   }
+ },
+ {
+  "id": "p17_ho_2_nguoi_lon_2_tre_ngan_sach_sat",
+  "slots": [
+   {
+    "kcal": 505.2631578947368,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 26.31578947368421,
+    "share": 0.21052631578947367,
+    "slot": "breakfast"
+   },
+   {
+    "kcal": 884.2105263157893,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 46.052631578947356,
+    "share": 0.36842105263157887,
+    "slot": "lunch"
+   },
+   {
+    "kcal": 884.2105263157893,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 46.052631578947356,
+    "share": 0.36842105263157887,
+    "slot": "dinner"
+   },
+   {
+    "kcal": 0,
+    "mode": "skip",
+    "planned": false,
+    "protein_g": 0,
+    "share": 0,
+    "slot": "snack_am"
+   },
+   {
+    "kcal": 126.3157894736842,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 6.578947368421052,
+    "share": 0.05263157894736842,
+    "slot": "snack_pm"
+   }
+  ],
+  "slots_config": {
+   "breakfast": "on",
+   "dinner": "on",
+   "lunch": "on",
+   "lunch_style": "hot",
+   "snack_am": "skip",
+   "snack_pm": "on",
+   "snack_pm_style": "savory"
+  }
+ },
+ {
+  "id": "p18_ho_3_nguoi_lon_ngan_sach_sat_nhieu_com",
+  "slots": [
+   {
+    "kcal": 505.2631578947368,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 26.31578947368421,
+    "share": 0.21052631578947367,
+    "slot": "breakfast"
+   },
+   {
+    "kcal": 884.2105263157893,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 46.052631578947356,
+    "share": 0.36842105263157887,
+    "slot": "lunch"
+   },
+   {
+    "kcal": 884.2105263157893,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 46.052631578947356,
+    "share": 0.36842105263157887,
+    "slot": "dinner"
+   },
+   {
+    "kcal": 0,
+    "mode": "skip",
+    "planned": false,
+    "protein_g": 0,
+    "share": 0,
+    "slot": "snack_am"
+   },
+   {
+    "kcal": 126.3157894736842,
+    "mode": "on",
+    "planned": true,
+    "protein_g": 6.578947368421052,
+    "share": 0.05263157894736842,
+    "slot": "snack_pm"
+   }
+  ],
+  "slots_config": {
+   "breakfast": "on",
+   "dinner": "on",
+   "lunch": "on",
+   "lunch_style": "hot",
+   "snack_am": "skip",
+   "snack_pm": "on",
+   "snack_pm_style": "savory"
+  }
  }
 ]

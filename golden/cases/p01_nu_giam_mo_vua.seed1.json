@@ -399,7 +399,7 @@
       "extras": [
        {
         "grams": 5,
-        "ingredient_id": "thit_heo_xay_nac"
+        "ingredient_id": "thit_heo_nac_dui"
        }
       ],
       "forced_zero_carb": false,
@@ -430,11 +430,11 @@
        }
       ],
       "macros": {
-       "carb_g": 67.70599999999997,
-       "fat_g": 8.0625,
+       "carb_g": 67.69549999999998,
+       "fat_g": 8.133,
        "fiber_g": 3.163,
-       "kcal": 522.1199999999999,
-       "protein_g": 44.56580000000001
+       "kcal": 522.8699999999999,
+       "protein_g": 44.53580000000001
       },
       "recipe_id": "canh_bi_xanh_thit_bam",
       "scale_infeasible": false,
@@ -586,10 +586,10 @@
      }
     ],
     "totals": {
-     "carb_g": 126.93899999999998,
-     "fat_g": 48.5456,
-     "kcal": 1414.33,
-     "protein_g": 122.6763
+     "carb_g": 126.92849999999999,
+     "fat_g": 48.6161,
+     "kcal": 1415.08,
+     "protein_g": 122.6463
     }
    },
    {
@@ -1955,6 +1955,22 @@
      "items": [
       {
        "aisle": "thit",
+       "ingredient_id": "thit_heo_nac_dui",
+       "leftover_days": 3,
+       "leftover_g": 295,
+       "name": "Thịt heo nạc đùi",
+       "need_g": 5,
+       "pack_g": 300,
+       "pack_label": "thịt đùi heo C.P 300 g (giá thường)",
+       "packs": 1,
+       "price_fallback": false,
+       "price_store_id": "bach_hoa_xanh",
+       "price_vnd_per_pack": 35700,
+       "till_cost_vnd": 35700,
+       "used_cost_vnd": 595
+      },
+      {
+       "aisle": "thit",
        "ingredient_id": "thit_heo_nac_than",
        "leftover_days": 3,
        "leftover_g": 15,
@@ -1973,17 +1989,17 @@
        "aisle": "thit",
        "ingredient_id": "thit_heo_xay_nac",
        "leftover_days": 3,
-       "leftover_g": 100,
+       "leftover_g": 105,
        "name": "Thịt heo xay (nạc ~96%)",
-       "need_g": 500,
+       "need_g": 495,
        "pack_g": 200,
-       "pack_label": "thịt heo xay C.P 200 g",
+       "pack_label": "thịt heo xay CP khay 200 g (giá thường)",
        "packs": 3,
        "price_fallback": false,
        "price_store_id": "bach_hoa_xanh",
-       "price_vnd_per_pack": 22478,
-       "till_cost_vnd": 67434,
-       "used_cost_vnd": 56195
+       "price_vnd_per_pack": 25500,
+       "till_cost_vnd": 76500,
+       "used_cost_vnd": 63112.5
       },
       {
        "aisle": "thit",
@@ -2336,6 +2352,22 @@
    "items": [
     {
      "aisle": "thit",
+     "ingredient_id": "thit_heo_nac_dui",
+     "leftover_days": 3,
+     "leftover_g": 295,
+     "name": "Thịt heo nạc đùi",
+     "need_g": 5,
+     "pack_g": 300,
+     "pack_label": "thịt đùi heo C.P 300 g (giá thường)",
+     "packs": 1,
+     "price_fallback": false,
+     "price_store_id": "bach_hoa_xanh",
+     "price_vnd_per_pack": 35700,
+     "till_cost_vnd": 35700,
+     "used_cost_vnd": 595
+    },
+    {
+     "aisle": "thit",
      "ingredient_id": "thit_heo_nac_than",
      "leftover_days": 3,
      "leftover_g": 15,
@@ -2354,17 +2386,17 @@
      "aisle": "thit",
      "ingredient_id": "thit_heo_xay_nac",
      "leftover_days": 3,
-     "leftover_g": 100,
+     "leftover_g": 105,
      "name": "Thịt heo xay (nạc ~96%)",
-     "need_g": 500,
+     "need_g": 495,
      "pack_g": 200,
-     "pack_label": "thịt heo xay C.P 200 g",
+     "pack_label": "thịt heo xay CP khay 200 g (giá thường)",
      "packs": 3,
      "price_fallback": false,
      "price_store_id": "bach_hoa_xanh",
-     "price_vnd_per_pack": 22478,
-     "till_cost_vnd": 67434,
-     "used_cost_vnd": 56195
+     "price_vnd_per_pack": 25500,
+     "till_cost_vnd": 76500,
+     "used_cost_vnd": 63112.5
     },
     {
      "aisle": "thit",
@@ -2688,8 +2720,8 @@
     }
    ],
    "skipped_pantry": [],
-   "till_cost": 720000,
-   "week_food_cost": 496000
+   "till_cost": 765000,
+   "week_food_cost": 503000
   },
   "start_date": "2026-11-09",
   "status": "ready",

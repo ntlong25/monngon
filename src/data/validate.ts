@@ -6,6 +6,9 @@ import {
 } from '../types/schema.ts';
 import { FALLBACK_STORE_ID, type RawDataset } from './load.ts';
 
+/** Giá trị `source_note` hợp lệ nhưng bị cảnh báo: dòng giá chưa khảo sát được nguồn (T-104). */
+export const NO_SOURCE = 'chưa có nguồn';
+
 export interface DataIssue {
   severity: 'error' | 'warning';
   file: 'ingredients' | 'recipes' | 'stores' | 'prices';
@@ -125,6 +128,18 @@ export function validateDataset(raw: RawDataset): DataIssue[] {
       if (!fallbackCovered.has(t)) bad(`"${t}" chưa có giá ở "cho_khac"`);
     }
   }
+
+  // T-104: dòng giá fallback `cho_khac` phải ghi nguồn (`source_note`). "chưa có nguồn" vẫn hợp lệ nhưng được đếm và cảnh báo (giá ước lượng).
+  let noSource = 0;
+  for (const p of prices) {
+    if (p.store_id !== FALLBACK_STORE_ID) continue;
+    const note = p.source_note?.trim() ?? '';
+    if (note === '')
+      issues.push({ severity: 'error', file: 'prices', id: `${p.ingredient_id}@${p.store_id}`, field: 'source_note', message: `dòng giá "${FALLBACK_STORE_ID}" bắt buộc có source_note (ghi "${NO_SOURCE}" nếu chưa khảo sát)` });
+    else if (note.toLowerCase() === NO_SOURCE) noSource++;
+  }
+  if (noSource > 0)
+    issues.push({ severity: 'warning', file: 'prices', id: `(${FALLBACK_STORE_ID})`, field: 'source_note', message: `${noSource} dòng giá "${FALLBACK_STORE_ID}" ghi "${NO_SOURCE}" (giá ước lượng)` });
 
   for (const i of ingredients) {
     const dev = kcalDeviation(i.per_100g);

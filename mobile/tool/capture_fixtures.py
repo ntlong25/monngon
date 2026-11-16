@@ -34,7 +34,7 @@ def main():
     p = items[0]
     profile, prefs = p['profile'], p['preferences']
     save('reference.json', call('GET', '/v1/reference'))
-    save('ingredients_search.json', call('GET', '/v1/ingredients?q=ga&limit=5'))
+    save('ingredients_search.json', call('GET', '/v1/ingredients?q=ga&limit=10'))
     targets = call('POST', '/v1/targets', {'profile': profile})
     save('targets.json', targets)
     save('slots_preview.json', call('POST', '/v1/slots/preview', {'profile': profile, 'slots': prefs['slots']}))

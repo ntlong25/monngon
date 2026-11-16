@@ -126,7 +126,7 @@ class MealPage extends ConsumerWidget {
           for (final d in dishes) ...[
             DishCard(
               key: Key('dish-${d.recipeId}'),
-              roleLabel: Labels.dishRole(l, d.role),
+              roleLabel: Labels.dishRole(l, d.role, riceKind: meal.rice?.kind),
               name: d.name,
               proteinText: '${formatInt(d.macros.proteinG)} g',
               kcalText: '${formatInt(d.macros.kcal)} kcal',

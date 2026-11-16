@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Nồi áp suất">
+  <rect width="120" height="120" rx="24" fill="#F1ECE0"/>
+  <path d="M24 60 H96 V84 Q96 98 82 98 H38 Q24 98 24 84 Z" fill="#1B6B4F"/>
+  <rect x="20" y="50" width="80" height="12" rx="6" fill="#1E2420"/>
+  <rect x="50" y="34" width="20" height="16" rx="6" fill="#1E2420"/>
+  <circle cx="60" cy="30" r="5" fill="#F2A93B"/>
+  <rect x="8" y="70" width="14" height="8" rx="4" fill="#1E2420"/>
+  <rect x="98" y="70" width="14" height="8" rx="4" fill="#1E2420"/>
+</svg>

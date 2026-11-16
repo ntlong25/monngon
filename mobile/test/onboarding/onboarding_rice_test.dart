@@ -4,6 +4,7 @@ import 'package:fitpro_mamdu/api/generated/models.dart';
 import 'package:fitpro_mamdu/app.dart';
 import 'package:fitpro_mamdu/core/rice.dart';
 import 'package:fitpro_mamdu/features/meal/rice_card.dart';
+import 'package:fitpro_mamdu/features/onboarding/onboarding_nav.dart';
 import 'package:fitpro_mamdu/l10n/gen/app_localizations.dart';
 import 'package:fitpro_mamdu/state/providers.dart';
 import 'package:fitpro_mamdu/state/storage.dart';
@@ -80,10 +81,11 @@ FakeAdapter _api({bool withBudget = true, int? needed = 806000}) =>
       ..on('POST', '/v1/plans', fixture('plan_response.json'))
       ..on('GET', '/v1/reference', fixture('reference.json'));
 
-const _diet = 8;
-const _rice = 9;
-const _dislike = 10;
-const _summary = 13;
+// Số bước theo thứ tự mới (D-ONB-06: thẻ vuốt đứng ngay sau Mục tiêu).
+final _diet = OnboardingStep.diet.index;
+final _rice = OnboardingStep.rice.index;
+final _dislike = OnboardingStep.dislike.index;
+final _summary = OnboardingStep.summary.index;
 
 Future<ProviderContainer> _pumpAt(WidgetTester t, int step) async {
   t.view.devicePixelRatio = 1;
@@ -91,7 +93,10 @@ Future<ProviderContainer> _pumpAt(WidgetTester t, int step) async {
   addTearDown(t.view.reset);
   await t.pumpWidget(
     ProviderScope(
-      overrides: testOverrides(store: onboardingAt(step), adapter: _api()),
+      overrides: testOverrides(
+        store: onboardingAtStep(OnboardingStep.values[step]),
+        adapter: _api(),
+      ),
       child: const FitProApp(),
     ),
   );
@@ -190,7 +195,7 @@ void main() {
         await t.pumpWidget(
           ProviderScope(
             overrides: testOverrides(
-              store: onboardingAt(_rice),
+              store: onboardingAtStep(OnboardingStep.rice),
               adapter: _api(withBudget: false),
             ),
             child: const FitProApp(),
@@ -218,7 +223,7 @@ void main() {
         await t.pumpWidget(
           ProviderScope(
             overrides: testOverrides(
-              store: onboardingAt(_rice),
+              store: onboardingAtStep(OnboardingStep.rice),
               adapter: _api(needed: null),
             ),
             child: const FitProApp(),
@@ -275,7 +280,7 @@ void main() {
     });
 
     test('dữ liệu lưu từ bản cũ (rice_habit rỗng) được hiểu là Vừa', () {
-      final store = onboardingAt(_rice);
+      final store = onboardingAtStep(OnboardingStep.rice);
       store.data[StoreKeys.preferences] = jsonEncode(
         const Preferences(storeId: 'bach_hoa_xanh', diet: 'none').toJson(),
       );

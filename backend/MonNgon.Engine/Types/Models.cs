@@ -138,6 +138,31 @@ public sealed class Recipe
     }
 }
 
+/// <summary>T-112: bảo quản một nguyên liệu (nguồn: docs/research/storage-draft.json → data/storage.json). Số ngày null = không có số liệu.</summary>
+public sealed class StorageEntry
+{
+    public string IngredientId { get; set; } = "";
+    /// <summary>ok | gan_dung | uoc_tinh_vn | chua_co_nguon</summary>
+    public string Status { get; set; } = "";
+    public int? FridgeDays { get; set; }
+    public int? PantryDays { get; set; }
+    public int? FreezerDays { get; set; }
+    public bool? Freezable { get; set; }
+    public bool LongTerm { get; set; }
+    public string? TipsVi { get; set; }
+    public string? SpoilageSignsVi { get; set; }
+    public StorageSource? Source { get; set; }
+}
+
+public sealed class StorageSource
+{
+    public string? Org { get; set; }
+    public string? Title { get; set; }
+    public string? Url { get; set; }
+    public string? Accessed { get; set; }
+    public bool AdjustedForVn { get; set; }
+}
+
 public sealed class Store
 {
     public string Id { get; set; } = "";
@@ -155,6 +180,8 @@ public sealed class Price
     public int ShelfLifeDays { get; set; }
     public string? SourceUrl { get; set; }
     public string? SurveyedOn { get; set; }
+    /// <summary>T-104: nguồn của dòng giá; bắt buộc ở cửa hàng fallback <c>cho_khac</c> (<see cref="DataValidator.NoSource"/> = chưa khảo sát).</summary>
+    public string? SourceNote { get; set; }
 }
 
 // ----- Hồ sơ & lựa chọn người dùng -----

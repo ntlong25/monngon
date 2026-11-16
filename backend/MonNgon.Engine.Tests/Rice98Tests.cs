@@ -131,11 +131,12 @@ public class Rice98Tests
     /// <summary>
     /// Đo được (seed 1): mọi phương án giữ ≥ 12/14 bữa có cơm ở ô này đều vượt ngân sách của hồ sơ, và mức nhiều của cùng hồ sơ có cơm ở bữa nào cũng dưới sàn của mức rất nhiều
     /// (nên không thể "nâng" tuần mức nhiều lên). Ngân sách đã đo: p02 vừa 595k/600k, p09 vừa 600k/600k, p14 vừa 1.189k/1.200k; p02 rất nhiều cần ≥ 652k, p09 rất nhiều ≥ 686k, p14 rất nhiều ≥ 1.489k.
+    /// p01 rất nhiều (T-104, D-COM-07): giá thịt heo xay nạc tăng 13,4% (đợt giá D2) đẩy tuần ≥ 12/14 bữa có cơm từ 645k lên ~664–675k; ngân sách hồ sơ 650k → 10/14 bữa có cơm. Ngân sách là ràng buộc của người dùng nên miễn — cần ~675k (không nâng ngân sách hồ sơ test).
     /// p14 nhiều đã rời danh sách: tuần mức vừa (14/14 bữa có cơm, đủ ngân sách) được dùng làm tuần mức nhiều, cơm 150 g có ghi chú.
     /// </summary>
     private static readonly Exemption[] BudgetExemptions =
     [
-        new("p02", "rat_nhieu", "budget"), new("p09", "rat_nhieu", "budget"), new("p14", "rat_nhieu", "budget"),
+        new("p02", "rat_nhieu", "budget"), new("p09", "rat_nhieu", "budget"), new("p14", "rat_nhieu", "budget"), new("p01", "rat_nhieu", "budget"),
     ];
 
     private static bool Exempt(TestProfile p, string habit) => BudgetExemptions.Any(x => p.Id.StartsWith(x.Profile, StringComparison.Ordinal) && x.Habit == habit);
@@ -166,7 +167,7 @@ public class Rice98Tests
 
     /// <summary>
     /// AC2: ≥ 12/14 bữa trưa/tối có cơm ở mức nhiều/rất nhiều với hồ sơ lên cả trưa lẫn tối (trừ low-carb), ngoại trừ <see cref="BudgetExemptions"/>.
-    /// Mỗi ngoại lệ phải còn đúng (thật sự &lt; 12/14 hoặc đủ cơm nhưng vượt ngân sách) và phải có cảnh báo lý do budget kèm ngân sách cần &gt; ngân sách hiện có.
+    /// Mỗi ngoại lệ phải còn đúng (thật sự &lt; 12/14 hoặc đủ cơm nhưng vượt ngân sách) và phải có cảnh báo lý do budget; ngân sách cần (nếu biết) &gt; ngân sách hiện có.
     /// </summary>
     [Fact]
     public void AC2_it_nhat_12_tren_14_bua_trua_toi_co_com_o_muc_nhieu_tru_ngoai_le_ngan_sach_sat()
@@ -185,7 +186,8 @@ public class Rice98Tests
                 Assert.True(withRice < 12, $"{p.Id} {h}: ngoại lệ ngân sách sát nhưng đã đạt {withRice}/{ld.Count} — bỏ khỏi danh sách");
                 var item = Feas(p, h);
                 Assert.False(item.Feasible);
-                Assert.True(item.BudgetNeededVnd is { } need && need > p.Preferences.WeeklyBudgetVnd, $"{p.Id} {h}: ngân sách cần {item.BudgetNeededVnd} không lớn hơn {p.Preferences.WeeklyBudgetVnd}");
+                // Ngân sách cần: null (không phương án thử nào đủ cơm, app hiện cảnh báo ngắn) hoặc > ngân sách hiện có — không bao giờ ≤ ngân sách.
+                Assert.True(item.BudgetNeededVnd is null || item.BudgetNeededVnd > p.Preferences.WeeklyBudgetVnd, $"{p.Id} {h}: ngân sách cần {item.BudgetNeededVnd} không lớn hơn {p.Preferences.WeeklyBudgetVnd}");
             }
     }
 
@@ -195,7 +197,7 @@ public class Rice98Tests
     // ---- AC4: cảnh báo onboarding ----
 
     /// <summary>
-    /// AC4 (D-COM-05, không ngoại lệ): 16 hồ sơ × 4 mức = 64 ô — hồ sơ × mức có &gt; 20% bữa mâm bị ghi chú bớt cơm (hoặc &gt; 20% bữa trưa/tối không đủ cơm) thì cờ cảnh báo bật, kèm lý do
+    /// AC4 (D-COM-05, không ngoại lệ): mọi hồ sơ × 4 mức (18 hồ sơ = 72 ô) — hồ sơ × mức có &gt; 20% bữa mâm bị ghi chú bớt cơm (hoặc &gt; 20% bữa trưa/tối không đủ cơm) thì cờ cảnh báo bật, kèm lý do
     /// (kcal_protein | budget). Chiều ngược lại: đủ cơm mọi bữa và kcal/đạm đủ chỗ thì không cảnh báo.
     /// </summary>
     [Fact]
@@ -220,7 +222,7 @@ public class Rice98Tests
                 if (!item.Feasible && item.Reason == "budget") Assert.True(withoutFull > 0.2 * ld.Count, $"{p.Id} {h}: cảnh báo ngân sách thừa");
                 if (rm.Count == ld.Count && rm.Count > 0 && ratio == 0) Assert.True(item.Feasible, $"{p.Id} {h}: cảnh báo thừa (đủ cơm mọi bữa; {item.Reason})");
             }
-        Assert.Equal(64, cells);
+        Assert.Equal(Profiles.Count * 4, cells);
         // p14 mức 2 chén (nhiều) phải cảnh báo vì ngân sách
         var p14 = Feas(P("p14"), "nhieu");
         Assert.False(p14.Feasible);

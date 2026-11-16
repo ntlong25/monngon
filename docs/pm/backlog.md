@@ -491,6 +491,194 @@ T-001 (khởi tạo Expo), T-013…T-028 (UI Expo): **CANCELLED**, thay bằng T
 - **Mô tả:** Trong `docs/research/test-scenarios.md`, TC-E-04 sửa kết quả mong đợi thành: "Hiện 'Chưa tạo được thực đơn' + thông báo không có mạng + nút Thử lại; dữ liệu trên máy giữ nguyên; có mạng lại thì Thử lại tạo được tuần". Thêm TC: tuần đã tạo xem được offline (Kế hoạch, công thức, Đi chợ). Kiểm các TC khác có giả định "chạy offline" tương tự thì sửa luôn.
 - **AC:** TC-E-04 khớp ADR-001 và `docs/dev/qa-automation.md`; ghi ngày sửa và lý do (D-QA-10).
 
+### T-101 — Hiệu năng lập tuần ở mức cơm cao · DEV · **P0** (việc tiếp theo của Dev)
+- **Trạng thái (2026-11-10):** p95 tổng 13,9 s → 1,3–1,7 s; ít/vừa ~0,1 s; app ≤ 2,0 s. **AC sửa theo D-PERF-01:** ít/vừa p95 ≤ 1 s (đạt); nhiều/3+ chén p95 ≤ 2 s, max ≤ 3 s (đạt); **thêm CPU mỗi lần lập p95 ≤ 2 s** (chưa đạt: max 7,1 s); lên lại 6 ngày theo cùng ngưỡng theo mức. **Thêm AC tất định:** 18 × 4 × 3 ô, mỗi ô 20 lần có song song → 100% cùng kết quả (P0 nếu không đạt). **XONG (2026-11-10, D-PERF-02):** tất định 216×20 = 0 khác; thời gian thực đạt mọi mức (3+ chén p95 1,89 s); điều kiện CPU chuyển sang T-105.
+- **Phụ thuộc:** PR T-098/T-099. PRD §7 (hiệu năng), D-COM-06.
+- **Mô tả:** Đo và giảm thời gian `POST /v1/plans` ở mức `nhieu`/`rat_nhieu` (hiện ~17 s ở 3+ chén). Gợi ý (Dev chọn): cắt tỉa sớm ứng viên mâm không vừa kcal/đạm/ngân sách trước khi scale; cache theo bữa trong một lần lập; giới hạn số vòng lặp lại ngân sách; tính chén khả thi một lần dùng chung cho onboarding và lập tuần. Kết quả phải giữ nguyên (cùng seed → cùng tuần), hoặc lệch có giải thích.
+- **AC:**
+  1. Bench (`MonNgon.Tools` hoặc test riêng) 18 hồ sơ × 4 mức × 3 seed, build Release: **p95 ≤ 1 s, max ≤ 3 s** mỗi lần lập tuần phía server. Ghi bảng trước/sau vào `docs/dev/`.
+  2. Đổi món / lên lại phần còn lại của tuần: p95 ≤ 1 s cùng ma trận.
+  3. Không đổi timeout 30 s của app để che; app hiển thị tổng ≤ 5 s trên emulator ở p01 mức 3+ chén.
+  4. Tất cả AC T-094/T-096/T-098 (theo D-COM-05) vẫn đạt; golden khớp hoặc lệch có lý do.
+  5. CI/check-tests có test hiệu năng chặn hồi quy (ngưỡng nới cho máy CI, ghi rõ).
+
+### T-105 — CPU mỗi lần lập tuần + tối ưu hiệu năng mức cơm cao · DEV · **P1 (điều kiện phát hành)**
+- **Phụ thuộc:** T-101. PRD D-PERF-01.
+- **Mô tả (D-PERF-02):** Giảm CPU mỗi lần lập ở mức nhiều/3+ chén (hiện p95 2,7 s / 5,2 s); nguồn chính là ~12k lần thử `RescueDayWithDessert` ở phương án nặng. **Được đổi thuật toán** (vd cắt tỉa sớm, giới hạn số lần cứu ngày, chọn tráng miệng trước khi scale), đổi golden có giải thích.
+- **AC:**
+  1. **CPU mỗi lần lập p95 ≤ 2 s ở mọi mức** (18 hồ sơ × 4 mức × 3 seed, Release).
+  2. Thời gian thực không lùi (ít/vừa p95 ≤ 1 s; nhiều/3+ ≤ 2 s); tất định 100% (mỗi ô 20 lần).
+  3. Mọi AC sản phẩm T-094/T-096/T-098 theo D-COM-05/07 giữ nguyên (danh sách ngoại lệ không được dài thêm).
+  4. Đo trên cấu hình máy chủ dự kiến (số lõi thật), ghi `docs/dev/`; app tổng p95 ≤ 5 s ở mọi mức.
+- **Trạng thái (2026-11-16, D-PERF-03):** **AC1–AC3 đạt, PM duyệt** (`docs/dev/perf-t105.md`), được commit. PM chấp nhận 62/216 ô đổi kết quả. **AC4 còn mở, là cổng phát hành:**
+  - (a) Cấu hình đo 2 vCPU (`DOTNET_PROCESSOR_COUNT=2`). Khi đã chọn hosting thật thì đo lại trên máy thật.
+  - (b) Chạy `bench` 10 lần, gộp mẫu: p95 ≤ 2 s ở mọi mức, không ô nào > 3 s.
+  - (c) App tổng p95 ≤ 5 s trên emulator, đo sau T-116.
+  - Nếu (a)/(b) không đạt thì mở T-118.
+
+### T-117 — Làm nóng engine khi khởi động API · DEV · **P1 (điều kiện phát hành)**
+- **Mô tả (D-PERF-03 mục 5):** Ở tiến trình lạnh, kế hoạch đầu tiên của hồ sơ nặng tốn ~12 s CPU vì phải nạp bộ đệm `Scaler`. Khi API khởi động, chạy làm nóng (vd lập 1–2 tuần mẫu, hoặc dựng sẵn bộ đệm) trước khi báo sẵn sàng.
+- **AC:**
+  1. Readiness (`/health/ready` hoặc tương đương) chỉ trả OK sau khi làm nóng xong. Liveness vẫn trả OK ngay.
+  2. Lần lập tuần đầu tiên sau khởi động, hồ sơ nặng (p01 mức rất nhiều): CPU và thời gian thực nằm trong ngưỡng D-PERF-01/03.
+  3. Kết quả làm nóng không ảnh hưởng kết quả lập tuần (tất định, băm giống bản không làm nóng).
+  4. Ghi thời gian khởi động thêm vào `docs/dev/`.
+
+### T-118 — Tối ưu thêm CPU mức rất nhiều · DEV · P2 (**chỉ mở nếu** T-105 AC4 không đạt trên cấu hình thật)
+- **Mô tả:** Cắt chi phí lặp trong `RescueDayWithFullMeal` / chọn ứng viên, hoặc đổi cấu trúc phương án. Hiện các phương án thất bại chạy đủ 12 vòng ở p01/p02/p14. Điều kiện như D-PERF-02: không hạ ngưỡng, giữ AC sản phẩm, giữ tính tất định, đổi golden có giải thích.
+
+### T-102 — Nhãn "TINH BỘT" + dọn chuỗi cũ · DEV · P2 (sau T-101; cần chuỗi từ T-057d)
+- **Mô tả:** Danh sách mâm: vai trò hiện "CƠM" khi `rice.kind = com`, "TINH BỘT" khi `other` (D-COM-06). Xóa `onboardingRiceWarning` cũ và mọi chỗ dùng.
+- **AC:** Widget test 3 trường hợp (cơm, khoai lang, bún); không còn key `onboardingRiceWarning` trong i18n và code (grep); `flutter test` xanh.
+
+### T-057d — Thêm 2 hồ sơ test hộ đông người + ngân sách sát; chuỗi "TINH BỘT" · RESEARCH · P1 (việc tiếp theo của Research)
+- **Mô tả:**
+  - Thêm vào `data/test-profiles.json`:
+    - **p17**: hộ 2 người lớn + 2 trẻ em, mức cơm `vua`, ngân sách = mức tối thiểu của `budget-range` cho hồ sơ đó (làm tròn lên 50k), đủ dụng cụ cơ bản.
+    - **p18**: hộ 3 người lớn, mức `nhieu`, ngân sách sát tối thiểu, ít dụng cụ (bếp + nồi cơm điện).
+  - Ghi `expect` (7/7 ngày, ghép mâm, cảnh báo cơm nếu có) và ghi chú lý do (bắt hồi quy T-098).
+  - Chuỗi i18n "TINH BỘT" cho T-102.
+- **AC:** 2 hồ sơ qua validator dữ liệu; báo session chính để Dev đưa vào check-tests/engine-report (AC engine áp dụng 18 hồ sơ). Nếu hồ sơ nào trượt 7/7 trên build hiện tại, ghi số đo, không sửa hồ sơ cho xanh.
+
+### T-103 — Đưa thẻ vuốt lên bước 2 của onboarding (Flutter) · DEV · P1 (sau T-101, T-102)
+- **Phụ thuộc:** T-101, T-102; chuỗi từ T-057e (**đã có**: `onboardingSwipeSoft` sửa câu, `onboardingSwipeSkipAll` = "Bỏ qua", `onboardingSummaryTasteNone` = "Khẩu vị: chưa chọn"; chạy `gen_arb.py`; xem `docs/research/content-i18n-T057e.md`). TC kiểm: TC-1-27…30, 39, 49, 50, 51. PRD D-ONB-06, US-1.5 AC4, US-1.6 AC4.
+- **Files:** `mobile/lib/features/onboarding/onboarding_nav.dart` (`OnboardingStep`), `onboarding_flow.dart`, `step_swipe.dart`, màn tổng kết, lưu trạng thái onboarding, integration test onboarding.
+- **Mô tả:**
+  - Thứ tự mới: Mục tiêu → **Khẩu vị (thẻ vuốt)** → Cơ thể → Vận động → Chỉ tiêu → Cửa hàng → Hộ gia đình → Ngân sách → Bữa ăn → Chế độ ăn (kiêng/dị ứng) → Thói quen ăn cơm → Không muốn thấy → Dụng cụ → Tổng kết.
+  - Màn vuốt: dòng "không ảnh hưởng calo, đạm hay dị ứng" + nút "Bỏ qua". Bỏ qua → không gửi `cuisine_likes`/`cuisine_less`; tổng kết "Khẩu vị: chưa chọn".
+  - Lưu bước đang làm theo tên bước; trạng thái lưu từ bản cũ (theo số) được chuyển sang tên.
+  - Sửa integration test/automation theo thứ tự mới, chụp lại ảnh onboarding vào `docs/dev/screens/`.
+- **AC:**
+  1. Widget/integration test: từ màn Mục tiêu bấm Tiếp tục → màn kế là thẻ vuốt; đi hết 14 bước đúng thứ tự trên; Back từ mọi bước về đúng bước trước, giữ lựa chọn.
+  2. Bỏ qua thẻ vuốt: request `POST /v1/plans` không có khẩu vị; tổng kết hiện "Khẩu vị: chưa chọn".
+  3. Thích thẻ món thịt rồi chọn Chay: tuần tạo ra 0 món có thịt (test API với hồ sơ đó).
+  4. Tiếp tục dở dang: lưu ở từng bước (ít nhất Vuốt, Ngân sách, Cơm), tắt app, mở lại → về đúng bước, đủ lựa chọn. Có test chuyển trạng thái cũ (lưu theo số) sang thứ tự mới mà không nhảy sai bước.
+  5. Đo thời gian từ mở app tới màn vuốt trên emulator: ≤ 2 thao tác (Mục tiêu → Tiếp tục). Ghi số đo tổng thời gian onboarding trước/sau (mục tiêu G1 ≤ 5 phút).
+  6. Tab Bạn (chế độ sửa) vẫn mở đúng từng màn; `flutter test` và integration xanh.
+- **Phụ (P1, L-16, D-DATA-01):** thẻ cửa hàng ở bước Cửa hàng và tab Đi chợ hiện "Giá ước lượng, chưa khảo sát tại cửa hàng này" khi `price_survey_date` là `null`; widget test 2 trạng thái. Thêm `source_note` vào validator dữ liệu nếu Research đề xuất.
+- **Phụ (P2, nếu nhỏ):** kiểm lệch "Cả nồi" ở TC-3-08 (thịt heo xay 145→305 so với bí 200→520) Research nêu trong `ux-review-swipe-first.md` §7; ghi kết luận vào `docs/dev/`.
+
+### T-106 — Sửa màn vuốt thẻ khẩu vị: căn giữa + cử chỉ quẹt (Flutter) · DEV · **P1** (làm ngay sau T-103; người dùng báo lỗi giao diện)
+- **Phụ thuộc:** T-103. PRD D-ONB-07, US-1.5 AC5. Thiết kế chi tiết: `docs/research/swipe-tinder-ux.md`.
+- **Files:** `mobile/lib/features/onboarding/step_swipe.dart` (bỏ `Dismissible`, tự viết thẻ kéo), widget test, ảnh `docs/dev/screens/`.
+- **Mô tả và AC (đo được):**
+  1. **Căn giữa:** thẻ rộng = chiều rộng màn hình − 2 × 16 dp, tối đa 400 dp, căn giữa ngang. Widget test ở 3 cỡ màn (360, 412, 600 dp): `|lề trái − lề phải| ≤ 1 dp`.
+  2. **Hình thẻ:** bo góc 20 dp, có bóng; ảnh minh họa chiếm phần trên, tên/nhãn nhóm món ở dưới; chữ không bị cắt ở cỡ chữ 1.3.
+  3. **Xếp chồng:** sau thẻ đang xem thấy tối đa 2 thẻ, scale 0,95 và 0,90, lệch xuống 8/16 dp. Thẻ sau "tiến lên" khi thẻ trước đi.
+  4. **Kéo đa trục:** thẻ đi theo ngón tay (cả ngang và dọc); **xoay** theo độ kéo ngang, tối đa ±12°.
+  5. **Nhãn kéo:** "Thích" (kéo phải) / "Ít hơn" (kéo trái), độ mờ tăng dần từ 0 theo độ kéo, đầy đủ khi tới ngưỡng. Nhãn có chữ, không chỉ dựa vào màu.
+  6. **Ngưỡng:** quyết định khi kéo ngang ≥ 35% chiều rộng thẻ **hoặc** vận tốc ngang ≥ 700 dp/s. Dưới ngưỡng thì bật về giữa trong 300 ms. Vượt ngưỡng thì bay ra ngoài màn trong 250–300 ms rồi gọi logic thích/ít hơn hiện có. Widget test: kéo 30% → bật về, không ghi trọng số; kéo 40% → ghi đúng hướng; ném nhanh 20% với vận tốc 800 dp/s → ghi đúng hướng.
+  7. **Nút thay thế** giữ nguyên thứ tự và `Key` (`swipe-undo`, `swipe-dislike`, `swipe-replace`, `swipe-like`), nút ≥ 48 dp. Bấm ♥/✕ chạy cùng hoạt ảnh bay ra như vuốt. **Hoàn tác:** thẻ quay lại từ phía đã bay ra (250 ms) và trả lại trọng số cũ.
+  8. **Trợ năng:** `Semantics` cho thẻ (tên nhóm món + hành động "Thích", "Ít hơn"); TalkBack thao tác được mà không cần vuốt. **Giảm chuyển động** (`MediaQuery.disableAnimations`): không xoay, không scale, đổi thẻ ngay.
+  9. Hết thẻ → màn kết quả hiện có (giữ "Vuốt lại"); "Bỏ qua" và dòng "không ảnh hưởng calo, đạm hay dị ứng" (T-103) giữ nguyên.
+  10. Không thêm dependency mới (`pubspec.yaml` không đổi). Nếu tự viết vượt 2 ngày công thì dừng và báo PM, không tự thêm package.
+  11. Chụp lại ảnh màn vuốt (thẻ đầu, đang kéo phải có nhãn, đang kéo trái, sau khi hết thẻ) trên emulator, đặt cạnh ảnh cũ `it-02-onb-11-vuot-the-dau.png` để so. `flutter test` và integration onboarding xanh.
+
+### T-107 — Màn Mục tiêu thành bộ thẻ quẹt chọn 1 (Flutter) · DEV · P1 (sau T-106)
+- **Chuỗi (đã có, T-057f):** `onboardingGoalChoose`, `onboardingGoalOther`, `onboardingGoalSelected`; tiêu đề `onboardingGoalHint`, mô tả `onboardingGoal{Lose,Hold,Build}Hint`.
+- **Đã chốt với người dùng (D-SHP-08):** hình vẽ phẳng. **3 hình mục tiêu đang được Research vẽ lại**: dùng biểu tượng dự phòng hoặc bản cũ cho tới khi Research báo bản mới, rồi chuyển PNG lại.
+- **Hình:** `docs/research/illustrations/goal-*.svg` (tự vẽ, không ghi công; D-SHP-07). `mobile/` chưa có `flutter_svg`; **PM chọn không thêm dependency**: chuyển SVG sang PNG @1x/2x/3x một lần (script trong `tools/`, giữ SVG gốc làm nguồn), đặt vào asset của `mobile/`. Màu theo token nên không cần đổi màu lúc chạy.
+- **Phụ thuộc:** T-106 (thành phần thẻ quẹt); hình từ T-057f (dùng biểu tượng dự phòng nếu chưa có). PRD D-ONB-08, US-1.1 AC1.
+- **Files:** `mobile/lib/features/onboarding/` (bước goal), tách thẻ quẹt của T-106 thành widget dùng chung (chế độ "chọn nhiều/loại" và "chọn 1/xoay vòng").
+- **AC:**
+  1. 3 thẻ Giảm mỡ / Giữ cân / Tăng cơ, mỗi thẻ có hình, tên, mô tả; căn giữa và xếp chồng như T-106 (cùng test căn giữa ±1 dp).
+  2. Quẹt phải hoặc nút "Chọn mục tiêu này" → chọn đúng thẻ trên cùng, dấu "Đã chọn", Tiếp tục mở khóa, tự sang bước Khẩu vị sau 400 ms (không tự sang khi giảm chuyển động).
+  3. Quẹt trái hoặc nút "Xem mục tiêu khác" → thẻ xuống cuối bộ; quẹt trái 10 lần liên tiếp vẫn còn đủ 3 thẻ (widget test).
+  4. Hàng 3 chấm: chạm chấm đưa thẻ đó lên trên; có `Semantics` ("Mục tiêu 2 trên 3: Giữ cân").
+  5. Chưa chọn thì Tiếp tục khóa. Quay lại bước: thẻ đã chọn ở trên cùng; chọn thẻ khác thay lựa chọn cũ; request gửi đúng `goal`.
+  6. Tiêu đề và dòng hướng dẫn khác với bước Khẩu vị (chuỗi từ Research).
+  7. Ảnh màn hình mới vào `docs/dev/screens/`; `flutter test` + integration onboarding xanh.
+
+### T-108 — Màn dụng cụ bếp có hình từng dụng cụ (Flutter) · DEV · P1 (sau T-107)
+- **Hình:** `docs/research/illustrations/dungcu-*.svg` (7 file), cùng cách đưa vào như T-107.
+- **Phụ thuộc:** hình từ T-057f (dự phòng biểu tượng nếu chưa có). PRD D-ONB-09.
+- **AC:**
+  1. Lưới 2 cột (3 cột khi ≥ 600 dp), 7 thẻ dụng cụ, mỗi thẻ hình + tên.
+  2. Chọn nhiều; trạng thái chọn có dấu tích + viền (widget test kiểm có icon tích, không chỉ màu).
+  3. Vùng chạm ≥ 48 dp; `Semantics` checkbox có trạng thái chọn; cỡ chữ 1.3 không vỡ bố cục.
+  4. Vẫn bắt buộc ≥ 1 thiết bị nấu (US-1.5 AC3); request gửi đúng `equipment`.
+  5. Thiếu file hình → biểu tượng dự phòng, không lỗi (test).
+
+### T-116 — Đi chợ 2 chế độ "Theo tuần" / "Theo ngày" · DEV · P1 phase 2 (sau T-112)
+- **Đã chốt với người dùng (D-SHP-08):** thịt cá mặc định Theo ngày + công tắc cấp đông; lần đầu mở tab là Theo tuần, sau đó nhớ chế độ gần nhất.
+- **Chuỗi (đã có, T-057f):** `shopModeWeekly`, `shopModeDaily`, `shopToday`, `shopFreezeMeatSwitch`, `shopBatchExtra`, `shopNoShelfInfo`.
+- **Phụ thuộc:** T-112 (`data/storage.json` + nhãn độ tươi). PRD D-SHP-06. Làm **trước** T-115 và T-114.
+- **Files:** `backend/MonNgon.Engine/Shopping.cs` (phân loại, đợt mua, gộp mua sớm), API danh sách đi chợ (thêm `mode`, `trip_date`/`trips`), `mobile/` tab Đi chợ.
+- **AC:**
+  0. (D-SHP-07) Nhóm mua **suy ra** từ `storage.json` + quy tắc, không thêm file dữ liệu; unit test so với bảng mong đợi `docs/research/ingredient-storage-groups.json` (đã sửa xong 2026-11-16: `buy_by_day` 35, `stock_buy_by_week` 34). Test bỏ qua 2 dòng deprecated `com_trang`, `gao_lut_nau_chin` (không có trong danh sách đi chợ, D-SHP-07 mục 5).
+  1. Phân loại đúng quy tắc D-SHP-06 cho 100% nguyên liệu trong `storage.json` (unit test bảng: nhãn × `freezable` × công tắc cấp đông → chế độ). chưa có số liệu → theo quầy (đồ khô/gia vị/đồ hộp → Theo tuần; đồ tươi → Theo ngày) + ghi chú "Chưa có thông tin hạn dùng" (D-SHP-07).
+  2. Theo ngày: các đợt theo ngày, "Hôm nay" đầu tiên; gộp mua sớm khi lần dùng sau nằm trong số ngày còn tươi (cận dưới). Unit test: rau 3–5 ngày dùng ngày 1 và 3 → 1 đợt ngày 1; thịt 1–2 ngày dùng ngày 1 và 4 → 2 đợt.
+  3. Tổng gram mỗi nguyên liệu qua mọi đợt = tổng gram tuần (không thiếu, không thừa phần cần dùng); số gói làm tròn theo đợt.
+  4. Chi phí so ngân sách và trạng thái ngân sách **giống hệt** trước khi có tính năng (test 18 hồ sơ).
+  5. Tổng "trả tại quầy" cả tuần ≥ tổng cũ; chênh lệch hiện "+X ₫ do mua theo đợt"; mỗi chế độ và mỗi đợt có tổng riêng.
+  6. "Đã mua x/N" theo từng chế độ + tổng; "Nhà có sẵn" chỉ ở Theo tuần; nhãn "Dùng trong N ngày" ở cả hai.
+  7. Công tắc "Mua thịt cá cả tuần rồi cấp đông": bật → dòng thịt cá `freezable` sang Theo tuần, có hướng dẫn cấp đông/rã đông; tắt → về Theo ngày; trạng thái đã mua giữ nguyên khi đổi.
+  8. Mặc định Theo tuần lần đầu, nhớ chế độ gần nhất (lưu máy). Widget test 2 chế độ; ảnh màn hình mới.
+- **Trạng thái (2026-11-16): XONG**, đã commit cùng T-105/T-112 (PR #3). Kết quả test: Engine 263, Api 50, vitest 179, flutter test 333. Ghi chú ở `docs/dev/t116-notes.md`.
+  - AC5 sửa theo D-SHP-09: chênh lệch hiện có dấu, bỏ điều kiện "≥ tổng cũ".
+  - Mức chênh tiền Theo ngày (+4%…+43%) xử lý tiếp ở T-116b.
+
+### T-116b — Đi chợ Theo ngày: mua theo cân ở chợ, gợi ý cấp đông · DEV · P1 phase 2 (sau T-117)
+- **Phụ thuộc:** T-116. PRD D-SHP-09.
+- **Mô tả:**
+  - Trong các đợt Theo ngày, dòng giá `cho_khac` thuộc quầy thịt, cá/hải sản, rau củ, trái cây được mua theo cân: làm tròn lên bước 100 g (tối thiểu 100 g), giá theo tỷ lệ `price_vnd / pack_g`.
+  - Dòng siêu thị vẫn làm tròn theo gói.
+  - Theo tuần và `till_cost` giữ nguyên; golden/parity không đổi.
+  - Chênh lệch hiện có dấu (+/−).
+  - Có gợi ý bật công tắc cấp đông khi chênh lớn.
+- **AC:**
+  1. Unit test: chợ, cần 25 g thịt trong một đợt → 100 g, giá = 100 × đơn giá/g. Siêu thị, cùng lượng → 1 gói. Rau 230 g → 300 g.
+  2. Tổng gram mua qua các đợt ≥ gram dùng; golden và chi phí so ngân sách không đổi (test 18 hồ sơ).
+  3. 18 hồ sơ golden, seed 1, công tắc cấp đông tắt:
+     - Hồ sơ mua ở chợ: trung vị chênh ≤ +10%, cao nhất ≤ +20%.
+     - Hồ sơ mua ở siêu thị: ghi số đo vào `docs/dev/`.
+     - Không đạt thì báo PM kèm số liệu, không nới số ngày tươi.
+  4. Chênh > 15% và có thịt cá `freezable` ở Theo ngày → hiện gợi ý "Mua thịt cá cả tuần rồi cấp đông để bớt khoảng Y ₫". Nút trong gợi ý bật công tắc. Có widget test.
+  5. Chênh âm hiện "−X ₫". Chuỗi vi đã có (Research, 2026-11-16): `shop.freeze_saving_hint`, `shop.freeze_switch_label`, `shop.batch_saving_negative`. Dev chạy `gen_arb.py`; truyền giá trị tuyệt đối vào `{amount}` (chuỗi đã có dấu "−" và " ₫"). Bản en để sau (MVP chỉ tiếng Việt, PRD §2).
+
+### T-057f — Hình minh họa mục tiêu + dụng cụ, chuỗi giao diện · RESEARCH · P1 (làm ngay)
+- **Trạng thái (2026-11-16):** hình **xong** (10 SVG trong `docs/research/illustrations/`, chờ session chính kiểm render); phân loại mua xong (`ingredient-storage-groups.*`). **Chuỗi i18n xong** (504 chuỗi, không trùng khóa); ARB mới: `onboardingGoalChoose`, `onboardingGoalOther`, `onboardingGoalSelected`, `shopModeWeekly`, `shopModeDaily`, `shopToday`, `shopFreezeMeatSwitch`, `shopBatchExtra`, `shopNoShelfInfo`; tiêu đề/mô tả mục tiêu dùng khóa có sẵn (`onboardingGoalHint`, `onboardingGoal{Lose,Hold,Build}Hint`); giấy phép ở `docs/research/illustrations-licenses.md`. Đặt hình vào `mobile/` là việc của Dev (chuyển PNG, T-107). **T-057f XONG (2026-11-16):** đậu phụ → `uoc_tinh_vn`, ngăn mát 1 ngày, mua theo ngày; 11 dòng có `long_term: true`; bảng mong đợi `ingredient-storage-groups.json` viết lại theo tên trường hợp đồng (`buy_by_day` 35, `stock_buy_by_week` 34, chưa phân loại 0). Còn chờ: 3 hình mục tiêu vẽ lại (session chính theo dõi).
+- **Phụ thuộc:** PRD D-ONB-08, D-ONB-09.
+- **Mô tả:** 3 hình mục tiêu (Giảm mỡ, Giữ cân, Tăng cơ) + 7 hình dụng cụ (Bếp, Nồi cơm điện, Lò vi sóng, Nồi chiên không dầu, Lò nướng, Nồi áp suất, Máy xay). Phong cách vẽ phẳng, đồng bộ với placeholder món hiện có; giấy phép CC0/MIT/tự vẽ, dùng thương mại được. Không ảnh của bên khác, không hình Mealbird/Tinder. Chuỗi: tiêu đề/hướng dẫn bước Mục tiêu, nút "Chọn mục tiêu này" / "Xem mục tiêu khác", mô tả 3 mục tiêu, nhãn "Đã chọn"; chuỗi tab Đi chợ 2 chế độ, công tắc cấp đông, "+X ₫ do mua theo đợt".
+- **AC:** file hình (SVG hoặc PNG @1x/2x/3x) trong thư mục asset Dev chỉ định; bảng giấy phép từng hình trong `docs/research/illustrations-licenses.md`; chuỗi trong `vi.json`, báo tên khóa ARB.
+
+### T-057e — Cập nhật TC theo thứ tự onboarding mới + kiểm lại · RESEARCH · P1
+- **Trạng thái (2026-11-09):** phần tài liệu **xong** (TC-1-27…32, 36/37, 39, E-05 theo tên/vị trí bước mới; thêm TC-1-49/50/51; chuỗi trong `vi.json`, ghi ở `docs/research/content-i18n-T057e.md`). Còn: kiểm lại sau T-103 → `acceptance-T103.md`.
+- **Phụ thuộc:** D-ONB-06. Phần kiểm lại chờ T-103.
+- **Mô tả:**
+  - Sửa `docs/research/test-scenarios.md`: TC-1-27…30 (vuốt, nút thay thế, hoàn tác, Vuốt lại) ghi vị trí bước 2; TC-1-39 sửa "sau bước Kiêng/Ghét/Vuốt" thành "ngay sau Chế độ ăn, trước Không muốn thấy"; rà mọi TC onboarding có đánh số/vị trí bước.
+  - Thêm TC: nút Bỏ qua (US-1.5 AC4); thích món thịt rồi chọn Chay → không có thịt; tiếp tục dở dang sau cập nhật thứ tự.
+  - Rà câu `onboarding.swipe.soft` và chuỗi nút "Bỏ qua", "Khẩu vị: chưa chọn" (gửi Dev cho T-103).
+  - Sau T-103: chạy lại các TC trên, ghi kết quả vào `docs/research/acceptance-T103.md` kèm ảnh.
+- **AC:** Không còn TC nào ghi thứ tự cũ (grep "bước 12", "sau bước Kiêng/Ghét/Vuốt"); mỗi TC mới có kết quả mong đợi đo được; biên bản kiểm lại có bảng đạt/không đạt.
+
+### T-054c — Đợt dữ liệu D2: sửa giá thịt heo xay (L-14) + kiểm mẫu giá BHX · RESEARCH · P1
+- **Trạng thái (2026-11-09): XONG** (`price-audit-D2.md`). L-14 rút lại; 4/4 dòng BHX được kiểm (chỉ có 4); sửa `thit_heo_nac_dui` 34.500 ₫. Việc tiếp chuyển sang T-054d (D-DATA-01).
+- **Phụ thuộc:** PRD D-P2-03. Nguồn: báo cáo T-110 lượt 2.
+- **Mô tả:**
+  - Mở trang BHX bằng trình duyệt, xác định đúng sản phẩm thịt heo xay nạc (quy cách, giá, ngày) và sửa dòng `thit_heo_xay_nac` trong `data/prices.json`.
+  - Kiểm mẫu ≥ 15 dòng giá BHX khác (ưu tiên nguyên liệu dùng ≥ 5 công thức): tên sản phẩm trên trang khớp nguyên liệu, quy cách, giá. Ghi bảng đúng/sai vào `docs/research/price-audit-D2.md`.
+  - Sai thì sửa luôn trong cùng đợt; sai > 3/15 thì báo PM để mở rộng kiểm toàn bộ.
+- **AC:** dữ liệu qua validator; mỗi dòng sửa có `source_url` và `surveyed_on` mới; báo session chính để Dev regen golden/fixture một lần (chạy sau T-103 nếu Dev đang giữa task) và chạy lại engine-report so chi phí trước/sau.
+
+### T-054d — Nguồn cho giá ước lượng + giá thường (L-15, L-16) · RESEARCH · P1
+- **Trạng thái (2026-11-09): XONG** (`price-audit-D2.md` mục 6). 4 dòng BHX về giá thường (25.500 / 35.700 / 46.200 / 63.400 ₫); 69/69 dòng `cho_khac` có `source_note` (25 có nguồn, **44 "chưa có nguồn"** → T-054e); `stores.json` WinMart/Co.opmart `price_survey_date = null`; chuỗi `priceEstimateNotSurveyed`. Đổi `data/prices.json`, `data/stores.json`, `content/i18n/vi.json`.
+- **Phụ thuộc:** PRD D-DATA-01.
+- **Mô tả:**
+  - `thit_heo_xay_nac` sửa về giá thường 25.500 ₫; kiểm 3 dòng BHX còn lại có phải giá khuyến mãi không, sửa về giá thường.
+  - Thêm `source_note` cho 69 dòng `cho_khac` (cách ước tính + nguồn tham chiếu + ngày); không nêu được thì `"chưa có nguồn"`. Đề xuất Dev thêm `source_note` vào hợp đồng dữ liệu/validator (bắt buộc với `cho_khac`).
+  - `stores.json`: `price_survey_date` = `null` cho WinMart, Co.opmart (0 dòng giá). Chuỗi i18n "Giá ước lượng, chưa khảo sát tại cửa hàng này".
+- **AC:** 69/69 dòng `cho_khac` có `source_note`; ghi số dòng "chưa có nguồn"; dữ liệu qua validator; báo session chính để Dev regen golden **một lần** gộp với T-054c (sau T-103 nếu Dev đang giữa task).
+
+### T-104 — Regen golden sau đợt giá D2 + validator `source_note` · DEV · P1 (**làm ngay**, việc nhỏ, chen trước phần còn lại của T-101)
+- **Phụ thuộc:** T-054c, T-054d xong (dữ liệu đã đổi trong cây làm việc, `data_version` đã đổi nên golden/fixture đang lệch).
+- **Mô tả:** Regen golden, `manifest.json`, fixture mobile **một lần**. Validator dữ liệu: `source_note` bắt buộc với dòng `cho_khac` (giá trị `"chưa có nguồn"` hợp lệ nhưng đếm và in cảnh báo). Chạy engine-report so chi phí trước/sau đợt D2.
+- **AC:** `dotnet test`, `flutter test` xanh; validator báo đúng số dòng "chưa có nguồn" (44); bảng chi phí trước/sau 18 hồ sơ ghi vào `docs/dev/`; hồ sơ nào vượt ngân sách sau khi đổi giá thì liệt kê (không tự nâng ngân sách hồ sơ test), báo session chính.
+
+### T-054e — Tìm nguồn cho 44 dòng giá ước lượng · RESEARCH · P2 (trước phát hành)
+- **Mô tả:** Khảo sát tay (trình duyệt hoặc chợ) cho 44 dòng `cho_khac` đang "chưa có nguồn", ưu tiên nguyên liệu dùng nhiều công thức. Xem lại 2 dòng lệch khoảng tham khảo (`thit_bo_nac`, `gao_te`). `com_trang` giữ dòng deprecated theo D-SHP-05, chỉ ghi chú.
+- **AC:** số dòng "chưa có nguồn" giảm còn ≤ 10, mỗi dòng sửa có `source_note` + ngày; báo Dev regen golden một lần.
+
 ### T-050b — Kiểm thử lại + phần UI chưa kiểm · RESEARCH · P0 (sau T-093 mục 1–4)
 - **Mô tả:**
   - Chạy lại các TC không đạt của T-050 (TC-1-17, 1-23, 1-31, 2-04, 2-04b) cùng TC đã sửa.
@@ -521,8 +709,10 @@ T-001 (khởi tạo Expo), T-013…T-028 (UI Expo): **CANCELLED**, thay bằng T
   - Ghi danh sách thay đổi vào `docs/research/data-batch-D1.md`.
 
 ### Thứ tự ưu tiên sau T-050
-1. **Dev:** xong việc điều tra số test .NET dao động → T-093 mục 1 (L-03) → 2 (L-09) → 3 (L-01) → 4 (L-02) → T-078 phần pantry → **T-094 (lượng cơm theo thói quen, D-COM-01, xong) → T-095 (Flutter) ∥ T-096 (giữ cơm khi chọn mâm, D-COM-02; song song được vì khác file)** → **T-098 (2–3 chén đủ bữa có cơm, D-COM-04)** → T-097 (L-12, L-13) → T-099 (thẻ tinh bột, Flutter) → T-093 mục 5 (L-08) → mục 6 (L-05).
-2. **Research:** T-057c (sửa TC-E-04, nhỏ) bất cứ lúc nào; **T-059c ngay (số liệu chén cơm, dữ liệu `max_g`, chuỗi; Dev cần trước T-095)**, T-057b (tài liệu, không chạm dữ liệu) → chờ Dev xong mục 1–4 → T-050b → T-050c (sau T-094/T-095/T-096) → T-054b (mở băng D1) → các task dữ liệu còn lại (T-053, T-054…).
+**Thứ tự Dev đã chốt (2026-11-10):** kiểm tất định (P0 nếu lỗi) → T-101 phần còn lại (ngoại lệ p01, BudgetTests, CPU ≤ 2 s) → T-103 → **T-106 (sửa màn vuốt, người dùng báo lỗi)** → **T-107 (Mục tiêu thẻ quẹt)** → **T-108 (dụng cụ có hình)** → T-105 (CPU, điều kiện phát hành; AC1–3 xong 2026-11-16) → T-112 phần dữ liệu (xong) → **T-116 (Đi chợ 2 chế độ, xong 2026-11-16)** → **T-117 (làm nóng API)** → **T-116b (mua theo cân ở chợ)** → T-112 phần tính năng → đo emulator T-105 AC4c → T-115 → T-113 → T-114. (Cập nhật 2026-11-16; dòng cũ bên dưới giữ để tham khảo.) Cũ: **T-106 (sửa màn vuốt)** → phase 2: T-112 (độ tươi) và T-115 (tự sửa giá) → T-113 (nguồn giá BHX) → T-114 (UI giá). T-105 (CPU ≤ 2 s, đổi thuật toán được; **P1, điều kiện phát hành**) xếp sau T-103, trước hoặc song song phase 2 tùy Dev (khác file với T-112/T-115 Flutter).
+
+1. **Dev:** xong việc điều tra số test .NET dao động → T-093 mục 1 (L-03) → 2 (L-09) → 3 (L-01) → 4 (L-02) → T-078 phần pantry → **T-094 (lượng cơm theo thói quen, D-COM-01, xong) → T-095 (Flutter) ∥ T-096 (giữ cơm khi chọn mâm, D-COM-02; song song được vì khác file)** → **T-098 (2–3 chén đủ bữa có cơm, D-COM-04)** → T-097 (L-12, L-13) → T-099 (thẻ tinh bột, Flutter, xong PR #2) → **T-104 (regen golden sau đợt giá D2, làm ngay)** → **T-101 (hiệu năng mức cơm cao, P0)** → T-102 (nhãn TINH BỘT, P2) → **T-103 (thẻ vuốt lên bước 2, D-ONB-06)** → T-093 mục 5 (L-08) → mục 6 (L-05).
+2. **Research:** **T-057f (hình mục tiêu + dụng cụ, chuỗi; làm ngay)** · **T-110 lượt 3 (robots.txt + ánh xạ sản phẩm BHX HCM, D-P2-06)** · T-054d xong · **T-054e (nguồn cho 44 dòng giá, P2)** · (sau T-057d: T-110/T-111 phase 2, mức thấp) · **T-057e (TC theo thứ tự onboarding mới + chuỗi cho T-103)**, **T-057d (2 hồ sơ test hộ đông người + ngân sách sát, chuỗi TINH BỘT)**; T-057c (sửa TC-E-04, TC-E-09) bất cứ lúc nào; **T-059c ngay (số liệu chén cơm, dữ liệu `max_g`, chuỗi; Dev cần trước T-095)**, T-057b (tài liệu, không chạm dữ liệu) → chờ Dev xong mục 1–4 → T-050b → T-050c (sau T-094/T-095/T-096) → T-054b (mở băng D1) → các task dữ liệu còn lại (T-053, T-054…).
 
 ### T-029 — Freemium (viết lại) · DEV · P2
 - **Mô tả:** Theo PRD §12.
@@ -691,7 +881,70 @@ T-001 (khởi tạo Expo), T-013…T-028 (UI Expo): **CANCELLED**, thay bằng T
 ## Tổng hợp v0.2
 | Owner | DONE | CANCELLED | Còn mở P0 | Còn mở P1 | Còn mở P2 |
 |---|---|---|---|---|---|
-| DEV | 11 (T-002…T-012) | 17 (T-001, T-013…T-028) | 30 (T-051, T-052, T-060…T-066, T-069…T-072, T-074, T-076, T-078, T-080…T-089, T-093…T-098) | 8 (T-067, T-068, T-073, T-077, T-099, T-090…T-092) | 4 (T-029, T-075, T-079, T-100) |
-| RESEARCH | 5 (T-041, T-043, T-047, T-048, T-049) | 1 (T-044) | 12 (T-058, T-053, T-054, T-055, T-057, T-059, T-059c, T-042c, T-050b, T-050c, T-057b, T-057c) | 3 (T-042b, T-056, T-054b) · T-050 DONE | 0 |
+| DEV | 11 (T-002…T-012) | 17 (T-001, T-013…T-028) | 31 (T-051, T-052, T-060…T-066, T-069…T-072, T-074, T-076, T-078, T-080…T-089, T-093…T-098, T-101) + T-104, T-105, T-116b, T-117 (P1) | 13 (T-067, T-068, T-073, T-077, T-099, T-103, T-106, T-107, T-108, T-116, T-090…T-092) | 6 (T-029, T-075, T-079, T-100, T-102, T-118 có điều kiện) |
+| RESEARCH | 5 (T-041, T-043, T-047, T-048, T-049) | 1 (T-044) | 12 (T-058, T-053, T-054, T-055, T-057, T-059, T-059c, T-042c, T-050b, T-050c, T-057b, T-057c) | 8 (T-042b, T-056, T-054b, T-054c, T-054d, T-057d, T-057e, T-057f) · P2: T-054e · T-050 DONE | 0 |
 
 Ghi chú: các task RESEARCH PARTIAL (T-040, T-042, T-045, T-046) đã được gộp vào T-054, T-042b, T-055.
+
+## Phase 2 (sau T-101…T-103): giá theo siêu thị, độ tươi, bảo quản
+
+Nguồn: PRD §13, ADR-002 (đề xuất). **Task DEV ở đây chưa giao** cho tới khi T-101, T-102, T-103 xong; Epic 7 còn chờ người dùng quyết PRD §13.4.
+
+### T-110 — Khảo sát khả thi nguồn giá siêu thị + pháp lý · RESEARCH · P1 (làm ngay, không chen việc P0)
+- **T-110 XONG (duyệt 2026-11-10):** `ingredient-sku-map-draft.json` 69 dòng: `verified_page` 49, `khong_ban` 11 (đạt AC: 60/69 = 87%), `khong_khop` 6, `chua_co_gia` 2, `chua_kiem` 1, `bulk_only` 2; không URL nào thuộc đường dẫn bị robots.txt cấm. 9 dòng còn lại dùng giá ước lượng (fallback). Dòng `khong_ban`/`khong_khop` có sản phẩm gần (vd ức gà có da) **có thể** hiện liên kết "Sản phẩm gần nhất tại BHX" nhưng không dùng giá đó cho chi phí (quyết ở T-114).
+- **Lượt 5 (giao 2026-11-09):** dùng sitemap khai báo trong robots.txt (`/sitemapnew`) để tìm URL sản phẩm/danh mục cho 53 nguyên liệu `chua_kiem` (đọc sitemap bằng trình duyệt hoặc tải một lần, không crawl trang). Có URL rồi mới mở trang sản phẩm để lấy JSON-LD. Sitemap không đủ thì mới gửi câu hỏi cho người dùng **qua PM → session chính**. AC giữ ≥ 80%; không chặn việc khác (T-113 còn chờ T-101…T-104). Lượt 4 kết quả: 15/69 `verified_page`, sữa tươi `bulk_only`, nấm rơm hộp `khong_khop`.
+- **Lượt 4 (D-P2-07, giao 2026-11-09):** tìm trang sản phẩm cho 59 nguyên liệu `chua_kiem` bằng công cụ tìm kiếm bên ngoài (`site:bachhoaxanh.com …`) hoặc liên kết từ danh mục đã mở được (không dùng `/tim-kiem`). Quy cách và giá lấy từ trang sản phẩm (JSON-LD), không lấy từ thẻ. Chọn SKU nhỏ nhất phù hợp hộ gia đình; chỉ có gói lớn thì `bulk_only`. Ghi nguyên liệu BHX không bán. **AC:** ≥ 80% nguyên liệu có `verified_page` hoặc ghi rõ "BHX không bán"; mỗi dòng có URL, quy cách, giá thường, ngày.
+- **Lượt 3 xong một phần (2026-11-09):** robots.txt không cấm trang sản phẩm; giá có trong JSON-LD; khu vực cần đăng nhập (xử lý ở D-P2-07); map 10/69 đã kiểm.
+- **Lượt 3 (D-P2-06, giao 2026-11-09):** chỉ BHX TP.HCM. (1) Đọc `robots.txt` của bachhoaxanh.com bằng trình duyệt, ghi nguyên văn + ngày; đường dẫn sản phẩm có bị `Disallow` không. (2) Cách chọn khu vực TP.HCM trên trang (có cần cookie/tham số không), giá thường và giá khuyến mãi hiển thị ở đâu. (3) Lập `ingredient_sku_map` nháp cho các nguyên liệu: URL trang sản phẩm BHX, tên sản phẩm, quy cách, nguyên liệu nào không có ở BHX. Không viết script thu thập (việc của Dev ở T-113). **AC:** `docs/research/bhx-hcm-mapping.md` + bản nháp `docs/research/ingredient-sku-map-draft.json`; nếu robots.txt cấm trang sản phẩm thì báo PM ngay (T-113 sẽ không làm adapter tự động).
+- **Trạng thái (2026-11-09):** lượt 1 xong (`price-sources-feasibility.md`): không chuỗi nào có kênh được phép (D-P2-01). **Lượt 2:** đọc điều khoản website bán hàng 5 chuỗi bằng trình duyệt (không tự động), trích dẫn + ngày; quan sát tay giá ~10 mặt hàng trong 1–2 tuần tại 2 chuỗi.
+- **Mô tả:** Với Bách hóa Xanh, WinMart, Co.opmart (Co.op Online), Emart, GO!/Big C, và Lotte Mart nếu có:
+  - Có API công khai, chương trình đối tác/affiliate, feed sản phẩm, hay dữ liệu mở không? Ai liên hệ, điều kiện gì.
+  - Điều khoản sử dụng website/app: có cấm thu thập tự động, sao chép giá, dùng thương mại không? Trích điều khoản kèm link và ngày đọc. **Không thử thu thập tự động.**
+  - Rủi ro pháp lý khi hiển thị giá/khuyến mãi của bên thứ ba (sở hữu dữ liệu, cạnh tranh, quảng cáo so sánh theo luật VN). Ghi rõ điểm cần luật sư xem.
+  - Giá có khác theo khu vực/cửa hàng không; tần suất đổi giá và khuyến mãi (quan sát tay 1–2 tuần trên vài mặt hàng).
+  - Liên kết sản phẩm (deep link) được phép không.
+- **AC:** `docs/research/price-sources-feasibility.md` có bảng mỗi siêu thị × (kênh dữ liệu, điều kiện, điều khoản trích dẫn + link + ngày, rủi ro, tần suất giá, khuyến nghị: dùng được / cần đối tác / không). Kết luận đề xuất siêu thị làm đầu tiên. Không có kết luận nào dựa trên giả định scrape được.
+
+### T-111 — Dữ liệu hạn dùng và bảo quản nguyên liệu VN · RESEARCH · P1 (làm ngay, song song T-110)
+- **Lượt 2 (2026-11-09):** tài liệu cập nhật ngưỡng/status; nháp 69 dòng ở `docs/research/storage-draft.json` (giữ ngoài `data/` tới T-112, D-P2-03).
+- **Trạng thái (2026-11-09):** lượt 1 xong (`shelf-life-ingredients.md`), 69/69 "chưa có nguồn" vì FoodKeeper trả 403. PM duyệt ngưỡng (sửa) và `storage.json` ở D-P2-02. **XONG (lượt 5, 2026-11-09):** 69 dòng: ok 9, gan_dung 32, uoc_tinh_vn 17, chưa nguồn 11; đồ tươi 50/50 đạt điều kiện, có mẹo + dấu hiệu hỏng; 22 dòng chỉ có DOP hạ `gan_dung`. Bản nháp `docs/research/storage-draft.json` chờ Dev chuyển vào `data/` ở T-112. **Lượt 4 xong (2026-11-09):** ok 30, gan_dung 10, uoc_tinh_vn 16, chưa nguồn 13; đồ tươi 50 có mẹo + dấu hiệu hỏng. **Lượt 5 nhỏ (D-P2-05):** sữa tươi/sữa đậu nành theo bao bì UHT; hạ dòng chỉ có DOP xuống `gan_dung`. Sau lượt 5 → T-111 XONG. **Lượt 3 (2026-11-09):** `storage-draft.json` 69 dòng (ok 9, uoc 43, chưa nguồn 17), báo cáo `storage-draft-report.md`. **Lượt 4 theo D-P2-04:** xác nhận DOP = ngày mua; tách `gan_dung`; xử lý 7 dòng chặn; cận dưới; quy tắc khí hậu VN; `freezable`; mẹo và dấu hiệu hỏng cho đồ tươi. ~~Chờ người dùng tải FoodKeeper~~ **Đã có (2026-11-09):** người dùng tải `docs/research/sources/foodkeeper-20261109.xls` (USDA FSIS, Excel 97–2003). Sau đó: tạo `data/storage.json`, điền theo FoodKeeper, nhóm nhiệt độ phòng dùng `uoc_tinh_vn`; Dev thêm `storage.json` vào validator (`MonNgon.Tools`) khi mở T-112.
+- **Mô tả:** Cho toàn bộ nguyên liệu trong `data/ingredients.json`:
+  - Số ngày dùng tốt ở nhiệt độ phòng / ngăn mát / ngăn đông sau khi mua; có cấp đông được không; mẹo bảo quản ngắn; dấu hiệu hỏng.
+  - Nguồn: tài liệu an toàn thực phẩm (Bộ Y tế/Cục ATTP, USDA FoodKeeper, FAO…), ghi nguồn từng dòng. Điều chỉnh cho khí hậu nóng ẩm VN nếu nguồn cho phép.
+  - Đề xuất ngưỡng 4 nhãn độ tươi (US-8.1 AC1) và đối chiếu `shelf_life_days` đang có trong `prices.json`.
+  - Đề xuất hợp đồng dữ liệu (trường mới trong `ingredients.json` hoặc file `storage.json`); PM duyệt trước khi Dev dùng.
+- **AC:** 100% nguyên liệu có dữ liệu hoặc ghi "chưa có nguồn"; mỗi dòng có nguồn; dữ liệu qua validator; câu miễn trừ và chuỗi i18n cho thẻ "Bảo quản".
+
+### T-112 — Độ tươi + thứ tự nấu + thẻ bảo quản · DEV · P1 phase 2 (**chưa giao**; sau T-103 và T-111)
+- **Trạng thái (2026-11-16, D-P2-09):** **phần dữ liệu XONG.** Đã có `data/storage.json` (69 dòng), `Dataset.Storage`, validator, 6 test và manifest golden. Bản nháp `docs/research/storage-draft.json` bị xóa trong cùng commit; từ nay `data/storage.json` là nguồn duy nhất. **Phần tính năng US-8.1…8.3 còn mở** (mô tả bên dưới).
+- **Việc kèm khi mở (D-P2-03):** chuyển `docs/research/storage-draft.json` → `data/storage.json`, thêm vào validator, regen golden/fixture một lần.
+- **Điều kiện mở (D-P2-02, sửa ở D-P2-04):** mọi nguyên liệu tươi trong `storage.json` có `status` ∈ `ok` | `gan_dung` | `uoc_tinh_vn` và có mẹo + dấu hiệu hỏng; nấm rơm đóng hộp không tính là tươi. Mở sau T-103. **Điều kiện dữ liệu ĐÃ ĐẠT** (T-111 xong 2026-11-09). Chỉ còn chờ T-103. Nhãn theo ngưỡng D-P2-02 (không tính ngăn đông); "Cấp đông được" là huy hiệu riêng. Việc kèm: thêm `storage.json` vào validator dữ liệu.
+- **Mô tả:** US-8.1, US-8.2, US-8.3: nhãn độ tươi trên danh sách đi chợ; ưu tiên mềm xếp bữa hạn ngắn đầu tuần; gợi ý cấp đông; thẻ Bảo quản; chọn ngày đi chợ.
+- **AC:** theo US-8.1…8.3 (đặc biệt US-8.2 AC2 đo trên 18 hồ sơ); không lùi AC engine hiện có (7/7, kcal ±5%, đạm, cơm, ngân sách, hiệu năng T-101).
+
+### T-113 — Nền nguồn giá: adapter, kho giá có phiên bản, fallback · DEV · P1 phase 2 (**chưa giao**; mọi điều kiện đầu vào đã đủ: T-110 xong, ADR-002 chấp nhận, D-P2-06/07/08)
+- ~~Tạm dừng (D-P2-01)~~ **Mở lại theo D-P2-06** (người dùng chấp nhận thu thập trang công khai). **Chưa giao**; giao sau T-101…T-103 (và T-104).
+- **Dữ liệu đầu vào:** chuyển `docs/research/ingredient-sku-map-draft.json` → `data/ingredient_sku_map.json` khi mở task (regen golden/fixture một lần, như `storage.json` ở T-112); thêm vào validator (URL không thuộc đường dẫn robots cấm; `bhx_status` hợp lệ).
+- **Phạm vi:** chỉ BHX TP.HCM. `IPriceSource`; `ManualSurveyPriceSource` (đọc `prices.json`); `BhxPublicPageSource` theo **11 quy tắc bắt buộc** trong ADR-002 mục "Adapter thu thập trang công khai"; `ingredient_sku_map` (Research cung cấp ở T-110 lượt 3); hosted service 1 đợt/ngày; snapshot giá trong DB; cờ `PriceSources:Bhx:Enabled`; API `GET /v1/shopping/prices`.
+- **AC bổ sung:**
+  1. Test với robots.txt giả: đường dẫn bị `Disallow` → không request; không đọc được robots.txt → không chạy đợt.
+  2. Gặp 403/429/captcha (giả lập) → dừng cả đợt, không thử lại trong ngày, API trả fallback.
+  3. Request tuần tự, khoảng cách ≥ 5 s (đo trong test bằng đồng hồ giả); chỉ URL trong `ingredient_sku_map`.
+  4. Tắt cờ lúc đang chạy → đợt kế không chạy, API trả giá ước lượng ngay, không cần deploy.
+  5. Trang đổi cấu trúc (fixture HTML khác) → > 20% không đọc được → dừng, cảnh báo, giữ snapshot cũ.
+  6. Snapshot > 7 ngày → fallback `prices.json`/`cho_khac`, trường trạng thái giá đúng.
+  7. Engine và golden không đổi khi bật/tắt nguồn (chi phí so ngân sách dùng snapshot cố định của tuần đã lập).
+  8. Test chạy trên fixture HTML đã lưu, **không gọi BHX thật trong CI**.
+  9. (D-P2-07) Đọc giá từ JSON-LD (`price`, `lowPrice`, `priceValidUntil`); trang thiếu JSON-LD tính là lỗi cấu trúc. Không gọi `/tim-kiem`, `/sp/*`, `/sieu-thi-*`; kiểm robots.txt cho từng URL. Không đặt cookie khu vực, không đăng nhập; nhãn nguồn cố định "Giá website Bách hóa Xanh" (D-P2-08, không có cờ đổi nhãn).
+  10. (D-P2-08) User-agent `FitProMamDu-PriceBot/<phiên bản> (+mailto:<email>)`, email đọc từ `PriceSources:Bhx:ContactEmail` (appsettings/biến môi trường), không viết cứng; thiếu cấu hình → adapter không chạy (có test).
+- **Mô tả:** Theo ADR-002: `IPriceSource`, `ManualSurveyPriceSource` (đọc `prices.json`), adapter siêu thị đầu tiên, `ingredient_sku_map`, job cập nhật, snapshot giá, engine nhận `price_snapshot_id`, API `GET /v1/shopping/prices`.
+- **AC:** cùng đầu vào + snapshot → cùng tuần (golden); nguồn lỗi/cũ → fallback, ghi trạng thái; không adapter nào bật khi chưa có cơ sở pháp lý ghi trong repo.
+
+### T-114 — UI giá BHX, khuyến mãi, liên kết sản phẩm · DEV · P1 phase 2 (**chưa giao**; sau T-113)
+- **Mô tả:** US-7.1, US-7.2, US-7.4 trên tab Đi chợ (Flutter), một siêu thị BHX TP.HCM. US-7.3 (so sánh) để sau (D-P2-06). Thuộc gói miễn phí.
+- **AC:** theo US-7.1, 7.2, 7.4; dòng ghi chú cố định "Chi tiết chương trình khuyến mãi vui lòng truy cập vào trang chủ siêu thị" (chuỗi i18n từ Research, D-P2-08) hiện dưới khối giá; 3 trạng thái giá (BHX cập nhật lúc … / ước lượng / không có) có widget test; dòng ghi nguồn + thời điểm; bấm liên kết mở trang sản phẩm BHX bằng trình duyệt ngoài; khuyến mãi hết hạn trước ngày đi chợ không tính.
+
+### T-115 — Tự sửa giá đã mua (US-7.5) · DEV · P1 phase 2 (**chưa giao**; sau T-103, không phụ thuộc T-113)
+- **Mô tả:** Trên tab Đi chợ, sửa "giá tôi đã trả" từng dòng; lưu trên máy; tổng "đã chi thực tế" cạnh tổng ước tính. Không gửi server, không đổi engine/ngân sách.
+- **AC:** theo US-7.5 AC1–AC4; widget test sửa/xóa giá, tổng cập nhật; kiểm request mạng không chứa giá tự sửa; xóa dữ liệu (US-6.3) xóa cả giá tự sửa.
+

@@ -70,7 +70,7 @@ Quy ước: **US-x.y**, AC = acceptance criteria dạng kiểm được. Số li
 ### Epic 1 — Onboarding + chỉ tiêu (P0-1)
 
 **US-1.1 Đặt chỉ tiêu theo cơ thể.** Là người dùng mới, tôi nhập mục tiêu và chỉ số cơ thể để app tính protein tối thiểu và calo mỗi ngày.
-- AC1: Nhập được mục tiêu (Giảm mỡ / Giữ cân / Tăng cơ), giới tính, tuổi (14–90), chiều cao (120–220 cm), cân nặng (30–250 kg), 5 mức vận động; ngoài khoảng → báo lỗi tại chỗ, nút Tiếp tục bị khóa.
+- AC1: Chọn mục tiêu bằng bộ thẻ quẹt chọn 1, xoay vòng, có hình minh họa (D-ONB-08); nhập được mục tiêu (Giảm mỡ / Giữ cân / Tăng cơ), giới tính, tuổi (14–90), chiều cao (120–220 cm), cân nặng (30–250 kg), 5 mức vận động; ngoài khoảng → báo lỗi tại chỗ, nút Tiếp tục bị khóa.
 - AC2: Công thức đúng mục 4.8 spec: BMR (Mifflin–St Jeor) × hệ số vận động × hệ số mục tiêu, làm tròn 50 kcal; cân nặng tham chiếu; protein theo g/kg làm tròn 5 g; trần 35% calo; sàn thắng trần.
 - AC3: Với ví dụ của spec (nam 30t, 177,8 cm, 81,6 kg, vừa vận động, giảm mỡ) app ra **2.200 kcal** và **175 g protein**.
 - AC4: Màn kết quả hiển thị từng dòng phép tính (BMR → TDEE → mục tiêu → protein) và cho phép chuyển sang "Tự nhập" protein/calo.
@@ -97,15 +97,17 @@ Quy ước: **US-x.y**, AC = acceptance criteria dạng kiểm được. Số li
 - AC4: Ô tìm nguyên liệu không muốn thấy có autocomplete không dấu ("rau muong" tìm được "Rau muống"); chip gợi ý ≥ 6 nguyên liệu hay bị ghét.
 - AC5: "Xu hướng nấu ăn" gồm Nhiều chất xơ, Ít đường, Tốt cho tim mạch, Ít béo (D-HLT-01). Đây chỉ là ưu tiên mềm, luôn kèm dòng miễn trừ y tế. PCOS và Chống viêm không có trong MVP.
 
-**US-1.4b Thói quen ăn cơm** (D-COM-01; bước ngay sau US-1.4).
+**US-1.4b Thói quen ăn cơm** (D-COM-01; bước ngay sau "Chế độ ăn" của US-1.4, trước "Không muốn thấy", D-ONB-06).
 - AC1: Câu hỏi "Mỗi bữa trưa/tối bạn thường ăn mấy chén cơm?" với 4 lựa chọn. **Nhãn chính là số chén, gram trong ngoặc chỉ để gợi ý**: "½ chén (~75 g)" / "1 chén (~150 g)" (chọn sẵn) / "2 chén (~300 g)" / "3 chén trở lên (~450 g)". Lựa chọn ½ chén có dòng phụ "Ít cơm, ăn nhiều thức ăn". Gram mỗi chén theo số Research chốt ở T-059c.
 - AC2: Đã chọn "Ít tinh bột" ở US-1.4 thì bỏ qua bước này; màn tổng kết ghi "Ít tinh bột: mâm không có cơm".
 - AC3: Mức đã chọn chiếm > 45% kcal trung bình một bữa chính thì hiện dòng cảnh báo "một số bữa sẽ phải bớt cơm"; không chặn Tiếp tục.
 - AC4: Màn tổng kết (US-1.6) hiện mức đã chọn; sửa được ở tab Bạn (US-6.1), đổi xong lên lại các ngày còn lại của tuần.
 
-**US-1.5 Khẩu vị bằng thẻ vuốt và dụng cụ bếp.**
+**US-1.5 Khẩu vị bằng thẻ vuốt và dụng cụ bếp.** (Thẻ vuốt là **bước 2**, ngay sau Mục tiêu; Dụng cụ là bước 13, trước Tổng kết. D-ONB-06.)
 - AC1: 12–16 thẻ xu hướng món Việt; vuốt phải = thích, trái = ít hơn; có nút ✕ / hoàn tác / ♥ cho người không vuốt được (trợ năng).
 - AC2: Màn kết quả liệt kê thích / ít hơn, có "Vuốt lại"; kết quả chỉ là trọng số mềm.
+- AC4: Màn vuốt có dòng "chỉ để biết khẩu vị, không ảnh hưởng calo, đạm hay dị ứng" và nút "Bỏ qua"; bỏ qua thì tổng kết ghi "Khẩu vị: chưa chọn" (D-ONB-06).
+- AC5: Thẻ căn giữa, rộng theo màn hình; kéo thẻ theo ngón tay, thẻ nghiêng theo hướng kéo, nhãn "Thích" / "Ít hơn" hiện dần; vượt ngưỡng thì thẻ bay ra, chưa tới ngưỡng thì bật về; phía sau thấy 2 thẻ kế tiếp xếp chồng (D-ONB-07).
 - AC3: Chọn nhiều dụng cụ (bếp, nồi cơm điện, lò vi sóng, nồi chiên không dầu, lò nướng, nồi áp suất, máy xay); bắt buộc ≥ 1 thiết bị nấu; công thức cần dụng cụ không có không bao giờ được chọn.
 
 **US-1.6 Tổng kết và tạo tuần.**
@@ -235,7 +237,7 @@ Web ReactJS (P2, sau mobile) ─────────────────
 ## 7. Yêu cầu phi chức năng (MVP)
 - NFR-01 minh bạch số liệu; NFR-02 trung thực khi không đạt; NFR-06 giữ màn hình sáng; NFR-08 miễn trừ y tế; NFR-09 không bắt ghi nhật ký — **giữ nguyên**.
 - NFR-03 rút gọn: chỉ tiếng Việt, nhưng **không hard-code chuỗi** trong component (Flutter: ARB `vi` sinh từ `content/i18n/vi.json`).
-- Hiệu năng: tạo tuần ≤ 5 s trên máy tầm trung; mở tab ≤ 300 ms.
+- Hiệu năng: tạo tuần ≤ 5 s trên máy tầm trung; mở tab ≤ 300 ms. Server: ít/vừa p95 ≤ 1 s; nhiều/3+ chén p95 ≤ 2 s; CPU/lần p95 ≤ 2 s là điều kiện phát hành qua T-105 (D-PERF-01, D-PERF-02).
 - Trợ năng: vùng chạm ≥ 44 pt, tương phản WCAG AA, mọi thao tác vuốt có nút thay thế.
 - Riêng tư: MVP chỉ gửi lên API những lựa chọn cần để tính tuần (không tên, không email); API không lưu trữ; không analytics.
 - Offline: xem tuần, công thức, đi chợ từ cache khi mất mạng; tạo/đổi tuần cần mạng và báo lỗi thân thiện khi mất mạng.
@@ -322,7 +324,7 @@ Dev đổi cách tính ước tính: ước tính = **chi phí món ăn của tu
 
 **Duyệt các chỗ lệch ở onboarding T-083…T-086 (PM, 2026-11-07).**
 
-**D-ONB-01 — Thứ tự bước (chấp nhận).** Thứ tự chính thức: Mục tiêu & cơ thể → Chỉ tiêu → Cửa hàng → **Hộ gia đình → Ngân sách** → Bữa ăn → Kiêng/dị ứng → Không muốn thấy → Khẩu vị → Dụng cụ → Tổng kết. Lý do: min/max ngân sách phụ thuộc số người (và chỉ tiêu, D-BUD-01). Vì bước Bữa ăn nằm sau Ngân sách, API ước tính ngân sách theo cấu hình bữa mặc định (trưa + tối + phụ chiều); màn Tổng kết gọi lại `budget-range` với cấu hình thật (US-1.2 AC2c). Không cần sửa code.
+**D-ONB-01 — Thứ tự bước (chấp nhận).** **(Thứ tự cập nhật ở D-ONB-06: thẻ vuốt lên bước 2.)** Thứ tự chính thức: Mục tiêu & cơ thể → Chỉ tiêu → Cửa hàng → **Hộ gia đình → Ngân sách** → Bữa ăn → Kiêng/dị ứng → Không muốn thấy → Khẩu vị → Dụng cụ → Tổng kết. Lý do: min/max ngân sách phụ thuộc số người (và chỉ tiêu, D-BUD-01). Vì bước Bữa ăn nằm sau Ngân sách, API ước tính ngân sách theo cấu hình bữa mặc định (trưa + tối + phụ chiều); màn Tổng kết gọi lại `budget-range` với cấu hình thật (US-1.2 AC2c). Không cần sửa code.
 
 **D-ONB-02 — "Ít tinh bột" là cờ riêng (chấp nhận).** Đúng spec: "Ít tinh bột" là ràng buộc cứng trong nhóm "Chế độ ăn" (`preferences.low_carb`), không phải ưu tiên mềm. Không cần sửa code.
 
@@ -482,6 +484,161 @@ Quyết định:
 - **AC1 (gạo tăng dần):** đo lại bằng **tổng tinh bột quy ra cơm** (`rice_equiv_g` cả tuần), không đo gạo sống, vì mâm khoai/bún thay cơm là hợp lệ. Yêu cầu tuyệt đối: không giảm khi tăng mức (cho phép sai số làm tròn ≤ 2%). Hồ sơ thuộc ngoại lệ ngân sách ở AC2 được miễn ở các mức thuộc ngoại lệ. Gạo sống chỉ ghi trong report. **Không nới luật 1 canh / 1 món chính.** Kho mâm cơm hẹp giao Research bổ sung trong T-053/T-054: ưu tiên món chính rẻ hợp mâm cơm.
 - **AC7 (đa dạng) ở 2 chén / 3+ chén:** chấp nhận **≥ 6 món trưa/tối** cho MVP (ngưỡng ở ½ chén và 1 chén giữ theo D-DIV-01/02). Theo dõi trong report; T-053/T-054 nâng lên.
 - Rice98Tests: các ngoại lệ phải đọc từ một danh sách có tên hồ sơ, mức và lý do (`budget`), không nới ngưỡng chung.
+
+**D-COM-06 — Sau T-099: nhãn vai trò, hồ sơ test, hiệu năng (PM, 2026-11-08).**
+- **Nhãn vai trò trong danh sách mâm:** `rice.kind = com` → "CƠM"; `other` (khoai, bún…) → **"TINH BỘT"**. Tên món và "(thay ½ chén cơm)" giữ như D-COM-03. P2, task T-102.
+- **Chuỗi `onboardingRiceWarning` cũ** (trước D-COM-04/05) bỏ khỏi i18n và code. Gộp T-102.
+- **Hồ sơ test thiếu:** hồi quy T-098 (hộ đông người + ngân sách sát ở mức 1 chén mất hết mâm) không có hồ sơ nào bắt được. Thêm 2 hồ sơ cố định vào bộ test (Research, T-057d, P1). Từ nay mọi AC engine áp dụng cả 18 hồ sơ.
+- **Hiệu năng mức 3+ chén (~17 s, timeout 30 s): vi phạm NFR** (§7: server p95 ≤ 1 s, app ≤ 5 s). Người dùng chọn 3+ chén sẽ gặp mỗi lần tạo/đổi tuần, máy chủ thật chậm hơn máy dev, nên **P0, task T-101**. Không tăng timeout để che.
+
+**D-ONB-06 — Đưa thẻ vuốt khẩu vị lên bước 2 (người dùng chọn phương án A, 2026-11-09).** Nguồn: `docs/research/ux-review-swipe-first.md`. Lời người dùng: "A: lên bước 2". Thay thứ tự ở D-ONB-01.
+
+- **Thứ tự chính thức (14 bước):** Mục tiêu → **Khẩu vị (thẻ vuốt)** → Cơ thể → Vận động → Chỉ tiêu → Cửa hàng → Hộ gia đình → Ngân sách → Bữa ăn → Chế độ ăn (kiêng/dị ứng) → Thói quen ăn cơm → Không muốn thấy → Dụng cụ → Tổng kết. Chỉ thẻ vuốt đổi chỗ; các bước khác giữ thứ tự tương đối. Dụng cụ vẫn ở cuối (US-1.5 AC3 tách khỏi thẻ vuốt về vị trí).
+- **Không đổi "cửa hàng → ngân sách" lên đầu** (câu 2 của Research): min/max ngân sách cần chỉ tiêu và số người (D-BUD-01/02), nên Ngân sách vẫn đứng sau Chỉ tiêu và Hộ gia đình.
+- **Xử lý rủi ro Research nêu:**
+  1. *Vuốt khi chưa khai báo gì:* màn vuốt hiện rõ dòng (khóa i18n `onboardingSwipeSoft`, Research đã rà ở T-057e): "Chỉ để biết bạn thích kiểu món nào. Không ảnh hưởng calo, đạm hay dị ứng; phần đó hỏi ở các bước sau."
+  2. *Thích món mà sau đó lại kiêng* (vd thích thẻ món thịt rồi chọn ăn chay): ràng buộc cứng luôn thắng, engine bỏ qua phần thích không còn hợp lệ (đã đúng theo thứ tự ưu tiên D-COM-01). Không hỏi lại, không cảnh báo. Màn kết quả vuốt không hứa món cụ thể.
+  3. *Người không muốn chơi:* thêm nút "Bỏ qua" trên màn vuốt. Bỏ qua thì không có trọng số khẩu vị (như chưa vuốt); tổng kết ghi "Khẩu vị: chưa chọn"; sửa được ở tab Bạn.
+  4. *Tiếp tục dở dang (US-1.6 AC4):* bước đang làm lưu theo **tên bước**, không theo số thứ tự. Người đang dở onboarding trên bản cũ mở bản mới phải về đúng bước theo tên, không nhảy sai bước, không mất lựa chọn.
+  5. *Test chạy theo thứ tự:* Research sửa TC-1-27…30 và TC-1-39; Dev sửa integration test và chụp lại ảnh.
+  6. *Không sao chép:* chỉ lấy cơ chế đặt vuốt sớm; bố cục thẻ, màu, câu chữ giữ của FitPro - Mâm đủ (nguyên tắc ở đầu PRD).
+- Task: T-103 (Dev, Flutter, sau T-101/T-102), T-057e (Research).
+
+**D-DATA-01 — Kết quả đợt giá D2 (T-054c) và nguồn của giá ước lượng (PM, 2026-11-09).**
+- **L-14 rút lại:** dòng thịt heo xay đúng sản phẩm, lỗi ban đầu do đọc nhầm thẻ liền kề. Chấp nhận kiểm **4/4 dòng BHX** thay vì 15, vì `prices.json` chỉ có 4 dòng BHX.
+- **Giá lưu là giá thường, không phải giá khuyến mãi** (đồng bộ ADR-002: ngân sách không dao động theo khuyến mãi). `thit_heo_xay_nac` đang lưu 22.478 ₫ là giá khuyến mãi; sửa thành giá gốc 25.500 ₫. Kiểm lại 3 dòng BHX còn lại theo quy tắc này.
+- **L-15 (P1): 69 dòng `cho_khac` không có nguồn.** Đây là giá engine dùng cho gần như mọi nguyên liệu. Mỗi dòng phải có `source_note` (cách ước tính, nguồn tham chiếu, ngày), vd "khảo sát chợ X ngày …" hoặc "giá thường BHX ngày … làm tròn". Dòng không nêu được cách ước tính thì ghi `"chưa có nguồn"` để biết mà khảo sát.
+- **L-16 (P1): WinMart và Co.opmart có trong danh sách chọn cửa hàng nhưng 0 dòng giá**, và `stores.json` vẫn ghi ngày khảo sát 06/11. Người chọn WinMart thực ra nhận giá `cho_khac`. Không trung thực. Sửa:
+  - `price_survey_date` = `null` cho cửa hàng chưa có dòng giá nào.
+  - Thẻ cửa hàng ở onboarding và tab Đi chợ ghi "Giá ước lượng, chưa khảo sát tại cửa hàng này" cho các cửa hàng đó.
+  - Không ẩn cửa hàng: người dùng vẫn biết mình hay đi đâu.
+- Task: T-054d (Research), mục phụ trong T-103 (Dev).
+
+**D-COM-07 / D-BUD-03 / D-PERF-01 — Kết quả T-101, T-104 (PM, 2026-11-10).** Nguyên tắc người dùng: không nới ngưỡng để cho qua, chỉ đổi khi có lý do sản phẩm.
+- **(a) p01 mức 3+ chén (Rice98 AC2):** sau T-104, thịt heo xay về giá gốc (+13,4%). Ở 650k chỉ còn 10/14 bữa có cơm, cần khoảng 675k. Đây đúng là trường hợp **"ngân sách sát"** của D-COM-05: ngân sách là ràng buộc của người dùng, giá đã sửa cho đúng. Thêm **p01 × `rat_nhieu`** vào danh sách ngoại lệ tường minh, lý do `budget`, ghi "cần ~675k". App phải bật cảnh báo lý do ngân sách (AC4 vẫn 64/64 + ô mới). **Không nâng ngân sách hồ sơ test.**
+  - **Tính tất định:** "một lần thử ra 640k/12 nhưng không tái hiện" là dấu hiệu kết quả phụ thuộc thứ tự luồng song song. Cùng đầu vào + seed phải ra cùng tuần (ADR-001). Dev kiểm: 18 hồ sơ × 4 mức × 3 seed, mỗi ô chạy 20 lần, có song song → 100% giống nhau. Không đạt là lỗi **P0**.
+- **(b) BudgetTests, thêm bữa phụ:** giả định "thêm bữa thì phải đắt hơn" sai về sản phẩm. Bữa phụ lấy kcal từ bữa chính, nên tuần có thể rẻ hơn. **Bỏ ca thêm bữa phụ khỏi phép kiểm đơn điệu**, không thêm dung sai 5%. Thay bằng phép kiểm đúng mục đích: với cấu hình có bữa phụ, ước tính `budget-range` lệch chi phí tuần thật ≤ 3% (sai số ước tính hiện hành). Giữ phép kiểm đơn điệu 0,97 cho thêm người.
+- **(c) Hiệu năng (T-101):** đo được: ít/vừa p95 0,10/0,14 s; nhiều 1,1 s; 3+ chén 1,75 s; app tổng ≤ 2,0 s trên emulator (US-1.6 AC2 ≤ 5 s đạt). Yêu cầu người dùng là ≤ 5 s ở app; "server p95 ≤ 1 s" là phần đệm PM đặt cho máy chủ thật chậm hơn máy dev. Quyết định:
+  - **Mức ít/vừa (mặc định, đa số người dùng): giữ p95 ≤ 1 s.** Đã đạt.
+  - **Mức nhiều/3+ chén:** chấp nhận **p95 ≤ 2 s, max ≤ 3 s** trên máy dev. Lý do sản phẩm: app vẫn ≤ 5 s và chỉ một nhóm nhỏ chọn mức này. Đổi lại, thêm điều kiện mới vì phần đệm cho máy chủ thật đang bị dùng hết: **CPU mỗi lần lập p95 ≤ 2 s** (hiện max 7,1 s CPU do chạy song song 14 luồng). Máy chủ ít lõi sẽ chậm theo CPU, nên phải giới hạn CPU, không chỉ thời gian chờ.
+  - **Lên lại 6 ngày:** cùng ngưỡng theo mức (ít/vừa ≤ 1 s; nhiều/3+ ≤ 2 s).
+  - **Trước phát hành:** đo lại trên cấu hình máy chủ dự kiến (số lõi thật). App tổng p95 ≤ 5 s ở mọi mức là điều kiện phát hành.
+  - Tối ưu tiếp (nếu giữ được kết quả) là T-105, P2.
+
+**D-PERF-02 — Điều kiện CPU của T-101 chuyển sang T-105 (PM, 2026-11-10).** Dev đã làm hết các cách không đổi kết quả:
+- Tất định 216 × 20 lần: 0 khác.
+- Thời gian thực đạt mọi mức (3+ chén p95 1,89 s, max 1,98 s).
+- CPU mỗi lần lập chưa đạt: nhiều p95 2,7 s, 3+ chén 5,2 s (ngưỡng 2 s).
+- Nguyên nhân là thuật toán (~12k lần thử cứu ngày bằng tráng miệng ở phương án nặng). Muốn đạt phải đổi thuật toán, tức đổi kết quả.
+
+Chọn phương án (3):
+- **T-101 đạt** về thời gian thực + tất định.
+- **CPU mỗi lần lập p95 ≤ 2 s ở mọi mức** thành **AC bắt buộc của T-105**. T-105 nâng lên **P1, điều kiện phát hành**, vì đây là chi phí và sức chịu tải của máy chủ.
+- Không chọn (1): đổi kết quả 4 ô mà vẫn không đủ (3+ chén ~3,7 s).
+- Không chọn (2): bỏ ràng buộc CPU che mất rủi ro máy chủ ít lõi.
+- T-105 được phép đổi thuật toán, với điều kiện: đổi golden có giải thích; giữ mọi AC sản phẩm của T-094/T-096/T-098 (theo D-COM-05/07); giữ tính tất định; thời gian thực không lùi. Ngoài ra đo trên cấu hình máy chủ dự kiến trước phát hành (D-PERF-01).
+
+**D-PERF-03 — Duyệt T-105 (PM, 2026-11-16).** Nguồn: `docs/dev/perf-t105.md`. CPU p95: ít 0,08 · vừa 0,03 · nhiều 0,92 · rất nhiều 1,84 s (trước 5,05 s). Thời gian thực p95 ≤ 0,9 s. Tất định 216 × 20: 0 khác. Engine 248/248, Api 49/49, engine-report 18/18 đạt 7/7.
+1. **Đổi kết quả 62/216 ô: chấp nhận.** Phần lớn chỉ đổi món tráng miệng. 5 ô đổi phương án thắng, đều qua AC D-COM-05 (Rice98). Golden parity không đổi, danh sách ngoại lệ không dài thêm, 216/216 "ready". Đúng điều kiện D-PERF-02.
+2. **AC1 (CPU p95 ≤ 2 s): đạt cho bản này.** Lần đo 2,08 s xảy ra trên máy dev dùng chung, nhiễu ±10–15%. Không bắt tối ưu thêm bây giờ. Biên mỏng được xử lý ở cổng phát hành (mục 3) và ở T-118 nếu cổng không qua.
+3. **AC4: cấu hình đo và cách tính đạt.**
+   - Cấu hình mặc định: **2 vCPU**, cấu hình nhỏ nhất hợp lý cho máy chủ đầu tiên. Đo bằng `DOTNET_PROCESSOR_COUNT=2` cho tới khi chọn hosting thật. Khi người dùng chọn gói hosting (cùng lúc với DB ở T-029), đo lại trên máy thật trước phát hành.
+   - Cách tính đạt: chạy `bench` **10 lần**, gộp toàn bộ mẫu (10 × 54 ô mỗi mức) rồi tính p95. Đạt khi **p95 gộp ≤ 2 s ở mọi mức** và **không ô nào > 3 s**. Không tính từng lần riêng lẻ, vì một lần đo nhiễu không nói lên tải thật.
+   - Nếu không đạt trên máy thật thì mở T-118 (tối ưu `RescueDayWithFullMeal` / cấu trúc phương án), không hạ ngưỡng.
+4. **App tổng p95 ≤ 5 s:** đo lại trên emulator **sau T-116**, trong cùng một buổi đo, trước phát hành. Không chặn commit, vì thời gian thực phía server đã giảm (rất nhiều 1,75 → 0,88 s) so với lần T-101 đo app ≤ 2,0 s.
+5. **Tiến trình lạnh** (kế hoạch đầu tiên tốn ~12 s CPU để nạp bộ đệm `Scaler`) là rủi ro thật với người dùng đầu tiên sau mỗi lần deploy. Đây là điều kiện phát hành: T-117.
+
+**D-ONB-07 — Màn vuốt thẻ khẩu vị: sửa bố cục và cử chỉ (PM, 2026-11-16).** Người dùng báo màn vuốt (bước 2) "rất xấu, thẻ lệch trái nhiều", muốn quẹt giống Tinder. Nguồn: `docs/research/swipe-tinder-ux.md`.
+- **Nguyên nhân lệch trái:** `Card` trong `Dismissible` không có ràng buộc chiều rộng, còn khung onboarding căn nội dung về trái (`crossAxisAlignment.start`).
+- **Tự viết, không thêm package.** Cử chỉ cần làm đơn giản: `GestureDetector` + `AnimationController` + `Transform`. Tự viết khớp sẵn logic thích/ít hơn/hoàn tác/thay thế hiện có, và giữ được trợ năng. Không thêm dependency khi chưa có lý do; `flutter_card_swiper` chỉ là phương án dự phòng nếu tự viết vượt quá 2 ngày công, khi đó báo PM.
+- **Chỉ lấy cơ chế "quẹt thẻ"**, không sao chép giao diện, màu, biểu tượng hay câu chữ của Tinder hoặc Mealbird (nguyên tắc ở đầu PRD).
+- Task: T-106.
+
+**D-ONB-08 / D-ONB-09 / D-SHP-06 — Ba yêu cầu sau khi người dùng thử app trên emulator (PM, 2026-11-16).**
+
+**D-ONB-08 — Màn "Mục tiêu" (bước 1) thành bộ thẻ quẹt, chọn đúng 1.**
+- Dùng lại thành phần thẻ quẹt của T-106 (căn giữa, xếp chồng, nghiêng, ngưỡng, giảm chuyển động). 3 thẻ: Giảm mỡ, Giữ cân, Tăng cơ. Mỗi thẻ có hình minh họa đúng mục tiêu, tên và một dòng mô tả ngắn.
+- **Chọn duy nhất:**
+  - Quẹt phải (hoặc nút "Chọn mục tiêu này") = chọn thẻ đang ở trên cùng. Thẻ có dấu "Đã chọn" và nút Tiếp tục mở khóa. Sau 400 ms tự sang bước kế (bước Khẩu vị). Giảm chuyển động thì không tự sang, người dùng bấm Tiếp tục.
+  - Quẹt trái (hoặc nút "Xem mục tiêu khác") = **đưa thẻ xuống cuối bộ**, không loại. Bộ thẻ xoay vòng nên không bao giờ hết thẻ và luôn chọn được.
+  - Hàng 3 chấm dưới bộ thẻ cho biết đang ở thẻ nào; chạm vào chấm thì đưa thẻ đó lên trên cùng. Đây là lối thay thế không cần vuốt, có nhãn cho trình đọc màn hình.
+  - Quay lại bước này: thẻ đã chọn nằm trên cùng, có dấu "Đã chọn"; chọn thẻ khác thì thay lựa chọn cũ.
+- Màn đầu tiên không có lựa chọn mặc định, nên không có Tiếp tục khi chưa chọn (US-1.1 AC1).
+- **Thứ tự bước không đổi** (D-ONB-06): Mục tiêu (thẻ quẹt) → Khẩu vị (thẻ quẹt) → Cơ thể → … Hai bộ thẻ liền nhau nhưng khác mục đích: tiêu đề và dòng hướng dẫn phải nói rõ ("Chọn 1 mục tiêu" và "Quẹt để cho biết bạn thích kiểu món nào").
+
+**D-ONB-09 — Màn "Bếp nhà bạn có những gì?" có hình cho từng dụng cụ.** Lưới thẻ 2 cột (3 cột khi màn ≥ 600 dp). Mỗi thẻ có hình minh họa dụng cụ và tên. Vẫn chọn nhiều, bắt buộc ≥ 1 thiết bị nấu (US-1.5 AC3). Trạng thái chọn có dấu tích + viền, không chỉ đổi màu. Vùng chạm ≥ 48 dp, có ngữ nghĩa checkbox cho trình đọc màn hình.
+
+**Hình minh họa (cho D-ONB-08, D-ONB-09):**
+- Mặc định là **hình minh họa vẽ phẳng, cùng phong cách** với ảnh placeholder theo nhóm món đang có.
+- Nguồn có giấy phép cho phép dùng thương mại (CC0/MIT/tự vẽ). Research chọn và ghi giấy phép vào `docs/research/`. Không dùng ảnh chụp của bên khác, không dùng hình của Mealbird/Tinder.
+- Thiếu hình thì app dùng biểu tượng dự phòng, không lỗi.
+- ~~Câu xác nhận cho người dùng~~ **Đã chốt: hình vẽ phẳng** (D-SHP-08).
+
+**D-SHP-06 — Tab Đi chợ có 2 chế độ: "Theo tuần" và "Theo ngày".**
+- **Phân loại** mỗi nguyên liệu theo dữ liệu bảo quản (`storage.json`, nhãn D-P2-02):
+  - **Theo tuần (mua 1 lần):** nhãn "Để lâu" (≥ 14 ngày) và "Để được cả tuần" (6–13 ngày). Ví dụ: gạo, đồ khô, gia vị, đồ hộp, trứng, sữa hộp, củ để lâu.
+  - **Theo ngày (mua gần ngày nấu):** nhãn "Dùng trong 1–2 ngày" và "Dùng trong 3–5 ngày". Ví dụ: rau lá, thịt cá tươi, đậu phụ.
+  - **Thịt cá tươi cấp đông được** (`freezable = true`): mặc định **Theo ngày**. Có công tắc "Mua thịt cá cả tuần rồi cấp đông" trên tab Đi chợ: bật thì các dòng này chuyển sang Theo tuần, kèm hướng dẫn cấp đông và rã đông (US-8.3 AC3).
+  - Nguyên liệu `chua_co_nguon` (không có dữ liệu) xếp **Theo tuần** kèm ghi chú "Chưa có thông tin hạn dùng". Không đoán.
+- **Chế độ Theo ngày:**
+  - Danh sách chia theo **đợt mua**. Đợt đầu là "Hôm nay" (chỉ khi trùng ngày hiện tại; nếu không thì ghi thứ/ngày, D-SHP-09), sau đó là từng ngày còn lại của tuần; mỗi ngày gập/mở được.
+  - Mỗi đợt gồm nguyên liệu tươi cho các bữa của ngày đó. **Gộp mua sớm:** nếu cùng nguyên liệu dùng lại trong số ngày nó còn tươi (theo cận dưới của nhãn), thì gộp vào đợt sớm hơn để tránh mua lẻ gói nhiều lần. Ví dụ: rau 3–5 ngày dùng ngày 1 và ngày 3 → mua 1 lần ngày 1.
+  - Quy cách gói làm tròn theo từng đợt.
+- **Chế độ Theo tuần:** danh sách như hiện nay nhưng chỉ có nhóm Theo tuần, vẫn gộp theo quầy.
+- **Số liệu theo chế độ:**
+  - **Chi phí món ăn so ngân sách** (theo gram dùng) **không đổi** theo chế độ. Trạng thái ngân sách giữ nguyên.
+  - **"Ước tính trả tại quầy":** đầu tab hiện tổng cả tuần. Mỗi chế độ hiện tổng của chế độ đó; Theo ngày thêm tổng của từng đợt. Tổng cả tuần có thể cao hơn trước vì làm tròn gói theo đợt; số chênh hiện rõ ("+X ₫ do mua theo đợt"). Ở chợ mua theo cân, có ngưỡng và gợi ý cấp đông: xem D-SHP-09.
+  - **"Đã mua x/N":** đếm riêng mỗi chế độ (N = số dòng của chế độ); đầu tab hiện tổng.
+  - **"Nhà có sẵn":** chỉ ở Theo tuần (đồ có sẵn đều là đồ để lâu).
+  - **Nhãn "Dùng trong N ngày":** hiện ở cả hai chế độ.
+- **Mặc định khi mở tab:** Theo tuần lần đầu; sau đó nhớ chế độ dùng gần nhất (lưu trên máy).
+- **Quan hệ phase 2:** tính năng này **là phần mở rộng của Epic 8**, cần `data/storage.json` (T-112). Giá BHX (T-114) và tự sửa giá (T-115) hiện ở từng dòng của **cả hai chế độ**, nên làm T-116 trước T-115/T-114 để hai task này xây trên cấu trúc mới, không làm lại.
+- ~~Câu xác nhận cho người dùng~~ **Đã chốt** cả hai mặc định (D-SHP-08).
+- Task: T-107 (mục tiêu), T-108 (dụng cụ), T-116 (đi chợ 2 chế độ); Research T-057f (hình), T-111 đã có dữ liệu phân loại.
+
+**D-SHP-08 — Người dùng xác nhận 3 mặc định (2026-11-16). ĐÃ CHỐT.** Người dùng chọn đúng 3 mặc định của PM:
+1. Hình mục tiêu và dụng cụ: **hình vẽ phẳng** (D-ONB-08/09).
+2. Thịt cá tươi mặc định **Theo ngày**, có công tắc "Mua thịt cá cả tuần rồi cấp đông" để chuyển sang Theo tuần (D-SHP-06/07).
+3. Tab Đi chợ: lần đầu hiện **Theo tuần**, các lần sau nhớ chế độ dùng gần nhất (D-SHP-06).
+
+Ghi chú: 3 hình mục tiêu đang được Research vẽ lại vì chưa rõ nghĩa (giảm mỡ, tăng cơ). Dev dùng bản mới khi Research báo xong.
+
+**D-SHP-09 — Tiền "Theo ngày" cao hơn mua một lần (PM, 2026-11-16).** Nguồn: `docs/dev/t116-notes.md`.
+- Số đo trên 18 hồ sơ golden (seed 1): tăng từ +4% đến **+43%**; p01 từ 925k lên 1.323k ₫. Trung vị ≈ +11%; 6/18 hồ sơ tăng hơn 20%. Chi phí so ngân sách không đổi.
+- Nguyên nhân: mỗi đợt làm tròn lên cả gói (cần 25 g thịt vẫn mua gói 300 g).
+- **Mức này không còn là "cao hơn một chút" như D-SHP-06 viết.** Không chấp nhận nguyên trạng.
+- **Phần lớn chênh lệch là giả.** 69/73 dòng giá là `cho_khac` (chợ), có "gói" 300–500 g chỉ là ước tính. Ở chợ, thịt, cá, rau được bán theo cân, nên làm tròn cả gói cho từng đợt là sai với thực tế.
+- **Quyết định:**
+  1. **Mua theo cân ở chợ (chỉ áp dụng cho các đợt Theo ngày).**
+     - Áp dụng cho dòng giá của `cho_khac`, quầy thịt, cá/hải sản, rau củ, trái cây.
+     - Mỗi đợt làm tròn lên bước 100 g, tối thiểu 100 g. Giá tính theo tỷ lệ `price_vnd / pack_g`.
+     - Dòng siêu thị (BHX) vẫn làm tròn theo gói thật, vì gói siêu thị là có thật.
+     - Theo tuần và `till_cost` của engine giữ nguyên, nên golden/parity không đổi.
+     - Không thêm trường dữ liệu: suy từ `store_id` + quầy.
+     - Không nới số ngày tươi của thịt cá để gộp đợt; an toàn thực phẩm đi trước.
+  2. **Hiện chênh lệch có dấu.**
+     - Hiện "+X ₫ do mua theo đợt", hoặc "−X ₫" nếu mua theo cân rẻ hơn mua cả gói một lần.
+     - Bỏ điều kiện "tổng Theo ngày ≥ tổng cũ" ở T-116 AC5.
+  3. **Gợi ý khi chênh lớn.**
+     - Khi chênh > 15% và tuần có thịt cá `freezable` đang ở Theo ngày, hiện dưới con số: "Mua thịt cá cả tuần rồi cấp đông để bớt khoảng Y ₫". Y là số tiền giảm được khi bật công tắc.
+     - Nút trong gợi ý bật công tắc luôn.
+  4. **"Hôm nay":** chỉ ghi khi ngày đợt trùng ngày hiện tại; tuần bắt đầu ngày mai thì đợt đầu ghi thứ/ngày. Chấp nhận cách Dev đã làm. D-SHP-06 sửa theo.
+- **AC đo được** (18 hồ sơ golden, seed 1, công tắc cấp đông tắt):
+  - Hồ sơ mua ở chợ: trung vị chênh ≤ +10%, cao nhất ≤ +20%.
+  - Hồ sơ mua ở siêu thị (gói thật): không đặt ngưỡng, ghi số đo vào `docs/dev/`; gợi ý ở mục 3 phải hiện khi chênh > 15%.
+  - Nếu quy tắc theo cân vẫn không đạt ngưỡng chợ thì báo PM kèm số liệu, không tự nới số ngày tươi.
+- Task: T-116b.
+
+**D-SHP-07 — Duyệt phân loại mua theo ngày/tuần và hình minh họa của Research (PM, 2026-11-16).** Nguồn: `docs/research/ingredient-storage-groups.md`, `docs/research/illustrations/`.
+- **Một nguồn sự thật:** nhóm mua **không lưu thành file dữ liệu thứ hai**. Engine suy ra nhóm từ `storage.json` (hợp đồng tiếng Anh D-P2-02/04/05) theo quy tắc dưới. `ingredient-storage-groups.json` của Research dùng làm **bảng kết quả mong đợi** cho unit test. Không đổi tên trường sang tiếng Việt, vì sẽ lệch với `storage.json` đã duyệt.
+- **Quy tắc (sửa D-SHP-06 cho khớp đề xuất Research):**
+  1. Thịt, cá, hải sản tươi → **Theo ngày**, bất kể số ngày. Công tắc "Mua thịt cá cả tuần rồi cấp đông" chuyển các dòng `freezable` sang Theo tuần. Người có tủ đông dùng công tắc này. Mặc định vẫn Theo ngày vì an toàn hơn. Đây cũng là câu xác nhận đã gửi người dùng.
+  2. Trứng → Theo tuần.
+  3. Còn lại: số ngày dài nhất ở nhiệt độ phòng/ngăn mát (cận dưới) ≤ 5 → Theo ngày; ≥ 6 hoặc `long_term` → Theo tuần.
+  4. **Chưa có số liệu** (11 dòng): xếp theo quầy (`aisle`). Gạo/đồ khô, gia vị/dầu, đồ hộp → Theo tuần. Thịt, cá, rau củ, trái cây, trứng/đậu phụ → Theo ngày (thận trọng). Cả 11 dòng hiện tại (tiêu, dầu ăn, nước mắm, xì dầu, nước mắm chay, đậu lăng, đậu đỏ, gạo nếp, gạo tẻ, gạo lứt, nấm rơm đóng hộp) đều là đồ để lâu → Theo tuần. Research bổ sung `long_term: true` cho chúng (không cần số ngày).
+  5. Dòng deprecated `com_trang`, `gao_lut_nau_chin` (D-SHP-05) không xuất hiện trong danh sách đi chợ (đã quy ra gạo sống), nên không cần nhóm.
+- **Cần Research kiểm lại:** **đậu phụ** đang ra Theo tuần. Đậu phụ bán ở chợ/siêu thị VN thường không đóng kín và chỉ để được 1–3 ngày ngăn mát. Nếu số FoodKeeper là của đậu phụ đóng hộp kín thì dùng quy cách VN (thường là `uoc_tinh_vn`) và chuyển sang Theo ngày.
+- **Hình minh họa:** 10 SVG tự vẽ, không bản quyền bên thứ ba. Duyệt dùng cho T-107/T-108, với điều kiện session chính kiểm render từng hình. Hình nào lỗi bố cục thì Research sửa; trong lúc chờ Dev dùng biểu tượng dự phòng.
 
 **D-SHP-01 — Đồ "nhà có sẵn" trong con số tại quầy (PM, 2026-11-07).** Câu (a) trong `docs/research/prices-small-packs-notes.md`. Chọn **có, loại khỏi mặc định**:
 - Nguyên liệu `default_pantry` (dầu ăn, nước mắm, xì dầu, muối, đường, tiêu, gia vị khô…) được đánh dấu sẵn "Nhà có sẵn" ở tuần đầu. **Không** cộng vào "Ước tính trả tại quầy" mặc định.
@@ -650,7 +807,7 @@ Nguyên tắc: bản free phải **dùng thật được mỗi tuần** để t�
 | Ăn ngoài / bỏ bữa, "Không hợp với tôi" | ✓ | ✓ |
 | Lên lại phần còn lại của tuần | ✗ | ✓ |
 | Tuần đã lưu (lịch sử, dùng lại tuần cũ) | Chỉ tuần hiện tại | ✓ |
-| Danh sách đi chợ | Giá chung ("Chợ/Nơi khác"), gộp theo quầy | **Giá + quy cách bao bì theo cửa hàng đã chọn**, phần dư, chi phí tại quầy |
+| Danh sách đi chợ | Giá chung ("Chợ/Nơi khác"), gộp theo quầy; **giá + khuyến mãi BHX HCM và liên kết sản phẩm (phase 2, D-P2-06)**; tự sửa giá đã mua | Phần dư, chi phí tại quầy theo quy cách bao bì (xem lại khi chốt T-029) |
 | Hộ gia đình | Chỉ mình bạn | **Nhiều thành viên**: "cả nồi", danh sách đi chợ nhân cả nhà |
 | Khẩu vị nâng cao (vuốt lại, chỉnh trọng số) | Cơ bản | ✓ |
 | v2/v3: gợi ý món mới bằng LLM | ✗ | ✓ |
@@ -659,3 +816,161 @@ Nguyên tắc: bản free phải **dùng thật được mỗi tuần** để t�
 - Giá tham khảo (giả định, cần T-056 khảo sát): **49.000 ₫/tháng**, **299.000 ₫/năm**.
 - Thanh toán: trên mobile phải dùng In-App Purchase của Google Play/App Store (chính sách store với gói số). Web (P2) có thể dùng MoMo/ZaloPay/VNPay. Quyền lợi kiểm ở backend, nên cần tài khoản (T-029).
 - MVP: chưa chặn giới hạn nào. App ghi lại số lần đổi món để sau này đo xem ngưỡng 3 lần/tuần có hợp lý không.
+
+## 13. Phase 2 (sau MVP): giá theo siêu thị, độ tươi và bảo quản
+
+> Yêu cầu của người dùng (2026-11-09): "Sau khi phase này hoàn thành, cần có chức năng kết nối đến các siêu thị như bách hóa xanh, winmart, coop.mart, emart, GO, ... để hiển thị thông tin nguyên liệu, giá tiền, giảm giá, ... sau khi chọn thực đơn cho 1 tuần. Kèm những thông tin như nguyên liệu nào để lâu, nguyên liệu nào cần dùng trong vài ngày tới, cách bảo quản nguyên liệu ra sao, ..."
+>
+> **Chỉ bắt đầu sau khi phase hiện tại xong (T-101, T-102, T-103).** Kiến trúc nguồn giá: ADR-002 (**đã chấp nhận** 2026-11-09). Người dùng đã trả lời §13.4: D-P2-06. Khảo sát khả thi: T-110, T-111.
+
+### 13.1 Epic 8 — Độ tươi và bảo quản (làm trước, không phụ thuộc siêu thị)
+
+Lý do làm trước: dữ liệu `shelf_life_days` đã có một phần trong `prices.json`. Không cần đối tác, không có rủi ro pháp lý về giá. Dùng được với mọi cửa hàng, kể cả chợ.
+
+**US-8.1 Biết nguyên liệu nào cần dùng sớm.** Là người đi chợ một lần mỗi tuần, tôi muốn biết món nào phải nấu trong vài ngày đầu để không bỏ phí.
+- AC1: Mỗi dòng trong danh sách đi chợ có nhãn độ tươi theo hạn dùng **sau khi mua, bảo quản đúng cách**: "Dùng trong 1–2 ngày" / "Dùng trong 3–5 ngày" / "Để được cả tuần" / "Để lâu (đồ khô, đông lạnh)". Ngưỡng chốt theo dữ liệu T-111.
+- AC2: Lọc hoặc nhóm danh sách theo độ tươi.
+- AC3: Nhãn lấy từ dữ liệu có nguồn (T-111). Nguyên liệu chưa có dữ liệu hiện "Chưa có thông tin hạn dùng", không đoán.
+
+**US-8.2 Thực đơn nấu theo thứ tự độ tươi.** Là người dùng, tôi muốn món dùng nguyên liệu mau hỏng được xếp đầu tuần.
+- AC1: Engine có ưu tiên mềm: bữa dùng nguyên liệu hạn ngắn xếp vào các ngày sớm (mở rộng luật tráng miệng ở D-DES-01 cho mọi nguyên liệu). Không làm trượt ràng buộc cứng, chỉ tiêu, cơm, ngân sách (thứ tự D-COM-01).
+- AC2: Đo được: với 18 hồ sơ, ≥ 90% bữa dùng nguyên liệu "1–2 ngày" nằm trong 2 ngày đầu sau ngày đi chợ, **hoặc** có gợi ý cấp đông (US-8.3 AC3).
+- AC3: Người dùng chọn ngày đi chợ (mặc định: ngày trước ngày đầu tuần). Có thể đi chợ 2 lần/tuần: danh sách tách 2 đợt theo độ tươi (P2 trong phase 2).
+
+**US-8.3 Cách bảo quản từng nguyên liệu.** Là người dùng, tôi muốn biết cất nguyên liệu thế nào cho lâu.
+- AC1: Bấm vào dòng nguyên liệu (tab Đi chợ hoặc thẻ Nguyên liệu ở màn món) mở thẻ "Bảo quản": nơi cất (nhiệt độ phòng / ngăn mát / ngăn đông), số ngày tối đa ở từng nơi, mẹo ngắn (vd rửa hay không rửa trước khi cất, bọc kín), dấu hiệu hỏng.
+- AC2: Mọi thông tin có nguồn (T-111) và câu miễn trừ "tham khảo, kiểm tra tình trạng thực tế trước khi dùng".
+- AC3: Nguyên liệu hạn ngắn mà bữa dùng nó rơi vào sau hạn thì hiện gợi ý "Cấp đông ngay sau khi mua, rã đông trước 1 ngày" nếu nguyên liệu cấp đông được; nếu không cấp đông được thì engine phải xếp bữa trước hạn.
+
+### 13.2 Epic 7 — Giá và khuyến mãi theo siêu thị
+
+**US-7.1 Xem giá siêu thị cho danh sách đi chợ.** Là người dùng đã có thực đơn tuần, tôi chọn siêu thị và khu vực, xem giá từng dòng và tổng.
+- AC1: Chọn siêu thị trong danh sách có nguồn được phép (ADR-002) và khu vực (tỉnh/thành).
+- AC2: Mỗi dòng: tên sản phẩm của siêu thị, quy cách, số gói cần mua, giá, nguồn và thời điểm cập nhật. Dòng không có giá siêu thị thì dùng giá ước lượng, ghi rõ "giá ước lượng".
+- AC3: Tổng "trả tại quầy" theo siêu thị đã chọn. Chi phí so ngân sách vẫn theo giá thường (ADR-002), không dao động theo khuyến mãi.
+- AC4: Giá cũ quá ngưỡng (ADR-002) thì hiện cảnh báo và dùng giá ước lượng.
+
+**US-7.2 Thấy khuyến mãi đang có.** Là người dùng, tôi muốn biết dòng nào đang giảm giá để mua đúng lúc.
+- AC1: Dòng có khuyến mãi hiện giá gốc gạch ngang, giá khuyến mãi, thời hạn khuyến mãi.
+- AC2: Dòng tổng "Tiết kiệm thêm nhờ khuyến mãi: …".
+- AC3: Khuyến mãi hết hạn trước ngày đi chợ đã chọn thì không tính.
+
+**US-7.3 So sánh siêu thị.** Là người dùng, tôi muốn biết mua ở đâu rẻ hơn cho cùng danh sách.
+- AC1: Bảng so sánh tổng "trả tại quầy" giữa các siêu thị có dữ liệu cho cùng tuần, kèm số dòng thiếu giá ở mỗi nơi.
+- AC2: Không gợi ý chia đơn nhiều siêu thị trong phase 2 (để sau).
+
+**US-7.4 Mở sản phẩm ở siêu thị (tùy kết quả T-110).** Bấm dòng nguyên liệu mở trang sản phẩm của siêu thị (liên kết) nếu điều khoản cho phép. Không đặt hàng hay thanh toán trong app ở phase 2.
+
+### 13.3 Thứ tự đề xuất
+
+1. **Ngay (không cần Dev):** Research làm T-110 (khảo sát nguồn giá + pháp lý) và T-111 (dữ liệu bảo quản/hạn dùng có nguồn) song song.
+2. **Sau T-101…T-103:** Dev làm Epic 8 (T-112), vì chỉ cần T-111.
+3. **Sau khi T-110 xong và người dùng quyết các câu ở §13.4:** chốt ADR-002, rồi Dev làm nền nguồn giá (T-113) và UI giá/khuyến mãi (T-114). Siêu thị đầu tiên là siêu thị có kênh được phép rõ nhất.
+4. Nếu không siêu thị nào có kênh được phép: Epic 7 thu lại thành khảo sát tay thường xuyên hơn + người dùng tự sửa giá đã mua.
+
+### 13.4 Câu hỏi cần người dùng quyết (trước khi giao Dev Epic 7)
+
+1. Siêu thị và khu vực làm trước (gợi ý: 1–2 chuỗi, 1 thành phố)?
+2. Nguồn giá chấp nhận: chỉ API/đối tác chính thức và nhập tay có nguồn? Không thu thập tự động trái điều khoản (PM đề xuất: đúng như vậy).
+3. Phase 2 chỉ hiển thị (giá, khuyến mãi, liên kết sản phẩm), hay cần đặt hàng/giỏ hàng qua siêu thị?
+4. Giá theo siêu thị và khuyến mãi thuộc gói miễn phí hay premium (§12)?
+5. Engine có được chọn món theo khuyến mãi (thực đơn rẻ hơn tuần có giảm giá), hay đúng như lời yêu cầu là chỉ hiện giá **sau khi** đã chọn thực đơn?
+6. (Thêm sau T-110) Chưa siêu thị nào có kênh dữ liệu được phép. Người dùng có liên hệ đối tác Co.opmart/BHX không? Trong lúc chờ, có làm phương án dự phòng không: khảo sát tay thường xuyên hơn, và cho người dùng tự sửa giá đã mua (lưu trên máy)?
+
+### 13.5 Quyết định sau khảo sát T-110, T-111 (PM, 2026-11-09)
+
+**D-P2-01 — Nguồn giá siêu thị: chưa có kênh được phép, Epic 7 tạm dừng phần "giá siêu thị".**
+- Kết quả T-110 (`docs/research/price-sources-feasibility.md`): không siêu thị nào có API, đối tác, affiliate hay feed công khai. Chưa đọc được điều khoản website bán hàng của chuỗi nào. Theo ADR-002, **không bật adapter nào** và không dùng dữ liệu từ website trong lúc chờ.
+- Ứng viên đối tác đầu tiên: **Co.opmart**, song song BHX (giả thuyết của Research, chưa có căn cứ). Liên hệ đối tác là việc của người dùng/chủ sản phẩm, không phải của các session.
+- Research làm tiếp (T-110 lượt 2): đọc điều khoản website bán hàng của 5 chuỗi **bằng trình duyệt, không tự động**, ghi trích dẫn và ngày; quan sát tay giá vài mặt hàng trong 1–2 tuần.
+- Trong lúc chờ, phương án dự phòng của §13.3 mục 4 (khảo sát tay thường xuyên hơn; người dùng tự sửa giá đã mua, lưu trên máy) là câu hỏi cho người dùng (§13.4 câu 6). ADR-002 giữ trạng thái "Đề xuất".
+
+**D-P2-02 — Nhãn độ tươi và dữ liệu bảo quản (duyệt có sửa đề xuất T-111).**
+- **Nhãn tính theo số ngày dài nhất ở nhiệt độ phòng hoặc ngăn mát, KHÔNG tính ngăn đông:** "Dùng trong 1–2 ngày" ≤ 2 ngày; "Dùng trong 3–5 ngày" 3–5; "Để được cả tuần" 6–13; "Để lâu" ≥ 14 (gồm đồ khô, gạo, đồ đông lạnh mua sẵn). Bỏ quy tắc "cấp đông được thì coi như ít nhất 3–5 ngày" của đề xuất, vì nó che mất độ gấp của thịt cá tươi. Đề xuất cũ cũng bỏ trống khoảng 8–13 ngày; bản này lấp khoảng đó.
+- **Cấp đông** là thông tin riêng: huy hiệu "Cấp đông được" + gợi ý của US-8.3 AC3; engine dùng nó khi bữa rơi sau hạn.
+- **`data/storage.json`** theo hợp đồng Research đề xuất, được duyệt. `status` ∈ `ok` | `uoc_tinh_vn` (số thận trọng cho khí hậu nóng ẩm, chưa kiểm chứng, UI ghi rõ) | `chua_co_nguon`. `storage.json` là nguồn sự thật cho phase 2. `prices.json.shelf_life_days` giữ nguyên cho engine hiện tại và golden (giống D-SHP-05). Lệch quá một nhãn thì validator báo, không tự sửa.
+- **FoodKeeper (USDA FSIS, dữ liệu công khai của chính phủ Mỹ):** lấy bằng cách **người dùng tải thủ công bằng trình duyệt** (JSON hoặc XLS từ fsis.usda.gov / data.gov). Lưu vào `docs/research/sources/foodkeeper-<ngày tải>.<đuôi>`, ghi nguồn và ngày tải. **Đã có:** `docs/research/sources/foodkeeper-20261109.xls` (người dùng tải 09/11/2026). Không dùng bản sao không chính thức trên GitHub.
+- **Điều kiện mở T-112 cho Dev:** mọi nguyên liệu tươi (thịt, cá, trứng, sữa, rau, trái cây) có `status` = `ok` hoặc `uoc_tinh_vn`; còn lại được phép `chua_co_nguon` (US-8.1 AC3 hiện "Chưa có thông tin hạn dùng").
+
+**D-P2-03 — Sau T-110/T-111 lượt 2 (PM, 2026-11-09).**
+- **Chỗ đặt `storage.json`:** chọn **giữ bản nháp ở `docs/research/storage-draft.json`** cho tới khi mở T-112. Lý do: `data_version` băm mọi `data/*.json`, thêm file bây giờ làm lệch golden và fixture mobile trong lúc Dev đang làm T-101…T-103. Khi mở T-112, Dev chuyển file vào `data/storage.json`, thêm validator và regen golden/fixture **một lần** cùng các thay đổi của T-112. Không loại `storage.json` khỏi hash về lâu dài (dữ liệu engine dùng thì phải nằm trong phiên bản dữ liệu).
+- **T-110:** đủ căn cứ cho D-P2-01. Không chuỗi nào có điều khoản cho phép dùng giá; Emart (lỗi TLS) và bigc.vn (bị chặn) ghi "không truy cập được ngày 09/11/2026". Dừng tìm điều khoản; chỉ làm lại khi có đối tác hoặc người dùng yêu cầu. Quan sát giá tay tiếp tục ở mức thấp (ghi `price-observations-log.md`), không chặn việc khác.
+- **Lỗi dữ liệu giá L-14 (P1):** `prices.json` gán 22.478 ₫ cho "thịt heo xay C.P 200 g" nhưng trên trang BHX giá đó thuộc "ba rọi rút sườn 200 g". `thit_heo_xay_nac` dùng trong 18 công thức, nên sai giá làm lệch chi phí và ngân sách. Research kiểm lại dòng này và **kiểm mẫu ≥ 15 dòng giá BHX khác** trong đợt dữ liệu D2 (T-054c). Dev regen golden sau đợt D2.
+
+**D-P2-04 — Duyệt T-111 lượt 3 (dữ liệu bảo quản từ FoodKeeper) (PM, 2026-11-09).**
+1. **Trường DOP:** trong FoodKeeper, `DOP_*` (`DOP_Pantry`, `DOP_Refrigerate`, `DOP_Freeze`) nghĩa là **tính từ ngày mua** (Date Of Purchase), không phải ngày in trên bao bì. Đây đúng là định nghĩa nhãn của US-8.1 ("sau khi mua"). Research kiểm lại bằng tiêu đề/ghi chú trong chính file. Nếu đúng thì ~30 dòng này là `ok`.
+2. **Thêm status `gan_dung`** cho dòng lấy theo nhóm gần trong FoodKeeper (ghi `fk_id` của nhóm dùng). `uoc_tinh_vn` chỉ dùng cho số đã điều chỉnh khí hậu. Thứ tự tin cậy: `ok` > `gan_dung` > `uoc_tinh_vn` > `chua_co_nguon`.
+3. **7 dòng đang chặn:**
+   - Thịt ba chỉ, khoai lang, cà chua, su su: thử lại theo nhóm gần (thịt heo tươi; khoai lang/sweet potatoes; cà chua; bí mùa hè cho su su) → `gan_dung`.
+   - Sữa tươi, sữa đậu nành: dùng mục sữa/sữa thực vật của FoodKeeper nếu có. Nếu không có, ghi theo hướng dẫn trên bao bì (UHT chưa mở / sau khi mở), `source` là ảnh hoặc link bao bì.
+   - Nấm rơm đóng hộp: không phải đồ tươi, bỏ khỏi điều kiện mở T-112.
+   - **Điều kiện mở T-112 (sửa D-P2-02):** mọi nguyên liệu tươi có status `ok` hoặc `gan_dung` hoặc `uoc_tinh_vn`.
+4. **Hợp đồng dữ liệu:**
+   - Chấp nhận thêm `source.fk_id`, `source.fields`, `source.fridge_range`.
+   - "Indefinitely" ghi `pantry_days: null` + `long_term: true` (nhãn "Để lâu"). Không dùng chuỗi trong trường số.
+   - **`fridge_days`/`pantry_days`/`freezer_days` lấy CẬN DƯỚI** của khoảng (an toàn thực phẩm), khoảng đầy đủ giữ trong `source`.
+5. **Khí hậu VN:** chỉ điều chỉnh số ở **nhiệt độ phòng** của rau, củ, quả, bánh: lấy 50% cận dưới, làm tròn xuống, tối thiểu 1 ngày, status `uoc_tinh_vn`, UI ghi "ước tính cho khí hậu nóng ẩm". Ngăn mát và ngăn đông giữ số FoodKeeper. Đây là quy tắc thận trọng PM chọn, chưa có nguồn VN; thay khi có.
+6. **`freezable`:** FoodKeeper có số ngăn đông → `true`; ghi chú "không nên cấp đông" → `false`; không có thông tin → `null` (UI không hiện huy hiệu, engine không gợi ý cấp đông).
+7. **Mẹo bảo quản và dấu hiệu hỏng:** bắt buộc cho nguyên liệu tươi trước khi mở T-112 (US-8.3 AC1). Research tự viết câu tiếng Việt ngắn theo nội dung FoodKeeper (dữ liệu công khai của chính phủ Mỹ), ghi nguồn. Nguyên liệu khác được để `null`, UI ẩn mục đó.
+
+**D-P2-05 — Duyệt T-111 lượt 4; điều kiện mở T-112 đã đủ (PM, 2026-11-09).**
+- **Sữa tươi, sữa đậu nành:** quy cách trong `prices.json` là hộp/lốc tiệt trùng (UHT), nên dùng **hướng dẫn trên bao bì làm nguồn** (`status` = `ok`, `source` = trang sản phẩm hoặc ảnh bao bì + ngày).
+  - Chưa mở: `long_term: true`, nhãn "Để lâu (theo hạn in trên hộp)".
+  - Mẹo: "Sau khi mở: cất ngăn mát, dùng hết trong ngày".
+  - Sữa đậu nành chưa có trang BHX thì dùng trang chính thức của một nhãn hàng hộp UHT không đường. Không tìm được thì ghi `uoc_tinh_vn` cùng quy tắc trên.
+  - Sữa thanh trùng hoặc sữa đậu nành nấu tươi không có trong dữ liệu; khi thêm sẽ là nguyên liệu riêng.
+- **Độ tin cậy của DOP:** FoodKeeper tự ghi các cột DOP "probably needed to be replaced" (Version.csv). Vì vậy dòng **chỉ có số DOP** hạ xuống `gan_dung`, ghi lý do. Dòng có cột thường (`Refrigerate`, `Pantry`, `Freeze`) thì ưu tiên cột thường và giữ `ok`.
+- **Hợp đồng dữ liệu:** chấp nhận `source.mapping`, `source.tips_source`, `source.vn_rule`; `long_term` có ở mọi dòng (mặc định `false`).
+- **Nhãn tính từ giá trị đã lưu (cận dưới):** xác nhận, theo D-P2-04 mục 4. D-P2-02 không quy định cận trên.
+- **Kết quả:** 50/50 đồ tươi có status trong nhóm cho phép, có mẹo và dấu hiệu hỏng → **điều kiện mở T-112 đạt**. T-112 vẫn xếp sau T-103.
+
+**D-P2-06 — Người dùng trả lời 6 câu §13.4 (2026-11-09).** Lời người dùng:
+> "1. Làm việc với Bách hóa xanh ở HCM trước
+> 2. Nếu tự động thu thập được thì cứ lấy đi, ko sao đâu. Mình chỉ đang tham khảo giá thôi.
+> 3. Chỉ hiển thị giá và dẫn link qua siêu thị để đặt hàng
+> 4. thuộc gói miễn phí
+> 5. chọn thực đơn trước rồi hiện giá sau
+> 6. Có thể tự sửa giá đã mua"
+
+Quyết định:
+- **Phạm vi Epic 7:**
+  - Một siêu thị: **Bách hóa Xanh, khu vực TP.HCM**.
+  - Chỉ hiển thị giá, khuyến mãi và **liên kết sang trang sản phẩm BHX** để người dùng tự đặt hàng (US-7.4 thành bắt buộc). Không có giỏ hàng hay thanh toán trong app.
+  - US-7.3 (so sánh siêu thị) để sau, vì chỉ có 1 siêu thị.
+- **Nguồn giá:** người dùng chấp nhận thu thập tự động từ trang công khai của BHX và chịu rủi ro về điều khoản (T-110 không tìm thấy điều khoản cho phép hay cấm). Thu thập phải theo **quy tắc có trách nhiệm** ở ADR-002 mục "Adapter thu thập trang công khai". Quy tắc chính:
+  - Chỉ trang công khai.
+  - Tôn trọng robots.txt.
+  - Tần suất thấp.
+  - Có công tắc tắt nhanh.
+  - Có fallback về giá ước lượng.
+- **Gói:** giá BHX và khuyến mãi thuộc **gói miễn phí**. Sửa §12: dòng "Danh sách đi chợ" của premium không còn gồm giá theo cửa hàng.
+- **Engine không chọn món theo khuyến mãi.** Thực đơn chọn trước, giá hiện sau (đúng US-7.1/7.2). Chi phí so ngân sách vẫn theo giá thường.
+- **Không có đối tác** (người dùng không nêu sẽ liên hệ). Thêm **US-7.5 "Tự sửa giá đã mua"**:
+  - AC1: Trên tab Đi chợ, mỗi dòng sửa được "giá tôi đã trả" (₫, theo gói đã mua). Lưu trên máy, không gửi lên server.
+  - AC2: Tổng "đã chi thực tế" hiện cạnh tổng ước tính; dòng chưa sửa dùng giá đang hiện.
+  - AC3: Giá tự sửa không đổi engine và ngân sách của các tuần sau ở phase 2. Chỉ dùng để người dùng theo dõi chi tiêu.
+  - AC4: Xóa dữ liệu (US-6.3) xóa cả giá tự sửa.
+- ADR-002 chuyển sang **Đã chấp nhận**. Task: T-110 lượt 3 (Research: robots.txt, cấu trúc trang, ánh xạ sản phẩm BHX HCM), T-113, T-114, T-115.
+
+**D-P2-07 — Kết quả T-110 lượt 3 (BHX TP.HCM) (PM, 2026-11-09).**
+- **robots.txt** (đọc 09/11/2026): không cấm trang sản phẩm và các trang danh mục đang dùng. Có cấm `/tim-kiem?key=*`, `/sp/*`, `/sieu-thi-*`. Adapter vẫn kiểm robots.txt **cho từng URL** trước mỗi đợt (ADR-002 quy tắc 1). Không dùng trang tìm kiếm của BHX để tìm sản phẩm.
+- **Đọc giá từ JSON-LD của trang sản phẩm** (`price` = giá thường, `lowPrice` = giá bán/khuyến mãi, `priceValidUntil` = hết hạn khuyến mãi), không đọc thẻ danh mục. Cách này ổn định hơn HTML, và thẻ danh mục có quy cách không khớp trang (vd thẻ 200–300 g nhưng trang 1 kg).
+- **Khu vực:** chọn TP.HCM trên web cần đăng nhập hoặc nhập số điện thoại, mà ADR-002 cấm đăng nhập và không được nhập dữ liệu cá nhân. Vì vậy dùng **giá khu vực mặc định của website khi chưa đăng nhập**. Giao diện ghi "Giá website Bách hóa Xanh", **không ghi "TP.HCM"** cho tới khi có kiểm chứng. Kiểm chứng: một lần, người dùng (đã đăng nhập, chọn TP.HCM) so 5 sản phẩm với giá khi chưa đăng nhập. Nếu khớp thì được ghi "TP.HCM". Đây là câu hỏi cho người dùng, gửi qua session chính.
+- **Tìm trang sản phẩm cho các nguyên liệu còn lại:** dùng công cụ tìm kiếm bên ngoài (vd `site:bachhoaxanh.com` + tên nguyên liệu) hoặc lần theo liên kết từ trang danh mục đã mở được. Không dùng `/tim-kiem` (bị cấm), không bắt người dùng chép menu.
+- **Tìm URL bằng sitemap (bổ sung sau lượt 4):** robots.txt khai báo `Sitemap: https://www.bachhoaxanh.com/sitemapnew`. Đây là cách website chủ động công bố danh sách trang, nên Research và adapter dùng sitemap để tìm trang sản phẩm và danh mục, thay cho đoán đường dẫn hay nhờ người chép menu. Chỉ đọc sitemap, theo cùng quy tắc tần suất.
+- **Quy cách gói:** `ingredient_sku_map` lấy quy cách từ trang sản phẩm (JSON-LD/tên), không lấy từ thẻ danh mục. Chọn SKU nhỏ nhất phù hợp hộ gia đình: ưu tiên hộp/lốc lẻ hơn thùng 48 hộp, túi 1 kg hơn 5 kg. Chỉ có gói lớn thì đánh dấu `bulk_only` và danh sách đi chợ ghi rõ "chỉ bán gói {quy cách}". Chi phí so ngân sách vẫn tính theo gram dùng (D-SHP), con số "trả tại quầy" theo gói thật.
+
+**D-P2-08 — Người dùng trả lời 2 câu của D-P2-07 (2026-11-09).** Lời người dùng:
+> "1. Không cần, chỉ cần ghi giá website BHX là được rồi. Note lại thông tin: Chi tiết chương trình khuyến mãi vui lòng truy cập vào trang chủ siêu thị
+> 2. Email liên hệ khi cần: romnon4807@gmail.com"
+
+- **Không kiểm chứng giá TP.HCM.** Nhãn nguồn cố định: "Giá website Bách hóa Xanh". Bỏ cờ cấu hình đổi nhãn sang "TP.HCM".
+- **Dòng ghi chú cố định** dưới khối giá/khuyến mãi trên tab Đi chợ, đúng câu người dùng: "Chi tiết chương trình khuyến mãi vui lòng truy cập vào trang chủ siêu thị" (chuỗi i18n, Research thêm). US-7.2 sửa theo: hiện giá gốc, giá bán, thời hạn nếu trang có, kèm dòng ghi chú này. Không diễn giải điều kiện khuyến mãi.
+- **Email liên hệ của bộ thu thập** do người dùng cung cấp, đặt trong cấu hình (ADR-002), không viết cứng trong mã.
+
+
+**D-P2-09 — T-112 phần dữ liệu xong; bỏ bản nháp storage (PM, 2026-11-16).**
+- Dev đã chuyển dữ liệu vào `data/storage.json` (69 dòng, giống hệt bản nháp), thêm `Dataset.Storage`, kiểm trong `DataValidator`, thêm 6 test và cập nhật `golden/manifest.json`.
+- **Xóa `docs/research/storage-draft.json` trong cùng commit.** Hai bản giống hệt nhau thì sớm muộn sẽ lệch nhau. Lịch sử git vẫn giữ bản nháp. Từ nay **`data/storage.json` là nguồn duy nhất**: Research sửa thẳng file này và chạy validator; mỗi lần sửa phải regen golden/fixture, vì `data_version` đổi.
+- `docs/research/ingredient-storage-groups.json` **giữ lại**: đây là bảng kết quả mong đợi cho test của T-116 (AC0), không phải bản sao dữ liệu.
+- **T-112 chưa đóng.** Phần tính năng US-8.1…8.3 vẫn mở: nhãn độ tươi, ưu tiên mềm cho bữa có nguyên liệu hạn ngắn, gợi ý cấp đông, thẻ Bảo quản, chọn ngày đi chợ.

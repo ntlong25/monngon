@@ -1,0 +1,1791 @@
+[
+  {
+    "ingredient_id": "uc_ga_khong_da",
+    "status": "gan_dung",
+    "fridge_days": 1,
+    "pantry_days": null,
+    "freezer_days": 270,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": "Cất ngăn mát trong túi kín, để dưới cùng để không nhỏ nước lên rau. Muốn giữ lâu hơn thì chia phần và cấp đông.",
+    "spoilage_signs_vi": "Mùi chua hoặc hôi, bề mặt nhớt, đổi màu xám hoặc xanh.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": false,
+      "fk_id": 117,
+      "fk_name": "Chicken parts",
+      "fk_subtitle": "breast halves, boneless",
+      "fields": [
+        "DOP_Refrigerate",
+        "DOP_Freeze"
+      ],
+      "fridge_range": "1–2 Days",
+      "mapping": "Chicken parts, breast boneless",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN.",
+      "downgrade_reason": "chỉ có số DOP (ngăn mát hoặc nhiệt độ phòng); FoodKeeper (bản ghi 115 trong Version) ghi các cột DOP cần thay thế, nên hạ xuống gan_dung"
+    }
+  },
+  {
+    "ingredient_id": "dui_ga_khong_da",
+    "status": "gan_dung",
+    "fridge_days": 1,
+    "pantry_days": null,
+    "freezer_days": 270,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": "Cất ngăn mát trong túi kín, để dưới cùng. Chia phần trước khi cấp đông.",
+    "spoilage_signs_vi": "Mùi chua hoặc hôi, bề mặt nhớt, đổi màu xám hoặc xanh.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": false,
+      "fk_id": 118,
+      "fk_name": "Chicken parts",
+      "fk_subtitle": "legs or thighs",
+      "fields": [
+        "DOP_Refrigerate",
+        "DOP_Freeze"
+      ],
+      "fridge_range": "1–2 Days",
+      "mapping": "Chicken parts, legs or thighs",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN.",
+      "downgrade_reason": "chỉ có số DOP (ngăn mát hoặc nhiệt độ phòng); FoodKeeper (bản ghi 115 trong Version) ghi các cột DOP cần thay thế, nên hạ xuống gan_dung"
+    }
+  },
+  {
+    "ingredient_id": "thit_heo_nac_dui",
+    "status": "gan_dung",
+    "fridge_days": 7,
+    "pantry_days": null,
+    "freezer_days": 30,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": "Cất ngăn mát trong túi kín, đặt ở ngăn dưới cùng. Chia phần trước khi cấp đông.",
+    "spoilage_signs_vi": "Mùi chua, bề mặt nhớt dính, màu xám hoặc xanh, thịt mất độ đàn hồi.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": false,
+      "fk_id": 95,
+      "fk_name": "Ham",
+      "fk_subtitle": "fresh, uncooked, whole leg, boneless",
+      "fields": [
+        "DOP_Refrigerate",
+        "DOP_Freeze"
+      ],
+      "fridge_range": "1–1 Weeks",
+      "mapping": "Ham fresh, uncooked, whole leg, boneless (thịt đùi heo tươi)",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN.",
+      "downgrade_reason": "chỉ có số DOP (ngăn mát hoặc nhiệt độ phòng); FoodKeeper (bản ghi 115 trong Version) ghi các cột DOP cần thay thế, nên hạ xuống gan_dung"
+    }
+  },
+  {
+    "ingredient_id": "thit_heo_nac_than",
+    "status": "gan_dung",
+    "fridge_days": 3,
+    "pantry_days": null,
+    "freezer_days": 120,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": "Cất ngăn mát trong túi kín, đặt ở ngăn dưới cùng. Chia phần trước khi cấp đông.",
+    "spoilage_signs_vi": "Mùi chua, bề mặt nhớt dính, màu xám hoặc xanh, thịt mất độ đàn hồi.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": false,
+      "fk_id": 67,
+      "fk_name": "Pork",
+      "fk_subtitle": "tenderloin",
+      "fields": [
+        "DOP_Refrigerate",
+        "DOP_Freeze"
+      ],
+      "fridge_range": "3–5 Days",
+      "mapping": "Pork tenderloin",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN.",
+      "downgrade_reason": "chỉ có số DOP (ngăn mát hoặc nhiệt độ phòng); FoodKeeper (bản ghi 115 trong Version) ghi các cột DOP cần thay thế, nên hạ xuống gan_dung"
+    }
+  },
+  {
+    "ingredient_id": "thit_heo_ba_chi",
+    "status": "gan_dung",
+    "fridge_days": 3,
+    "pantry_days": null,
+    "freezer_days": 120,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": "Bọc kín, cất ngăn mát; không dùng trong vài ngày thì cấp đông.",
+    "spoilage_signs_vi": "Mùi chua hoặc hôi, bề mặt nhớt, màu xám.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": false,
+      "fk_id": 74,
+      "fk_name": "Pork",
+      "fk_subtitle": "shoulder",
+      "fields": [
+        "DOP_Refrigerate",
+        "DOP_Freeze"
+      ],
+      "fridge_range": "3–5 Days",
+      "mapping": "Nhóm gần: Pork shoulder (FoodKeeper không có ba chỉ tươi)",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN."
+    }
+  },
+  {
+    "ingredient_id": "thit_heo_xay_nac",
+    "status": "gan_dung",
+    "fridge_days": 1,
+    "pantry_days": null,
+    "freezer_days": 90,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": "Xay xong nên dùng trong 1–2 ngày, hoặc cấp đông ngay trong túi phẳng để rã đông nhanh.",
+    "spoilage_signs_vi": "Mùi chua hoặc hôi, màu xám, bề mặt nhớt, nhiều nước và có bọt.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": false,
+      "fk_id": 73,
+      "fk_name": "Pork",
+      "fk_subtitle": "ground",
+      "fields": [
+        "DOP_Refrigerate",
+        "DOP_Freeze"
+      ],
+      "fridge_range": "1–2 Days",
+      "mapping": "Pork ground",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN.",
+      "downgrade_reason": "chỉ có số DOP (ngăn mát hoặc nhiệt độ phòng); FoodKeeper (bản ghi 115 trong Version) ghi các cột DOP cần thay thế, nên hạ xuống gan_dung"
+    }
+  },
+  {
+    "ingredient_id": "thit_bo_nac",
+    "status": "gan_dung",
+    "fridge_days": 3,
+    "pantry_days": null,
+    "freezer_days": 120,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": "Bọc kín, cất ngăn mát dưới cùng; để lâu hơn thì cấp đông.",
+    "spoilage_signs_vi": "Mùi hôi chua, màu nâu xám, bề mặt nhớt.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": false,
+      "fk_id": 36,
+      "fk_name": "Beef",
+      "fk_subtitle": "round or rump roast",
+      "fields": [
+        "DOP_Refrigerate",
+        "DOP_Freeze"
+      ],
+      "fridge_range": "3–5 Days",
+      "mapping": "Beef round or rump roast (đùi bò)",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN.",
+      "downgrade_reason": "chỉ có số DOP (ngăn mát hoặc nhiệt độ phòng); FoodKeeper (bản ghi 115 trong Version) ghi các cột DOP cần thay thế, nên hạ xuống gan_dung"
+    }
+  },
+  {
+    "ingredient_id": "ca_basa",
+    "status": "gan_dung",
+    "fridge_days": 1,
+    "pantry_days": null,
+    "freezer_days": 60,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": "Làm sạch, cất ngăn mát ngay trong túi kín; dùng trong 1–2 ngày hoặc cấp đông.",
+    "spoilage_signs_vi": "Mùi tanh nồng hoặc chua, thịt mềm nhũn, mắt đục, mang đổi màu.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": false,
+      "fk_id": 146,
+      "fk_name": "Fatty fish",
+      "fk_subtitle": "bluefish, catfish, mackerel, mullet, salmon, tuna, etc.",
+      "fields": [
+        "DOP_Refrigerate",
+        "DOP_Freeze"
+      ],
+      "fridge_range": "1–2 Days",
+      "mapping": "Fatty fish; FoodKeeper ghi catfish trong nhóm này (bản ghi 120)",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN.",
+      "downgrade_reason": "chỉ có số DOP (ngăn mát hoặc nhiệt độ phòng); FoodKeeper (bản ghi 115 trong Version) ghi các cột DOP cần thay thế, nên hạ xuống gan_dung"
+    }
+  },
+  {
+    "ingredient_id": "tom",
+    "status": "gan_dung",
+    "fridge_days": 1,
+    "pantry_days": null,
+    "freezer_days": 180,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": "Cất ngăn mát trong hộp kín, dùng trong 1–3 ngày; để lâu hơn thì bỏ đầu rồi cấp đông.",
+    "spoilage_signs_vi": "Mùi amoniac hoặc chua, vỏ đen, thịt mềm nhũn, nhớt.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": false,
+      "fk_id": 151,
+      "fk_name": "Shrimp, crayfish",
+      "fk_subtitle": "",
+      "fields": [
+        "DOP_Refrigerate",
+        "DOP_Freeze"
+      ],
+      "fridge_range": "1–3 Days",
+      "mapping": "Shrimp, crayfish",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN.",
+      "downgrade_reason": "chỉ có số DOP (ngăn mát hoặc nhiệt độ phòng); FoodKeeper (bản ghi 115 trong Version) ghi các cột DOP cần thay thế, nên hạ xuống gan_dung"
+    }
+  },
+  {
+    "ingredient_id": "trung_ga",
+    "status": "gan_dung",
+    "fridge_days": 21,
+    "pantry_days": null,
+    "freezer_days": null,
+    "freezable": false,
+    "long_term": false,
+    "tips_vi": "Cất ngăn mát trong hộp, đầu nhọn hướng xuống; tránh để ngoài nhiệt độ phòng lâu.",
+    "spoilage_signs_vi": "Vỏ nứt, có mùi lạ khi đập, lòng trắng loãng hoặc đổi màu bất thường.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": false,
+      "fk_id": 21,
+      "fk_name": "Eggs",
+      "fk_subtitle": "in shell",
+      "fields": [
+        "DOP_Refrigerate",
+        "Freeze"
+      ],
+      "fridge_range": "3–5 Weeks",
+      "mapping": "Eggs in shell",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN.",
+      "downgrade_reason": "chỉ có số DOP (ngăn mát hoặc nhiệt độ phòng); FoodKeeper (bản ghi 115 trong Version) ghi các cột DOP cần thay thế, nên hạ xuống gan_dung"
+    }
+  },
+  {
+    "ingredient_id": "dau_phu",
+    "status": "uoc_tinh_vn",
+    "fridge_days": 1,
+    "pantry_days": null,
+    "freezer_days": null,
+    "freezable": null,
+    "long_term": false,
+    "tips_vi": "Ngâm nước sạch, thay nước hằng ngày, cất ngăn mát; dùng trong khoảng 1 tuần.",
+    "spoilage_signs_vi": "Mùi chua, bề mặt nhớt, nước đục hoặc có váng.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": true,
+      "fk_id": 168,
+      "fk_name": "Tofu",
+      "fk_subtitle": "",
+      "fields": [
+        "DOP_Refrigerate",
+        "DOP_Freeze"
+      ],
+      "fridge_range": "1–1 Weeks",
+      "mapping": "Tofu | PM 2026-11-16: đổi sang số VN (bán rời).",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN.",
+      "downgrade_reason": "chỉ có số DOP (ngăn mát hoặc nhiệt độ phòng); FoodKeeper (bản ghi 115 trong Version) ghi các cột DOP cần thay thế, nên hạ xuống gan_dung",
+      "vn_rule": "đậu phụ bán rời ở chợ/siêu thị VN không đóng kín: ngăn mát 1–3 ngày; FoodKeeper 1 tuần (DOP) áp dụng cho loại đóng kín nên không dùng. Lấy cận dưới = 1 ngày. Ngăn đông không dùng số FoodKeeper."
+    }
+  },
+  {
+    "ingredient_id": "com_trang",
+    "status": "ok",
+    "fridge_days": 4,
+    "pantry_days": null,
+    "freezer_days": 180,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": null,
+    "spoilage_signs_vi": null,
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": false,
+      "fk_id": 178,
+      "fk_name": "Cooked rice",
+      "fk_subtitle": "",
+      "fields": [
+        "Refrigerate",
+        "Freeze"
+      ],
+      "fridge_range": "4–6 Days",
+      "mapping": "Cooked rice"
+    }
+  },
+  {
+    "ingredient_id": "sup_lo_xanh",
+    "status": "gan_dung",
+    "fridge_days": 3,
+    "pantry_days": null,
+    "freezer_days": 300,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": "Cất ngăn mát trong túi, để khô; dùng trong 3–5 ngày.",
+    "spoilage_signs_vi": "Hoa vàng và nhũn, có mùi lạ hoặc mốc.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": false,
+      "fk_id": 276,
+      "fk_name": "Broccoli and broccoli raab (rapini)",
+      "fk_subtitle": "",
+      "fields": [
+        "DOP_Refrigerate",
+        "DOP_Freeze"
+      ],
+      "fridge_range": "3–5 Days",
+      "mapping": "Broccoli and broccoli raab (rapini)",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN.",
+      "downgrade_reason": "chỉ có số DOP (ngăn mát hoặc nhiệt độ phòng); FoodKeeper (bản ghi 115 trong Version) ghi các cột DOP cần thay thế, nên hạ xuống gan_dung"
+    }
+  },
+  {
+    "ingredient_id": "sup_lo_trang",
+    "status": "gan_dung",
+    "fridge_days": 3,
+    "pantry_days": null,
+    "freezer_days": 300,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": "Cất ngăn mát trong túi, để khô; dùng trong 3–5 ngày.",
+    "spoilage_signs_vi": "Đổi màu vàng hoặc nâu, nhũn, có mùi lạ hoặc mốc.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": false,
+      "fk_id": 280,
+      "fk_name": "Cauliflower",
+      "fk_subtitle": "",
+      "fields": [
+        "DOP_Refrigerate",
+        "DOP_Freeze"
+      ],
+      "fridge_range": "3–5 Days",
+      "mapping": "Cauliflower",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN.",
+      "downgrade_reason": "chỉ có số DOP (ngăn mát hoặc nhiệt độ phòng); FoodKeeper (bản ghi 115 trong Version) ghi các cột DOP cần thay thế, nên hạ xuống gan_dung"
+    }
+  },
+  {
+    "ingredient_id": "bap_cai",
+    "status": "gan_dung",
+    "fridge_days": 7,
+    "pantry_days": null,
+    "freezer_days": 300,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": "Cất ngăn mát, để nguyên bắp; dùng trong 1–2 tuần.",
+    "spoilage_signs_vi": "Lá nhũn, đen ở gốc, có mùi chua hoặc mốc.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": false,
+      "fk_id": 278,
+      "fk_name": "Cabbage",
+      "fk_subtitle": "",
+      "fields": [
+        "DOP_Refrigerate",
+        "DOP_Freeze"
+      ],
+      "fridge_range": "1–2 Weeks",
+      "mapping": "Cabbage",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN.",
+      "downgrade_reason": "chỉ có số DOP (ngăn mát hoặc nhiệt độ phòng); FoodKeeper (bản ghi 115 trong Version) ghi các cột DOP cần thay thế, nên hạ xuống gan_dung"
+    }
+  },
+  {
+    "ingredient_id": "ca_rot",
+    "status": "gan_dung",
+    "fridge_days": 14,
+    "pantry_days": null,
+    "freezer_days": 300,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": "Bỏ lá trước khi cất; cất ngăn mát trong túi kín; dùng trong 2–3 tuần.",
+    "spoilage_signs_vi": "Mềm nhũn, nứt, có đốm mốc hoặc đổi màu.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": false,
+      "fk_id": 279,
+      "fk_name": "Carrots, parsnips",
+      "fk_subtitle": "",
+      "fields": [
+        "DOP_Refrigerate",
+        "DOP_Freeze"
+      ],
+      "fridge_range": "2–3 Weeks",
+      "mapping": "Carrots, parsnips",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN.",
+      "downgrade_reason": "chỉ có số DOP (ngăn mát hoặc nhiệt độ phòng); FoodKeeper (bản ghi 115 trong Version) ghi các cột DOP cần thay thế, nên hạ xuống gan_dung"
+    }
+  },
+  {
+    "ingredient_id": "ca_tim",
+    "status": "uoc_tinh_vn",
+    "fridge_days": 4,
+    "pantry_days": 1,
+    "freezer_days": 180,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": "Cất ngăn mát trong túi, tránh va đập; dùng trong 4–7 ngày.",
+    "spoilage_signs_vi": "Vỏ nhăn, có vết thâm, thịt mềm nhũn hoặc có mùi chua.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": true,
+      "fk_id": 284,
+      "fk_name": "Eggplant",
+      "fk_subtitle": "",
+      "fields": [
+        "DOP_Refrigerate",
+        "DOP_Pantry",
+        "DOP_Freeze"
+      ],
+      "fridge_range": "4–7 Days",
+      "mapping": "Eggplant",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN.",
+      "vn_rule": "nhiệt độ phòng: 1 ngày gốc -> 1 ngày (50% cận dưới, làm tròn xuống, tối thiểu 1)"
+    }
+  },
+  {
+    "ingredient_id": "ca_thu",
+    "status": "gan_dung",
+    "fridge_days": 1,
+    "pantry_days": null,
+    "freezer_days": 60,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": "Cất ngăn mát trong túi kín; dùng trong 1–2 ngày hoặc cấp đông.",
+    "spoilage_signs_vi": "Mùi tanh nồng, mắt đục lõm, thịt mất độ đàn hồi, mang đổi màu.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": false,
+      "fk_id": 146,
+      "fk_name": "Fatty fish",
+      "fk_subtitle": "bluefish, catfish, mackerel, mullet, salmon, tuna, etc.",
+      "fields": [
+        "DOP_Refrigerate",
+        "DOP_Freeze"
+      ],
+      "fridge_range": "1–2 Days",
+      "mapping": "Fatty fish (mackerel = cá thu)",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN.",
+      "downgrade_reason": "chỉ có số DOP (ngăn mát hoặc nhiệt độ phòng); FoodKeeper (bản ghi 115 trong Version) ghi các cột DOP cần thay thế, nên hạ xuống gan_dung"
+    }
+  },
+  {
+    "ingredient_id": "muc_ong",
+    "status": "gan_dung",
+    "fridge_days": 1,
+    "pantry_days": null,
+    "freezer_days": 180,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": "Bọc kín, cất ngăn mát; dùng trong 1–3 ngày, để lâu hơn thì cấp đông.",
+    "spoilage_signs_vi": "Mùi chua, thân nhớt, màu xỉn, thịt mềm nhũn.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": false,
+      "fk_id": 152,
+      "fk_name": "Squid",
+      "fk_subtitle": "",
+      "fields": [
+        "DOP_Refrigerate",
+        "DOP_Freeze"
+      ],
+      "fridge_range": "1–3 Days",
+      "mapping": "Squid",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN.",
+      "downgrade_reason": "chỉ có số DOP (ngăn mát hoặc nhiệt độ phòng); FoodKeeper (bản ghi 115 trong Version) ghi các cột DOP cần thay thế, nên hạ xuống gan_dung"
+    }
+  },
+  {
+    "ingredient_id": "ca_ro_phi",
+    "status": "gan_dung",
+    "fridge_days": 1,
+    "pantry_days": null,
+    "freezer_days": 180,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": "Cất ngăn mát trong túi kín; dùng trong 1–2 ngày hoặc cấp đông.",
+    "spoilage_signs_vi": "Mùi tanh, mắt đục, thịt bở, mang đổi màu.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": false,
+      "fk_id": 144,
+      "fk_name": "Lean fish",
+      "fk_subtitle": "cod, flounder, haddock, halibut, sole, etc.",
+      "fields": [
+        "DOP_Refrigerate",
+        "DOP_Freeze"
+      ],
+      "fridge_range": "1–2 Days",
+      "mapping": "Nhóm gần: Lean fish (cá trắng); rô phi không được liệt kê",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN."
+    }
+  },
+  {
+    "ingredient_id": "sua_chua_khong_duong",
+    "status": "gan_dung",
+    "fridge_days": 7,
+    "pantry_days": null,
+    "freezer_days": 30,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": "Cất ngăn mát đến khi dùng; dùng trước hạn in trên hộp.",
+    "spoilage_signs_vi": "Tách nước nhiều, mùi chua gắt, có mốc hoặc váng lạ.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": false,
+      "fk_id": 33,
+      "fk_name": "Yogurt",
+      "fk_subtitle": "",
+      "fields": [
+        "DOP_Refrigerate",
+        "Freeze"
+      ],
+      "fridge_range": "1–2 Weeks",
+      "mapping": "Yogurt",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN.",
+      "downgrade_reason": "chỉ có số DOP (ngăn mát hoặc nhiệt độ phòng); FoodKeeper (bản ghi 115 trong Version) ghi các cột DOP cần thay thế, nên hạ xuống gan_dung"
+    }
+  },
+  {
+    "ingredient_id": "tieu_den",
+    "status": "chua_co_nguon",
+    "fridge_days": null,
+    "pantry_days": null,
+    "freezer_days": null,
+    "freezable": null,
+    "long_term": true,
+    "tips_vi": null,
+    "spoilage_signs_vi": null,
+    "source": null
+  },
+  {
+    "ingredient_id": "lac",
+    "status": "gan_dung",
+    "fridge_days": 360,
+    "pantry_days": 28,
+    "freezer_days": 720,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": null,
+    "spoilage_signs_vi": null,
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": false,
+      "fk_id": 442,
+      "fk_name": "Peanuts",
+      "fk_subtitle": "no shell",
+      "fields": [
+        "DOP_Refrigerate",
+        "DOP_Pantry",
+        "DOP_Freeze"
+      ],
+      "fridge_range": "12–12 Months",
+      "mapping": "Peanuts, no shell",
+      "downgrade_reason": "chỉ có số DOP (ngăn mát hoặc nhiệt độ phòng); FoodKeeper (bản ghi 115 trong Version) ghi các cột DOP cần thay thế, nên hạ xuống gan_dung"
+    }
+  },
+  {
+    "ingredient_id": "vung",
+    "status": "ok",
+    "fridge_days": null,
+    "pantry_days": 1825,
+    "freezer_days": null,
+    "freezable": null,
+    "long_term": false,
+    "tips_vi": null,
+    "spoilage_signs_vi": null,
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": false,
+      "fk_id": 613,
+      "fk_name": "Sesame seeds",
+      "fk_subtitle": "",
+      "fields": [
+        "Pantry"
+      ],
+      "fridge_range": "",
+      "mapping": "Sesame seeds"
+    }
+  },
+  {
+    "ingredient_id": "bun_pho_nau_chin",
+    "status": "gan_dung",
+    "fridge_days": 3,
+    "pantry_days": null,
+    "freezer_days": 30,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": null,
+    "spoilage_signs_vi": null,
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": false,
+      "fk_id": 177,
+      "fk_name": "Cooked pasta",
+      "fk_subtitle": "",
+      "fields": [
+        "Refrigerate",
+        "Freeze"
+      ],
+      "fridge_range": "3–5 Days",
+      "mapping": "Nhóm gần: Cooked pasta (mì nấu chín)"
+    }
+  },
+  {
+    "ingredient_id": "khoai_lang",
+    "status": "uoc_tinh_vn",
+    "fridge_days": null,
+    "pantry_days": 15,
+    "freezer_days": 300,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": "Để nơi khô thoáng, tối; không cất ngăn mát vì dễ đổi vị.",
+    "spoilage_signs_vi": "Mềm nhũn, có đốm đen, mùi chua hoặc mốc.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": true,
+      "fk_id": 297,
+      "fk_name": "Potatoes",
+      "fk_subtitle": "",
+      "fields": [
+        "DOP_Refrigerate",
+        "DOP_Pantry",
+        "Freeze"
+      ],
+      "fridge_range": "1–2 Weeks",
+      "mapping": "Nhóm gần: Potatoes (FoodKeeper không có khoai lang: dòng 422 trống)",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN.",
+      "vn_rule": "nhiệt độ phòng: 30 ngày gốc -> 15 ngày (50% cận dưới, làm tròn xuống, tối thiểu 1)"
+    }
+  },
+  {
+    "ingredient_id": "khoai_tay",
+    "status": "uoc_tinh_vn",
+    "fridge_days": null,
+    "pantry_days": 15,
+    "freezer_days": null,
+    "freezable": null,
+    "long_term": false,
+    "tips_vi": "Để nơi khô thoáng, tối, tránh ánh sáng; không cất ngăn mát vì dễ đổi vị.",
+    "spoilage_signs_vi": "Vỏ xanh (có độc tố), mọc mầm, mềm nhũn, mùi chua.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": true,
+      "fk_id": 297,
+      "fk_name": "Potatoes",
+      "fk_subtitle": "",
+      "fields": [
+        "DOP_Refrigerate",
+        "DOP_Pantry"
+      ],
+      "fridge_range": "1–2 Weeks",
+      "mapping": "Potatoes; số cấp đông của FoodKeeper áp dụng cho khoai đã nấu nên bỏ",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN.",
+      "vn_rule": "nhiệt độ phòng: 30 ngày gốc -> 15 ngày (50% cận dưới, làm tròn xuống, tối thiểu 1)"
+    }
+  },
+  {
+    "ingredient_id": "duong",
+    "status": "ok",
+    "fridge_days": null,
+    "pantry_days": null,
+    "freezer_days": null,
+    "freezable": null,
+    "long_term": true,
+    "tips_vi": null,
+    "spoilage_signs_vi": null,
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": false,
+      "fk_id": 240,
+      "fk_name": "Sugar",
+      "fk_subtitle": "granulated",
+      "fields": [
+        "Pantry"
+      ],
+      "fridge_range": "",
+      "mapping": "Sugar granulated"
+    }
+  },
+  {
+    "ingredient_id": "dau_an",
+    "status": "chua_co_nguon",
+    "fridge_days": null,
+    "pantry_days": null,
+    "freezer_days": null,
+    "freezable": null,
+    "long_term": true,
+    "tips_vi": null,
+    "spoilage_signs_vi": null,
+    "source": null
+  },
+  {
+    "ingredient_id": "nuoc_mam",
+    "status": "chua_co_nguon",
+    "fridge_days": null,
+    "pantry_days": null,
+    "freezer_days": null,
+    "freezable": null,
+    "long_term": true,
+    "tips_vi": null,
+    "spoilage_signs_vi": null,
+    "source": null
+  },
+  {
+    "ingredient_id": "xi_dau",
+    "status": "chua_co_nguon",
+    "fridge_days": null,
+    "pantry_days": null,
+    "freezer_days": null,
+    "freezable": null,
+    "long_term": true,
+    "tips_vi": null,
+    "spoilage_signs_vi": null,
+    "source": null
+  },
+  {
+    "ingredient_id": "muoi",
+    "status": "ok",
+    "fridge_days": null,
+    "pantry_days": null,
+    "freezer_days": null,
+    "freezable": null,
+    "long_term": true,
+    "tips_vi": null,
+    "spoilage_signs_vi": null,
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": false,
+      "fk_id": 468,
+      "fk_name": "Salt",
+      "fk_subtitle": "table, plain, or iodized",
+      "fields": [
+        "Pantry"
+      ],
+      "fridge_range": "",
+      "mapping": "Salt, table"
+    }
+  },
+  {
+    "ingredient_id": "toi",
+    "status": "uoc_tinh_vn",
+    "fridge_days": 3,
+    "pantry_days": 15,
+    "freezer_days": 30,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": "Để củ nguyên nơi khô thoáng; tép đã bóc thì cất ngăn mát.",
+    "spoilage_signs_vi": "Mềm, nảy mầm xanh, có mốc hoặc mùi lạ.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": true,
+      "fk_id": 285,
+      "fk_name": "Garlic",
+      "fk_subtitle": "",
+      "fields": [
+        "DOP_Refrigerate",
+        "DOP_Pantry",
+        "DOP_Freeze"
+      ],
+      "fridge_range": "3–14 Days",
+      "mapping": "Garlic",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN.",
+      "vn_rule": "nhiệt độ phòng: 30 ngày gốc -> 15 ngày (50% cận dưới, làm tròn xuống, tối thiểu 1)"
+    }
+  },
+  {
+    "ingredient_id": "gung",
+    "status": "uoc_tinh_vn",
+    "fridge_days": 14,
+    "pantry_days": 1,
+    "freezer_days": 180,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": "Để nơi khô thoáng hoặc cất ngăn mát trong túi kín; dùng trong 2–3 tuần.",
+    "spoilage_signs_vi": "Mốc, mềm nhũn, có mùi chua.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": true,
+      "fk_id": 286,
+      "fk_name": "Ginger root",
+      "fk_subtitle": "",
+      "fields": [
+        "DOP_Refrigerate",
+        "DOP_Pantry",
+        "DOP_Freeze"
+      ],
+      "fridge_range": "2–3 Weeks",
+      "mapping": "Ginger root",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN.",
+      "vn_rule": "nhiệt độ phòng: 2 ngày gốc -> 1 ngày (50% cận dưới, làm tròn xuống, tối thiểu 1)"
+    }
+  },
+  {
+    "ingredient_id": "hanh_tay",
+    "status": "uoc_tinh_vn",
+    "fridge_days": 60,
+    "pantry_days": 15,
+    "freezer_days": 300,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": "Để nơi khô thoáng, tách khỏi khoai tây; đã cắt thì cất ngăn mát.",
+    "spoilage_signs_vi": "Mềm, nảy mầm, mốc hoặc có mùi chua.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": true,
+      "fk_id": 294,
+      "fk_name": "Onions",
+      "fk_subtitle": "yellow, white, red, etc.",
+      "fields": [
+        "DOP_Refrigerate",
+        "DOP_Pantry",
+        "DOP_Freeze"
+      ],
+      "fridge_range": "2–2 Months",
+      "mapping": "Onions, yellow/white",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN.",
+      "vn_rule": "nhiệt độ phòng: 30 ngày gốc -> 15 ngày (50% cận dưới, làm tròn xuống, tối thiểu 1)"
+    }
+  },
+  {
+    "ingredient_id": "hanh_la",
+    "status": "uoc_tinh_vn",
+    "fridge_days": 7,
+    "pantry_days": 15,
+    "freezer_days": 300,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": "Cất ngăn mát trong túi; dùng trong khoảng 1 tuần.",
+    "spoilage_signs_vi": "Lá vàng, nhũn, có mùi chua.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": true,
+      "fk_id": 295,
+      "fk_name": "Onions",
+      "fk_subtitle": "spring or green",
+      "fields": [
+        "DOP_Refrigerate",
+        "DOP_Pantry",
+        "DOP_Freeze"
+      ],
+      "fridge_range": "1–1 Weeks",
+      "mapping": "Onions, spring or green",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN.",
+      "vn_rule": "nhiệt độ phòng: 30 ngày gốc -> 15 ngày (50% cận dưới, làm tròn xuống, tối thiểu 1)"
+    }
+  },
+  {
+    "ingredient_id": "ca_chua",
+    "status": "gan_dung",
+    "fridge_days": 4,
+    "pantry_days": null,
+    "freezer_days": 180,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": "Quả chín thì cất ngăn mát; quả chưa chín để nhiệt độ phòng cho chín dần.",
+    "spoilage_signs_vi": "Vỏ nứt, nhũn, có mốc, có mùi chua.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": false,
+      "fk_id": 296,
+      "fk_name": "Peppers",
+      "fk_subtitle": "",
+      "fields": [
+        "DOP_Refrigerate",
+        "DOP_Freeze"
+      ],
+      "fridge_range": "4–14 Days",
+      "mapping": "Nhóm gần: Peppers (FoodKeeper Tomatoes chỉ ghi 'khi chín', không có số ngày)",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN."
+    }
+  },
+  {
+    "ingredient_id": "cai_ngot",
+    "status": "gan_dung",
+    "fridge_days": 2,
+    "pantry_days": null,
+    "freezer_days": 300,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": "Cất ngăn mát trong túi có lỗ thoát khí; dùng trong 2–3 ngày.",
+    "spoilage_signs_vi": "Lá vàng, nhũn, có mùi chua.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": false,
+      "fk_id": 275,
+      "fk_name": "Bok choy",
+      "fk_subtitle": "",
+      "fields": [
+        "DOP_Refrigerate",
+        "DOP_Freeze"
+      ],
+      "fridge_range": "2–3 Days",
+      "mapping": "Nhóm gần: Bok choy",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN."
+    }
+  },
+  {
+    "ingredient_id": "su_su",
+    "status": "uoc_tinh_vn",
+    "fridge_days": 4,
+    "pantry_days": 1,
+    "freezer_days": 300,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": "Cất ngăn mát, tránh ẩm; dùng trong vài ngày.",
+    "spoilage_signs_vi": "Vỏ mềm, có đốm đen, có mùi chua.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": true,
+      "fk_id": 302,
+      "fk_name": "Squash",
+      "fk_subtitle": "summer and zucchini",
+      "fields": [
+        "DOP_Refrigerate",
+        "DOP_Pantry",
+        "DOP_Freeze"
+      ],
+      "fridge_range": "4–5 Days",
+      "mapping": "Nhóm gần: Squash, summer and zucchini",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN.",
+      "vn_rule": "nhiệt độ phòng: 1 ngày gốc -> 1 ngày (50% cận dưới, làm tròn xuống, tối thiểu 1)"
+    }
+  },
+  {
+    "ingredient_id": "bi_xanh",
+    "status": "uoc_tinh_vn",
+    "fridge_days": 4,
+    "pantry_days": 1,
+    "freezer_days": 300,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": "Cất ngăn mát trong túi; dùng trong 4–5 ngày.",
+    "spoilage_signs_vi": "Vỏ mềm, có đốm mốc, ruột nhũn.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": true,
+      "fk_id": 302,
+      "fk_name": "Squash",
+      "fk_subtitle": "summer and zucchini",
+      "fields": [
+        "DOP_Refrigerate",
+        "DOP_Pantry",
+        "DOP_Freeze"
+      ],
+      "fridge_range": "4–5 Days",
+      "mapping": "Nhóm gần: Squash, summer and zucchini",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN.",
+      "vn_rule": "nhiệt độ phòng: 1 ngày gốc -> 1 ngày (50% cận dưới, làm tròn xuống, tối thiểu 1)"
+    }
+  },
+  {
+    "ingredient_id": "dau_lang",
+    "status": "chua_co_nguon",
+    "fridge_days": null,
+    "pantry_days": null,
+    "freezer_days": null,
+    "freezable": null,
+    "long_term": true,
+    "tips_vi": null,
+    "spoilage_signs_vi": null,
+    "source": null
+  },
+  {
+    "ingredient_id": "dau_xanh",
+    "status": "ok",
+    "fridge_days": 365,
+    "pantry_days": 365,
+    "freezer_days": 365,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": null,
+    "spoilage_signs_vi": null,
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": false,
+      "fk_id": 680,
+      "fk_name": "Mung bean",
+      "fk_subtitle": "dry, food-grade bags",
+      "fields": [
+        "Refrigerate",
+        "Pantry",
+        "Freeze"
+      ],
+      "fridge_range": "1–1 Years",
+      "mapping": "Mung bean, dry, food-grade bags"
+    }
+  },
+  {
+    "ingredient_id": "sua_dau_nanh",
+    "status": "uoc_tinh_vn",
+    "fridge_days": null,
+    "pantry_days": null,
+    "freezer_days": null,
+    "freezable": null,
+    "long_term": true,
+    "tips_vi": "Sau khi mở: cất ngăn mát, dùng hết trong ngày.",
+    "spoilage_signs_vi": "Có mùi chua, vón cục, có váng hoặc tách nước.",
+    "source": {
+      "org": "không tìm được nguồn chính thức",
+      "title": "Tìm kiếm 09/11/2026: không thấy trang Vinasoy hoặc nhãn UHT không đường có hướng dẫn bảo quản",
+      "url": null,
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": false,
+      "fields": [],
+      "fridge_range": "",
+      "mapping": "Sữa đậu nành UHT (quy cách trong prices.json). Nội dung như sữa tươi, chưa có nguồn riêng.",
+      "label_vi": "Để lâu (theo hạn in trên hộp)",
+      "tips_source": "Nội dung như sữa tươi; mẹo do PM chốt; dấu hiệu hỏng viết tay."
+    }
+  },
+  {
+    "ingredient_id": "gao_lut_nau_chin",
+    "status": "gan_dung",
+    "fridge_days": 4,
+    "pantry_days": null,
+    "freezer_days": 180,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": null,
+    "spoilage_signs_vi": null,
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": false,
+      "fk_id": 178,
+      "fk_name": "Cooked rice",
+      "fk_subtitle": "",
+      "fields": [
+        "Refrigerate",
+        "Freeze"
+      ],
+      "fridge_range": "4–6 Days",
+      "mapping": "Nhóm gần: Cooked rice (gạo lứt nấu chín)"
+    }
+  },
+  {
+    "ingredient_id": "tempeh",
+    "status": "gan_dung",
+    "fridge_days": 3,
+    "pantry_days": null,
+    "freezer_days": 180,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": "Cất ngăn mát và nấu chín trước khi dùng; để lâu hơn thì cấp đông.",
+    "spoilage_signs_vi": "Mùi chua gắt, mốc không đều, đổi màu đen hoặc xanh.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": false,
+      "fk_id": 328,
+      "fk_name": "Tempeh",
+      "fk_subtitle": "",
+      "fields": [
+        "Refrigerate",
+        "DOP_Freeze"
+      ],
+      "fridge_range": "3–4 Days",
+      "mapping": "FoodKeeper ghi thời gian này áp dụng cho tempeh đã nấu",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN."
+    }
+  },
+  {
+    "ingredient_id": "nuoc_mam_chay",
+    "status": "chua_co_nguon",
+    "fridge_days": null,
+    "pantry_days": null,
+    "freezer_days": null,
+    "freezable": null,
+    "long_term": true,
+    "tips_vi": null,
+    "spoilage_signs_vi": null,
+    "source": null
+  },
+  {
+    "ingredient_id": "rau_den",
+    "status": "gan_dung",
+    "fridge_days": 1,
+    "pantry_days": null,
+    "freezer_days": 300,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": "Cất ngăn mát trong túi; dùng trong 1–4 ngày.",
+    "spoilage_signs_vi": "Lá vàng nhũn, có mùi chua.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": false,
+      "fk_id": 287,
+      "fk_name": "Greens",
+      "fk_subtitle": "",
+      "fields": [
+        "DOP_Refrigerate",
+        "DOP_Freeze"
+      ],
+      "fridge_range": "1–4 Days",
+      "mapping": "Nhóm gần: Greens",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN."
+    }
+  },
+  {
+    "ingredient_id": "gia_do",
+    "status": "gan_dung",
+    "fridge_days": 5,
+    "pantry_days": null,
+    "freezer_days": null,
+    "freezable": null,
+    "long_term": false,
+    "tips_vi": "Cất ngăn mát trong hộp có khăn ẩm; dùng trong 5–10 ngày.",
+    "spoilage_signs_vi": "Mùi chua, thân nhớt, đổi màu nâu.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": false,
+      "fk_id": 549,
+      "fk_name": "Bean sprouts",
+      "fk_subtitle": "",
+      "fields": [
+        "DOP_Refrigerate"
+      ],
+      "fridge_range": "5–10 Days",
+      "mapping": "Bean sprouts",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN.",
+      "downgrade_reason": "chỉ có số DOP (ngăn mát hoặc nhiệt độ phòng); FoodKeeper (bản ghi 115 trong Version) ghi các cột DOP cần thay thế, nên hạ xuống gan_dung"
+    }
+  },
+  {
+    "ingredient_id": "nam_rom",
+    "status": "chua_co_nguon",
+    "fridge_days": null,
+    "pantry_days": null,
+    "freezer_days": null,
+    "freezable": null,
+    "long_term": true,
+    "tips_vi": null,
+    "spoilage_signs_vi": null,
+    "source": null
+  },
+  {
+    "ingredient_id": "dau_co_ve",
+    "status": "gan_dung",
+    "fridge_days": 3,
+    "pantry_days": null,
+    "freezer_days": 240,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": "Cất ngăn mát trong túi; dùng trong 3–5 ngày.",
+    "spoilage_signs_vi": "Vỏ héo, đổi màu, có mùi chua.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": false,
+      "fk_id": 273,
+      "fk_name": "Beans and peas",
+      "fk_subtitle": "green, fava, lima, soybean, wax, snow, sugar snap",
+      "fields": [
+        "DOP_Refrigerate",
+        "DOP_Freeze"
+      ],
+      "fridge_range": "3–5 Days",
+      "mapping": "Beans and peas (green, wax)",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN.",
+      "downgrade_reason": "chỉ có số DOP (ngăn mát hoặc nhiệt độ phòng); FoodKeeper (bản ghi 115 trong Version) ghi các cột DOP cần thay thế, nên hạ xuống gan_dung"
+    }
+  },
+  {
+    "ingredient_id": "dua_chuot",
+    "status": "gan_dung",
+    "fridge_days": 4,
+    "pantry_days": null,
+    "freezer_days": null,
+    "freezable": false,
+    "long_term": false,
+    "tips_vi": "Cất ngăn mát trong túi; dùng trong 4–6 ngày.",
+    "spoilage_signs_vi": "Vỏ nhăn, mềm, có đốm nhũn.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": false,
+      "fk_id": 283,
+      "fk_name": "Cucumbers",
+      "fk_subtitle": "",
+      "fields": [
+        "DOP_Refrigerate",
+        "Freeze"
+      ],
+      "fridge_range": "4–6 Days",
+      "mapping": "Cucumbers",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN.",
+      "downgrade_reason": "chỉ có số DOP (ngăn mát hoặc nhiệt độ phòng); FoodKeeper (bản ghi 115 trong Version) ghi các cột DOP cần thay thế, nên hạ xuống gan_dung"
+    }
+  },
+  {
+    "ingredient_id": "dau_bap",
+    "status": "uoc_tinh_vn",
+    "fridge_days": 2,
+    "pantry_days": 1,
+    "freezer_days": 300,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": "Cất ngăn mát; dùng trong 2–3 ngày.",
+    "spoilage_signs_vi": "Vỏ đen, mềm, có mùi chua.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": true,
+      "fk_id": 293,
+      "fk_name": "Okra",
+      "fk_subtitle": "",
+      "fields": [
+        "DOP_Refrigerate",
+        "DOP_Pantry",
+        "DOP_Freeze"
+      ],
+      "fridge_range": "2–3 Days",
+      "mapping": "Okra",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN.",
+      "vn_rule": "nhiệt độ phòng: 1 ngày gốc -> 1 ngày (50% cận dưới, làm tròn xuống, tối thiểu 1)"
+    }
+  },
+  {
+    "ingredient_id": "cai_thao",
+    "status": "gan_dung",
+    "fridge_days": 7,
+    "pantry_days": null,
+    "freezer_days": 300,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": "Cất ngăn mát; dùng trong 1–2 tuần.",
+    "spoilage_signs_vi": "Lá nhũn, đổi màu nâu, có mùi chua.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": false,
+      "fk_id": 278,
+      "fk_name": "Cabbage",
+      "fk_subtitle": "",
+      "fields": [
+        "DOP_Refrigerate",
+        "DOP_Freeze"
+      ],
+      "fridge_range": "1–2 Weeks",
+      "mapping": "Nhóm gần: Cabbage",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN."
+    }
+  },
+  {
+    "ingredient_id": "chuoi",
+    "status": "ok",
+    "fridge_days": 3,
+    "pantry_days": null,
+    "freezer_days": 60,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": "Quả chín thì cất ngăn mát, vỏ sẽ đen nhưng ruột vẫn dùng được; quả chưa chín để nhiệt độ phòng.",
+    "spoilage_signs_vi": "Vỏ thâm lan rộng, ruột nhão, mùi lên men.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": false,
+      "fk_id": 251,
+      "fk_name": "Bananas",
+      "fk_subtitle": "",
+      "fields": [
+        "Refrigerate",
+        "Freeze"
+      ],
+      "fridge_range": "3–3 Days",
+      "mapping": "Bananas (số áp dụng cho chuối chín)",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN."
+    }
+  },
+  {
+    "ingredient_id": "cam",
+    "status": "uoc_tinh_vn",
+    "fridge_days": 10,
+    "pantry_days": 5,
+    "freezer_days": null,
+    "freezable": false,
+    "long_term": false,
+    "tips_vi": "Để nơi thoáng hoặc cất ngăn mát; dùng trong 10–21 ngày.",
+    "spoilage_signs_vi": "Vỏ mềm, có đốm mốc, mùi chua lên men.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": true,
+      "fk_id": 256,
+      "fk_name": "Citrus fruit",
+      "fk_subtitle": "lemon, lime, orange, grapefruit, tangerines, clementines",
+      "fields": [
+        "DOP_Refrigerate",
+        "DOP_Pantry",
+        "Freeze"
+      ],
+      "fridge_range": "10–21 Days",
+      "mapping": "Citrus fruit (orange)",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN.",
+      "vn_rule": "nhiệt độ phòng: 10 ngày gốc -> 5 ngày (50% cận dưới, làm tròn xuống, tối thiểu 1)"
+    }
+  },
+  {
+    "ingredient_id": "oi",
+    "status": "ok",
+    "fridge_days": 2,
+    "pantry_days": null,
+    "freezer_days": null,
+    "freezable": false,
+    "long_term": false,
+    "tips_vi": "Quả chín thì cất ngăn mát; dùng trong 2–4 ngày.",
+    "spoilage_signs_vi": "Vỏ thâm, mềm nhũn, có mùi lên men.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": false,
+      "fk_id": 262,
+      "fk_name": "Guava",
+      "fk_subtitle": "",
+      "fields": [
+        "Refrigerate",
+        "Freeze"
+      ],
+      "fridge_range": "2–4 Days",
+      "mapping": "Guava (số áp dụng cho ổi chín)",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN."
+    }
+  },
+  {
+    "ingredient_id": "dua_hau",
+    "status": "uoc_tinh_vn",
+    "fridge_days": 3,
+    "pantry_days": 1,
+    "freezer_days": 360,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": "Chưa cắt để nơi thoáng; đã cắt thì cất ngăn mát bọc kín, dùng trong 3–4 ngày.",
+    "spoilage_signs_vi": "Ruột nhão, chảy nước, có mùi chua hoặc mốc.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": true,
+      "fk_id": 495,
+      "fk_name": "Watermelon",
+      "fk_subtitle": "",
+      "fields": [
+        "DOP_Refrigerate",
+        "DOP_Pantry",
+        "Freeze"
+      ],
+      "fridge_range": "3–4 Days",
+      "mapping": "Watermelon",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN.",
+      "vn_rule": "nhiệt độ phòng: 1 ngày gốc -> 1 ngày (50% cận dưới, làm tròn xuống, tối thiểu 1)"
+    }
+  },
+  {
+    "ingredient_id": "du_du",
+    "status": "uoc_tinh_vn",
+    "fridge_days": 7,
+    "pantry_days": 1,
+    "freezer_days": 180,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": "Quả chín thì cất ngăn mát; dùng trong khoảng 1 tuần.",
+    "spoilage_signs_vi": "Vỏ thâm, ruột nhũn, mùi lên men.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": true,
+      "fk_id": 265,
+      "fk_name": "Papaya, mango, feijoa, passionfruit, casaha melon",
+      "fk_subtitle": "",
+      "fields": [
+        "DOP_Refrigerate",
+        "DOP_Pantry",
+        "Freeze"
+      ],
+      "fridge_range": "1–1 Weeks",
+      "mapping": "Papaya, mango, feijoa, passionfruit, casaha melon",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN.",
+      "vn_rule": "nhiệt độ phòng: 3 ngày gốc -> 1 ngày (50% cận dưới, làm tròn xuống, tối thiểu 1)"
+    }
+  },
+  {
+    "ingredient_id": "tao",
+    "status": "uoc_tinh_vn",
+    "fridge_days": 28,
+    "pantry_days": 10,
+    "freezer_days": null,
+    "freezable": null,
+    "long_term": false,
+    "tips_vi": "Cất ngăn mát trong túi; dùng trong 4–6 tuần.",
+    "spoilage_signs_vi": "Vết thâm lan rộng, mềm, mùi chua hoặc lên men.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": true,
+      "fk_id": 248,
+      "fk_name": "Apples",
+      "fk_subtitle": "",
+      "fields": [
+        "DOP_Refrigerate",
+        "DOP_Pantry"
+      ],
+      "fridge_range": "4–6 Weeks",
+      "mapping": "Apples; số cấp đông của FoodKeeper áp dụng cho táo đã nấu nên bỏ",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN.",
+      "vn_rule": "nhiệt độ phòng: 21 ngày gốc -> 10 ngày (50% cận dưới, làm tròn xuống, tối thiểu 1)"
+    }
+  },
+  {
+    "ingredient_id": "xoai",
+    "status": "uoc_tinh_vn",
+    "fridge_days": 7,
+    "pantry_days": 1,
+    "freezer_days": 180,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": "Quả chín thì cất ngăn mát; dùng trong khoảng 1 tuần.",
+    "spoilage_signs_vi": "Vỏ đen, mềm nhũn, mùi lên men.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": true,
+      "fk_id": 265,
+      "fk_name": "Papaya, mango, feijoa, passionfruit, casaha melon",
+      "fk_subtitle": "",
+      "fields": [
+        "DOP_Refrigerate",
+        "DOP_Pantry",
+        "Freeze"
+      ],
+      "fridge_range": "1–1 Weeks",
+      "mapping": "Papaya, mango, feijoa, passionfruit, casaha melon",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN.",
+      "vn_rule": "nhiệt độ phòng: 3 ngày gốc -> 1 ngày (50% cận dưới, làm tròn xuống, tối thiểu 1)"
+    }
+  },
+  {
+    "ingredient_id": "dua_thom",
+    "status": "ok",
+    "fridge_days": 5,
+    "pantry_days": null,
+    "freezer_days": 300,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": "Quả chín thì cất ngăn mát; dùng trong 5–7 ngày.",
+    "spoilage_signs_vi": "Thân thâm, quả mềm nhũn, mùi lên men.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": false,
+      "fk_id": 267,
+      "fk_name": "Pineapple",
+      "fk_subtitle": "",
+      "fields": [
+        "Refrigerate",
+        "Freeze"
+      ],
+      "fridge_range": "5–7 Days",
+      "mapping": "Pineapple (số áp dụng cho dứa chín)",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN."
+    }
+  },
+  {
+    "ingredient_id": "buoi",
+    "status": "uoc_tinh_vn",
+    "fridge_days": 10,
+    "pantry_days": 5,
+    "freezer_days": null,
+    "freezable": false,
+    "long_term": false,
+    "tips_vi": "Để nơi thoáng hoặc cất ngăn mát; dùng trong 10–21 ngày.",
+    "spoilage_signs_vi": "Vỏ mềm, có đốm mốc, mùi chua.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": true,
+      "fk_id": 256,
+      "fk_name": "Citrus fruit",
+      "fk_subtitle": "lemon, lime, orange, grapefruit, tangerines, clementines",
+      "fields": [
+        "DOP_Refrigerate",
+        "DOP_Pantry",
+        "Freeze"
+      ],
+      "fridge_range": "10–21 Days",
+      "mapping": "Nhóm gần: Citrus (bưởi không phải grapefruit)",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN.",
+      "vn_rule": "nhiệt độ phòng: 10 ngày gốc -> 5 ngày (50% cận dưới, làm tròn xuống, tối thiểu 1)"
+    }
+  },
+  {
+    "ingredient_id": "sua_tuoi",
+    "status": "ok",
+    "fridge_days": null,
+    "pantry_days": null,
+    "freezer_days": null,
+    "freezable": null,
+    "long_term": true,
+    "tips_vi": "Sau khi mở: cất ngăn mát, dùng hết trong ngày.",
+    "spoilage_signs_vi": "Hộp phồng, có mùi chua, sữa vón cục hoặc tách nước.",
+    "source": {
+      "org": "Nhà sản xuất (hướng dẫn trên bao bì), xem qua trang Bách hóa XANH",
+      "title": "Thùng 48 hộp sữa tươi ít đường Vinamilk 180ml",
+      "url": "https://www.bachhoaxanh.com/sua-tuoi/stt-vinamilk-it-duong-hop-180ml-48",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": false,
+      "fields": [],
+      "fridge_range": "",
+      "mapping": "Sữa UHT hộp (quy cách trong prices.json). Trang ghi: bảo quản nơi khô ráo, thoáng mát; nên dùng hết sau khi mở; hạn in trên hộp.",
+      "label_vi": "Để lâu (theo hạn in trên hộp)",
+      "tips_source": "Hướng dẫn trên bao bì (trang BHX). Mẹo sau khi mở do PM chốt; dấu hiệu hỏng viết tay theo kiến thức chung."
+    }
+  },
+  {
+    "ingredient_id": "sua_chua_co_duong",
+    "status": "gan_dung",
+    "fridge_days": 7,
+    "pantry_days": null,
+    "freezer_days": 30,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": "Cất ngăn mát đến khi dùng; dùng trước hạn in trên hộp.",
+    "spoilage_signs_vi": "Tách nước nhiều, mùi chua gắt, có mốc hoặc váng lạ.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": false,
+      "fk_id": 33,
+      "fk_name": "Yogurt",
+      "fk_subtitle": "",
+      "fields": [
+        "DOP_Refrigerate",
+        "Freeze"
+      ],
+      "fridge_range": "1–2 Weeks",
+      "mapping": "Yogurt",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN.",
+      "downgrade_reason": "chỉ có số DOP (ngăn mát hoặc nhiệt độ phòng); FoodKeeper (bản ghi 115 trong Version) ghi các cột DOP cần thay thế, nên hạ xuống gan_dung"
+    }
+  },
+  {
+    "ingredient_id": "dau_do",
+    "status": "chua_co_nguon",
+    "fridge_days": null,
+    "pantry_days": null,
+    "freezer_days": null,
+    "freezable": null,
+    "long_term": true,
+    "tips_vi": null,
+    "spoilage_signs_vi": null,
+    "source": null
+  },
+  {
+    "ingredient_id": "gao_nep",
+    "status": "chua_co_nguon",
+    "fridge_days": null,
+    "pantry_days": null,
+    "freezer_days": null,
+    "freezable": null,
+    "long_term": true,
+    "tips_vi": null,
+    "spoilage_signs_vi": null,
+    "source": null
+  },
+  {
+    "ingredient_id": "gao_te",
+    "status": "chua_co_nguon",
+    "fridge_days": null,
+    "pantry_days": null,
+    "freezer_days": null,
+    "freezable": null,
+    "long_term": true,
+    "tips_vi": null,
+    "spoilage_signs_vi": null,
+    "source": null
+  },
+  {
+    "ingredient_id": "gao_lut",
+    "status": "chua_co_nguon",
+    "fridge_days": null,
+    "pantry_days": null,
+    "freezer_days": null,
+    "freezable": null,
+    "long_term": true,
+    "tips_vi": null,
+    "spoilage_signs_vi": null,
+    "source": null
+  },
+  {
+    "ingredient_id": "rau_muong",
+    "status": "gan_dung",
+    "fridge_days": 1,
+    "pantry_days": null,
+    "freezer_days": 300,
+    "freezable": true,
+    "long_term": false,
+    "tips_vi": "Cất ngăn mát trong túi; dùng trong 1–4 ngày.",
+    "spoilage_signs_vi": "Lá vàng, nhũn, mùi chua.",
+    "source": {
+      "org": "USDA FSIS",
+      "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
+      "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
+      "accessed": "2026-11-09",
+      "adjusted_for_vn": false,
+      "fk_id": 287,
+      "fk_name": "Greens",
+      "fk_subtitle": "",
+      "fields": [
+        "DOP_Refrigerate",
+        "DOP_Freeze"
+      ],
+      "fridge_range": "1–4 Days",
+      "mapping": "Nhóm gần: Greens",
+      "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN."
+    }
+  }
+]

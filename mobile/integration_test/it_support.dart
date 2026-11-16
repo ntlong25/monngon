@@ -53,11 +53,16 @@ Future<void> breathe(WidgetTester t, [int ms = 600]) async {
 /// Báo cho tool/run_integration.sh chụp màn hình thiết bị (adb screencap) rồi chờ cho nó chụp xong.
 /// (`flutter test` không có driver nhận ảnh, và app bị gỡ cài đặt sau khi chạy nên không để ảnh trên máy được.)
 Future<void> shot(WidgetTester t, String name) async {
+  final sw = Stopwatch()..start();
   await breathe(t, 400);
   // ignore: avoid_print
   print('[it] ảnh: $name');
   await breathe(t, 2500);
+  shotTime += sw.elapsed;
 }
+
+/// Tổng thời gian đã dùng để chụp ảnh, để trừ ra khi đo thời gian thao tác thật (T-103 AC5).
+Duration shotTime = Duration.zero;
 
 Future<void> tapFinder(WidgetTester t, Finder f) async {
   await waitFor(t, f);

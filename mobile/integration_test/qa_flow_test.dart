@@ -204,6 +204,8 @@ void main() {
           );
           await shot(t, 'it-10-com-$id-tab-ban');
           await tapKey(t, 'profile-replan');
+          // T-101 AC3: đo từ lúc xác nhận đến lúc tuần mới hiện (gồm gọi API thật + xử lý trong app); ngưỡng 5 s (NFR PRD §7), không nới timeout 30 s của app.
+          final replanWatch = Stopwatch()..start();
           await tapKey(t, 'replan-confirm');
           await until(
             t,
@@ -217,6 +219,14 @@ void main() {
                     false),
             timeout: const Duration(minutes: 2),
             what: 'tuần lên lại với mức cơm $id',
+          );
+          replanWatch.stop();
+          // ignore: avoid_print
+          print('[it] mức $id: lên lại tuần mất ${replanWatch.elapsedMilliseconds} ms');
+          expect(
+            replanWatch.elapsedMilliseconds,
+            lessThan(5000),
+            reason: 'mức $id: lên lại tuần quá 5 s (T-101 AC3)',
           );
           await breathe(t, 1500);
         } else {

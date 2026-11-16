@@ -156,6 +156,11 @@ class _SummaryStepState extends ConsumerState<SummaryStep> {
           (o) => Labels.equipment(l, o),
         ),
     ];
+    // Khẩu vị (bước 2): tên các thẻ đã thích; rỗng (bỏ qua hoặc chưa vuốt) → "Khẩu vị: chưa chọn".
+    final tasteNames = (reference?.swipeCards ?? const <SwipeCardDto>[])
+        .where((c) => prefs.cuisineLikes.contains(c.tag))
+        .map((c) => c.title)
+        .join(', ');
     String list(List<String> v) =>
         v.isEmpty ? l.onboardingSummaryNone : v.join(', ');
 
@@ -165,6 +170,12 @@ class _SummaryStepState extends ConsumerState<SummaryStep> {
         l.onboardingSummaryGoal,
         Labels.goal(l, profile.goal),
         OnboardingStep.goal,
+      ),
+      _Row(
+        'taste',
+        tasteNames.isEmpty ? '' : l.onboardingSwipeLiked,
+        tasteNames.isEmpty ? l.onboardingSummaryTasteNone : tasteNames,
+        OnboardingStep.swipe,
       ),
       _Row(
         'protein',
@@ -390,12 +401,13 @@ class _SummaryRow extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      row.label,
-                      style: theme.textTheme.bodyMedium?.copyWith(
-                        color: AppColors.textMuted,
+                    if (row.label.isNotEmpty)
+                      Text(
+                        row.label,
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          color: AppColors.textMuted,
+                        ),
                       ),
-                    ),
                     Text(
                       row.value,
                       key: Key('summary-${row.id}-value'),

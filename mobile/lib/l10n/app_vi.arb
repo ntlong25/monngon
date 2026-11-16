@@ -12,6 +12,9 @@
   "commonClose": "Đóng",
   "commonEstimate": "ước tính",
   "commonEstimateNote": "Giá là ước tính, có thể khác khi bạn đi chợ.",
+  "priceEstimateNotSurveyed": "Giá ước lượng, chưa khảo sát tại cửa hàng này",
+  "priceSourceBhx": "Giá website Bách hóa Xanh",
+  "pricePromoNote": "Chi tiết chương trình khuyến mãi vui lòng truy cập vào trang chủ siêu thị",
   "commonKcal": "{count} kcal",
   "commonGram": "{count} g",
   "commonVnd": "{count} ₫",
@@ -23,6 +26,11 @@
   "onboardingGoalLose": "Giảm mỡ",
   "onboardingGoalHold": "Giữ cân",
   "onboardingGoalBuild": "Tăng cơ",
+  "onboardingGoalChoose": "Chọn mục tiêu này",
+  "onboardingGoalOther": "Xem mục tiêu khác",
+  "onboardingGoalSelected": "Đã chọn",
+  "onboardingGoalSwipeHint": "Quẹt phải để chọn mục tiêu này, quẹt trái để xem mục tiêu khác.",
+  "onboardingGoalDot": "Mục tiêu {v1} trên {v2}: {v3}",
   "onboardingBodyTitle": "Cho mình biết về cơ thể bạn",
   "onboardingBodySex": "Giới tính",
   "onboardingBodyAge": "Tuổi",
@@ -94,6 +102,7 @@
   "onboardingSwipeDislike": "Không thích",
   "onboardingSwipeUndo": "Hoàn tác",
   "onboardingSwipeSkip": "Thay thế",
+  "onboardingSwipeSkipAll": "Bỏ qua",
   "onboardingEquipmentTitle": "Bếp nhà bạn có những gì?",
   "onboardingEquipmentStove": "Bếp",
   "onboardingEquipmentRiceCooker": "Nồi cơm điện",
@@ -105,6 +114,7 @@
   "onboardingSummaryTitle": "Đây là thiết lập của bạn",
   "onboardingSummaryEdit": "Sửa",
   "onboardingSummaryCreate": "Tạo thực đơn tuần",
+  "onboardingSummaryTasteNone": "Khẩu vị: chưa chọn",
   "onboardingGeneratingTitle": "Đang lên thực đơn",
   "onboardingGeneratingChecklist": "Kiểm tra protein từng ngày, calo, ngân sách",
   "onboardingGeneratingWait": "Thường mất vài giây.",
@@ -231,6 +241,7 @@
   "dishRoleSoup": "Canh",
   "dishRoleSideVeg": "Rau",
   "dishRoleCarbBase": "Cơm",
+  "dishRoleStarch": "Tinh bột",
   "dishRoleDessert": "Tráng miệng",
   "dishRoleExtra": "Món thêm",
   "macroProtein": "Protein",
@@ -297,7 +308,7 @@
   "onboardingSwipeLess": "Ít hơn",
   "onboardingSwipeNone": "Chưa chọn",
   "onboardingSwipeAgain": "Vuốt lại",
-  "onboardingSwipeSoft": "Đây chỉ là ưu tiên mềm; bạn có thể đổi bất cứ lúc nào.",
+  "onboardingSwipeSoft": "Chỉ để biết bạn thích kiểu món nào. Không ảnh hưởng calo, đạm hay dị ứng; phần đó hỏi ở các bước sau.",
   "onboardingEquipmentHint": "Chọn tất cả thiết bị bạn có.",
   "onboardingEquipmentNeedOne": "Cần chọn ít nhất một thiết bị nấu.",
   "onboardingSummaryGoal": "Mục tiêu",
@@ -470,6 +481,22 @@
   "shoppingBudgetFoodOver": "Chi phí món ăn tuần này vượt ngân sách {amount}.",
   "shoppingBudgetTillInfo": "Lần đi chợ này ước tính {amount}, cao hơn ngân sách vì mua nguyên gói; phần dư dùng tiếp cho tuần sau.",
   "shopPantryIfBuy": "Nếu phải mua: +{amount} ₫",
+  "shopModeWeekly": "Theo tuần",
+  "shopModeDaily": "Theo ngày",
+  "shopToday": "Hôm nay",
+  "shopFreezeMeatSwitch": "Mua thịt cá cả tuần rồi cấp đông",
+  "shopBatchExtra": "+{amount} ₫ do mua theo đợt",
+  "shopNoShelfInfo": "Chưa có thông tin hạn dùng",
+  "shopTripTotal": "Đợt này: {amount} ₫",
+  "shopModeTotalWeekly": "Mua theo tuần: {amount} ₫",
+  "shopModeTotalDaily": "Mua theo ngày: {amount} ₫",
+  "shopFreezeTip": "Cấp đông ngay sau khi mua, rã đông trước 1 ngày khi nấu.",
+  "shopWeeklyEmpty": "Không có nguyên liệu nào cần mua theo tuần.",
+  "shopDailyEmpty": "Không có nguyên liệu tươi cần mua theo ngày.",
+  "shopTripPast": "Đã qua",
+  "shopFreezeSavingHint": "Mua thịt cá cả tuần rồi cấp đông để bớt khoảng {amount} ₫",
+  "shopFreezeSwitchLabel": "Bật cấp đông",
+  "shopBatchSavingNegative": "−{amount} ₫ nhờ mua theo cân",
   "onboardingRiceTitle": "Thói quen ăn cơm",
   "onboardingRiceQuestion": "Mỗi bữa trưa/tối bạn thường ăn mấy chén cơm?",
   "onboardingRiceNote": "Chỉ áp cho bạn. Người lớn khác ăn mức Vừa, trẻ em ăn 0,6 suất.",
@@ -534,6 +561,19 @@
   "@onboardingProgressLabel": {
     "placeholders": {
       "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "@onboardingGoalDot": {
+    "placeholders": {
+      "v1": {
+        "type": "Object"
+      },
+      "v2": {
+        "type": "Object"
+      },
+      "v3": {
         "type": "Object"
       }
     }
@@ -1215,6 +1255,48 @@
     }
   },
   "@shopPantryIfBuy": {
+    "placeholders": {
+      "amount": {
+        "type": "Object"
+      }
+    }
+  },
+  "@shopBatchExtra": {
+    "placeholders": {
+      "amount": {
+        "type": "Object"
+      }
+    }
+  },
+  "@shopTripTotal": {
+    "placeholders": {
+      "amount": {
+        "type": "Object"
+      }
+    }
+  },
+  "@shopModeTotalWeekly": {
+    "placeholders": {
+      "amount": {
+        "type": "Object"
+      }
+    }
+  },
+  "@shopModeTotalDaily": {
+    "placeholders": {
+      "amount": {
+        "type": "Object"
+      }
+    }
+  },
+  "@shopFreezeSavingHint": {
+    "placeholders": {
+      "amount": {
+        "type": "Object"
+      }
+    }
+  },
+  "@shopBatchSavingNegative": {
     "placeholders": {
       "amount": {
         "type": "Object"

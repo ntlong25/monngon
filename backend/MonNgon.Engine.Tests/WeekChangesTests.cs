@@ -133,8 +133,10 @@ public class WeekChangesTests
         Assert.False(r.AnyKeepsDay);
         Assert.NotEmpty(r.Items);
         Assert.All(r.Items, s => Assert.False(s.KeepsDayOk));
-        // gần đạt nhất: đạm ngày không tăng dần theo thứ tự trả về (món đứng đầu thiếu ít nhất)
-        Assert.Equal(r.Items.Select(s => s.DayProteinG).OrderByDescending(x => x), r.Items.Select(s => s.DayProteinG));
+        // gần đạt nhất: món đứng đầu có mức vi phạm chỉ tiêu ngày (thiếu đạm ×4 + lệch dải calo) nhỏ nhất trong các gợi ý. Chỉ kiểm tra tính chất này,
+        // không kiểm tra thứ tự các món còn lại (chúng được chọn theo đa dạng đạm chính nên thứ tự phụ thuộc giá/điểm món).
+        double Viol(SwapSuggestion s) => Math.Max(0, tough.Targets.ProteinG - s.DayProteinG) * 4 + Math.Max(0, tough.Targets.KcalMin - s.DayKcal) + Math.Max(0, s.DayKcal - tough.Targets.KcalMax);
+        Assert.All(r.Items, s => Assert.True(Viol(r.Items[0]) <= Viol(s) + 1e-9, $"{r.Items[0].RecipeId} {Viol(r.Items[0])} > {s.RecipeId} {Viol(s)}"));
     }
 
     [Fact]

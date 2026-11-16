@@ -74,6 +74,9 @@ class OnboardingNotifier extends PersistedNotifier<OnboardingState> {
 
   void resetSwiped() => update((s) => s.copyWith(swipedCardIds: const []));
 
+  void markGoalChosen() =>
+      update((s) => s.goalChosen ? s : s.copyWith(goalChosen: true));
+
   void complete() => update((s) => s.copyWith(completed: true));
 }
 
@@ -220,6 +223,28 @@ class ShoppingNotifier extends PersistedNotifier<ShoppingState> {
 
 final shoppingStateProvider = NotifierProvider<ShoppingNotifier, ShoppingState>(
   ShoppingNotifier.new,
+);
+
+/// Chế độ xem tab Đi chợ và công tắc cấp đông — không bị đặt lại khi sang tuần mới (D-SHP-06: nhớ chế độ gần nhất).
+class ShopViewNotifier extends PersistedNotifier<ShopViewPrefs> {
+  @override
+  String get key => StoreKeys.shopView;
+  @override
+  ShopViewPrefs get initial => const ShopViewPrefs();
+  @override
+  ShopViewPrefs decode(Object json) =>
+      ShopViewPrefs.fromJson(json as Map<String, dynamic>);
+  @override
+  Object? encode(ShopViewPrefs value) => value.toJson();
+
+  void setMode(ShopMode mode) => update((s) => s.copyWith(mode: mode));
+
+  void setFreezeMeat({required bool on}) =>
+      update((s) => s.copyWith(freezeMeat: on));
+}
+
+final shopViewProvider = NotifierProvider<ShopViewNotifier, ShopViewPrefs>(
+  ShopViewNotifier.new,
 );
 
 /// Các bước nấu đã đánh dấu xong, theo khóa bữa/món (xem [cookKey]).

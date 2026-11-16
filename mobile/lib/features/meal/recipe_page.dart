@@ -71,7 +71,7 @@ class RecipePage extends ConsumerWidget {
             const SizedBox(height: AppSpacing.lg),
             Text(
               '${l.mealContext(weekday, Labels.slot(l, slot))} · '
-                      '${Labels.dishRole(l, dish.role)}'
+                      '${Labels.dishRole(l, dish.role, riceKind: meal.rice?.kind)}'
                   .toUpperCase(),
               key: const Key('recipe-context'),
               style: theme.textTheme.labelMedium?.copyWith(

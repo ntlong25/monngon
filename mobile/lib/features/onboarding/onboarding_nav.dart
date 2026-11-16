@@ -2,9 +2,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../state/providers.dart';
 
-/// Các bước của wizard theo thứ tự. Bước hiện tại được lưu để mở lại đúng chỗ.
+/// Các bước của wizard theo thứ tự (D-ONB-06: thẻ vuốt khẩu vị là bước 2, ngay sau Mục tiêu).
+/// Bước hiện tại được lưu THEO TÊN để mở lại đúng chỗ dù thứ tự có đổi (xem `OnboardingState`).
 enum OnboardingStep {
   goal,
+
+  /// Khẩu vị (thẻ vuốt): chỉ là trọng số mềm, không đụng calo/đạm/dị ứng nên đặt sớm được.
+  swipe,
   body,
   activity,
   targets,
@@ -19,7 +23,6 @@ enum OnboardingStep {
   /// Thói quen ăn cơm (US-1.4b): sau kiểu ăn; bỏ qua khi bật "Ít tinh bột".
   rice,
   dislike,
-  swipe,
   equipment,
   summary,
 }

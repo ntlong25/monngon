@@ -30,8 +30,9 @@ class StoreStep extends ConsumerWidget {
             for (final s in r.stores) ...[
               SelectCard(
                 title: s.name,
+                // L-16 (D-DATA-01): chưa có giá khảo sát → nói rõ là giá ước lượng, không ẩn cửa hàng.
                 subtitle: s.priceSurveyDate == null
-                    ? null
+                    ? l.priceEstimateNotSurveyed
                     : l.onboardingStoreSurvey(
                         formatSurveyDate(s.priceSurveyDate),
                       ),

@@ -5,8 +5,11 @@ import '../../api/generated/models.dart';
 import '../../core/format.dart';
 import '../../core/share.dart';
 import '../../l10n/gen/app_localizations.dart';
+import '../../state/app_state.dart';
 import '../../state/providers.dart';
+import '../../state/week_changes.dart' show clockProvider;
 import '../../ui/ui.dart';
+import '../plan/plan_view.dart' show dayIndexOf;
 import 'shopping_view.dart';
 
 /// Tab Đi chợ (US-4.1): danh sách gộp theo quầy, số gói, hai con số chi phí, đánh dấu đã mua / nhà có sẵn, chia sẻ.
@@ -44,10 +47,20 @@ class ShoppingPage extends ConsumerWidget {
     final reference = ref.watch(referenceProvider).value;
     final aisleNames = reference?.aisles ?? const <String, String>{};
     String? surveyDate;
+    // L-16 (D-DATA-01): cửa hàng đã biết mà chưa có dòng giá khảo sát → ghi rõ "giá ước lượng", không để trống.
+    var notSurveyed = false;
     for (final s in reference?.stores ?? const <StoreDto>[]) {
-      if (s.id == prefs.storeId) surveyDate = s.priceSurveyDate;
+      if (s.id == prefs.storeId) {
+        surveyDate = s.priceSurveyDate;
+        notSurveyed = s.priceSurveyDate == null;
+      }
     }
+    final view = ref.watch(shopViewProvider);
+    final modes = hasBuyModes(list);
+    final now = ref.watch(clockProvider)();
     final totals = totalsOf(list, state);
+    final mt = modes ? modeTotals(list, state, view) : null;
+    final freezeHint = modes ? freezeSavingHint(list, state, view) : null;
     final aisles = orderedAisles(list);
     final pantry = [
       for (final it in list.items)
@@ -73,6 +86,8 @@ class ShoppingPage extends ConsumerWidget {
                     aisleNames: aisleNames,
                     startDate: saved.plan.startDate,
                     surveyDate: surveyDate,
+                    view: view,
+                    now: now,
                   ),
                   subject: l.shopShare,
                 ),
@@ -89,40 +104,73 @@ class ShoppingPage extends ConsumerWidget {
         ),
         children: [
           _CostCards(
-            totals: totals,
+            foodCost: totals.foodCost,
+            tillCost: mt?.total ?? totals.tillCost,
+            batchDelta: mt?.delta ?? 0,
             budget: saved.plan.budgetVnd,
             surveyDate: surveyDate,
+            notSurveyed: notSurveyed,
           ),
+          if (freezeHint != null) _FreezeHint(saving: freezeHint),
           const SizedBox(height: AppSpacing.md),
-          _Progress(totals: totals),
-          for (final g in aisles)
-            _AisleSection(
-              aisle: g.aisle,
-              name: aisleNames[g.aisle] ?? g.aisle,
-              items: [
-                for (final it in g.items)
-                  if (!isPantry(it, state)) it,
-              ],
-            ),
-          if (pantry.isNotEmpty) ...[
-            const SizedBox(height: AppSpacing.lg),
-            Semantics(
-              header: true,
-              child: Text(
-                l.shopPantrySection(formatInt(pantry.length)),
-                key: const Key('pantry-section'),
-                style: theme.textTheme.titleMedium,
+          _Progress(
+            bought: mt?.bought ?? totals.bought,
+            toBuy: mt?.count ?? totals.toBuy,
+          ),
+          if (modes && mt != null)
+            _ModeBar(view: view, totals: mt, showFreeze: hasFreezable(list)),
+          if (modes && view.mode == ShopMode.daily)
+            ..._dailySections(
+              context,
+              list,
+              state,
+              view,
+              saved.plan.startDate,
+              now,
+            )
+          else ...[
+            for (final g in aisles)
+              _AisleSection(
+                aisle: g.aisle,
+                name: aisleNames[g.aisle] ?? g.aisle,
+                items: [
+                  for (final it in g.items)
+                    if (!isPantry(it, state) && (!modes || inWeekly(it, view)))
+                      it,
+                ],
+                freezeTip: (it) => modes && isFrozenMeat(it, view),
               ),
-            ),
-            const SizedBox(height: AppSpacing.xs),
-            Text(
-              l.shopPantryNote,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: AppColors.textMuted,
+            if (modes && mt!.weeklyCount == 0 && pantry.isEmpty)
+              Padding(
+                padding: const EdgeInsets.only(top: AppSpacing.lg),
+                child: Text(
+                  l.shopWeeklyEmpty,
+                  key: const Key('shop-weekly-empty'),
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    color: AppColors.textMuted,
+                  ),
+                ),
               ),
-            ),
-            const SizedBox(height: AppSpacing.sm),
-            for (final it in pantry) _PantryTile(item: it),
+            if (pantry.isNotEmpty) ...[
+              const SizedBox(height: AppSpacing.lg),
+              Semantics(
+                header: true,
+                child: Text(
+                  l.shopPantrySection(formatInt(pantry.length)),
+                  key: const Key('pantry-section'),
+                  style: theme.textTheme.titleMedium,
+                ),
+              ),
+              const SizedBox(height: AppSpacing.xs),
+              Text(
+                l.shopPantryNote,
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: AppColors.textMuted,
+                ),
+              ),
+              const SizedBox(height: AppSpacing.sm),
+              for (final it in pantry) _PantryTile(item: it),
+            ],
           ],
         ],
       ),
@@ -130,16 +178,254 @@ class ShoppingPage extends ConsumerWidget {
   }
 }
 
-class _CostCards extends StatelessWidget {
-  const _CostCards({
+/// Chế độ Theo ngày: các đợt mua; đợt gần nhất (hôm nay hoặc sắp tới) mở sẵn, đợt của ngày đã qua xếp cuối.
+List<Widget> _dailySections(
+  BuildContext context,
+  ShoppingList list,
+  ShoppingState state,
+  ShopViewPrefs view,
+  String startDate,
+  DateTime now,
+) {
+  final l = AppL10n.of(context);
+  final trips = visibleTrips(list, state, view);
+  if (trips.isEmpty) {
+    return [
+      Padding(
+        padding: const EdgeInsets.only(top: AppSpacing.lg),
+        child: Text(
+          l.shopDailyEmpty,
+          key: const Key('shop-daily-empty'),
+          style: Theme.of(context).textTheme.bodyMedium
+              ?.copyWith(color: AppColors.textMuted),
+        ),
+      ),
+    ];
+  }
+  final today = dayIndexOf(startDate, now);
+  final upcoming = [
+    for (final t in trips)
+      if (t.dayIndex >= today) t,
+  ];
+  final past = [
+    for (final t in trips)
+      if (t.dayIndex < today) t,
+  ];
+  return [
+    for (var i = 0; i < upcoming.length; i++)
+      _TripSection(
+        trip: upcoming[i],
+        title: tripHeading(l, startDate, upcoming[i].dayIndex, now),
+        initiallyExpanded: i == 0,
+      ),
+    for (final t in past)
+      _TripSection(
+        trip: t,
+        title: tripHeading(l, startDate, t.dayIndex, now),
+        initiallyExpanded: false,
+      ),
+  ];
+}
+
+/// Gợi ý bật cấp đông khi mua theo đợt đắt hơn nhiều so với mua một lần (T-116b).
+class _FreezeHint extends ConsumerWidget {
+  const _FreezeHint({required this.saving});
+
+  final double saving;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppL10n.of(context);
+    final theme = Theme.of(context);
+    return Padding(
+      padding: const EdgeInsets.only(top: AppSpacing.sm),
+      child: Card(
+        key: const Key('shop-freeze-hint'),
+        child: Padding(
+          padding: const EdgeInsets.all(AppSpacing.md),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                l.shopFreezeSavingHint(formatVnd(saving)),
+                key: const Key('shop-freeze-hint-text'),
+                style: theme.textTheme.bodyMedium,
+              ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: TextButton(
+                  key: const Key('shop-freeze-hint-on'),
+                  style: TextButton.styleFrom(
+                    minimumSize: const Size(kMinTouch, kMinTouch),
+                  ),
+                  onPressed: () => ref
+                      .read(shopViewProvider.notifier)
+                      .setFreezeMeat(on: true),
+                  child: Text(l.shopFreezeSwitchLabel),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _ModeBar extends ConsumerWidget {
+  const _ModeBar({
+    required this.view,
     required this.totals,
-    required this.budget,
-    required this.surveyDate,
+    required this.showFreeze,
   });
 
-  final ShoppingTotals totals;
+  final ShopViewPrefs view;
+  final ModeTotals totals;
+  final bool showFreeze;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppL10n.of(context);
+    final theme = Theme.of(context);
+    final daily = view.mode == ShopMode.daily;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: AppSpacing.md),
+        SizedBox(
+          width: double.infinity,
+          child: SegmentedButton<ShopMode>(
+            key: const Key('shop-mode'),
+            showSelectedIcon: false,
+            segments: [
+              ButtonSegment(
+                value: ShopMode.weekly,
+                label: Text(
+                  l.shopModeWeekly,
+                  key: const Key('shop-mode-weekly'),
+                ),
+              ),
+              ButtonSegment(
+                value: ShopMode.daily,
+                label: Text(l.shopModeDaily, key: const Key('shop-mode-daily')),
+              ),
+            ],
+            selected: {view.mode},
+            onSelectionChanged: (v) =>
+                ref.read(shopViewProvider.notifier).setMode(v.first),
+          ),
+        ),
+        if (showFreeze)
+          SwitchListTile(
+            key: const Key('shop-freeze'),
+            contentPadding: EdgeInsets.zero,
+            title: Text(l.shopFreezeMeatSwitch),
+            value: view.freezeMeat,
+            onChanged: (v) =>
+                ref.read(shopViewProvider.notifier).setFreezeMeat(on: v),
+          ),
+        const SizedBox(height: AppSpacing.xs),
+        Text(
+          daily
+              ? l.shopModeTotalDaily(formatVnd(totals.dailyTill))
+              : l.shopModeTotalWeekly(formatVnd(totals.weeklyTill)),
+          key: const Key('shop-mode-total'),
+          style: theme.textTheme.titleSmall,
+        ),
+        Text(
+          l.shopProgress(
+            formatInt(daily ? totals.dailyBought : totals.weeklyBought),
+            formatInt(daily ? totals.dailyCount : totals.weeklyCount),
+          ),
+          key: const Key('shop-mode-progress'),
+          style: theme.textTheme.bodyMedium?.copyWith(
+            color: AppColors.textMuted,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _TripSection extends StatelessWidget {
+  const _TripSection({
+    required this.trip,
+    required this.title,
+    required this.initiallyExpanded,
+  });
+
+  final TripView trip;
+  final String title;
+  final bool initiallyExpanded;
+
+  @override
+  Widget build(BuildContext context) {
+    final l = AppL10n.of(context);
+    final theme = Theme.of(context);
+    final day = trip.dayIndex;
+    return Padding(
+      padding: const EdgeInsets.only(top: AppSpacing.md),
+      child: Card(
+        key: Key('trip-$day'),
+        clipBehavior: Clip.antiAlias,
+        child: Theme(
+          data: theme.copyWith(dividerColor: Colors.transparent),
+          child: ExpansionTile(
+            key: PageStorageKey('trip-$day'),
+            initiallyExpanded: initiallyExpanded,
+            title: Text(
+              title,
+              key: Key('trip-$day-title'),
+              style: theme.textTheme.titleMedium,
+            ),
+            subtitle: Text(
+              '${l.shopProgress(formatInt(trip.bought), formatInt(trip.items.length))} · ${l.shopTripTotal(formatVnd(trip.tillCost))}',
+              key: Key('trip-$day-summary'),
+            ),
+            childrenPadding: const EdgeInsets.fromLTRB(
+              AppSpacing.xs,
+              0,
+              AppSpacing.xs,
+              AppSpacing.sm,
+            ),
+            children: [
+              for (final it in trip.items)
+                _ItemTile(
+                  item: it,
+                  boughtKey: tripBoughtKey(day, it.ingredientId),
+                  keyBase: 'trip-$day-${it.ingredientId}',
+                  showPantry: false,
+                ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _CostCards extends StatelessWidget {
+  const _CostCards({
+    required this.foodCost,
+    required this.tillCost,
+    this.batchDelta = 0,
+    required this.budget,
+    required this.surveyDate,
+    this.notSurveyed = false,
+  });
+
+  final double foodCost;
+
+  /// Tổng "ước tính trả tại quầy" cả tuần (cả hai chế độ nếu có).
+  final double tillCost;
+
+  /// Chênh so với mua một lần: dương "+X ₫ do mua theo đợt", âm "−X ₫ nhờ mua theo cân" (0 = không hiện).
+  final double batchDelta;
   final double budget;
   final String? surveyDate;
+
+  /// Cửa hàng đang chọn chưa có giá khảo sát (`price_survey_date` rỗng).
+  final bool notSurveyed;
 
   @override
   Widget build(BuildContext context) {
@@ -147,13 +433,13 @@ class _CostCards extends StatelessWidget {
     final theme = Theme.of(context);
     final date = fullDate(surveyDate);
     // Ngân sách tuần so với chi phí món ăn (cùng thước đo với validator của engine), không so với tiền mua theo gói.
-    final diff = budget - totals.foodCost;
+    final diff = budget - foodCost;
     final over = diff < 0;
     final status = over
         ? l.shoppingBudgetFoodOver('${formatVnd(-diff)} ₫')
         : l.shoppingBudgetFoodUnder('${formatVnd(diff)} ₫');
     // D-QA-02: tiền tại quầy cao hơn ngân sách chỉ là thông tin trung tính (mua nguyên gói), không phải cảnh báo.
-    final tillHigher = budget > 0 && totals.tillCost > budget;
+    final tillHigher = budget > 0 && tillCost > budget;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -164,7 +450,7 @@ class _CostCards extends StatelessWidget {
               child: _CostCard(
                 cardKey: const Key('shop-food-cost'),
                 title: l.shopFoodCost,
-                value: '${formatVnd(totals.foodCost)} ₫',
+                value: '${formatVnd(foodCost)} ₫',
                 hint: l.shopFoodCostHint,
               ),
             ),
@@ -173,16 +459,24 @@ class _CostCards extends StatelessWidget {
               child: _CostCard(
                 cardKey: const Key('shop-till-cost'),
                 title: l.shopTillCost,
-                value: '${formatVnd(totals.tillCost)} ₫',
+                value: '${formatVnd(tillCost)} ₫',
                 hint: l.shopTillCostHint,
+                extra: batchDelta >= 500
+                    ? l.shopBatchExtra(formatVnd(batchDelta))
+                    : (batchDelta <= -500
+                          ? l.shopBatchSavingNegative(formatVnd(-batchDelta))
+                          : null),
+                extraKey: const Key('shop-batch-extra'),
               ),
             ),
           ],
         ),
-        if (date.isNotEmpty) ...[
+        if (date.isNotEmpty || notSurveyed) ...[
           const SizedBox(height: AppSpacing.xs),
           Text(
-            l.shopSurveyDate(date),
+            date.isNotEmpty
+                ? l.shopSurveyDate(date)
+                : l.priceEstimateNotSurveyed,
             key: const Key('shop-survey'),
             style: theme.textTheme.bodySmall?.copyWith(
               color: AppColors.textMuted,
@@ -209,7 +503,7 @@ class _CostCards extends StatelessWidget {
           if (tillHigher) ...[
             const SizedBox(height: AppSpacing.xs),
             Text(
-              l.shoppingBudgetTillInfo('${formatVnd(totals.tillCost)} ₫'),
+              l.shoppingBudgetTillInfo('${formatVnd(tillCost)} ₫'),
               key: const Key('shop-till-info'),
               style: theme.textTheme.bodySmall?.copyWith(
                 color: AppColors.textMuted,
@@ -228,12 +522,16 @@ class _CostCard extends StatelessWidget {
     required this.title,
     required this.value,
     required this.hint,
+    this.extra,
+    this.extraKey,
   });
 
   final Key cardKey;
   final String title;
   final String value;
   final String hint;
+  final String? extra;
+  final Key? extraKey;
 
   @override
   Widget build(BuildContext context) {
@@ -261,6 +559,14 @@ class _CostCard extends StatelessWidget {
                 fontStyle: FontStyle.italic,
               ),
             ),
+            if (extra != null)
+              Text(
+                extra!,
+                key: extraKey,
+                style: theme.textTheme.bodySmall?.copyWith(
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
             const SizedBox(height: AppSpacing.xs),
             Text(
               hint,
@@ -276,25 +582,23 @@ class _CostCard extends StatelessWidget {
 }
 
 class _Progress extends StatelessWidget {
-  const _Progress({required this.totals});
+  const _Progress({required this.bought, required this.toBuy});
 
-  final ShoppingTotals totals;
+  final int bought;
+  final int toBuy;
 
   @override
   Widget build(BuildContext context) {
     final l = AppL10n.of(context);
     final theme = Theme.of(context);
-    final done = totals.toBuy > 0 && totals.bought >= totals.toBuy;
+    final done = toBuy > 0 && bought >= toBuy;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           done
               ? l.shopAllDone
-              : l.shopProgress(
-                  formatInt(totals.bought),
-                  formatInt(totals.toBuy),
-                ),
+              : l.shopProgress(formatInt(bought), formatInt(toBuy)),
           key: const Key('shop-progress'),
           style: theme.textTheme.titleSmall,
         ),
@@ -302,7 +606,7 @@ class _Progress extends StatelessWidget {
         ClipRRect(
           borderRadius: BorderRadius.circular(AppRadius.sm),
           child: LinearProgressIndicator(
-            value: totals.toBuy == 0 ? 0 : totals.bought / totals.toBuy,
+            value: toBuy == 0 ? 0 : bought / toBuy,
             minHeight: 6,
             color: AppColors.primary,
             backgroundColor: AppColors.surface,
@@ -318,11 +622,15 @@ class _AisleSection extends StatelessWidget {
     required this.aisle,
     required this.name,
     required this.items,
+    this.freezeTip,
   });
 
   final String aisle;
   final String name;
   final List<ShoppingItem> items;
+
+  /// Dòng nào hiện hướng dẫn cấp đông / rã đông (công tắc "mua cả tuần rồi cấp đông").
+  final bool Function(ShoppingItem)? freezeTip;
 
   @override
   Widget build(BuildContext context) {
@@ -342,39 +650,63 @@ class _AisleSection extends StatelessWidget {
           ),
         ),
         const SizedBox(height: AppSpacing.xs),
-        for (final it in items) _ItemTile(item: it),
+        for (final it in items)
+          _ItemTile(item: it, freezeTip: freezeTip?.call(it) ?? false),
       ],
     );
   }
 }
 
 class _ItemTile extends ConsumerWidget {
-  const _ItemTile({required this.item});
+  const _ItemTile({
+    required this.item,
+    this.boughtKey,
+    this.keyBase,
+    this.showPantry = true,
+    this.freezeTip = false,
+  });
 
   final ShoppingItem item;
+
+  /// Khóa trong `bought`: mặc định mã nguyên liệu; dòng trong đợt mua dùng [tripBoughtKey].
+  final String? boughtKey;
+
+  /// Tiền tố khóa widget: mặc định `item-<mã>`.
+  final String? keyBase;
+
+  /// Hiện nút "Nhà có sẵn" (chỉ ở danh sách Theo tuần, D-SHP-06).
+  final bool showPantry;
+
+  /// Hiện hướng dẫn cấp đông / rã đông (thịt cá mua cả tuần).
+  final bool freezeTip;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l = AppL10n.of(context);
     final theme = Theme.of(context);
     final id = item.ingredientId;
+    final base = keyBase ?? 'item-$id';
+    final stateKey = boughtKey ?? id;
     final bought = ref.watch(
-      shoppingStateProvider.select((s) => s.bought.contains(id)),
+      shoppingStateProvider.select((s) => s.bought.contains(stateKey)),
     );
-    void toggle() =>
-        ref.read(shoppingStateProvider.notifier).setBought(id, bought: !bought);
+    void toggle() => ref
+        .read(shoppingStateProvider.notifier)
+        .setBought(stateKey, bought: !bought);
     final muted = theme.textTheme.bodyMedium?.copyWith(
       color: AppColors.textMuted,
     );
     final strike = bought ? TextDecoration.lineThrough : null;
-    final shelf = item.leftoverDays >= 1
+    // Nhãn hạn dùng theo storage.json (cận dưới); kế hoạch cũ chưa có thì dùng hạn của phần dư như trước.
+    final hasShelfData = item.freshDays != null || item.noShelfInfo == true;
+    final shelf = !hasShelfData && item.leftoverDays >= 1
         ? ' · ${l.shoppingShelfLife(formatInt(item.leftoverDays))}'
         : '';
     final leftover = item.leftoverG >= 1
         ? ' · ${l.shoppingLeftover(formatInt(item.leftoverG))}$shelf'
         : '';
     return Card(
-      key: Key('item-$id'),
+      key: Key(base),
       child: InkWell(
         borderRadius: BorderRadius.circular(AppRadius.md),
         onTap: toggle,
@@ -391,7 +723,7 @@ class _ItemTile extends ConsumerWidget {
               Semantics(
                 label: l.shopBoughtSemantics(item.name),
                 child: Checkbox(
-                  key: Key('item-$id-check'),
+                  key: Key('$base-check'),
                   value: bought,
                   onChanged: (_) => toggle(),
                 ),
@@ -412,25 +744,46 @@ class _ItemTile extends ConsumerWidget {
                       ),
                       Text(
                         itemQty(item),
-                        key: Key('item-$id-qty'),
+                        key: Key('$base-qty'),
                         style: muted?.copyWith(decoration: strike),
                       ),
                       Text(
                         '${l.shopNeedG(formatInt(item.needG))}$leftover',
                         style: muted?.copyWith(fontSize: 13),
                       ),
-                      TextButton(
-                        key: Key('item-$id-pantry'),
-                        style: TextButton.styleFrom(
-                          padding: EdgeInsets.zero,
-                          minimumSize: const Size(kMinTouch, kMinTouch),
-                          alignment: Alignment.centerLeft,
+                      if (item.freshDays != null)
+                        Text(
+                          l.shoppingShelfLife(formatInt(item.freshDays!)),
+                          key: Key('$base-fresh'),
+                          style: muted?.copyWith(fontSize: 13),
+                        )
+                      else if (item.noShelfInfo == true)
+                        Text(
+                          l.shopNoShelfInfo,
+                          key: Key('$base-noinfo'),
+                          style: muted?.copyWith(fontSize: 13),
                         ),
-                        onPressed: () => ref
-                            .read(shoppingStateProvider.notifier)
-                            .setPantry(id, have: true),
-                        child: Text(l.shopPantryToggle),
-                      ),
+                      if (freezeTip)
+                        Text(
+                          l.shopFreezeTip,
+                          key: Key('$base-freeze'),
+                          style: muted?.copyWith(fontSize: 13),
+                        ),
+                      if (showPantry)
+                        TextButton(
+                          key: Key('$base-pantry'),
+                          style: TextButton.styleFrom(
+                            padding: EdgeInsets.zero,
+                            minimumSize: const Size(kMinTouch, kMinTouch),
+                            alignment: Alignment.centerLeft,
+                          ),
+                          onPressed: () => ref
+                              .read(shoppingStateProvider.notifier)
+                              .setPantry(id, have: true),
+                          child: Text(l.shopPantryToggle),
+                        )
+                      else
+                        const SizedBox(height: AppSpacing.sm),
                     ],
                   ),
                 ),
@@ -442,7 +795,7 @@ class _ItemTile extends ConsumerWidget {
                   children: [
                     Text(
                       '${formatVnd(item.tillCostVnd)} ₫',
-                      key: Key('item-$id-price'),
+                      key: Key('$base-price'),
                       style: theme.textTheme.bodyLarge?.copyWith(
                         fontWeight: FontWeight.w700,
                         decoration: strike,

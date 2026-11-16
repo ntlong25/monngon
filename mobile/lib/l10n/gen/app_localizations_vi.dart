@@ -47,6 +47,17 @@ class AppL10nVi extends AppL10n {
       'Giá là ước tính, có thể khác khi bạn đi chợ.';
 
   @override
+  String get priceEstimateNotSurveyed =>
+      'Giá ước lượng, chưa khảo sát tại cửa hàng này';
+
+  @override
+  String get priceSourceBhx => 'Giá website Bách hóa Xanh';
+
+  @override
+  String get pricePromoNote =>
+      'Chi tiết chương trình khuyến mãi vui lòng truy cập vào trang chủ siêu thị';
+
+  @override
   String commonKcal(Object count) {
     return '$count kcal';
   }
@@ -92,6 +103,24 @@ class AppL10nVi extends AppL10n {
 
   @override
   String get onboardingGoalBuild => 'Tăng cơ';
+
+  @override
+  String get onboardingGoalChoose => 'Chọn mục tiêu này';
+
+  @override
+  String get onboardingGoalOther => 'Xem mục tiêu khác';
+
+  @override
+  String get onboardingGoalSelected => 'Đã chọn';
+
+  @override
+  String get onboardingGoalSwipeHint =>
+      'Quẹt phải để chọn mục tiêu này, quẹt trái để xem mục tiêu khác.';
+
+  @override
+  String onboardingGoalDot(Object v1, Object v2, Object v3) {
+    return 'Mục tiêu $v1 trên $v2: $v3';
+  }
 
   @override
   String get onboardingBodyTitle => 'Cho mình biết về cơ thể bạn';
@@ -321,6 +350,9 @@ class AppL10nVi extends AppL10n {
   String get onboardingSwipeSkip => 'Thay thế';
 
   @override
+  String get onboardingSwipeSkipAll => 'Bỏ qua';
+
+  @override
   String get onboardingEquipmentTitle => 'Bếp nhà bạn có những gì?';
 
   @override
@@ -352,6 +384,9 @@ class AppL10nVi extends AppL10n {
 
   @override
   String get onboardingSummaryCreate => 'Tạo thực đơn tuần';
+
+  @override
+  String get onboardingSummaryTasteNone => 'Khẩu vị: chưa chọn';
 
   @override
   String get onboardingGeneratingTitle => 'Đang lên thực đơn';
@@ -775,6 +810,9 @@ class AppL10nVi extends AppL10n {
   String get dishRoleCarbBase => 'Cơm';
 
   @override
+  String get dishRoleStarch => 'Tinh bột';
+
+  @override
   String get dishRoleDessert => 'Tráng miệng';
 
   @override
@@ -1020,7 +1058,7 @@ class AppL10nVi extends AppL10n {
 
   @override
   String get onboardingSwipeSoft =>
-      'Đây chỉ là ưu tiên mềm; bạn có thể đổi bất cứ lúc nào.';
+      'Chỉ để biết bạn thích kiểu món nào. Không ảnh hưởng calo, đạm hay dị ứng; phần đó hỏi ở các bước sau.';
 
   @override
   String get onboardingEquipmentHint => 'Chọn tất cả thiết bị bạn có.';
@@ -1655,6 +1693,67 @@ class AppL10nVi extends AppL10n {
   @override
   String shopPantryIfBuy(Object amount) {
     return 'Nếu phải mua: +$amount ₫';
+  }
+
+  @override
+  String get shopModeWeekly => 'Theo tuần';
+
+  @override
+  String get shopModeDaily => 'Theo ngày';
+
+  @override
+  String get shopToday => 'Hôm nay';
+
+  @override
+  String get shopFreezeMeatSwitch => 'Mua thịt cá cả tuần rồi cấp đông';
+
+  @override
+  String shopBatchExtra(Object amount) {
+    return '+$amount ₫ do mua theo đợt';
+  }
+
+  @override
+  String get shopNoShelfInfo => 'Chưa có thông tin hạn dùng';
+
+  @override
+  String shopTripTotal(Object amount) {
+    return 'Đợt này: $amount ₫';
+  }
+
+  @override
+  String shopModeTotalWeekly(Object amount) {
+    return 'Mua theo tuần: $amount ₫';
+  }
+
+  @override
+  String shopModeTotalDaily(Object amount) {
+    return 'Mua theo ngày: $amount ₫';
+  }
+
+  @override
+  String get shopFreezeTip =>
+      'Cấp đông ngay sau khi mua, rã đông trước 1 ngày khi nấu.';
+
+  @override
+  String get shopWeeklyEmpty => 'Không có nguyên liệu nào cần mua theo tuần.';
+
+  @override
+  String get shopDailyEmpty => 'Không có nguyên liệu tươi cần mua theo ngày.';
+
+  @override
+  String get shopTripPast => 'Đã qua';
+
+  @override
+  String shopFreezeSavingHint(Object amount) {
+    return 'Mua thịt cá cả tuần rồi cấp đông để bớt khoảng $amount ₫';
+  }
+
+  @override
+  String get shopFreezeSwitchLabel => 'Bật cấp đông';
+
+  @override
+  String shopBatchSavingNegative(Object amount) {
+    return '−$amount ₫ nhờ mua theo cân';
   }
 
   @override
