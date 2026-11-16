@@ -47,6 +47,17 @@ class AppL10nVi extends AppL10n {
       'Giá là ước tính, có thể khác khi bạn đi chợ.';
 
   @override
+  String get priceEstimateNotSurveyed =>
+      'Giá ước lượng, chưa khảo sát tại cửa hàng này';
+
+  @override
+  String get priceSourceBhx => 'Giá website Bách hóa Xanh';
+
+  @override
+  String get pricePromoNote =>
+      'Chi tiết chương trình khuyến mãi vui lòng truy cập vào trang chủ siêu thị';
+
+  @override
   String commonKcal(Object count) {
     return '$count kcal';
   }
@@ -321,6 +332,9 @@ class AppL10nVi extends AppL10n {
   String get onboardingSwipeSkip => 'Thay thế';
 
   @override
+  String get onboardingSwipeSkipAll => 'Bỏ qua';
+
+  @override
   String get onboardingEquipmentTitle => 'Bếp nhà bạn có những gì?';
 
   @override
@@ -352,6 +366,9 @@ class AppL10nVi extends AppL10n {
 
   @override
   String get onboardingSummaryCreate => 'Tạo thực đơn tuần';
+
+  @override
+  String get onboardingSummaryTasteNone => 'Khẩu vị: chưa chọn';
 
   @override
   String get onboardingGeneratingTitle => 'Đang lên thực đơn';
@@ -775,6 +792,9 @@ class AppL10nVi extends AppL10n {
   String get dishRoleCarbBase => 'Cơm';
 
   @override
+  String get dishRoleStarch => 'Tinh bột';
+
+  @override
   String get dishRoleDessert => 'Tráng miệng';
 
   @override
@@ -1020,7 +1040,7 @@ class AppL10nVi extends AppL10n {
 
   @override
   String get onboardingSwipeSoft =>
-      'Đây chỉ là ưu tiên mềm; bạn có thể đổi bất cứ lúc nào.';
+      'Chỉ để biết bạn thích kiểu món nào. Không ảnh hưởng calo, đạm hay dị ứng; phần đó hỏi ở các bước sau.';
 
   @override
   String get onboardingEquipmentHint => 'Chọn tất cả thiết bị bạn có.';

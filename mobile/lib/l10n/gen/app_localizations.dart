@@ -165,6 +165,24 @@ abstract class AppL10n {
   /// **'Giá là ước tính, có thể khác khi bạn đi chợ.'**
   String get commonEstimateNote;
 
+  /// No description provided for @priceEstimateNotSurveyed.
+  ///
+  /// In vi, this message translates to:
+  /// **'Giá ước lượng, chưa khảo sát tại cửa hàng này'**
+  String get priceEstimateNotSurveyed;
+
+  /// No description provided for @priceSourceBhx.
+  ///
+  /// In vi, this message translates to:
+  /// **'Giá website Bách hóa Xanh'**
+  String get priceSourceBhx;
+
+  /// No description provided for @pricePromoNote.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chi tiết chương trình khuyến mãi vui lòng truy cập vào trang chủ siêu thị'**
+  String get pricePromoNote;
+
   /// No description provided for @commonKcal.
   ///
   /// In vi, this message translates to:
@@ -657,6 +675,12 @@ abstract class AppL10n {
   /// **'Thay thế'**
   String get onboardingSwipeSkip;
 
+  /// No description provided for @onboardingSwipeSkipAll.
+  ///
+  /// In vi, this message translates to:
+  /// **'Bỏ qua'**
+  String get onboardingSwipeSkipAll;
+
   /// No description provided for @onboardingEquipmentTitle.
   ///
   /// In vi, this message translates to:
@@ -722,6 +746,12 @@ abstract class AppL10n {
   /// In vi, this message translates to:
   /// **'Tạo thực đơn tuần'**
   String get onboardingSummaryCreate;
+
+  /// No description provided for @onboardingSummaryTasteNone.
+  ///
+  /// In vi, this message translates to:
+  /// **'Khẩu vị: chưa chọn'**
+  String get onboardingSummaryTasteNone;
 
   /// No description provided for @onboardingGeneratingTitle.
   ///
@@ -1479,6 +1509,12 @@ abstract class AppL10n {
   /// **'Cơm'**
   String get dishRoleCarbBase;
 
+  /// No description provided for @dishRoleStarch.
+  ///
+  /// In vi, this message translates to:
+  /// **'Tinh bột'**
+  String get dishRoleStarch;
+
   /// No description provided for @dishRoleDessert.
   ///
   /// In vi, this message translates to:
@@ -1878,7 +1914,7 @@ abstract class AppL10n {
   /// No description provided for @onboardingSwipeSoft.
   ///
   /// In vi, this message translates to:
-  /// **'Đây chỉ là ưu tiên mềm; bạn có thể đổi bất cứ lúc nào.'**
+  /// **'Chỉ để biết bạn thích kiểu món nào. Không ảnh hưởng calo, đạm hay dị ứng; phần đó hỏi ở các bước sau.'**
   String get onboardingSwipeSoft;
 
   /// No description provided for @onboardingEquipmentHint.

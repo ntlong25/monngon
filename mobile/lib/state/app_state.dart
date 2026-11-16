@@ -1,6 +1,27 @@
 import '../api/generated/models.dart';
+import '../features/onboarding/onboarding_nav.dart' show OnboardingStep;
+
+/// Thứ tự bước của bản cũ (trước T-103), khi bước đang làm còn lưu THEO SỐ. Chỉ để đọc lại trạng thái cũ.
+const _legacyStepNames = [
+  'goal',
+  'body',
+  'activity',
+  'targets',
+  'store',
+  'household',
+  'budget',
+  'meals',
+  'diet',
+  'rice',
+  'dislike',
+  'swipe',
+  'equipment',
+  'summary',
+];
 
 /// Tiến độ onboarding: bước hiện tại (0 = bước đầu) để mở lại đúng chỗ khi tắt app giữa chừng.
+/// Lưu theo TÊN bước (`step_name`, D-ONB-06 ý 4) nên đổi thứ tự bước không làm nhảy sai bước.
+/// Trạng thái cũ chỉ có `step` (số theo thứ tự cũ) được đổi sang tên rồi sang số của thứ tự mới.
 class OnboardingState {
   const OnboardingState({
     this.step = 0,
@@ -9,12 +30,23 @@ class OnboardingState {
   });
 
   factory OnboardingState.fromJson(Map<String, dynamic> j) => OnboardingState(
-    step: (j['step'] as num?)?.toInt() ?? 0,
+    step: _stepFromJson(j),
     completed: j['completed'] as bool? ?? false,
     swipedCardIds:
         (j['swiped_card_ids'] as List<dynamic>?)?.cast<String>().toList() ??
         const [],
   );
+
+  static int _stepFromJson(Map<String, dynamic> j) {
+    final byName = OnboardingStep.values.where((s) => s.name == j['step_name']);
+    if (byName.isNotEmpty) return byName.first.index;
+    final legacy = (j['step'] as num?)?.toInt() ?? 0;
+    if (legacy < 0) return 0;
+    if (legacy >= _legacyStepNames.length) return OnboardingStep.summary.index;
+    return OnboardingStep.values
+        .firstWhere((s) => s.name == _legacyStepNames[legacy])
+        .index;
+  }
 
   final int step;
   final bool completed;
@@ -34,6 +66,9 @@ class OnboardingState {
 
   Map<String, dynamic> toJson() => {
     'step': step,
+    'step_name': OnboardingStep
+        .values[step.clamp(0, OnboardingStep.values.length - 1)]
+        .name,
     'completed': completed,
     'swiped_card_ids': swipedCardIds,
   };

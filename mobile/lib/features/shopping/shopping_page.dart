@@ -44,8 +44,13 @@ class ShoppingPage extends ConsumerWidget {
     final reference = ref.watch(referenceProvider).value;
     final aisleNames = reference?.aisles ?? const <String, String>{};
     String? surveyDate;
+    // L-16 (D-DATA-01): cửa hàng đã biết mà chưa có dòng giá khảo sát → ghi rõ "giá ước lượng", không để trống.
+    var notSurveyed = false;
     for (final s in reference?.stores ?? const <StoreDto>[]) {
-      if (s.id == prefs.storeId) surveyDate = s.priceSurveyDate;
+      if (s.id == prefs.storeId) {
+        surveyDate = s.priceSurveyDate;
+        notSurveyed = s.priceSurveyDate == null;
+      }
     }
     final totals = totalsOf(list, state);
     final aisles = orderedAisles(list);
@@ -92,6 +97,7 @@ class ShoppingPage extends ConsumerWidget {
             totals: totals,
             budget: saved.plan.budgetVnd,
             surveyDate: surveyDate,
+            notSurveyed: notSurveyed,
           ),
           const SizedBox(height: AppSpacing.md),
           _Progress(totals: totals),
@@ -135,11 +141,15 @@ class _CostCards extends StatelessWidget {
     required this.totals,
     required this.budget,
     required this.surveyDate,
+    this.notSurveyed = false,
   });
 
   final ShoppingTotals totals;
   final double budget;
   final String? surveyDate;
+
+  /// Cửa hàng đang chọn chưa có giá khảo sát (`price_survey_date` rỗng).
+  final bool notSurveyed;
 
   @override
   Widget build(BuildContext context) {
@@ -179,10 +189,10 @@ class _CostCards extends StatelessWidget {
             ),
           ],
         ),
-        if (date.isNotEmpty) ...[
+        if (date.isNotEmpty || notSurveyed) ...[
           const SizedBox(height: AppSpacing.xs),
           Text(
-            l.shopSurveyDate(date),
+            date.isNotEmpty ? l.shopSurveyDate(date) : l.priceEstimateNotSurveyed,
             key: const Key('shop-survey'),
             style: theme.textTheme.bodySmall?.copyWith(
               color: AppColors.textMuted,

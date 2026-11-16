@@ -44,6 +44,7 @@ class OnboardingPage extends ConsumerWidget {
 /// Widget của một bước (dùng cả ở wizard lẫn khi sửa từ tab Bạn).
 Widget buildOnboardingStep(OnboardingStep step) => switch (step) {
   OnboardingStep.goal => const GoalStep(),
+  OnboardingStep.swipe => const SwipeStep(),
   OnboardingStep.body => const BodyStep(),
   OnboardingStep.activity => const ActivityStep(),
   OnboardingStep.targets => const TargetsStep(),
@@ -54,7 +55,6 @@ Widget buildOnboardingStep(OnboardingStep step) => switch (step) {
   OnboardingStep.diet => const DietStep(),
   OnboardingStep.rice => const RiceStep(),
   OnboardingStep.dislike => const DislikeStep(),
-  OnboardingStep.swipe => const SwipeStep(),
   OnboardingStep.equipment => const EquipmentStep(),
   OnboardingStep.summary => const SummaryStep(),
 };

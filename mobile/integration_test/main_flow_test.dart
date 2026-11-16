@@ -29,6 +29,8 @@ void main() {
       await prefs.clear();
       final store = SharedPrefsStore(prefs);
       await const StorageMigrator().migrate(store);
+      final onboardingClock = Stopwatch()..start();
+      shotTime = Duration.zero;
       await t.pumpWidget(
         ProviderScope(
           overrides: [storeProvider.overrideWithValue(store)],
@@ -49,7 +51,41 @@ void main() {
       await shot(t, 'it-02-onb-01-muc-tieu');
       await next(t);
 
-      // 2/13 cơ thể: nữ, 32 tuổi, 162 cm, 60 kg
+      // 2/14 thẻ vuốt khẩu vị (D-ONB-06: ngay sau Mục tiêu): thích "xào" và "canh", các thẻ khác chọn ít hơn
+      await waitFor(t, find.byKey(const Key('swipe-progress')));
+      final reference = await containerOf(t).read(referenceProvider.future);
+      final cards = reference.swipeCards;
+      expect(cards.map((c) => c.tag), containsAll(['xao', 'canh']));
+      // T-103 AC5: từ mở app tới màn vuốt = 1 thao tác (chọn mục tiêu) + Tiếp tục; trừ thời gian chụp ảnh.
+      // ignore: avoid_print
+      print(
+        '[it] đo: tới màn vuốt ${(onboardingClock.elapsed - shotTime).inMilliseconds} ms (không tính ảnh)',
+      );
+      await shot(t, 'it-02-onb-11-vuot-the-dau');
+      // T-106: kéo thẻ đầu sang phải (nhãn "Thích" hiện dần), rồi sang trái (nhãn "Ít hơn"), thả dưới ngưỡng thì bật về.
+      final topCard = find.byKey(Key('swipe-card-${cards.first.id}'));
+      final cardWidth = t.getSize(topCard).width;
+      final g = await t.startGesture(t.getCenter(topCard));
+      await g.moveBy(Offset(0.25 * cardWidth, 24));
+      await t.pump(const Duration(milliseconds: 50));
+      await shot(t, 'it-02-onb-11-keo-phai');
+      await g.moveBy(Offset(-0.5 * cardWidth, 0));
+      await t.pump(const Duration(milliseconds: 50));
+      await shot(t, 'it-02-onb-11-keo-trai');
+      await g.moveBy(Offset(0.25 * cardWidth, -24));
+      await g.up();
+      await breathe(t, 600);
+      for (final c in cards) {
+        final like = c.tag == 'xao' || c.tag == 'canh';
+        await tapKey(t, like ? 'swipe-like' : 'swipe-dislike');
+      }
+      await waitFor(t, find.byKey(const Key('swipe-liked')));
+      final pf = containerOf(t).read(preferencesProvider);
+      expect(pf.cuisineLikes, containsAll(['xao', 'canh']));
+      await shot(t, 'it-02-onb-11-vuot-the-ket-qua');
+      await next(t);
+
+      // 3/14 cơ thể: nữ, 32 tuổi, 162 cm, 60 kg
       await waitFor(t, find.text(l.onboardingBodyTitle));
       await tapFinder(t, find.text(l.onboardingBodySexFemale));
       await t.enterText(find.byKey(const Key('field-age')), '32');
@@ -78,7 +114,6 @@ void main() {
 
       // 5/13 cửa hàng: Bách hóa Xanh
       await waitFor(t, find.text(l.onboardingStoreTitle));
-      final reference = await containerOf(t).read(referenceProvider.future);
       final bhx = reference.stores.firstWhere((s) => s.id == 'bach_hoa_xanh');
       await tapFinder(t, find.text(bhx.name));
       await shot(t, 'it-02-onb-05-cua-hang');
@@ -135,21 +170,6 @@ void main() {
       await shot(t, 'it-02-onb-10-khong-thich');
       await next(t);
 
-      // 11/13 thẻ vuốt: thích "xào" và "canh", các thẻ khác chọn ít hơn
-      await waitFor(t, find.byKey(const Key('swipe-progress')));
-      final cards = reference.swipeCards;
-      expect(cards.map((c) => c.tag), containsAll(['xao', 'canh']));
-      await shot(t, 'it-02-onb-11-vuot-the-dau');
-      for (final c in cards) {
-        final like = c.tag == 'xao' || c.tag == 'canh';
-        await tapKey(t, like ? 'swipe-like' : 'swipe-dislike');
-      }
-      await waitFor(t, find.byKey(const Key('swipe-liked')));
-      final pf = containerOf(t).read(preferencesProvider);
-      expect(pf.cuisineLikes, containsAll(['xao', 'canh']));
-      await shot(t, 'it-02-onb-11-vuot-the-ket-qua');
-      await next(t);
-
       // 12/13 dụng cụ: bếp + nồi cơm điện (mặc định)
       await waitFor(t, find.text(l.onboardingEquipmentTitle));
       expect(containerOf(t).read(preferencesProvider).equipment, [
@@ -161,7 +181,16 @@ void main() {
 
       // 13/13 tổng kết
       await waitFor(t, find.text(l.onboardingSummaryTitle));
-      await waitFor(t, find.byKey(const Key('summary-budget')));
+      // Dòng ngân sách nằm cuối danh sách (sau dòng khẩu vị mới) nên ListView chưa dựng: cuộn tới.
+      await t.scrollUntilVisible(
+        find.byKey(const Key('summary-budget')),
+        200,
+        scrollable: find.byType(Scrollable).first,
+      );
+      // ignore: avoid_print
+      print(
+        '[it] đo: onboarding tới tổng kết ${(onboardingClock.elapsed - shotTime).inMilliseconds} ms (không tính ảnh; gồm chờ API)',
+      );
       await shot(t, 'it-02-onb-13-tong-ket');
 
       // ---------------------------------------------------------------- 3. Tạo tuần

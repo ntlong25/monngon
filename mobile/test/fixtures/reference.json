@@ -1,5 +1,5 @@
 {
- "data_version": "0b6c64572f5ed7ec41d73fe1eb7de4529f16c909da242982e82bd24b47c33d7d",
+ "data_version": "b9380b17b895a1aee268040efb12edd605aeee257e79fbf3c4c8a46294d4d73c",
  "stores": [
   {
    "id": "bach_hoa_xanh",
@@ -9,12 +9,12 @@
   {
    "id": "winmart",
    "name": "WinMart",
-   "price_survey_date": "2026-11-06"
+   "price_survey_date": null
   },
   {
    "id": "coopmart",
    "name": "Co.opmart",
-   "price_survey_date": "2026-11-06"
+   "price_survey_date": null
   },
   {
    "id": "cho_khac",
@@ -139,11 +139,12 @@
   },
   {
    "id": "no_seed",
-   "name": "Không hạt giống",
+   "name": "Không hạt giống & vừng",
    "bans": [
-    "seed"
+    "seed",
+    "sesame"
    ],
-   "description": "Không loại nguyên liệu nào trong kho hiện tại",
+   "description": "Loại: Vừng (mè) trắng",
    "group": "exclusion"
   },
   {
@@ -536,6 +537,6 @@
   "gia_vi_dau": "Gia vị & dầu",
   "sua": "Sữa"
  },
- "recipe_count": 324,
- "ingredient_count": 66
+ "recipe_count": 327,
+ "ingredient_count": 69
 }

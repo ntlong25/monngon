@@ -4,15 +4,18 @@ import '../l10n/gen/app_localizations.dart';
 /// Nhãn hiển thị cho các mã (wire value) của API, lấy từ i18n. Mã lạ → dùng tên server gửi ([fallback]) hoặc chính mã.
 abstract final class Labels {
   /// Vai trò món trong mâm.
-  static String dishRole(AppL10n l, String role) => switch (role) {
-    'main' => l.dishRoleMain,
-    'soup' => l.dishRoleSoup,
-    'side_veg' => l.dishRoleSideVeg,
-    'carb_base' => l.dishRoleCarbBase,
-    'dessert' => l.dishRoleDessert,
-    'extra' => l.dishRoleExtra,
-    _ => l.dishRoleFullMeal,
-  };
+  /// [riceKind]: `rice.kind` của bữa — món `carb_base` ghi "Cơm" khi `com`, "Tinh bột" khi `other` (khoai lang, bún; D-COM-06).
+  static String dishRole(AppL10n l, String role, {String? riceKind}) =>
+      switch (role) {
+        'main' => l.dishRoleMain,
+        'soup' => l.dishRoleSoup,
+        'side_veg' => l.dishRoleSideVeg,
+        'carb_base' =>
+          riceKind == 'other' ? l.dishRoleStarch : l.dishRoleCarbBase,
+        'dessert' => l.dishRoleDessert,
+        'extra' => l.dishRoleExtra,
+        _ => l.dishRoleFullMeal,
+      };
 
   /// 1 = Thứ Hai … 7 = Chủ nhật (như `DateTime.weekday`).
   static String weekday(AppL10n l, int weekday) => switch (weekday) {

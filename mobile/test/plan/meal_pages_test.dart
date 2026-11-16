@@ -7,6 +7,7 @@ import 'package:fitpro_mamdu/l10n/gen/app_localizations.dart';
 import 'package:fitpro_mamdu/state/app_state.dart';
 import 'package:fitpro_mamdu/state/providers.dart';
 import 'package:fitpro_mamdu/state/storage.dart';
+import 'package:fitpro_mamdu/state/week_changes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -49,6 +50,8 @@ Future<ProviderContainer> pumpApp(
       overrides: [
         ...testOverrides(store: store ?? seeded(), adapter: adapter),
         wakelockProvider.overrideWithValue(wake ?? FakeWakelock()),
+        // Cố định "hôm nay" trong tuần mẫu (09–15/11/2026): "Không hợp với tôi" chỉ cho lên lại khi còn ngày sau hôm nay.
+        clockProvider.overrideWithValue(() => DateTime(2026, 11, 10)),
       ],
       child: const FitProApp(),
     ),

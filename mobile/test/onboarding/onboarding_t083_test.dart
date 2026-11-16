@@ -1,4 +1,5 @@
 import 'package:fitpro_mamdu/app.dart';
+import 'package:fitpro_mamdu/features/onboarding/onboarding_nav.dart';
 import 'package:fitpro_mamdu/features/onboarding/onboarding_providers.dart';
 import 'package:fitpro_mamdu/state/providers.dart';
 import 'package:fitpro_mamdu/state/storage.dart';
@@ -42,17 +43,23 @@ void main() {
     expect(find.byKey(const Key('onboarding-back')), findsNothing);
   });
 
-  testWidgets('Chọn mục tiêu rồi Tiếp tục → bước cơ thể; Back giữ lựa chọn', (
+  testWidgets('Chọn mục tiêu rồi Tiếp tục → bước khẩu vị (thẻ vuốt); Back giữ lựa chọn', (
     t,
   ) async {
-    final c = await pumpApp(t, store: MemoryStore());
+    final c = await pumpApp(
+      t,
+      store: MemoryStore(),
+      adapter: FakeAdapter()
+        ..on('POST', '/v1/targets', fixture('targets.json'))
+        ..on('GET', '/v1/reference', fixture('reference.json')),
+    );
     await t.tap(find.text('Tăng cơ'));
     await t.pump();
     expect(c.read(profileProvider).goal, 'build');
     await t.tap(find.text('Tiếp tục'));
     await t.pumpAndSettle();
-    expect(find.text('Cho mình biết về cơ thể bạn'), findsOneWidget);
-    expect(c.read(onboardingProvider).step, 1);
+    expect(find.text('Vuốt để chọn món bạn thích'), findsOneWidget);
+    expect(c.read(onboardingProvider).step, OnboardingStep.swipe.index);
 
     await t.tap(find.byKey(const Key('onboarding-back')));
     await t.pumpAndSettle();
@@ -70,7 +77,7 @@ void main() {
     c
         .read(profileProvider.notifier)
         .update((p) => p.copyWith(weightKg: 77, goal: 'hold'));
-    c.read(onboardingProvider.notifier).goTo(2);
+    c.read(onboardingProvider.notifier).goTo(OnboardingStep.activity.index);
     await t.pumpAndSettle();
     expect(find.text('Bạn vận động mỗi tuần thế nào?'), findsOneWidget);
 

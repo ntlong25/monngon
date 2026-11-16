@@ -1,5 +1,12 @@
 [
  {
+  "id": "gao_lut",
+  "name": "Gạo lứt (sống)",
+  "aisle": "gao_do_kho",
+  "household_units": [],
+  "default_pantry": false
+ },
+ {
   "id": "gao_lut_nau_chin",
   "name": "Gạo lứt nấu chín",
   "aisle": "gao_do_kho",
@@ -17,6 +24,13 @@
    }
   ],
   "default_pantry": false
+ },
+ {
+  "id": "gao_te",
+  "name": "Gạo tẻ (sống)",
+  "aisle": "gao_do_kho",
+  "household_units": [],
+  "default_pantry": true
  },
  {
   "id": "dui_ga_khong_da",
