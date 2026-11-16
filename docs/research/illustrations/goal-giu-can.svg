@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Giữ cân">
+  <rect width="120" height="120" rx="24" fill="#F1ECE0"/>
+  <path d="M60 24 V96" stroke="#1E2420" stroke-width="7" stroke-linecap="round"/>
+  <path d="M22 34 H98" stroke="#1E2420" stroke-width="7" stroke-linecap="round"/>
+  <path d="M34 100 H86" stroke="#1E2420" stroke-width="7" stroke-linecap="round"/>
+  <path d="M22 34 L6 68 M22 34 L38 68" stroke="#1E2420" stroke-width="3"/>
+  <path d="M98 34 L82 68 M98 34 L114 68" stroke="#1E2420" stroke-width="3"/>
+  <path d="M4 68 H40 Q40 86 22 86 Q4 86 4 68 Z" fill="#1B6B4F"/>
+  <path d="M80 68 H116 Q116 86 98 86 Q80 86 80 68 Z" fill="#1B6B4F"/>
+  <circle cx="60" cy="24" r="8" fill="#F2A93B"/>
+</svg>

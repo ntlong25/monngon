@@ -290,11 +290,11 @@
   },
   {
     "ingredient_id": "dau_phu",
-    "status": "gan_dung",
-    "fridge_days": 7,
+    "status": "uoc_tinh_vn",
+    "fridge_days": 1,
     "pantry_days": null,
-    "freezer_days": 150,
-    "freezable": true,
+    "freezer_days": null,
+    "freezable": null,
     "long_term": false,
     "tips_vi": "Ngâm nước sạch, thay nước hằng ngày, cất ngăn mát; dùng trong khoảng 1 tuần.",
     "spoilage_signs_vi": "Mùi chua, bề mặt nhớt, nước đục hoặc có váng.",
@@ -303,7 +303,7 @@
       "title": "FoodKeeper (Product.csv, file foodkeeper-20261109.xls)",
       "url": "https://www.fsis.usda.gov/shared/data/EN/foodkeeper.json",
       "accessed": "2026-11-09",
-      "adjusted_for_vn": false,
+      "adjusted_for_vn": true,
       "fk_id": 168,
       "fk_name": "Tofu",
       "fk_subtitle": "",
@@ -312,9 +312,10 @@
         "DOP_Freeze"
       ],
       "fridge_range": "1–1 Weeks",
-      "mapping": "Tofu",
+      "mapping": "Tofu | PM 2026-11-16: đổi sang số VN (bán rời).",
       "tips_source": "Thời gian: FoodKeeper (USDA FSIS), fk_id ghi ở source. Mẹo và dấu hiệu hỏng: viết tay theo kiến thức chung, FoodKeeper không có dấu hiệu hỏng; chưa đối chiếu nguồn an toàn thực phẩm VN.",
-      "downgrade_reason": "chỉ có số DOP (ngăn mát hoặc nhiệt độ phòng); FoodKeeper (bản ghi 115 trong Version) ghi các cột DOP cần thay thế, nên hạ xuống gan_dung"
+      "downgrade_reason": "chỉ có số DOP (ngăn mát hoặc nhiệt độ phòng); FoodKeeper (bản ghi 115 trong Version) ghi các cột DOP cần thay thế, nên hạ xuống gan_dung",
+      "vn_rule": "đậu phụ bán rời ở chợ/siêu thị VN không đóng kín: ngăn mát 1–3 ngày; FoodKeeper 1 tuần (DOP) áp dụng cho loại đóng kín nên không dùng. Lấy cận dưới = 1 ngày. Ngăn đông không dùng số FoodKeeper."
     }
   },
   {
@@ -612,7 +613,7 @@
     "pantry_days": null,
     "freezer_days": null,
     "freezable": null,
-    "long_term": false,
+    "long_term": true,
     "tips_vi": null,
     "spoilage_signs_vi": null,
     "source": null
@@ -791,7 +792,7 @@
     "pantry_days": null,
     "freezer_days": null,
     "freezable": null,
-    "long_term": false,
+    "long_term": true,
     "tips_vi": null,
     "spoilage_signs_vi": null,
     "source": null
@@ -803,7 +804,7 @@
     "pantry_days": null,
     "freezer_days": null,
     "freezable": null,
-    "long_term": false,
+    "long_term": true,
     "tips_vi": null,
     "spoilage_signs_vi": null,
     "source": null
@@ -815,7 +816,7 @@
     "pantry_days": null,
     "freezer_days": null,
     "freezable": null,
-    "long_term": false,
+    "long_term": true,
     "tips_vi": null,
     "spoilage_signs_vi": null,
     "source": null
@@ -1089,7 +1090,7 @@
     "pantry_days": null,
     "freezer_days": null,
     "freezable": null,
-    "long_term": false,
+    "long_term": true,
     "tips_vi": null,
     "spoilage_signs_vi": null,
     "source": null
@@ -1207,7 +1208,7 @@
     "pantry_days": null,
     "freezer_days": null,
     "freezable": null,
-    "long_term": false,
+    "long_term": true,
     "tips_vi": null,
     "spoilage_signs_vi": null,
     "source": null
@@ -1275,7 +1276,7 @@
     "pantry_days": null,
     "freezer_days": null,
     "freezable": null,
-    "long_term": false,
+    "long_term": true,
     "tips_vi": null,
     "spoilage_signs_vi": null,
     "source": null
@@ -1718,7 +1719,7 @@
     "pantry_days": null,
     "freezer_days": null,
     "freezable": null,
-    "long_term": false,
+    "long_term": true,
     "tips_vi": null,
     "spoilage_signs_vi": null,
     "source": null
@@ -1730,7 +1731,7 @@
     "pantry_days": null,
     "freezer_days": null,
     "freezable": null,
-    "long_term": false,
+    "long_term": true,
     "tips_vi": null,
     "spoilage_signs_vi": null,
     "source": null
@@ -1742,7 +1743,7 @@
     "pantry_days": null,
     "freezer_days": null,
     "freezable": null,
-    "long_term": false,
+    "long_term": true,
     "tips_vi": null,
     "spoilage_signs_vi": null,
     "source": null
@@ -1754,7 +1755,7 @@
     "pantry_days": null,
     "freezer_days": null,
     "freezable": null,
-    "long_term": false,
+    "long_term": true,
     "tips_vi": null,
     "spoilage_signs_vi": null,
     "source": null

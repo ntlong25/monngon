@@ -105,6 +105,24 @@ class AppL10nVi extends AppL10n {
   String get onboardingGoalBuild => 'Tăng cơ';
 
   @override
+  String get onboardingGoalChoose => 'Chọn mục tiêu này';
+
+  @override
+  String get onboardingGoalOther => 'Xem mục tiêu khác';
+
+  @override
+  String get onboardingGoalSelected => 'Đã chọn';
+
+  @override
+  String get onboardingGoalSwipeHint =>
+      'Quẹt phải để chọn mục tiêu này, quẹt trái để xem mục tiêu khác.';
+
+  @override
+  String onboardingGoalDot(Object v1, Object v2, Object v3) {
+    return 'Mục tiêu $v1 trên $v2: $v3';
+  }
+
+  @override
   String get onboardingBodyTitle => 'Cho mình biết về cơ thể bạn';
 
   @override
@@ -1676,6 +1694,26 @@ class AppL10nVi extends AppL10n {
   String shopPantryIfBuy(Object amount) {
     return 'Nếu phải mua: +$amount ₫';
   }
+
+  @override
+  String get shopModeWeekly => 'Theo tuần';
+
+  @override
+  String get shopModeDaily => 'Theo ngày';
+
+  @override
+  String get shopToday => 'Hôm nay';
+
+  @override
+  String get shopFreezeMeatSwitch => 'Mua thịt cá cả tuần rồi cấp đông';
+
+  @override
+  String shopBatchExtra(Object amount) {
+    return '+$amount ₫ do mua theo đợt';
+  }
+
+  @override
+  String get shopNoShelfInfo => 'Chưa có thông tin hạn dùng';
 
   @override
   String get onboardingRiceTitle => 'Thói quen ăn cơm';

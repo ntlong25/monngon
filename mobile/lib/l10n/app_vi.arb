@@ -26,6 +26,11 @@
   "onboardingGoalLose": "Giảm mỡ",
   "onboardingGoalHold": "Giữ cân",
   "onboardingGoalBuild": "Tăng cơ",
+  "onboardingGoalChoose": "Chọn mục tiêu này",
+  "onboardingGoalOther": "Xem mục tiêu khác",
+  "onboardingGoalSelected": "Đã chọn",
+  "onboardingGoalSwipeHint": "Quẹt phải để chọn mục tiêu này, quẹt trái để xem mục tiêu khác.",
+  "onboardingGoalDot": "Mục tiêu {v1} trên {v2}: {v3}",
   "onboardingBodyTitle": "Cho mình biết về cơ thể bạn",
   "onboardingBodySex": "Giới tính",
   "onboardingBodyAge": "Tuổi",
@@ -476,6 +481,12 @@
   "shoppingBudgetFoodOver": "Chi phí món ăn tuần này vượt ngân sách {amount}.",
   "shoppingBudgetTillInfo": "Lần đi chợ này ước tính {amount}, cao hơn ngân sách vì mua nguyên gói; phần dư dùng tiếp cho tuần sau.",
   "shopPantryIfBuy": "Nếu phải mua: +{amount} ₫",
+  "shopModeWeekly": "Theo tuần",
+  "shopModeDaily": "Theo ngày",
+  "shopToday": "Hôm nay",
+  "shopFreezeMeatSwitch": "Mua thịt cá cả tuần rồi cấp đông",
+  "shopBatchExtra": "+{amount} ₫ do mua theo đợt",
+  "shopNoShelfInfo": "Chưa có thông tin hạn dùng",
   "onboardingRiceTitle": "Thói quen ăn cơm",
   "onboardingRiceQuestion": "Mỗi bữa trưa/tối bạn thường ăn mấy chén cơm?",
   "onboardingRiceNote": "Chỉ áp cho bạn. Người lớn khác ăn mức Vừa, trẻ em ăn 0,6 suất.",
@@ -540,6 +551,19 @@
   "@onboardingProgressLabel": {
     "placeholders": {
       "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "@onboardingGoalDot": {
+    "placeholders": {
+      "v1": {
+        "type": "Object"
+      },
+      "v2": {
+        "type": "Object"
+      },
+      "v3": {
         "type": "Object"
       }
     }
@@ -1221,6 +1245,13 @@
     }
   },
   "@shopPantryIfBuy": {
+    "placeholders": {
+      "amount": {
+        "type": "Object"
+      }
+    }
+  },
+  "@shopBatchExtra": {
     "placeholders": {
       "amount": {
         "type": "Object"

@@ -4,7 +4,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart' show CustomSemanticsAction;
 
-import '../../api/generated/models.dart';
 import '../../ui/ui.dart';
 
 /// Chồng thẻ vuốt khẩu vị kiểu "quẹt thẻ" (T-106, D-ONB-07). Tự viết bằng cử chỉ + `AnimationController` + `Transform`,
@@ -32,47 +31,74 @@ const Duration kSwipeFlyDuration = Duration(milliseconds: 280);
 const Duration kSwipeReturnDuration = Duration(milliseconds: 300);
 const Duration kSwipeUndoDuration = Duration(milliseconds: 250);
 
-/// Điều khiển từ ngoài (nút ♥ / ✕ / hoàn tác) để chạy cùng hoạt ảnh với vuốt tay.
-class SwipeDeckController {
-  _SwipeDeckState? _state;
-
-  /// Đang chạy hoạt ảnh (bay ra, bật về, thẻ quay lại) hoặc đang kéo.
-  bool get busy => _state?._busy ?? false;
-
-  /// Thẻ trên cùng bay ra theo hướng thích (`true`) / ít hơn (`false`), xong thì gọi `onDecide`.
-  void swipe({required bool like}) => _state?._swipeByButton(like);
-
-  /// Thẻ vừa bị bỏ quay lại từ phía nó đã bay ra (gọi ngay sau khi trả thẻ về đầu danh sách).
-  void enterFrom({required bool like}) => _state?._enterFrom(like);
+/// Phần điều khiển mà trạng thái của [SwipeDeck] cung cấp (không phụ thuộc kiểu thẻ).
+abstract interface class _DeckOps {
+  bool get busy;
+  void swipe(bool like);
+  void enterFrom(bool like);
 }
 
-class SwipeDeck extends StatefulWidget {
+/// Điều khiển từ ngoài (nút ♥ / ✕ / hoàn tác) để chạy cùng hoạt ảnh với vuốt tay.
+class SwipeDeckController {
+  _DeckOps? _state;
+
+  /// Đang chạy hoạt ảnh (bay ra, bật về, thẻ quay lại) hoặc đang kéo.
+  bool get busy => _state?.busy ?? false;
+
+  /// Thẻ trên cùng bay ra theo hướng thích (`true`) / ít hơn (`false`), xong thì gọi `onDecide`.
+  void swipe({required bool like}) => _state?.swipe(like);
+
+  /// Thẻ vừa bị bỏ quay lại từ phía nó đã bay ra (gọi ngay sau khi trả thẻ về đầu danh sách).
+  void enterFrom({required bool like}) => _state?.enterFrom(like);
+}
+
+/// Chồng thẻ quẹt dùng chung cho hai chế độ (kiểu thẻ [T] do nơi gọi chọn):
+/// - chọn nhiều / loại (T-106, bước Khẩu vị): thẻ bay ra rồi nơi gọi bỏ thẻ khỏi danh sách;
+/// - chọn 1 / xoay vòng (T-107, bước Mục tiêu): [keepOnLike] = `true`, quẹt phải chỉ bật thẻ về chỗ cũ sau khi báo
+///   [onDecide]; quẹt trái bay ra rồi nơi gọi đưa thẻ xuống cuối danh sách.
+class SwipeDeck<T extends Object> extends StatefulWidget {
   const SwipeDeck({
     required this.cards,
+    required this.idOf,
     required this.onDecide,
     required this.controller,
     required this.faceBuilder,
     required this.likeLabel,
     required this.lessLabel,
+    this.likeIcon = Icons.favorite,
+    this.lessIcon = Icons.thumb_down_alt_outlined,
+    this.keepOnLike = false,
+    this.onGrab,
     super.key,
   });
 
   /// Thẻ chưa xem, thẻ đầu tiên nằm trên cùng.
-  final List<SwipeCardDto> cards;
+  final List<T> cards;
+
+  /// Mã ổn định của thẻ (dùng làm `Key`).
+  final String Function(T card) idOf;
 
   /// Gọi sau khi thẻ bay ra xong (hoặc ngay khi giảm chuyển động).
-  final void Function(SwipeCardDto card, {required bool like}) onDecide;
+  final void Function(T card, {required bool like}) onDecide;
 
   final SwipeDeckController controller;
 
   /// Mặt thẻ (chỉ nội dung; khung, bo góc, bóng do chồng thẻ vẽ).
-  final Widget Function(BuildContext context, SwipeCardDto card) faceBuilder;
+  final Widget Function(BuildContext context, T card) faceBuilder;
 
   final String likeLabel;
   final String lessLabel;
+  final IconData likeIcon;
+  final IconData lessIcon;
+
+  /// Quẹt phải không đưa thẻ ra khỏi chồng: báo [onDecide] ngay rồi thẻ bật về giữa (chế độ chọn 1).
+  final bool keepOnLike;
+
+  /// Người dùng vừa chạm vào thẻ để kéo (để nơi gọi hủy việc đang chờ, vd tự sang bước kế).
+  final VoidCallback? onGrab;
 
   @override
-  State<SwipeDeck> createState() => _SwipeDeckState();
+  State<SwipeDeck<T>> createState() => _SwipeDeckState<T>();
 }
 
 /// Nhận kéo từ khoảng 18 dp (như cuộn dọc) thay vì 36 dp của `PanGestureRecognizer`, để kéo thẻ thắng
@@ -87,8 +113,9 @@ class _DeckPan extends PanGestureRecognizer {
       computeHitSlop(pointerDeviceKind, gestureSettings);
 }
 
-class _SwipeDeckState extends State<SwipeDeck>
-    with SingleTickerProviderStateMixin {
+class _SwipeDeckState<T extends Object> extends State<SwipeDeck<T>>
+    with SingleTickerProviderStateMixin
+    implements _DeckOps {
   late final AnimationController _anim = AnimationController(vsync: this)
     ..addListener(_tick)
     ..addStatusListener(_status);
@@ -105,6 +132,15 @@ class _SwipeDeckState extends State<SwipeDeck>
 
   bool get _busy => _dragging || _animating;
 
+  @override
+  bool get busy => _busy;
+
+  @override
+  void swipe(bool like) => _swipeByButton(like);
+
+  @override
+  void enterFrom(bool like) => _enterFrom(like);
+
   bool get _reduceMotion => MediaQuery.disableAnimationsOf(context);
 
   @override
@@ -114,7 +150,7 @@ class _SwipeDeckState extends State<SwipeDeck>
   }
 
   @override
-  void didUpdateWidget(SwipeDeck old) {
+  void didUpdateWidget(SwipeDeck<T> old) {
     super.didUpdateWidget(old);
     if (old.controller != widget.controller) {
       old.controller._state = null;
@@ -176,6 +212,12 @@ class _SwipeDeckState extends State<SwipeDeck>
       widget.onDecide(card, like: like);
     }
 
+    if (like && widget.keepOnLike) {
+      // Chọn 1: thẻ ở lại chồng, chỉ bật về giữa; báo chọn ngay.
+      widget.onDecide(card, like: true);
+      _backToCenter();
+      return;
+    }
     if (_reduceMotion) {
       decide();
       return;
@@ -204,6 +246,7 @@ class _SwipeDeckState extends State<SwipeDeck>
   void _onStart(DragStartDetails d) {
     if (_animating) return;
     _dragging = true;
+    widget.onGrab?.call();
   }
 
   void _onUpdate(DragUpdateDetails d) {
@@ -284,7 +327,7 @@ class _SwipeDeckState extends State<SwipeDeck>
           final s = reduce ? 1.0 : 1.0 - 0.05 * depth + 0.05 * p;
           final dy = 8.0 * depth - 8.0 * p;
           return Positioned.fill(
-            key: ValueKey('swipe-back-${card.id}'),
+            key: ValueKey('swipe-back-${widget.idOf(card)}'),
             child: ExcludeSemantics(
               child: IgnorePointer(
                 child: Transform.translate(
@@ -321,7 +364,7 @@ class _SwipeDeckState extends State<SwipeDeck>
                     if (cards.length > 2) back(2),
                     if (cards.length > 1) back(1),
                     RawGestureDetector(
-                      key: ValueKey('swipe-${top.id}'),
+                      key: ValueKey('swipe-${widget.idOf(top)}'),
                       behavior: HitTestBehavior.opaque,
                       gestures: {
                         _DeckPan:
@@ -356,7 +399,7 @@ class _SwipeDeckState extends State<SwipeDeck>
                             child: Stack(
                               children: [
                                 _CardFrame(
-                                  key: Key('swipe-card-${top.id}'),
+                                  key: Key('swipe-card-${widget.idOf(top)}'),
                                   width: w,
                                   height: h,
                                   child: widget.faceBuilder(context, top),
@@ -367,7 +410,7 @@ class _SwipeDeckState extends State<SwipeDeck>
                                   child: _DragLabel(
                                     key: const Key('swipe-label-like'),
                                     text: widget.likeLabel,
-                                    icon: Icons.favorite,
+                                    icon: widget.likeIcon,
                                     opacity: like ? p : 0,
                                     background: AppColors.primaryContainer,
                                     foreground: AppColors.onPrimaryContainer,
@@ -379,7 +422,7 @@ class _SwipeDeckState extends State<SwipeDeck>
                                   child: _DragLabel(
                                     key: const Key('swipe-label-less'),
                                     text: widget.lessLabel,
-                                    icon: Icons.thumb_down_alt_outlined,
+                                    icon: widget.lessIcon,
                                     opacity: !like ? p : 0,
                                     background: AppColors.warningContainer,
                                     foreground: AppColors.onWarningContainer,

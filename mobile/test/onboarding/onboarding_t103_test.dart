@@ -44,25 +44,28 @@ Future<ProviderContainer> _pump(
 
 void main() {
   group('Thứ tự bước (D-ONB-06)', () {
-    test('14 bước, khẩu vị ngay sau Mục tiêu, Dụng cụ ở cuối trước Tổng kết', () {
-      expect(OnboardingStep.values.map((s) => s.name).toList(), [
-        'goal',
-        'swipe',
-        'body',
-        'activity',
-        'targets',
-        'store',
-        'household',
-        'budget',
-        'meals',
-        'diet',
-        'rice',
-        'dislike',
-        'equipment',
-        'summary',
-      ]);
-      expect(OnboardingNav.last, OnboardingStep.values.length - 1);
-    });
+    test(
+      '14 bước, khẩu vị ngay sau Mục tiêu, Dụng cụ ở cuối trước Tổng kết',
+      () {
+        expect(OnboardingStep.values.map((s) => s.name).toList(), [
+          'goal',
+          'swipe',
+          'body',
+          'activity',
+          'targets',
+          'store',
+          'household',
+          'budget',
+          'meals',
+          'diet',
+          'rice',
+          'dislike',
+          'equipment',
+          'summary',
+        ]);
+        expect(OnboardingNav.last, OnboardingStep.values.length - 1);
+      },
+    );
   });
 
   group('Lưu bước theo tên (US-1.6 AC4)', () {
@@ -84,37 +87,46 @@ void main() {
       'summary',
     ];
 
-    test('trạng thái cũ (chỉ có số) đổi sang đúng bước theo tên ở thứ tự mới', () {
-      for (var i = 0; i < legacy.length; i++) {
-        final s = OnboardingState.fromJson({'step': i, 'completed': false});
+    test(
+      'trạng thái cũ (chỉ có số) đổi sang đúng bước theo tên ở thứ tự mới',
+      () {
+        for (var i = 0; i < legacy.length; i++) {
+          final s = OnboardingState.fromJson({'step': i, 'completed': false});
+          expect(
+            OnboardingStep.values[s.step].name,
+            legacy[i],
+            reason: 'số cũ $i',
+          );
+        }
+      },
+    );
+
+    test(
+      'số cũ ngoài khoảng không nhảy sai: quá cuối → Tổng kết, âm → đầu',
+      () {
         expect(
-          OnboardingStep.values[s.step].name,
-          legacy[i],
-          reason: 'số cũ $i',
+          OnboardingStep.values[OnboardingState.fromJson({'step': 99}).step],
+          OnboardingStep.summary,
         );
-      }
-    });
+        expect(OnboardingState.fromJson({'step': -2}).step, 0);
+        expect(OnboardingState.fromJson(const {}).step, 0);
+      },
+    );
 
-    test('số cũ ngoài khoảng không nhảy sai: quá cuối → Tổng kết, âm → đầu', () {
-      expect(
-        OnboardingStep.values[OnboardingState.fromJson({'step': 99}).step],
-        OnboardingStep.summary,
-      );
-      expect(OnboardingState.fromJson({'step': -2}).step, 0);
-      expect(OnboardingState.fromJson(const {}).step, 0);
-    });
-
-    test('định dạng mới có step_name: ưu tiên tên, vòng lưu → đọc giữ nguyên', () {
-      for (final step in OnboardingStep.values) {
-        final json = const OnboardingState()
-            .copyWith(step: step.index)
-            .toJson();
-        expect(json['step_name'], step.name);
-        // tên thắng số (kể cả khi số lệch)
-        final read = OnboardingState.fromJson({...json, 'step': 0});
-        expect(read.step, step.index, reason: step.name);
-      }
-    });
+    test(
+      'định dạng mới có step_name: ưu tiên tên, vòng lưu → đọc giữ nguyên',
+      () {
+        for (final step in OnboardingStep.values) {
+          final json = const OnboardingState()
+              .copyWith(step: step.index)
+              .toJson();
+          expect(json['step_name'], step.name);
+          // tên thắng số (kể cả khi số lệch)
+          final read = OnboardingState.fromJson({...json, 'step': 0});
+          expect(read.step, step.index, reason: step.name);
+        }
+      },
+    );
 
     testWidgets(
       'TC-1-51: bản cũ dừng ở Ngân sách (số 6) → mở lại đúng Ngân sách, giữ lựa chọn',
@@ -132,25 +144,27 @@ void main() {
         expect(c.read(onboardingProvider).swipedCardIds, isEmpty);
         // đi tiếp một bước thì lưu theo tên
         c.read(onboardingProvider.notifier).goTo(OnboardingStep.meals.index);
-        final saved =
-            jsonDecode(store.data[StoreKeys.onboarding]!) as Map<String, dynamic>;
+        final saved = jsonDecode(
+          store.data[StoreKeys.onboarding]!,
+        ) as Map<String, dynamic>;
         expect(saved['step_name'], 'meals');
       },
     );
 
-    testWidgets('bước Vuốt lưu dở: tắt app → mở lại đúng thẻ vuốt (US-1.6 AC4)', (
-      t,
-    ) async {
-      final store = onboardingAtStep(OnboardingStep.swipe);
-      await _pump(t, store);
-      expect(find.text('Vuốt để chọn món bạn thích'), findsOneWidget);
-      await t.tap(find.byKey(const Key('swipe-like')));
-      await t.pumpAndSettle();
-      await t.pumpWidget(const SizedBox());
-      final c = await _pump(t, store);
-      expect(c.read(onboardingProvider).step, OnboardingStep.swipe.index);
-      expect(find.text('Thẻ 2/14'), findsOneWidget);
-    });
+    testWidgets(
+      'bước Vuốt lưu dở: tắt app → mở lại đúng thẻ vuốt (US-1.6 AC4)',
+      (t) async {
+        final store = onboardingAtStep(OnboardingStep.swipe);
+        await _pump(t, store);
+        expect(find.text('Vuốt để chọn món bạn thích'), findsOneWidget);
+        await t.tap(find.byKey(const Key('swipe-like')));
+        await t.pumpAndSettle();
+        await t.pumpWidget(const SizedBox());
+        final c = await _pump(t, store);
+        expect(c.read(onboardingProvider).step, OnboardingStep.swipe.index);
+        expect(find.text('Thẻ 2/14'), findsOneWidget);
+      },
+    );
   });
 
   group('Đi hết các bước theo thứ tự', () {
@@ -162,9 +176,10 @@ void main() {
         c
             .read(preferencesProvider.notifier)
             .update((p) => p.copyWith(weeklyBudgetVnd: 900000));
-        // Vào onboarding: Mục tiêu → Tiếp tục → màn kế là thẻ vuốt (≤ 2 thao tác, AC5)
+        // Vào onboarding: Mục tiêu (thẻ quẹt chọn 1) → chọn → tự sang thẻ vuốt khẩu vị (≤ 2 thao tác, AC5)
         expect(c.read(onboardingProvider).step, OnboardingStep.goal.index);
-        await t.tap(find.text('Tiếp tục'));
+        await t.tap(find.byKey(const Key('goal-choose')));
+        await t.pump(const Duration(milliseconds: 450));
         await t.pumpAndSettle();
         expect(c.read(onboardingProvider).step, OnboardingStep.swipe.index);
 
@@ -217,9 +232,9 @@ void main() {
     testWidgets(
       'cửa hàng chưa khảo sát giá ghi "Giá ước lượng, chưa khảo sát tại cửa hàng này"; cửa hàng có ngày ghi ngày khảo sát',
       (t) async {
-        final reference =
-            jsonDecode(File('test/fixtures/reference.json').readAsStringSync())
-                as Map<String, dynamic>;
+        final reference = jsonDecode(
+          File('test/fixtures/reference.json').readAsStringSync(),
+        ) as Map<String, dynamic>;
         await _pump(
           t,
           onboardingAtStep(OnboardingStep.store),

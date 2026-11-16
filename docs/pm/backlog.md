@@ -558,6 +558,53 @@ T-001 (khởi tạo Expo), T-013…T-028 (UI Expo): **CANCELLED**, thay bằng T
   10. Không thêm dependency mới (`pubspec.yaml` không đổi). Nếu tự viết vượt 2 ngày công thì dừng và báo PM, không tự thêm package.
   11. Chụp lại ảnh màn vuốt (thẻ đầu, đang kéo phải có nhãn, đang kéo trái, sau khi hết thẻ) trên emulator, đặt cạnh ảnh cũ `it-02-onb-11-vuot-the-dau.png` để so. `flutter test` và integration onboarding xanh.
 
+### T-107 — Màn Mục tiêu thành bộ thẻ quẹt chọn 1 (Flutter) · DEV · P1 (sau T-106)
+- **Chuỗi (đã có, T-057f):** `onboardingGoalChoose`, `onboardingGoalOther`, `onboardingGoalSelected`; tiêu đề `onboardingGoalHint`, mô tả `onboardingGoal{Lose,Hold,Build}Hint`.
+- **Đã chốt với người dùng (D-SHP-08):** hình vẽ phẳng. **3 hình mục tiêu đang được Research vẽ lại**: dùng biểu tượng dự phòng hoặc bản cũ cho tới khi Research báo bản mới, rồi chuyển PNG lại.
+- **Hình:** `docs/research/illustrations/goal-*.svg` (tự vẽ, không ghi công; D-SHP-07). `mobile/` chưa có `flutter_svg`; **PM chọn không thêm dependency**: chuyển SVG sang PNG @1x/2x/3x một lần (script trong `tools/`, giữ SVG gốc làm nguồn), đặt vào asset của `mobile/`. Màu theo token nên không cần đổi màu lúc chạy.
+- **Phụ thuộc:** T-106 (thành phần thẻ quẹt); hình từ T-057f (dùng biểu tượng dự phòng nếu chưa có). PRD D-ONB-08, US-1.1 AC1.
+- **Files:** `mobile/lib/features/onboarding/` (bước goal), tách thẻ quẹt của T-106 thành widget dùng chung (chế độ "chọn nhiều/loại" và "chọn 1/xoay vòng").
+- **AC:**
+  1. 3 thẻ Giảm mỡ / Giữ cân / Tăng cơ, mỗi thẻ có hình, tên, mô tả; căn giữa và xếp chồng như T-106 (cùng test căn giữa ±1 dp).
+  2. Quẹt phải hoặc nút "Chọn mục tiêu này" → chọn đúng thẻ trên cùng, dấu "Đã chọn", Tiếp tục mở khóa, tự sang bước Khẩu vị sau 400 ms (không tự sang khi giảm chuyển động).
+  3. Quẹt trái hoặc nút "Xem mục tiêu khác" → thẻ xuống cuối bộ; quẹt trái 10 lần liên tiếp vẫn còn đủ 3 thẻ (widget test).
+  4. Hàng 3 chấm: chạm chấm đưa thẻ đó lên trên; có `Semantics` ("Mục tiêu 2 trên 3: Giữ cân").
+  5. Chưa chọn thì Tiếp tục khóa. Quay lại bước: thẻ đã chọn ở trên cùng; chọn thẻ khác thay lựa chọn cũ; request gửi đúng `goal`.
+  6. Tiêu đề và dòng hướng dẫn khác với bước Khẩu vị (chuỗi từ Research).
+  7. Ảnh màn hình mới vào `docs/dev/screens/`; `flutter test` + integration onboarding xanh.
+
+### T-108 — Màn dụng cụ bếp có hình từng dụng cụ (Flutter) · DEV · P1 (sau T-107)
+- **Hình:** `docs/research/illustrations/dungcu-*.svg` (7 file), cùng cách đưa vào như T-107.
+- **Phụ thuộc:** hình từ T-057f (dự phòng biểu tượng nếu chưa có). PRD D-ONB-09.
+- **AC:**
+  1. Lưới 2 cột (3 cột khi ≥ 600 dp), 7 thẻ dụng cụ, mỗi thẻ hình + tên.
+  2. Chọn nhiều; trạng thái chọn có dấu tích + viền (widget test kiểm có icon tích, không chỉ màu).
+  3. Vùng chạm ≥ 48 dp; `Semantics` checkbox có trạng thái chọn; cỡ chữ 1.3 không vỡ bố cục.
+  4. Vẫn bắt buộc ≥ 1 thiết bị nấu (US-1.5 AC3); request gửi đúng `equipment`.
+  5. Thiếu file hình → biểu tượng dự phòng, không lỗi (test).
+
+### T-116 — Đi chợ 2 chế độ "Theo tuần" / "Theo ngày" · DEV · P1 phase 2 (sau T-112)
+- **Đã chốt với người dùng (D-SHP-08):** thịt cá mặc định Theo ngày + công tắc cấp đông; lần đầu mở tab là Theo tuần, sau đó nhớ chế độ gần nhất.
+- **Chuỗi (đã có, T-057f):** `shopModeWeekly`, `shopModeDaily`, `shopToday`, `shopFreezeMeatSwitch`, `shopBatchExtra`, `shopNoShelfInfo`.
+- **Phụ thuộc:** T-112 (`data/storage.json` + nhãn độ tươi). PRD D-SHP-06. Làm **trước** T-115 và T-114.
+- **Files:** `backend/MonNgon.Engine/Shopping.cs` (phân loại, đợt mua, gộp mua sớm), API danh sách đi chợ (thêm `mode`, `trip_date`/`trips`), `mobile/` tab Đi chợ.
+- **AC:**
+  0. (D-SHP-07) Nhóm mua **suy ra** từ `storage.json` + quy tắc, không thêm file dữ liệu; unit test so với bảng mong đợi `docs/research/ingredient-storage-groups.json` (đã sửa xong 2026-11-16: `buy_by_day` 35, `stock_buy_by_week` 34). Test bỏ qua 2 dòng deprecated `com_trang`, `gao_lut_nau_chin` (không có trong danh sách đi chợ, D-SHP-07 mục 5).
+  1. Phân loại đúng quy tắc D-SHP-06 cho 100% nguyên liệu trong `storage.json` (unit test bảng: nhãn × `freezable` × công tắc cấp đông → chế độ). chưa có số liệu → theo quầy (đồ khô/gia vị/đồ hộp → Theo tuần; đồ tươi → Theo ngày) + ghi chú "Chưa có thông tin hạn dùng" (D-SHP-07).
+  2. Theo ngày: các đợt theo ngày, "Hôm nay" đầu tiên; gộp mua sớm khi lần dùng sau nằm trong số ngày còn tươi (cận dưới). Unit test: rau 3–5 ngày dùng ngày 1 và 3 → 1 đợt ngày 1; thịt 1–2 ngày dùng ngày 1 và 4 → 2 đợt.
+  3. Tổng gram mỗi nguyên liệu qua mọi đợt = tổng gram tuần (không thiếu, không thừa phần cần dùng); số gói làm tròn theo đợt.
+  4. Chi phí so ngân sách và trạng thái ngân sách **giống hệt** trước khi có tính năng (test 18 hồ sơ).
+  5. Tổng "trả tại quầy" cả tuần ≥ tổng cũ; chênh lệch hiện "+X ₫ do mua theo đợt"; mỗi chế độ và mỗi đợt có tổng riêng.
+  6. "Đã mua x/N" theo từng chế độ + tổng; "Nhà có sẵn" chỉ ở Theo tuần; nhãn "Dùng trong N ngày" ở cả hai.
+  7. Công tắc "Mua thịt cá cả tuần rồi cấp đông": bật → dòng thịt cá `freezable` sang Theo tuần, có hướng dẫn cấp đông/rã đông; tắt → về Theo ngày; trạng thái đã mua giữ nguyên khi đổi.
+  8. Mặc định Theo tuần lần đầu, nhớ chế độ gần nhất (lưu máy). Widget test 2 chế độ; ảnh màn hình mới.
+
+### T-057f — Hình minh họa mục tiêu + dụng cụ, chuỗi giao diện · RESEARCH · P1 (làm ngay)
+- **Trạng thái (2026-11-16):** hình **xong** (10 SVG trong `docs/research/illustrations/`, chờ session chính kiểm render); phân loại mua xong (`ingredient-storage-groups.*`). **Chuỗi i18n xong** (504 chuỗi, không trùng khóa); ARB mới: `onboardingGoalChoose`, `onboardingGoalOther`, `onboardingGoalSelected`, `shopModeWeekly`, `shopModeDaily`, `shopToday`, `shopFreezeMeatSwitch`, `shopBatchExtra`, `shopNoShelfInfo`; tiêu đề/mô tả mục tiêu dùng khóa có sẵn (`onboardingGoalHint`, `onboardingGoal{Lose,Hold,Build}Hint`); giấy phép ở `docs/research/illustrations-licenses.md`. Đặt hình vào `mobile/` là việc của Dev (chuyển PNG, T-107). **T-057f XONG (2026-11-16):** đậu phụ → `uoc_tinh_vn`, ngăn mát 1 ngày, mua theo ngày; 11 dòng có `long_term: true`; bảng mong đợi `ingredient-storage-groups.json` viết lại theo tên trường hợp đồng (`buy_by_day` 35, `stock_buy_by_week` 34, chưa phân loại 0). Còn chờ: 3 hình mục tiêu vẽ lại (session chính theo dõi).
+- **Phụ thuộc:** PRD D-ONB-08, D-ONB-09.
+- **Mô tả:** 3 hình mục tiêu (Giảm mỡ, Giữ cân, Tăng cơ) + 7 hình dụng cụ (Bếp, Nồi cơm điện, Lò vi sóng, Nồi chiên không dầu, Lò nướng, Nồi áp suất, Máy xay). Phong cách vẽ phẳng, đồng bộ với placeholder món hiện có; giấy phép CC0/MIT/tự vẽ, dùng thương mại được. Không ảnh của bên khác, không hình Mealbird/Tinder. Chuỗi: tiêu đề/hướng dẫn bước Mục tiêu, nút "Chọn mục tiêu này" / "Xem mục tiêu khác", mô tả 3 mục tiêu, nhãn "Đã chọn"; chuỗi tab Đi chợ 2 chế độ, công tắc cấp đông, "+X ₫ do mua theo đợt".
+- **AC:** file hình (SVG hoặc PNG @1x/2x/3x) trong thư mục asset Dev chỉ định; bảng giấy phép từng hình trong `docs/research/illustrations-licenses.md`; chuỗi trong `vi.json`, báo tên khóa ARB.
+
 ### T-057e — Cập nhật TC theo thứ tự onboarding mới + kiểm lại · RESEARCH · P1
 - **Trạng thái (2026-11-09):** phần tài liệu **xong** (TC-1-27…32, 36/37, 39, E-05 theo tên/vị trí bước mới; thêm TC-1-49/50/51; chuỗi trong `vi.json`, ghi ở `docs/research/content-i18n-T057e.md`). Còn: kiểm lại sau T-103 → `acceptance-T103.md`.
 - **Phụ thuộc:** D-ONB-06. Phần kiểm lại chờ T-103.
@@ -625,10 +672,10 @@ T-001 (khởi tạo Expo), T-013…T-028 (UI Expo): **CANCELLED**, thay bằng T
   - Ghi danh sách thay đổi vào `docs/research/data-batch-D1.md`.
 
 ### Thứ tự ưu tiên sau T-050
-**Thứ tự Dev đã chốt (2026-11-10):** kiểm tất định (P0 nếu lỗi) → T-101 phần còn lại (ngoại lệ p01, BudgetTests, CPU ≤ 2 s) → T-103 → **T-106 (sửa màn vuốt, người dùng báo lỗi)** → **T-106 (sửa màn vuốt)** → phase 2: T-112 (độ tươi) và T-115 (tự sửa giá) → T-113 (nguồn giá BHX) → T-114 (UI giá). T-105 (CPU ≤ 2 s, đổi thuật toán được; **P1, điều kiện phát hành**) xếp sau T-103, trước hoặc song song phase 2 tùy Dev (khác file với T-112/T-115 Flutter).
+**Thứ tự Dev đã chốt (2026-11-10):** kiểm tất định (P0 nếu lỗi) → T-101 phần còn lại (ngoại lệ p01, BudgetTests, CPU ≤ 2 s) → T-103 → **T-106 (sửa màn vuốt, người dùng báo lỗi)** → **T-107 (Mục tiêu thẻ quẹt)** → **T-108 (dụng cụ có hình)** → T-105 (CPU, điều kiện phát hành) → T-112 → **T-116 (Đi chợ 2 chế độ)** → T-115 → T-113 → T-114. (Cập nhật 2026-11-16; dòng cũ bên dưới giữ để tham khảo.) Cũ: **T-106 (sửa màn vuốt)** → phase 2: T-112 (độ tươi) và T-115 (tự sửa giá) → T-113 (nguồn giá BHX) → T-114 (UI giá). T-105 (CPU ≤ 2 s, đổi thuật toán được; **P1, điều kiện phát hành**) xếp sau T-103, trước hoặc song song phase 2 tùy Dev (khác file với T-112/T-115 Flutter).
 
 1. **Dev:** xong việc điều tra số test .NET dao động → T-093 mục 1 (L-03) → 2 (L-09) → 3 (L-01) → 4 (L-02) → T-078 phần pantry → **T-094 (lượng cơm theo thói quen, D-COM-01, xong) → T-095 (Flutter) ∥ T-096 (giữ cơm khi chọn mâm, D-COM-02; song song được vì khác file)** → **T-098 (2–3 chén đủ bữa có cơm, D-COM-04)** → T-097 (L-12, L-13) → T-099 (thẻ tinh bột, Flutter, xong PR #2) → **T-104 (regen golden sau đợt giá D2, làm ngay)** → **T-101 (hiệu năng mức cơm cao, P0)** → T-102 (nhãn TINH BỘT, P2) → **T-103 (thẻ vuốt lên bước 2, D-ONB-06)** → T-093 mục 5 (L-08) → mục 6 (L-05).
-2. **Research:** **T-110 lượt 3 (robots.txt + ánh xạ sản phẩm BHX HCM, D-P2-06)** · T-054d xong · **T-054e (nguồn cho 44 dòng giá, P2)** · (sau T-057d: T-110/T-111 phase 2, mức thấp) · **T-057e (TC theo thứ tự onboarding mới + chuỗi cho T-103)**, **T-057d (2 hồ sơ test hộ đông người + ngân sách sát, chuỗi TINH BỘT)**; T-057c (sửa TC-E-04, TC-E-09) bất cứ lúc nào; **T-059c ngay (số liệu chén cơm, dữ liệu `max_g`, chuỗi; Dev cần trước T-095)**, T-057b (tài liệu, không chạm dữ liệu) → chờ Dev xong mục 1–4 → T-050b → T-050c (sau T-094/T-095/T-096) → T-054b (mở băng D1) → các task dữ liệu còn lại (T-053, T-054…).
+2. **Research:** **T-057f (hình mục tiêu + dụng cụ, chuỗi; làm ngay)** · **T-110 lượt 3 (robots.txt + ánh xạ sản phẩm BHX HCM, D-P2-06)** · T-054d xong · **T-054e (nguồn cho 44 dòng giá, P2)** · (sau T-057d: T-110/T-111 phase 2, mức thấp) · **T-057e (TC theo thứ tự onboarding mới + chuỗi cho T-103)**, **T-057d (2 hồ sơ test hộ đông người + ngân sách sát, chuỗi TINH BỘT)**; T-057c (sửa TC-E-04, TC-E-09) bất cứ lúc nào; **T-059c ngay (số liệu chén cơm, dữ liệu `max_g`, chuỗi; Dev cần trước T-095)**, T-057b (tài liệu, không chạm dữ liệu) → chờ Dev xong mục 1–4 → T-050b → T-050c (sau T-094/T-095/T-096) → T-054b (mở băng D1) → các task dữ liệu còn lại (T-053, T-054…).
 
 ### T-029 — Freemium (viết lại) · DEV · P2
 - **Mô tả:** Theo PRD §12.
@@ -797,8 +844,8 @@ T-001 (khởi tạo Expo), T-013…T-028 (UI Expo): **CANCELLED**, thay bằng T
 ## Tổng hợp v0.2
 | Owner | DONE | CANCELLED | Còn mở P0 | Còn mở P1 | Còn mở P2 |
 |---|---|---|---|---|---|
-| DEV | 11 (T-002…T-012) | 17 (T-001, T-013…T-028) | 31 (T-051, T-052, T-060…T-066, T-069…T-072, T-074, T-076, T-078, T-080…T-089, T-093…T-098, T-101) + T-104, T-105 (P1) | 10 (T-067, T-068, T-073, T-077, T-099, T-103, T-106, T-090…T-092) | 5 (T-029, T-075, T-079, T-100, T-102) |
-| RESEARCH | 5 (T-041, T-043, T-047, T-048, T-049) | 1 (T-044) | 12 (T-058, T-053, T-054, T-055, T-057, T-059, T-059c, T-042c, T-050b, T-050c, T-057b, T-057c) | 7 (T-042b, T-056, T-054b, T-054c, T-054d, T-057d, T-057e) · P2: T-054e · T-050 DONE | 0 |
+| DEV | 11 (T-002…T-012) | 17 (T-001, T-013…T-028) | 31 (T-051, T-052, T-060…T-066, T-069…T-072, T-074, T-076, T-078, T-080…T-089, T-093…T-098, T-101) + T-104, T-105 (P1) | 13 (T-067, T-068, T-073, T-077, T-099, T-103, T-106, T-107, T-108, T-116, T-090…T-092) | 5 (T-029, T-075, T-079, T-100, T-102) |
+| RESEARCH | 5 (T-041, T-043, T-047, T-048, T-049) | 1 (T-044) | 12 (T-058, T-053, T-054, T-055, T-057, T-059, T-059c, T-042c, T-050b, T-050c, T-057b, T-057c) | 8 (T-042b, T-056, T-054b, T-054c, T-054d, T-057d, T-057e, T-057f) · P2: T-054e · T-050 DONE | 0 |
 
 Ghi chú: các task RESEARCH PARTIAL (T-040, T-042, T-045, T-046) đã được gộp vào T-054, T-042b, T-055.
 

@@ -27,11 +27,16 @@ class OnboardingState {
     this.step = 0,
     this.completed = false,
     this.swipedCardIds = const [],
+    this.goalChosen = false,
   });
 
   factory OnboardingState.fromJson(Map<String, dynamic> j) => OnboardingState(
     step: _stepFromJson(j),
     completed: j['completed'] as bool? ?? false,
+    // Dữ liệu cũ chưa có cờ: đã qua bước Mục tiêu (hoặc đã xong onboarding) nghĩa là mục tiêu đã được chọn.
+    goalChosen:
+        j['goal_chosen'] as bool? ??
+        (_stepFromJson(j) > 0 || (j['completed'] as bool? ?? false)),
     swipedCardIds:
         (j['swiped_card_ids'] as List<dynamic>?)?.cast<String>().toList() ??
         const [],
@@ -54,14 +59,20 @@ class OnboardingState {
   /// Các thẻ vuốt đã xem (để mở lại đúng thẻ tiếp theo).
   final List<String> swipedCardIds;
 
+  /// Người dùng đã chọn mục tiêu (bước Mục tiêu là bộ thẻ quẹt chọn 1, T-107): chưa chọn thì "Tiếp tục" khóa.
+  /// `Profile.goal` luôn có giá trị mặc định nên không dùng nó để biết đã chọn hay chưa.
+  final bool goalChosen;
+
   OnboardingState copyWith({
     int? step,
     bool? completed,
     List<String>? swipedCardIds,
+    bool? goalChosen,
   }) => OnboardingState(
     step: step ?? this.step,
     completed: completed ?? this.completed,
     swipedCardIds: swipedCardIds ?? this.swipedCardIds,
+    goalChosen: goalChosen ?? this.goalChosen,
   );
 
   Map<String, dynamic> toJson() => {
@@ -71,6 +82,7 @@ class OnboardingState {
         .name,
     'completed': completed,
     'swiped_card_ids': swipedCardIds,
+    'goal_chosen': goalChosen,
   };
 }
 

@@ -46,13 +46,28 @@ void main() {
       await shot(t, 'it-01-xoa-du-lieu');
 
       // ---------------------------------------------------------------- 2. Onboarding 13 bước (hồ sơ p01)
-      // 1/13 mục tiêu: giảm mỡ
-      await tapFinder(t, find.text(l.onboardingGoalLose));
+      // 1/14 mục tiêu (T-107: bộ thẻ quẹt chọn 1): kéo thử sang phải/trái (nhãn hiện ra), rồi chọn "Giảm mỡ"
       await shot(t, 'it-02-onb-01-muc-tieu');
-      await next(t);
+      final goalCard = find.byKey(const Key('swipe-card-lose'));
+      final goalWidth = t.getSize(goalCard).width;
+      final gg = await t.startGesture(t.getCenter(goalCard));
+      await gg.moveBy(Offset(0.25 * goalWidth, 24));
+      await t.pump(const Duration(milliseconds: 50));
+      await shot(t, 'it-02-onb-01-keo-phai');
+      await gg.moveBy(Offset(-0.5 * goalWidth, 0));
+      await t.pump(const Duration(milliseconds: 50));
+      await shot(t, 'it-02-onb-01-keo-trai');
+      await gg.moveBy(Offset(0.25 * goalWidth, -24));
+      await gg.up();
+      await breathe(t, 600);
+      expect(containerOf(t).read(onboardingProvider).goalChosen, isFalse);
+      // chọn bằng nút: thẻ "Đã chọn", rồi tự sang bước Khẩu vị sau 400 ms
+      await tapKey(t, 'goal-choose');
+      await shot(t, 'it-02-onb-01-da-chon');
 
       // 2/14 thẻ vuốt khẩu vị (D-ONB-06: ngay sau Mục tiêu): thích "xào" và "canh", các thẻ khác chọn ít hơn
       await waitFor(t, find.byKey(const Key('swipe-progress')));
+      expect(containerOf(t).read(profileProvider).goal, 'lose');
       final reference = await containerOf(t).read(referenceProvider.future);
       final cards = reference.swipeCards;
       expect(cards.map((c) => c.tag), containsAll(['xao', 'canh']));

@@ -150,8 +150,9 @@ class _SwipeStepState extends ConsumerState<SwipeStep> {
               ),
               const SizedBox(height: AppSpacing.md),
               // Thẻ căn giữa, kéo theo ngón tay; vuốt phải = thích, trái = ít hơn (T-106).
-              SwipeDeck(
+              SwipeDeck<SwipeCardDto>(
                 cards: remaining.take(3).toList(),
+                idOf: (c) => c.id,
                 controller: _deck,
                 onDecide: _decide,
                 faceBuilder: (context, c) => _SwipeFace(card: c),

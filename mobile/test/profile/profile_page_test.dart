@@ -198,7 +198,10 @@ void main() {
         expect(find.byKey(const Key('edit-back')), findsOneWidget);
         expect(find.byKey(const Key('onboarding-back')), findsNothing);
         expect(find.text('Lưu'), findsOneWidget);
-        await t.tap(find.text('Tăng cơ'));
+        // màn Mục tiêu là bộ thẻ quẹt chọn 1 (T-107): chạm chấm thứ 3 đưa "Tăng cơ" lên trên rồi chọn
+        await t.tap(find.byKey(const Key('goal-dot-build')));
+        await t.pumpAndSettle();
+        await t.tap(find.byKey(const Key('goal-choose')));
         await _settle(t);
         await t.tap(find.text('Lưu'));
         await _settle(t);
@@ -252,7 +255,10 @@ void main() {
         final c = await _pump(t, adapter: a);
         final before = c.read(currentPlanProvider)!.toJson();
         await _tap(t, 'edit-goal');
-        await t.tap(find.text('Tăng cơ'));
+        // màn Mục tiêu là bộ thẻ quẹt chọn 1 (T-107): chạm chấm thứ 3 đưa "Tăng cơ" lên trên rồi chọn
+        await t.tap(find.byKey(const Key('goal-dot-build')));
+        await t.pumpAndSettle();
+        await t.tap(find.byKey(const Key('goal-choose')));
         await _settle(t);
         await t.tap(find.text('Lưu'));
         await _settle(t);

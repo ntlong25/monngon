@@ -9,6 +9,7 @@ export 'app_toggle.dart';
 export 'bottom_cta.dart';
 export 'dish_card.dart';
 export 'dish_image.dart';
+export 'illustration.dart';
 export 'list_row.dart';
 export 'progress_segments.dart';
 export 'segmented_control.dart';

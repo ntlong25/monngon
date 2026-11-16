@@ -70,7 +70,7 @@ Quy ước: **US-x.y**, AC = acceptance criteria dạng kiểm được. Số li
 ### Epic 1 — Onboarding + chỉ tiêu (P0-1)
 
 **US-1.1 Đặt chỉ tiêu theo cơ thể.** Là người dùng mới, tôi nhập mục tiêu và chỉ số cơ thể để app tính protein tối thiểu và calo mỗi ngày.
-- AC1: Nhập được mục tiêu (Giảm mỡ / Giữ cân / Tăng cơ), giới tính, tuổi (14–90), chiều cao (120–220 cm), cân nặng (30–250 kg), 5 mức vận động; ngoài khoảng → báo lỗi tại chỗ, nút Tiếp tục bị khóa.
+- AC1: Chọn mục tiêu bằng bộ thẻ quẹt chọn 1, xoay vòng, có hình minh họa (D-ONB-08); nhập được mục tiêu (Giảm mỡ / Giữ cân / Tăng cơ), giới tính, tuổi (14–90), chiều cao (120–220 cm), cân nặng (30–250 kg), 5 mức vận động; ngoài khoảng → báo lỗi tại chỗ, nút Tiếp tục bị khóa.
 - AC2: Công thức đúng mục 4.8 spec: BMR (Mifflin–St Jeor) × hệ số vận động × hệ số mục tiêu, làm tròn 50 kcal; cân nặng tham chiếu; protein theo g/kg làm tròn 5 g; trần 35% calo; sàn thắng trần.
 - AC3: Với ví dụ của spec (nam 30t, 177,8 cm, 81,6 kg, vừa vận động, giảm mỡ) app ra **2.200 kcal** và **175 g protein**.
 - AC4: Màn kết quả hiển thị từng dòng phép tính (BMR → TDEE → mục tiêu → protein) và cho phép chuyển sang "Tự nhập" protein/calo.
@@ -543,6 +543,66 @@ Chọn phương án (3):
 - **Tự viết, không thêm package.** Cử chỉ cần làm đơn giản: `GestureDetector` + `AnimationController` + `Transform`. Tự viết khớp sẵn logic thích/ít hơn/hoàn tác/thay thế hiện có, và giữ được trợ năng. Không thêm dependency khi chưa có lý do; `flutter_card_swiper` chỉ là phương án dự phòng nếu tự viết vượt quá 2 ngày công, khi đó báo PM.
 - **Chỉ lấy cơ chế "quẹt thẻ"**, không sao chép giao diện, màu, biểu tượng hay câu chữ của Tinder hoặc Mealbird (nguyên tắc ở đầu PRD).
 - Task: T-106.
+
+**D-ONB-08 / D-ONB-09 / D-SHP-06 — Ba yêu cầu sau khi người dùng thử app trên emulator (PM, 2026-11-16).**
+
+**D-ONB-08 — Màn "Mục tiêu" (bước 1) thành bộ thẻ quẹt, chọn đúng 1.**
+- Dùng lại thành phần thẻ quẹt của T-106 (căn giữa, xếp chồng, nghiêng, ngưỡng, giảm chuyển động). 3 thẻ: Giảm mỡ, Giữ cân, Tăng cơ. Mỗi thẻ có hình minh họa đúng mục tiêu, tên và một dòng mô tả ngắn.
+- **Chọn duy nhất:**
+  - Quẹt phải (hoặc nút "Chọn mục tiêu này") = chọn thẻ đang ở trên cùng. Thẻ có dấu "Đã chọn" và nút Tiếp tục mở khóa. Sau 400 ms tự sang bước kế (bước Khẩu vị). Giảm chuyển động thì không tự sang, người dùng bấm Tiếp tục.
+  - Quẹt trái (hoặc nút "Xem mục tiêu khác") = **đưa thẻ xuống cuối bộ**, không loại. Bộ thẻ xoay vòng nên không bao giờ hết thẻ và luôn chọn được.
+  - Hàng 3 chấm dưới bộ thẻ cho biết đang ở thẻ nào; chạm vào chấm thì đưa thẻ đó lên trên cùng. Đây là lối thay thế không cần vuốt, có nhãn cho trình đọc màn hình.
+  - Quay lại bước này: thẻ đã chọn nằm trên cùng, có dấu "Đã chọn"; chọn thẻ khác thì thay lựa chọn cũ.
+- Màn đầu tiên không có lựa chọn mặc định, nên không có Tiếp tục khi chưa chọn (US-1.1 AC1).
+- **Thứ tự bước không đổi** (D-ONB-06): Mục tiêu (thẻ quẹt) → Khẩu vị (thẻ quẹt) → Cơ thể → … Hai bộ thẻ liền nhau nhưng khác mục đích: tiêu đề và dòng hướng dẫn phải nói rõ ("Chọn 1 mục tiêu" và "Quẹt để cho biết bạn thích kiểu món nào").
+
+**D-ONB-09 — Màn "Bếp nhà bạn có những gì?" có hình cho từng dụng cụ.** Lưới thẻ 2 cột (3 cột khi màn ≥ 600 dp). Mỗi thẻ có hình minh họa dụng cụ và tên. Vẫn chọn nhiều, bắt buộc ≥ 1 thiết bị nấu (US-1.5 AC3). Trạng thái chọn có dấu tích + viền, không chỉ đổi màu. Vùng chạm ≥ 48 dp, có ngữ nghĩa checkbox cho trình đọc màn hình.
+
+**Hình minh họa (cho D-ONB-08, D-ONB-09):**
+- Mặc định là **hình minh họa vẽ phẳng, cùng phong cách** với ảnh placeholder theo nhóm món đang có.
+- Nguồn có giấy phép cho phép dùng thương mại (CC0/MIT/tự vẽ). Research chọn và ghi giấy phép vào `docs/research/`. Không dùng ảnh chụp của bên khác, không dùng hình của Mealbird/Tinder.
+- Thiếu hình thì app dùng biểu tượng dự phòng, không lỗi.
+- ~~Câu xác nhận cho người dùng~~ **Đã chốt: hình vẽ phẳng** (D-SHP-08).
+
+**D-SHP-06 — Tab Đi chợ có 2 chế độ: "Theo tuần" và "Theo ngày".**
+- **Phân loại** mỗi nguyên liệu theo dữ liệu bảo quản (`storage.json`, nhãn D-P2-02):
+  - **Theo tuần (mua 1 lần):** nhãn "Để lâu" (≥ 14 ngày) và "Để được cả tuần" (6–13 ngày). Ví dụ: gạo, đồ khô, gia vị, đồ hộp, trứng, sữa hộp, củ để lâu.
+  - **Theo ngày (mua gần ngày nấu):** nhãn "Dùng trong 1–2 ngày" và "Dùng trong 3–5 ngày". Ví dụ: rau lá, thịt cá tươi, đậu phụ.
+  - **Thịt cá tươi cấp đông được** (`freezable = true`): mặc định **Theo ngày**. Có công tắc "Mua thịt cá cả tuần rồi cấp đông" trên tab Đi chợ: bật thì các dòng này chuyển sang Theo tuần, kèm hướng dẫn cấp đông và rã đông (US-8.3 AC3).
+  - Nguyên liệu `chua_co_nguon` (không có dữ liệu) xếp **Theo tuần** kèm ghi chú "Chưa có thông tin hạn dùng". Không đoán.
+- **Chế độ Theo ngày:**
+  - Danh sách chia theo **đợt mua**. Đợt đầu là "Hôm nay", sau đó là từng ngày còn lại của tuần; mỗi ngày gập/mở được.
+  - Mỗi đợt gồm nguyên liệu tươi cho các bữa của ngày đó. **Gộp mua sớm:** nếu cùng nguyên liệu dùng lại trong số ngày nó còn tươi (theo cận dưới của nhãn), thì gộp vào đợt sớm hơn để tránh mua lẻ gói nhiều lần. Ví dụ: rau 3–5 ngày dùng ngày 1 và ngày 3 → mua 1 lần ngày 1.
+  - Quy cách gói làm tròn theo từng đợt.
+- **Chế độ Theo tuần:** danh sách như hiện nay nhưng chỉ có nhóm Theo tuần, vẫn gộp theo quầy.
+- **Số liệu theo chế độ:**
+  - **Chi phí món ăn so ngân sách** (theo gram dùng) **không đổi** theo chế độ. Trạng thái ngân sách giữ nguyên.
+  - **"Ước tính trả tại quầy":** đầu tab hiện tổng cả tuần. Mỗi chế độ hiện tổng của chế độ đó; Theo ngày thêm tổng của từng đợt. Tổng cả tuần có thể cao hơn trước một chút vì làm tròn gói theo đợt; số chênh hiện rõ ("+X ₫ do mua theo đợt").
+  - **"Đã mua x/N":** đếm riêng mỗi chế độ (N = số dòng của chế độ); đầu tab hiện tổng.
+  - **"Nhà có sẵn":** chỉ ở Theo tuần (đồ có sẵn đều là đồ để lâu).
+  - **Nhãn "Dùng trong N ngày":** hiện ở cả hai chế độ.
+- **Mặc định khi mở tab:** Theo tuần lần đầu; sau đó nhớ chế độ dùng gần nhất (lưu trên máy).
+- **Quan hệ phase 2:** tính năng này **là phần mở rộng của Epic 8**, cần `data/storage.json` (T-112). Giá BHX (T-114) và tự sửa giá (T-115) hiện ở từng dòng của **cả hai chế độ**, nên làm T-116 trước T-115/T-114 để hai task này xây trên cấu trúc mới, không làm lại.
+- ~~Câu xác nhận cho người dùng~~ **Đã chốt** cả hai mặc định (D-SHP-08).
+- Task: T-107 (mục tiêu), T-108 (dụng cụ), T-116 (đi chợ 2 chế độ); Research T-057f (hình), T-111 đã có dữ liệu phân loại.
+
+**D-SHP-08 — Người dùng xác nhận 3 mặc định (2026-11-16). ĐÃ CHỐT.** Người dùng chọn đúng 3 mặc định của PM:
+1. Hình mục tiêu và dụng cụ: **hình vẽ phẳng** (D-ONB-08/09).
+2. Thịt cá tươi mặc định **Theo ngày**, có công tắc "Mua thịt cá cả tuần rồi cấp đông" để chuyển sang Theo tuần (D-SHP-06/07).
+3. Tab Đi chợ: lần đầu hiện **Theo tuần**, các lần sau nhớ chế độ dùng gần nhất (D-SHP-06).
+
+Ghi chú: 3 hình mục tiêu đang được Research vẽ lại vì chưa rõ nghĩa (giảm mỡ, tăng cơ). Dev dùng bản mới khi Research báo xong.
+
+**D-SHP-07 — Duyệt phân loại mua theo ngày/tuần và hình minh họa của Research (PM, 2026-11-16).** Nguồn: `docs/research/ingredient-storage-groups.md`, `docs/research/illustrations/`.
+- **Một nguồn sự thật:** nhóm mua **không lưu thành file dữ liệu thứ hai**. Engine suy ra nhóm từ `storage.json` (hợp đồng tiếng Anh D-P2-02/04/05) theo quy tắc dưới. `ingredient-storage-groups.json` của Research dùng làm **bảng kết quả mong đợi** cho unit test. Không đổi tên trường sang tiếng Việt, vì sẽ lệch với `storage.json` đã duyệt.
+- **Quy tắc (sửa D-SHP-06 cho khớp đề xuất Research):**
+  1. Thịt, cá, hải sản tươi → **Theo ngày**, bất kể số ngày. Công tắc "Mua thịt cá cả tuần rồi cấp đông" chuyển các dòng `freezable` sang Theo tuần. Người có tủ đông dùng công tắc này. Mặc định vẫn Theo ngày vì an toàn hơn. Đây cũng là câu xác nhận đã gửi người dùng.
+  2. Trứng → Theo tuần.
+  3. Còn lại: số ngày dài nhất ở nhiệt độ phòng/ngăn mát (cận dưới) ≤ 5 → Theo ngày; ≥ 6 hoặc `long_term` → Theo tuần.
+  4. **Chưa có số liệu** (11 dòng): xếp theo quầy (`aisle`). Gạo/đồ khô, gia vị/dầu, đồ hộp → Theo tuần. Thịt, cá, rau củ, trái cây, trứng/đậu phụ → Theo ngày (thận trọng). Cả 11 dòng hiện tại (tiêu, dầu ăn, nước mắm, xì dầu, nước mắm chay, đậu lăng, đậu đỏ, gạo nếp, gạo tẻ, gạo lứt, nấm rơm đóng hộp) đều là đồ để lâu → Theo tuần. Research bổ sung `long_term: true` cho chúng (không cần số ngày).
+  5. Dòng deprecated `com_trang`, `gao_lut_nau_chin` (D-SHP-05) không xuất hiện trong danh sách đi chợ (đã quy ra gạo sống), nên không cần nhóm.
+- **Cần Research kiểm lại:** **đậu phụ** đang ra Theo tuần. Đậu phụ bán ở chợ/siêu thị VN thường không đóng kín và chỉ để được 1–3 ngày ngăn mát. Nếu số FoodKeeper là của đậu phụ đóng hộp kín thì dùng quy cách VN (thường là `uoc_tinh_vn`) và chuyển sang Theo ngày.
+- **Hình minh họa:** 10 SVG tự vẽ, không bản quyền bên thứ ba. Duyệt dùng cho T-107/T-108, với điều kiện session chính kiểm render từng hình. Hình nào lỗi bố cục thì Research sửa; trong lúc chờ Dev dùng biểu tượng dự phòng.
 
 **D-SHP-01 — Đồ "nhà có sẵn" trong con số tại quầy (PM, 2026-11-07).** Câu (a) trong `docs/research/prices-small-packs-notes.md`. Chọn **có, loại khỏi mặc định**:
 - Nguyên liệu `default_pantry` (dầu ăn, nước mắm, xì dầu, muối, đường, tiêu, gia vị khô…) được đánh dấu sẵn "Nhà có sẵn" ở tuần đầu. **Không** cộng vào "Ước tính trả tại quầy" mặc định.

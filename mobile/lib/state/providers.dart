@@ -74,6 +74,10 @@ class OnboardingNotifier extends PersistedNotifier<OnboardingState> {
 
   void resetSwiped() => update((s) => s.copyWith(swipedCardIds: const []));
 
+  void markGoalChosen() => update(
+    (s) => s.goalChosen ? s : s.copyWith(goalChosen: true),
+  );
+
   void complete() => update((s) => s.copyWith(completed: true));
 }
 

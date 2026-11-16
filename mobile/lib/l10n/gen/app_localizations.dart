@@ -249,6 +249,36 @@ abstract class AppL10n {
   /// **'Tăng cơ'**
   String get onboardingGoalBuild;
 
+  /// No description provided for @onboardingGoalChoose.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chọn mục tiêu này'**
+  String get onboardingGoalChoose;
+
+  /// No description provided for @onboardingGoalOther.
+  ///
+  /// In vi, this message translates to:
+  /// **'Xem mục tiêu khác'**
+  String get onboardingGoalOther;
+
+  /// No description provided for @onboardingGoalSelected.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đã chọn'**
+  String get onboardingGoalSelected;
+
+  /// No description provided for @onboardingGoalSwipeHint.
+  ///
+  /// In vi, this message translates to:
+  /// **'Quẹt phải để chọn mục tiêu này, quẹt trái để xem mục tiêu khác.'**
+  String get onboardingGoalSwipeHint;
+
+  /// No description provided for @onboardingGoalDot.
+  ///
+  /// In vi, this message translates to:
+  /// **'Mục tiêu {v1} trên {v2}: {v3}'**
+  String onboardingGoalDot(Object v1, Object v2, Object v3);
+
   /// No description provided for @onboardingBodyTitle.
   ///
   /// In vi, this message translates to:
@@ -2948,6 +2978,42 @@ abstract class AppL10n {
   /// In vi, this message translates to:
   /// **'Nếu phải mua: +{amount} ₫'**
   String shopPantryIfBuy(Object amount);
+
+  /// No description provided for @shopModeWeekly.
+  ///
+  /// In vi, this message translates to:
+  /// **'Theo tuần'**
+  String get shopModeWeekly;
+
+  /// No description provided for @shopModeDaily.
+  ///
+  /// In vi, this message translates to:
+  /// **'Theo ngày'**
+  String get shopModeDaily;
+
+  /// No description provided for @shopToday.
+  ///
+  /// In vi, this message translates to:
+  /// **'Hôm nay'**
+  String get shopToday;
+
+  /// No description provided for @shopFreezeMeatSwitch.
+  ///
+  /// In vi, this message translates to:
+  /// **'Mua thịt cá cả tuần rồi cấp đông'**
+  String get shopFreezeMeatSwitch;
+
+  /// No description provided for @shopBatchExtra.
+  ///
+  /// In vi, this message translates to:
+  /// **'+{amount} ₫ do mua theo đợt'**
+  String shopBatchExtra(Object amount);
+
+  /// No description provided for @shopNoShelfInfo.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chưa có thông tin hạn dùng'**
+  String get shopNoShelfInfo;
 
   /// No description provided for @onboardingRiceTitle.
   ///
